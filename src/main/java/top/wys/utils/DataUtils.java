@@ -29,6 +29,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -245,16 +247,28 @@ public class DataUtils {
 					ip = (InetAddress) nii.nextElement();
 					if (ip.getHostAddress().indexOf(":") == -1) {
 						res.add(ip.getHostAddress());
-						// System.out.println("本机的ip=" + ip.getHostAddress());
+						 System.out.println("本机的ip=" + ip.getHostAddress());
 						ipAddr = ip.getHostAddress();
-						// System.err.println(ipAddr);
+
 					}
 				}
 			}
 		} catch (SocketException e) {
 			e.printStackTrace();
 		}
-		// return (String[]) res.toArray(new String[0]);
+		try {
+			System.out.println("------------------");
+			String name = NetworkInterface.getByInetAddress(InetAddress.getByName(ipAddr)).getName();
+			System.out.println("name:"+name);
+			String displayName = NetworkInterface.getByInetAddress(InetAddress.getByName(ipAddr)).getDisplayName();
+			System.out.println("displayName:"+displayName);
+			System.out.println("--------------------");
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (SocketException e) {
+			e.printStackTrace();
+		}
+//		return res.size() > 1 ? res.get(1) : res.size() > 0 ? res.get(0):null;
 		return ipAddr;
 	}
 
@@ -309,11 +323,19 @@ public class DataUtils {
 	 * @return
 	 */
 	public static String getLocalMac() {
+		return getLocalMac(getLocalHostIP());
+	}
+
+	/**
+	 * 根据本地ip地址获取 该网卡的物理地址
+	 * @param host
+	 * @return
+	 */
+	public static String getLocalMac(String host) {
 		StringBuffer sb = new StringBuffer("");
 		try {
-			InetAddress ia = InetAddress.getLocalHost();
 			//获取网卡，获取地址
-			byte[] mac = NetworkInterface.getByInetAddress(ia).getHardwareAddress();
+			byte[] mac = NetworkInterface.getByInetAddress(InetAddress.getByName(host)).getHardwareAddress();
 			System.out.println("mac数组长度："+mac.length);
 			for(int i=0; i<mac.length; i++) {
 				if(i!=0) {
@@ -337,6 +359,45 @@ public class DataUtils {
 		String addr = sb.toString().toUpperCase();
 		System.out.println("本机MAC地址:"+addr);
 		return addr;
+	}
+
+	/**
+	 * 获取所有的物理地址
+	 * @return
+	 */
+	public static Set<String> getAllMacAddress() {
+		Set<String> set = new TreeSet<>();
+		try {
+			Enumeration<NetworkInterface> el = NetworkInterface.getNetworkInterfaces();
+			while (el.hasMoreElements()) {
+				byte[] mac = el.nextElement().getHardwareAddress();
+				if (mac == null){
+					continue;
+				}
+				StringBuilder macString = new StringBuilder("");
+				for (byte b : mac) {
+
+					//convert to hex string.
+					String hex = Integer.toHexString(0xff & b).toUpperCase();
+					if(hex.length() == 1){
+						hex  = "0" + hex;
+					}
+					macString.append(hex);
+					macString.append("-");
+				}
+				macString.deleteCharAt(macString.length() - 1);
+				set.add(macString.toString());
+			}
+			System.out.println(set);
+			if(set.size() == 0){
+				System.out.println("Sorry, can't find your MAC Address.");
+			}else{
+				System.out.println("Your MAC Address is " + set);
+			}
+		}catch (Exception exception) {
+			exception.printStackTrace();
+		}
+		return set;
 	}
 	/**
 	 * getLocalIpAddress:[获得手机的ip地址].
