@@ -25,7 +25,7 @@ public class FileUtils {
 	 * Create the given file. If the parent directory  don't exists, we will create them all.
 	 * @param file the file to be created
 	 * @return true if the named file does not exist and was successfully created; false if the named file already exists
-	 * @see java.io.File#createNewFile
+	 * @see File#createNewFile
 	 * @throws IOException
 	 */
 	public static boolean createFile(File file) throws IOException {
@@ -34,11 +34,11 @@ public class FileUtils {
 		}
 		return file.createNewFile();
 	}
-	
+
 	/**
 	 * Enhancement of java.io.File#mkdir()
 	 * Create the given directory . If the parent folders don't exists, we will create them all.
-	 * @see java.io.File#mkdir()
+	 * @see File#mkdir()
 	 * @param dir the directory to be created
 	 */
 	public static void makeDir(File dir) {
@@ -59,6 +59,7 @@ public class FileUtils {
      */
     public static void writeFile(String path, String content,boolean append) {
         File writefile;
+        FileOutputStream fw = null;
         try {
             writefile = new File(path);
 
@@ -68,16 +69,17 @@ public class FileUtils {
                 writefile = new File(path); // 重新实例化
             }
 
-            FileOutputStream fw = new FileOutputStream(writefile,true);
+            fw = new FileOutputStream(writefile,true);
             System.out.println("###content:" + content);
             fw.write(content.getBytes());
             fw.flush();
-            fw.close();
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+          ex.printStackTrace();
+        }finally {
+            IOUtils.close(fw);
         }
     }
-	
+
     /**
      * 复制文件
      * @param source
@@ -89,22 +91,22 @@ public class FileUtils {
         FileInputStream inStream = null;  
         FileOutputStream outStream = null;  
         try {  
-            inStream = new FileInputStream(source);  
+            inStream = new FileInputStream(source);
             outStream = new FileOutputStream(target);  
             in = inStream.getChannel();  
             out = outStream.getChannel();  
           
             in.transferTo(0, in.size(), out);  
-           
-            inStream.close();
-            outStream.close(); 
-            in.close();  
-        	out.close();  
+
+
         } catch (IOException e) {  
             e.printStackTrace();  
-        } finally {  
-        	  
-        }  
+        } finally {
+            IOUtils.close(outStream);
+            IOUtils.close(inStream);
+            IOUtils.close(in);
+            IOUtils.close(out);
+        }
     }  
     
     /** 
@@ -163,14 +165,11 @@ public class FileUtils {
                 e.printStackTrace();  
                 throw new RuntimeException(e);  
             } finally{  
-                //关闭流  
-                try {  
-                    if(null != bis) bis.close();  
-                    if(null != zos) zos.close();  
-                } catch (IOException e) {  
-                    e.printStackTrace();  
-                    throw new RuntimeException(e);  
-                }  
+                //关闭流
+                IOUtils.close(zos);
+                IOUtils.close(bis);
+                 IOUtils.close(fis);
+                 IOUtils.close(fos);
             }  
         }  
         return zipName;  
@@ -252,6 +251,15 @@ public class FileUtils {
 //		FileUtils.deleteDir(new File(dirPath));
 	}
 
+    /**
+     * @param filePath 纯文本文件路径
+     * @param encoding
+     * @return
+     */
+    public static String readTxtFile(String filePath,String encoding) {
+        return readTxtFile(new File(filePath),encoding);
+    }
+
 	/**
 	 * @author 郑明亮
 	 * @Email zhengmingliang911@gmail.com
@@ -261,26 +269,29 @@ public class FileUtils {
 	 * @return
 	 */
 	/**读取纯文本文件内容
-     * @param filePath  纯文本文件路径
+     * @param file
      * @param encoding 该文件编码 ，若输入null则自动判断文件编码
      * @return
      */
-    public static String readTxtFile(String filePath,String encoding) {
+    public static String readTxtFile(File file,String encoding) {
+        FileInputStream fis = null;
+        InputStreamReader read = null;
     	try {
+    	    String filePath = file.getAbsolutePath();
     		encoding =  encoding==null?EncodingDetect.getJavaEncode(filePath):encoding;
-    		File file = new File(filePath);
-    		System.out.println(file.getAbsolutePath());
+//    		File file = new File(filePath);
+    		System.out.println(filePath);
     		String str = "";
     		if (file.isFile() && file.exists()) { // 判断文件是否存在
-    			InputStreamReader read = new InputStreamReader(
-    					new FileInputStream(file), encoding);// 考虑到编码格式
+                fis = new FileInputStream(file);
+                read = new InputStreamReader(fis, encoding);// 考虑到编码格式
     			BufferedReader bufferedReader = new BufferedReader(read);
     			String lineTxt = null;
     			while ((lineTxt = bufferedReader.readLine()) != null) {
 //    				System.out.println(lineTxt);
     				str += lineTxt + "\r\n";
     			}
-    			read.close();
+
     		} else {
     			System.out.println("找不到指定的文件");
     		}
@@ -288,9 +299,14 @@ public class FileUtils {
     	} catch (Exception e) {
     		System.out.println("读取文件内容出错");
     		e.printStackTrace();
-    	}
-    	return "";
+    	}finally {
+    	    IOUtils.close(read);
+            IOUtils.close(fis);
+        }
+        return "";
     }
+
+
 
     /**
      * @author 郑明亮
