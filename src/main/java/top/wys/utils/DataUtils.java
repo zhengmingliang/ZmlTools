@@ -8,7 +8,6 @@ import org.jsoup.Jsoup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -29,7 +28,6 @@ import java.net.UnknownHostException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -371,7 +369,7 @@ public class DataUtils {
             connection.setRequestProperty("Connection","keep-alive");
             connection.setReadTimeout(10000);
             InputStream inputStream = connection.getInputStream();
-            String str = new String(IsToByte(inputStream),"gb2312").trim();
+            String str = new String(IOUtils.isToBytes(inputStream),"gb2312").trim();
             ip = str.substring(str.indexOf('[')+1, str.lastIndexOf(']'));
 
 //			log.info("公网ip："+ip);
@@ -486,151 +484,7 @@ public class DataUtils {
 		return null;
 	}
 
-    /**
-     * 将输入流转换为byte[]
-     *
-     * @param is 输入流
-     * @return
-     */
-    public static byte[] IsToByte(InputStream is) {
 
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        byte[] buffer = new byte[1024];
-        int len = 0;
-        try {
-            while ((len = is.read(buffer)) != -1) {
-                bos.write(buffer, 0, len);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                bos.flush();
-                bos.close();
-                is.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-        return bos.toByteArray();
-    }
-
-    /**
-     * isLeapYear:[判断是否为闰年].
-     *
-     * @param year
-     * @return
-     * @author 郑明亮
-     */
-    public static boolean isLeapYear(int year) {
-        boolean flag = false;
-        int y1 = year % 100;
-        if (y1 == 0) {
-            if (year % 400 == 0) {
-                flag = true;
-            }
-        } else {
-            if (year % 4 == 0) {
-                flag = true;
-            }
-        }
-        return flag;
-
-    }
-
-    /**
-     * @param month 1~12
-     * @return 根据月份，返回这个月有多少天
-     */
-    public static int getDaysOfMonths(int month) {
-        int day = 30;
-        switch (month) {
-            case 1:
-                day = 31;
-                break;
-            case 2:
-                day = 28;
-                break;
-            case 3:
-                day = 31;
-                break;
-            case 4:
-                day = 30;
-                break;
-            case 5:
-                day = 31;
-                break;
-            case 6:
-                day = 30;
-                break;
-            case 7:
-                day = 31;
-                break;
-            case 8:
-                day = 31;
-                break;
-            case 9:
-                day = 30;
-                break;
-            case 10:
-                day = 31;
-                break;
-            case 11:
-                day = 30;
-                break;
-            case 12:
-                day = 31;
-                break;
-            default:
-                break;
-        }
-
-        return day;
-    }
-
-    /**
-     * [根据传入的month 和day拼接成一个日期字符串 ;如：传入getMonthsAndDays(1,1) 返回0101]
-     *
-     * @param month
-     * @param day  Noncompliant; creates & discards an Integer object
-     * @return
-     * @author 郑明亮
-     */
-    public static String getMonthsAndDays(int month, int day) {
-        String monthString = Integer.toString(month);
-        String dayString = Integer.toString(day);
-        int monlen = monthString.length();
-        int daylen = dayString.length();
-        if (monlen == 1) {
-            monthString = 0 + monthString;
-        }
-        if (daylen == 1) {
-            dayString = 0 + dayString;
-        }
-
-        return monthString + dayString;
-    }
-
-    /**
-     * 默认请传入null 获得当前的系统时间，默认格式为 yyyy-MM-dd HH:mm:ss（24小时制） 你也许需要 yyyy-MM-dd
-     * hh:mm:ss (12小时制) yyyy年MM月dd日 HH:mm:ss yyyy年MM月dd日 HH时mm分ss秒
-     *
-     * @return String 指定格式的当前时间
-     */
-    public static String getSystemTime(String formateString) {
-        SimpleDateFormat dateFormat = null;
-        if (formateString == null) {
-            dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        } else {
-            dateFormat = new SimpleDateFormat(formateString);
-        }
-
-        return dateFormat.format(new Date());
-
-    }
 
     /**
      * 验证手机号是否合法

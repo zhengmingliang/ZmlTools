@@ -8,10 +8,10 @@ import java.util.TimeZone;
 
 /**
  * @author 郑明亮
- * @Time 2017年2月1日 下午6:35:24
- * @Description <p>
+ * @time 2017年2月1日 下午6:35:24
+ * @description <p>
  *              日期工具类，部分方法来自金融项目
- *              </p>
+ *              <br>
  */
 public class DateUtils {
 
@@ -29,7 +29,6 @@ public class DateUtils {
 		Date date = new Date();
 		SimpleDateFormat format = new SimpleDateFormat(pattern);
 		String nowDateString = format.format(date);
-		System.out.println(nowDateString);
 		if (nowDateString != null) {
 			return Integer.parseInt(nowDateString);
 		}
@@ -38,14 +37,14 @@ public class DateUtils {
 
 	/**
 	 * @author 郑明亮
-	 * @Time 2017年2月1日 下午8:13:59
-	 * @Description <p>
+	 * @time 2017年2月1日 下午8:13:59
+	 * @description <p>
 	 *              当前时间转换成特定形式Date
-	 *              </p>
+	 *              <br>
 	 *              <p>
 	 *              因为有时在存入到数据库中的date类型带有微秒值，在再次从数据库中读取为String类型时，仍会带有微秒值，
 	 *              所以为保险起见，经格式化后，再保存就不会出现微秒值
-	 *              </p>
+	 *              <br>
 	 * @param datePattern
 	 * @return
 	 */
@@ -72,8 +71,7 @@ public class DateUtils {
 	public static String getNowDateStrByPattern(String datePattern) {
 		Date currentTime = new Date();
 		SimpleDateFormat formatter = new SimpleDateFormat(datePattern);
-		String dateString = formatter.format(currentTime);
-		return dateString;
+		return formatter.format(currentTime);
 	}
 
 	/**
@@ -143,9 +141,9 @@ public class DateUtils {
 	
 	/**
 	 * @author 郑明亮
-	 * @Email zhengmingliang911@gmail.com
-	 * @Time 2017年2月16日 下午4:26:32
-	 * @Description <p>UTC时间转换为本地时间，默认的UTC的格式为yyyy-MM-dd'T'HH:mm:ss.SSS'Z'  </P>
+	 * @email zhengmingliang911@gmail.com
+	 * @time 2017年2月16日 下午4:26:32
+	 * @description <p>UTC时间转换为本地时间，默认的UTC的格式为yyyy-MM-dd'T'HH:mm:ss.SSS'Z'  </P>
 	 * @param utcTime  utc时间字符串
 	 * @param localTimePatten  要转换成的本地时间格式
 	 * @return
@@ -158,10 +156,10 @@ public class DateUtils {
 
 	/**
 	 * @author 郑明亮
-	 * @Email zhengmingliang911@gmail.com
-	 * @Time 2017年2月16日 下午2:51:57
-	 * @Description <p>UTC时间转换为本地时间
-	 *              </P>
+	 * @email zhengmingliang911@gmail.com
+	 * @time 2017年2月16日 下午2:51:57
+	 * @description UTC时间转换为本地时间
+	 *
 	 * @param utcTime utc时间字符串
 	 * @param utcTimePatten UTC时间符合的pattern
 	 * @param localTimePatten 要转换成的本地时间格式
@@ -175,16 +173,15 @@ public class DateUtils {
 		Date gpsUTCDate = utcFormater.parse(utcTime);
 		SimpleDateFormat localFormater = new SimpleDateFormat(localTimePatten);
 		localFormater.setTimeZone(TimeZone.getDefault());
-		String localTime = localFormater.format(gpsUTCDate.getTime());
-		return localTime;
+		return localFormater.format(gpsUTCDate.getTime());
 	}
 	
 	
 	/**
 	 * @author 郑明亮
-	 * @Email zhengmingliang911@gmail.com
-	 * @Time 2017年2月16日 下午6:37:17
-	 * @Description <p>UTC时间字符串转换为Date类型 时间</P>
+	 * @email zhengmingliang911@gmail.com
+	 * @time 2017年2月16日 下午6:37:17
+	 * @description <p>UTC时间字符串转换为Date类型 时间</P>
 	 * @param utcTime UTC时间字符
 	 * @return Date类型时间
 	 */
@@ -194,9 +191,9 @@ public class DateUtils {
 	}
 	/**
 	 * @author 郑明亮
-	 * @Email zhengmingliang911@gmail.com
-	 * @Time 2017年2月16日 下午6:37:53
-	 * @Description <p> UTC时间字符串转换为Date类型 时间 </P>
+	 * @email zhengmingliang911@gmail.com
+	 * @time 2017年2月16日 下午6:37:53
+	 * @description <p> UTC时间字符串转换为Date类型 时间 </P>
 	 * @param utcTime UTC时间字符
 	 * @param utcTimePatten UTC时间格式
 	 * @return
@@ -221,10 +218,7 @@ public class DateUtils {
 	 * @return
 	 */
 	public static String getStringByPattern(Date date, String pattern) {
-		Date currentTime = date;
-		SimpleDateFormat formatter = new SimpleDateFormat(pattern);
-		String dateString = formatter.format(currentTime);
-		return dateString;
+		return new SimpleDateFormat(pattern).format(date);
 	}
 
 	/**
@@ -266,14 +260,14 @@ public class DateUtils {
 
 	/**
 	 * @author 郑明亮
-	 * @Time 2017年2月1日 下午7:25:35
-	 * @Description <p>
+	 * @time 2017年2月1日 下午7:25:35
+	 * @description <p>
 	 *              获取两个时间相差的毫秒数值
-	 *              </p>
-	 * @param startday
-	 *            开始日期
-	 * @param endday
-	 *            结束日期
+	 *              <br>
+	 * @param startday  开始日期
+	 *
+	 * @param endday  结束日期
+	 *
 	 * @return
 	 */
 	public static long getTimeGapsInMilliseconds(Date startday, Date endday) {
@@ -290,10 +284,10 @@ public class DateUtils {
 
 	/**
 	 * @author 郑明亮
-	 * @Time 2017年2月1日 下午8:18:31
-	 * @Description <p>
+	 * @time 2017年2月1日 下午8:18:31
+	 * @description <p>
 	 *              获得两个日期之前相差的月份
-	 *              </p>
+	 *              <br>
 	 * @param start
 	 *            开始日期
 	 * @param end
@@ -412,5 +406,120 @@ public class DateUtils {
 	 */
 	public static String getNowDateTime() {
 		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+	}
+
+
+	/**
+	 * isLeapYear:[判断是否为闰年].
+	 *
+	 * @param year
+	 * @return
+	 * @author 郑明亮
+	 */
+	public static boolean isLeapYear(int year) {
+		boolean flag = false;
+		int y1 = year % 100;
+		if (y1 == 0) {
+			if (year % 400 == 0) {
+				flag = true;
+			}
+		} else {
+			if (year % 4 == 0) {
+				flag = true;
+			}
+		}
+		return flag;
+
+	}
+
+	/**
+	 * @param month 1~12
+	 * @return 根据月份，返回这个月有多少天
+	 */
+	public static int getDaysOfMonths(int month) {
+		int day = 30;
+		switch (month) {
+			case 1:
+				day = 31;
+				break;
+			case 2:
+				day = 28;
+				break;
+			case 3:
+				day = 31;
+				break;
+			case 4:
+				day = 30;
+				break;
+			case 5:
+				day = 31;
+				break;
+			case 6:
+				day = 30;
+				break;
+			case 7:
+				day = 31;
+				break;
+			case 8:
+				day = 31;
+				break;
+			case 9:
+				day = 30;
+				break;
+			case 10:
+				day = 31;
+				break;
+			case 11:
+				day = 30;
+				break;
+			case 12:
+				day = 31;
+				break;
+			default:
+				break;
+		}
+
+		return day;
+	}
+
+	/**
+	 * [根据传入的month 和day拼接成一个日期字符串 ;如：传入getMonthsAndDays(1,1) 返回0101]
+	 *
+	 * @param month
+	 * @param day  Noncompliant; creates & discards an Integer object
+	 * @return
+	 * @author 郑明亮
+	 */
+	public static String getMonthsAndDays(int month, int day) {
+		String monthString = Integer.toString(month);
+		String dayString = Integer.toString(day);
+		int monlen = monthString.length();
+		int daylen = dayString.length();
+		if (monlen == 1) {
+			monthString = 0 + monthString;
+		}
+		if (daylen == 1) {
+			dayString = 0 + dayString;
+		}
+
+		return monthString + dayString;
+	}
+
+	/**
+	 * 默认请传入null 获得当前的系统时间，默认格式为 yyyy-MM-dd HH:mm:ss（24小时制） 你也许需要 yyyy-MM-dd
+	 * hh:mm:ss (12小时制) yyyy年MM月dd日 HH:mm:ss yyyy年MM月dd日 HH时mm分ss秒
+	 *
+	 * @return String 指定格式的当前时间
+	 */
+	public static String getSystemTime(String formateString) {
+		SimpleDateFormat dateFormat = null;
+		if (formateString == null) {
+			dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		} else {
+			dateFormat = new SimpleDateFormat(formateString);
+		}
+
+		return dateFormat.format(new Date());
+
 	}
 }

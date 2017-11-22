@@ -6,8 +6,10 @@ package top.wys.utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @author 郑明亮   @email 1072307340@qq.com
@@ -21,6 +23,30 @@ public class IOUtils {
 
     private IOUtils(){
         throw new UnsupportedOperationException("you can not instant me");
+    }
+
+    /**
+     * 将输入流转换为byte[]
+     *
+     * @param is 输入流
+     * @return
+     */
+    public static byte[] isToBytes(InputStream is) {
+
+        ByteArrayOutputStream temp = null;
+        byte[] buffer = new byte[1024];
+        int len = 0;
+        try(ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+            while ((len = is.read(buffer)) != -1) {
+                bos.write(buffer, 0, len);
+            }
+            bos.flush();
+            temp = bos;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return temp != null ?temp.toByteArray() : new byte[0];
     }
 
     /**
