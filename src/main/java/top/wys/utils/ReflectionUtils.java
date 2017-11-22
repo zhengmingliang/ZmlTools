@@ -1,5 +1,6 @@
 package top.wys.utils;
 
+
 import com.google.common.collect.Lists;
 
 import java.lang.reflect.Field;
@@ -133,11 +134,9 @@ public class ReflectionUtils {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static <T> Object methodInvoke(T t, String methodName,
-			Class... paramters) throws IllegalAccessException,
-			 InvocationTargetException,
-			NoSuchMethodException {
+			Class... paramters) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		Class clz = t.getClass();
-		Method method = clz.getDeclaredMethod(methodName);
+		Method method = clz.getMethod(methodName);
 		return method.invoke(t);
 
 	}

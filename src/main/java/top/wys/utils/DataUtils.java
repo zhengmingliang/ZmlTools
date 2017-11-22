@@ -995,7 +995,7 @@ public class DataUtils {
 	 */
 	public static <T> List<Map<String, Object[]>> List2Array(List<T> list) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException{
 		T t = list.get(0);
-		String[] fields  = ReflectionUtils.getFields(t.getClass());
+		String[] fields  = ReflectionUtils.getFieldsNames(t.getClass());
 		Object[][] objects = new Object[fields.length][list.size()];
 		
 		for (int i = 0;i < list.size();i++) {
