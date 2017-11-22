@@ -50,9 +50,9 @@ public class FileUtils {
 	
     /**
      * @author 郑明亮
-     * @Time 2017年3月10日 上午10:30:44
-     * @Description <p> 向文本文件中写入内容或追加新内容,如果append为true则直接追加新内容,<br>
-     * 如果append为false则覆盖原来的内容<br>  </p>
+     * @time 2017年3月10日 上午10:30:44
+     * @description <p> 向文本文件中写入内容或追加新内容,如果append为true则直接追加新内容,<br>
+     * 如果append为false则覆盖原来的内容<br>  <br>
      * @param path 文件路径及文件名称
      * @param content 要写入的内容
      * @param append 是否追加 新内容在原有内容中，{@code ture}追加   {@code false}不追加
@@ -117,9 +117,8 @@ public class FileUtils {
      * @return 
      */  
     @SuppressWarnings("resource")
-	public static String fileToZip(String sourceFilePath,String zipFilePath,String fileName){  
-//        boolean flag = false;  
-        File sourceFile = new File(sourceFilePath); 
+	public static String fileToZip(String sourceFilePath,String zipFilePath,String fileName){
+        File sourceFile = new File(sourceFilePath);
         FileInputStream fis = null;
         
         BufferedInputStream bis = null;  
@@ -160,11 +159,9 @@ public class FileUtils {
                 zipName = zipFile.getName();  
             } catch (FileNotFoundException e) {  
                 e.printStackTrace();  
-                throw new RuntimeException(e);  
-            } catch (IOException e) {  
+            } catch (IOException e) {
                 e.printStackTrace();  
-                throw new RuntimeException(e);  
-            } finally{  
+            } finally{
                 //关闭流
                 IOUtils.close(zos);
                 IOUtils.close(bis);
@@ -262,9 +259,9 @@ public class FileUtils {
 
 	/**
 	 * @author 郑明亮
-	 * @Email zhengmingliang911@gmail.com
-	 * @Time 2017年3月28日 下午5:51:05
-	 * @Description <p> 读取文件中的内容 </P>
+	 * @email zhengmingliang911@gmail.com
+	 * @time 2017年3月28日 下午5:51:05
+	 * @description <p> 读取文件中的内容 </P>
 	 * @param fileName
 	 * @return
 	 */
@@ -310,9 +307,9 @@ public class FileUtils {
 
     /**
      * @author 郑明亮
-     * @Email zhengmingliang911@gmail.com
-     * @Time 2017年4月13日 下午7:21:57
-     * @Description <p>获取指定文件夹大小  </P>
+     * @email zhengmingliang911@gmail.com
+     * @time 2017年4月13日 下午7:21:57
+     * @description 获取指定文件夹大小
      * @param f
      * @return
      * @throws Exception
@@ -336,7 +333,6 @@ public class FileUtils {
             }  
 		}else{
 			System.err.println(f.getAbsolutePath()+"不存在");
-//			throw new UnavailableException(f.getAbsolutePath()+"不存在");
 		}
         
         return size;  
@@ -344,9 +340,9 @@ public class FileUtils {
     
     /**
      * @author 郑明亮
-     * @Email zhengmingliang911@gmail.com
-     * @Time 2017年4月13日 下午7:21:43
-     * @Description <p>获取指定文件大小    </P>
+     * @email zhengmingliang911@gmail.com
+     * @time 2017年4月13日 下午7:21:43
+     * @description <p>获取指定文件大小    </p>
      * @param file
      * @return
      * @throws Exception
@@ -357,7 +353,6 @@ public class FileUtils {
             try(FileInputStream fis = new FileInputStream(file); ){
 				size = fis.available();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}  
         } else {  

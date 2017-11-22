@@ -1,25 +1,27 @@
 package top.wys.utils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
+
+import org.springframework.util.StringUtils;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.util.StringUtils;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.TypeReference;
 /**
  * @author 郑明亮
- * @Time：2016年7月18日 上午9:53:16
+ * @time：2016年7月18日 上午9:53:16
  * @version 1.0
  */
 public class FastJsonTools {
 
-	public FastJsonTools() {
+	private FastJsonTools() {
 		throw new UnsupportedOperationException("不能被实例化");
 	}
 
-	/**TODO 转换成json格式的字符串
+	/**
+	 *  转换成json格式的字符串
 	 * @param object 要转换的对象
 	 * @return
 	 */
@@ -38,7 +40,7 @@ public class FastJsonTools {
 		return t;
 	}
 
-	/**将json字符串转换为List<T>
+	/**将json字符串转换为List&lt;T&gt;
 	 * @param jsonString
 	 * @param cls
 	 * @return
@@ -50,7 +52,7 @@ public class FastJsonTools {
 		return list;
 	}
 
-	/**将json字符串转换为List<Map<String,Object>>
+	/**将json字符串转换为List&lt;Map&lt;String,Object&gt;&gt;
 	 * @param jsonString
 	 * @return
 	 */
@@ -62,7 +64,7 @@ public class FastJsonTools {
 		return list2;
 	}
 
-	/**将json字符串转换为List<String>
+	/**将json字符串转换为List&lt;String&gt;
 	 * @param jsonString
 	 * @return
 	 */
@@ -73,7 +75,7 @@ public class FastJsonTools {
 		return list2;
 	}
 
-	/**将json字符串转换为Map<String,Object>
+	/**将json字符串转换为Map&ltString,Object&gt;
 	 * @param jsonString
 	 * @return
 	 */
@@ -88,10 +90,10 @@ public class FastJsonTools {
 	/**
 	 * @author 郑明亮
 	 * @time 2017年7月4日 下午5:27:57
-	 * @description <p>将json字符串转换为Map<Object,Object> </p>
+	 * @description <p>将json字符串转换为Map&lt;Object,Object&gt; <br>
 	 * @modifyBy
 	 * @modifyTime 
-	 * @modifyDescription<p> </p>
+	 * @modifyDescription<p> <br>
 	 * @param jsonString  json字符串
 	 * @param ignoreSpace 是否忽略value中为空字符串的值
 	 * @return
@@ -117,17 +119,17 @@ public class FastJsonTools {
 	/**
 	 * @author 郑明亮
 	 * @time 2017年7月4日 下午5:58:48
-	 * @description <p> 将实体类转换为Map<Object,Object></p>
+	 * @description <p> 将实体类转换为Map&lt;Object,Object&gt;<br>
 	 * @modifyBy
 	 * @modifyTime 
-	 * @modifyDescription<p> </p>
+	 * @modifyDescription<p> <br>
 	 * @param obj
 	 * @return
 	 */
-	public static Map<Object, Object> createBeanToMap(Object obj) {
+	public static Map<String, Object> createBeanToMap(Object obj) {
 		String jsonString = createJsonString(obj);
-		Map<Object, Object> map = JSON.parseObject(jsonString,
-				new TypeReference<Map<Object, Object>>() {
+		Map<String, Object> map = JSON.parseObject(jsonString,
+				new TypeReference<Map<String, Object>>() {
 				});
 		
 		return map;
@@ -136,10 +138,10 @@ public class FastJsonTools {
 	/**
 	 * @author 郑明亮
 	 * @time 2017年7月4日 下午5:58:27
-	 * @description <p>将实体类转换为Map<Object,Object> </p>
+	 * @description <p>将实体类转换为Map&lt;Object,Object&gt; <br>
 	 * @modifyBy
 	 * @modifyTime 
-	 * @modifyDescription<p> </p>
+	 * @modifyDescription<p> <br>
 	 * @param obj  
 	 * @param ignoreSpace
 	 * @return

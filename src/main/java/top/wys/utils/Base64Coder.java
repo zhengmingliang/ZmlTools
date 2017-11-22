@@ -30,9 +30,6 @@ package top.wys.utils;
  * 公开的Base64Coder类（不用深究它是怎么实现的，
  * 还是那句话，有轮子直接用轮子），好用的要死人了...
  * 小亮也很无耻的引用了这个网址下的东东，吼吼...
-* @Title: Base64Coder.java
-* @Package com.zml.utils
-* @Description: TODO
 * @author 郑明亮
  */
 

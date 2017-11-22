@@ -1,16 +1,13 @@
 package top.wys.utils;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
 
 /**
  * @author 郑明亮
@@ -19,6 +16,11 @@ import com.google.gson.reflect.TypeToken;
  */
 public class GsonTools {
 
+	/**
+	 * 将对象转换为json字符串
+	 * @param src
+	 * @return
+	 */
 	public static String createJsonString(Object src) {
 
 		Gson gson = new Gson();
@@ -26,19 +28,30 @@ public class GsonTools {
 		return jsonString;
 	}
 
-	public static <T> T getObject(String jsonString, Class<T> type) {
+	/**
+	 *  将json字符串转换为指定类型对象
+	 * @param jsonString json字符串
+	 * @param type 要转换成的对象的类型
+	 * @return
+	 */
+	public static <T> T getBeanFromJson(String jsonString, Class<T> type) {
 
 		T t = null;
 		try {
 			Gson gson = new Gson();
 			t = gson.fromJson(jsonString, type);
 		} catch (JsonSyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return t;
 	}
 
+	/**
+	 * 将json字符串转换为指定对象集合
+	 * @param jsonString json字符串
+	 * @param type 要转换成的对象集合类型
+	 * @return
+	 */
 	public static <T> List<T> getlist(String jsonString, Class<T> type) {
 		List<T> list = new ArrayList<T>();
 		Gson gson = new Gson();
@@ -47,6 +60,13 @@ public class GsonTools {
 		return list;
 
 	}
+
+	/**
+	 * 将json字符串转换为对象集合，该方法可避免在远程调用时引起的java对象擦除的问题
+	 * @param jsonString json字符串
+	 * @param type 要转换成对象的数组类型
+	 * @return
+	 */
 	public static <T> List<T> StringTolist(String jsonString, Class<T[]> type) {
 		
 		T[] list = null;
@@ -55,13 +75,18 @@ public class GsonTools {
 			list = gson.fromJson(jsonString, type);
 			return Arrays.asList(list);
 		} catch (JsonSyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		return null;
 
 	}
+
+	/**
+	 * 将json字符串转换为字符串集合
+	 * @param jsonString
+	 * @return
+	 */
 	public static List<String> getStrings(String jsonString) {
 		List<String> list = new ArrayList<String>();
 		Gson gson = new Gson();
@@ -71,6 +96,10 @@ public class GsonTools {
 
 	}
 
+	/** 将json字符串转换为map集合
+	 * @param jsonString
+	 * @return
+	 */
 	public static List<Map<String, Object>> getMaps(String jsonString) {
 
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
@@ -82,41 +111,4 @@ public class GsonTools {
 		return list;
 
 	}
-
-	/**
-	 * 将输入流转换为byte[]
-	 * 
-	 * @param is
-	 * @return
-	 */
-	public static byte[] IsToByte(InputStream is) {
-
-		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		byte buffer[] = new byte[1024];
-		int len = 0;
-		try {
-			while ((len = is.read(buffer)) != -1) {
-				bos.write(buffer, 0, len);
-
-			}
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		} finally {
-			try {
-				bos.flush();
-				bos.close();
-				is.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		}
-
-		return bos.toByteArray();
-	}
-
 }

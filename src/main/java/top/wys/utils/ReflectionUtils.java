@@ -37,7 +37,7 @@ public class ReflectionUtils {
 	 * @time：2016年12月19日 下午5:40:50  获取传入类中声明的成员变量、常量的成员名称，并将首字母变为大写
 	 * @param clz
 	 * @param upperFirstLetter 是否首字母大写
-	 * @param includeParent 是否获取父类中的成员
+	 * @param includeParent 是否获取直接父类中的成员
 	 * @return
 	 */
 	public static String[] getFieldsNames(Class<?> clz,boolean upperFirstLetter,boolean includeParent) {
@@ -66,8 +66,8 @@ public class ReflectionUtils {
 	 *              获取传入类中声明的成员变量、常量的成员名称，并将首字母变为大写，特定成员除外
 	 *              <br>
 	 * @param clz
-	 * @param exceptNames
-	 *            不包含的声明的成员变量、常量的名称，必需与实体类中的成员名称大小写一致
+	 * @param exceptNames   不包含的声明的成员变量、常量的名称，必需与实体类中的成员名称大小写一致
+	 *
 	 * @return
 	 */
 	public static String[] getFieldsNames(Class<?> clz, String... exceptNames) {
@@ -124,12 +124,12 @@ public class ReflectionUtils {
 	 * @description <p>
 	 *              通过反射执行某特定实例中的特定方法
 	 *              <br>
-	 * @param t
-	 *            要执行方法的实例
-	 * @param methodName
-	 *            方法名
-	 * @param paramters
-	 *            传入方法的参数，没有参数可不传
+	 * @param t 要执行方法的实例
+	 *
+	 * @param methodName  方法名
+	 *
+	 * @param paramters  传入方法的参数，没有参数可不传
+	 *
 	 * @return
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -153,7 +153,7 @@ public class ReflectionUtils {
 		Class clazz = object.getClass();
 		List<Field> fieldList = new ArrayList<Field>();
 		while (clazz != null){
-			fieldList.addAll(new ArrayList<Field>(Arrays.asList(clazz.getDeclaredFields())));
+			fieldList.addAll(Arrays.asList(clazz.getDeclaredFields()));
 			clazz = clazz.getSuperclass();
 		}
 		Field[] fields = new Field[fieldList.size()];
