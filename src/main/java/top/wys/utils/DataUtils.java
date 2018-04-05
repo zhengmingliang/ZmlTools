@@ -1249,7 +1249,7 @@ public class DataUtils {
      * @param callback 回调方法名称
      * @return
      */
-    public String getJsonFromJsonp(String jsonp,String callback){
+    public static String getJsonFromJsonp(String jsonp,String callback){
         int  offset = 1;
         if(StringUtils.isNotEmpty(callback)){
             offset += callback.length();
