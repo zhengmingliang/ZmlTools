@@ -1243,5 +1243,22 @@ public class DataUtils {
         return list;
     }
 
+    /**
+     * 从jsonp中获取json字符串
+     * @param jsonp
+     * @param callback 回调方法名称
+     * @return
+     */
+    public String getJsonFromJsonp(String jsonp,String callback){
+        int  offset = 1;
+        if(StringUtils.isNotEmpty(callback)){
+            offset += callback.length();
+        }
+        if(StringUtils.isEmpty(jsonp)){
+            return "{}";
+        }
+        String json = jsonp.substring(offset,jsonp.length() -2);
+        return json;
+    }
 
 }
