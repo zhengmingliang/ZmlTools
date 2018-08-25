@@ -9,6 +9,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.SocketAddress;
 import java.net.SocketTimeoutException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -80,15 +83,50 @@ public class HttpUtils {
         return response.body().string();
     }
 
+    private static Proxy proxy;
+
     /**
      * 获取OKHttpClient实例
      */
     private static OkHttpClient getOkHttpClient() {
-        return new OkHttpClient().newBuilder().connectTimeout(1, TimeUnit.MINUTES)
+        OkHttpClient.Builder builder = new OkHttpClient().newBuilder().connectTimeout(1, TimeUnit.MINUTES)
                 .readTimeout(1, TimeUnit.MINUTES)
-                .retryOnConnectionFailure(true).build();
+                .retryOnConnectionFailure(true);
+        if(proxy == null){
+            return builder.build();
+        }else{
+            return builder.proxy(proxy).build();
+        }
     }
 
+    /**
+     *  设置代理
+     * @param proxy
+     */
+    public static void setProxy(Proxy proxy){
+        HttpUtils.proxy = proxy;
+    }
+
+    /**
+     * 设置代理，默认使用http代理，无授权方式
+     * @param host 主机名/ip
+     * @param port 端口
+     */
+    public static void setProxy(String host,int port){
+        SocketAddress address = new InetSocketAddress(host,port);
+       HttpUtils.proxy = new Proxy(Proxy.Type.HTTP,address);
+    }
+
+    /**
+     * 是否在使用代理
+     */
+    public static boolean isUseProxy(){
+        if(proxy != null){
+            return true;
+        }else{
+            return false;
+        }
+    }
     /**
      * POST请求
      * @param url 访问地址
@@ -436,7 +474,7 @@ public class HttpUtils {
         return fileAbsolutePath;
     }
 
-    public static String getFileFromHttpDataByAsyn(final String url, final String fileName_,String dir) throws IOException {
+    public static String getFileFromHttpDataByAsyn(final String url, final String fileName_, final String dir) throws IOException {
 
         final OkHttpClient client = new OkHttpClient().newBuilder()
                 .connectTimeout(1, TimeUnit.MINUTES)
