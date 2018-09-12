@@ -9,6 +9,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.SocketAddress;
 import java.net.SocketTimeoutException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -81,15 +84,50 @@ public class HttpUtils {
         return response.body().string();
     }
 
+    private static Proxy proxy;
+
     /**
      * 获取OKHttpClient实例
      */
     private static OkHttpClient getOkHttpClient() {
-        return new OkHttpClient().newBuilder().connectTimeout(1, TimeUnit.MINUTES)
+        OkHttpClient.Builder builder = new OkHttpClient().newBuilder().connectTimeout(1, TimeUnit.MINUTES)
                 .readTimeout(1, TimeUnit.MINUTES)
-                .retryOnConnectionFailure(true).build();
+                .retryOnConnectionFailure(true);
+        if(proxy == null){
+            return builder.build();
+        }else{
+            return builder.proxy(proxy).build();
+        }
     }
 
+    /**
+     *  设置代理
+     * @param proxy
+     */
+    public static void setProxy(Proxy proxy){
+        HttpUtils.proxy = proxy;
+    }
+
+    /**
+     * 设置代理，默认使用http代理，无授权方式
+     * @param host 主机名/ip
+     * @param port 端口
+     */
+    public static void setProxy(String host,int port){
+        SocketAddress address = new InetSocketAddress(host,port);
+       HttpUtils.proxy = new Proxy(Proxy.Type.HTTP,address);
+    }
+
+    /**
+     * 是否在使用代理
+     */
+    public static boolean isUseProxy(){
+        if(proxy != null){
+            return true;
+        }else{
+            return false;
+        }
+    }
     /**
      * POST请求
      * @param url 访问地址
@@ -253,6 +291,35 @@ public class HttpUtils {
         return fileAbsolutePath;
     }
 
+    public static String getFileFromHttpDataBySyn(final String url, final String fileName,String dir,Map<String,String>... headers ) throws IOException {
+
+
+        final OkHttpClient client = getOkHttpClient();
+        Request request = new Request.Builder()
+                .url(url)
+                .headers(Headers.of(headers[0]))
+                .build();
+        int serverLoadTimes = 0;
+//		String fileName = fileName_;
+        try {
+            httpReLoad(url, client, request, fileName,dir);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            if (SocketTimeoutException.class.equals(e) && serverLoadTimes <= MAX_SERVER_LOAD_TIMES) {
+                serverLoadTimes++;
+                log.error("网络连接超时" + serverLoadTimes + "次");
+                httpReLoad(url, client, request, fileName);
+            } else {
+                e.printStackTrace();
+                log.error("连接超时" + MAX_SERVER_LOAD_TIMES + "次", e);
+            }
+        }
+        System.out.println(fileAbsolutePath);
+
+        return fileAbsolutePath;
+    }
+
     /**
      * @param url
      * @param client   OKHttpClient
@@ -286,6 +353,44 @@ public class HttpUtils {
             file = new File(fileName);
         } else {
             file = new File(fileName);
+        }
+        //如果文件夹不存在，则创建父级文件夹
+//			FileUtils.createFile(file);
+        try (FileOutputStream fos = new FileOutputStream(file);) {
+
+            fos.write(response.body().bytes());
+            fos.flush();
+        }
+        fileAbsolutePath = file.getAbsolutePath();
+    }
+
+
+    private static void httpReLoad(final String url, final OkHttpClient client,
+                                   Request request, String fileName,String dir) throws IOException,
+            UnsupportedEncodingException, FileNotFoundException {
+        File pathFile = new File(dir);
+        if (!pathFile.exists()) {
+            pathFile.mkdirs();
+        }
+        String basePath = pathFile.getAbsolutePath() + File.separator;
+        File file;
+        Response response = client.newCall(request).execute();
+
+        //如果不传入文件名的话，则截取URL的“/”后的字符串为文件名
+        if (StringUtils.isEmpty(fileName)) {
+            fileName = DataUtils.getFileNameFromHttp(response.headers());
+            if (fileName == null) {//如果从Head中获取文件名失败，则从URL中进行截取名
+                fileName = basePath + DataUtils.getFileNameFromUrl(url);
+            }
+
+            file = new File(fileName);
+        } else if (!fileName.contains(".")) {//如果文件名不含“.”，则说明不包含扩展名，则改为截取URL中的文件名
+            //如果从Head中获取文件名失败，则从URL中进行截取文件名
+            fileName = basePath + DataUtils.getFileNameFromHttp(response.headers()) == null ? DataUtils.getFileNameFromUrl(url) : DataUtils.getFileNameFromHttp(response.headers());
+
+            file = new File(fileName);
+        } else {
+            file = new File(basePath + fileName);
         }
         //如果文件夹不存在，则创建父级文件夹
 //			FileUtils.createFile(file);
@@ -342,7 +447,78 @@ public class HttpUtils {
                 }
                 //如果文件夹不存在，则创建父级文件夹
 //						FileUtils.createFile(file);
-                try (FileOutputStream fos = new FileOutputStream(file);) {
+                try (FileOutputStream fos = new FileOutputStream(file)) {
+
+                    fos.write(response.body().bytes());
+                    fos.flush();
+                }
+                fileAbsolutePath = file.getAbsolutePath();
+            }
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+                if (SocketTimeoutException.class.equals(e) && serverLoadTimes <= MAX_SERVER_LOAD_TIMES) {
+                    serverLoadTimes++;
+                    log.error("网络连接超时" + serverLoadTimes + "次");
+                    client.newCall(call.request()).enqueue(this);
+                } else {
+                    e.printStackTrace();
+                    log.error("连接超时" + MAX_SERVER_LOAD_TIMES + "次", e);
+                }
+
+            }
+        });
+        ;
+
+
+        return fileAbsolutePath;
+    }
+
+    public static String getFileFromHttpDataByAsyn(final String url, final String fileName_, final String dir) throws IOException {
+
+        final OkHttpClient client = new OkHttpClient().newBuilder()
+                .connectTimeout(1, TimeUnit.MINUTES)
+                .readTimeout(1, TimeUnit.SECONDS)
+                .retryOnConnectionFailure(true).build();
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            int serverLoadTimes = 0;
+            File file = null;
+
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                File pathFile = null;
+                if (StringUtils.isNotEmpty(dir)) {
+                    pathFile = new File(dir);
+                    if (!pathFile.exists()) {
+                        pathFile.mkdirs();
+                    }
+                }
+                String basePath =pathFile.getAbsolutePath() + File.separator;
+                String fileName = basePath +fileName_;
+                //如果不传入文件名的话，则截取URL的“/”后的字符串为文件名
+                if (StringUtils.isEmpty(fileName)) {
+                    fileName = DataUtils.getFileNameFromHttp(response.headers());
+                    if (fileName == null) {//如果从Head中获取文件名失败，则从URL中进行截取名
+                        fileName = basePath + DataUtils.getFileNameFromUrl(url);
+                    }
+
+                    file = new File(fileName);
+                } else if (!fileName.contains(".")) {//如果文件名不含“.”，则说明不包含扩展名，则改为截取URL中的文件名
+                    //如果从Head中获取文件名失败，则从URL中进行截取文件名
+                    fileName = basePath + DataUtils.getFileNameFromHttp(response.headers()) == null ? DataUtils.getFileNameFromUrl(url) : DataUtils.getFileNameFromHttp(response.headers());
+
+                    file = new File(fileName);
+                } else {
+                    file = new File(fileName);
+                }
+                //如果文件夹不存在，则创建父级文件夹
+//						FileUtils.createFile(file);
+                try (FileOutputStream fos = new FileOutputStream(file)) {
 
                     fos.write(response.body().bytes());
                     fos.flush();
@@ -388,6 +564,8 @@ public class HttpUtils {
 
         Request request = new Request.Builder()
                 .url(url)
+                .header("X-REAL-IP",DataUtils.getRandomIp())
+                .header("X-FORWARDED-FOR",DataUtils.getRandomIp())
                 .post(body)
                 .build();
         Response response = client.newCall(request).execute();
@@ -410,6 +588,8 @@ public class HttpUtils {
         Request request = new Request.Builder()
                 .url(url)
                 .post(body)
+                .header("X-REAL-IP",DataUtils.getRandomIp())
+                .header("X-FORWARDED-FOR",DataUtils.getRandomIp())
                 .headers(Headers.of(header))
                 .build();
         Response response = client.newCall(request).execute();
