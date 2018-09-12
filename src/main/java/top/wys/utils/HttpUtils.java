@@ -55,6 +55,7 @@ public class HttpUtils {
 //		client.
         Request request = new Request.Builder()
                 .header("X-FORWARDED-FOR",DataUtils.getRandomIp())
+                .header("User-Agent","Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36")
                 .url(url)
                 .build();
         Response response = client.newCall(request).execute();
@@ -102,8 +103,8 @@ public class HttpUtils {
         FormBody.Builder builder = new FormBody.Builder();
         //添加request参数
         if (params != null) {
-            for (String key : params.keySet()) {
-                builder.add(key, params.get(key) + "");
+            for (Map.Entry entry : params.entrySet()) {
+                builder.add(entry.getKey()+"", entry.getValue()+ "");
             }
         }
         Request request = new Request.Builder()
@@ -163,8 +164,8 @@ public class HttpUtils {
         OkHttpClient client = getOkHttpClient();
         Builder builder = new FormBody.Builder();
         if (param != null) {
-            for (String key : param.keySet()) {
-                builder.add(key, param.get(key) + "");
+            for (Map.Entry entry : param.entrySet()) {
+                builder.add(entry.getKey()+"", entry.getValue()+ "");
             }
         }
         RequestBody body = builder.build();
@@ -232,7 +233,7 @@ public class HttpUtils {
                 .url(url)
                 .build();
         int serverLoadTimes = 0;
-//		String fileName = fileName_;
+
         try {
             httpReLoad(url, client, request, fileName);
         } catch (Exception e) {

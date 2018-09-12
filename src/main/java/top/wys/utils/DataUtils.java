@@ -1,5 +1,7 @@
 package top.wys.utils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 
@@ -37,6 +39,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
@@ -66,6 +69,27 @@ public class DataUtils {
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 
+    /**
+     * 当source 和targets中的任意一个相等，则返回true，否则返回false
+     * @param source
+     * @param targets
+     * @return
+     */
+    public static boolean orEquals(String source,String... targets){
+        if (source == null) {
+            return false;
+        }
+        if (targets == null){
+            return false;
+        }
+
+        for (String target : targets) {
+            if (source.equals(target)){
+                return true;
+            }
+        }
+        return false;
+    }
     /**
      * 参数排序
      */
@@ -213,19 +237,7 @@ public class DataUtils {
         return file.getAbsolutePath();
     }
 
-    /**
-     * @author 郑明亮
-     * @time 2017年2月6日 上午9:33:27
-     * @description <p> 得到对明文加密后的文本  (因Android端AS导shiro包编译有问题，所以md5加盐加密暂时不用shiro包中的)<br>
-     * @param source 需要加密的文本（明文密码）
-     * @param salt 需要对明文密码进行随机组合的任意字符（用户不需要记住，只是对于文本加密使用）
-     * @param hashIterations MD5加密散列次数
-     * @return
-     */
-//	public static String getEncryptionPasswd(String source,String salt,int hashIterations){
-//		Md5Hash md5Hash = new Md5Hash(source, salt, hashIterations);
-//		return md5Hash.toString();
-//	}
+
 
     /**
      * @return 32位UUID
@@ -291,9 +303,7 @@ public class DataUtils {
     @SuppressWarnings("unused")
     public static synchronized String getEncryptionPasswd(String source, String salt, int hashIterations) {
         String md5 = source + md5(salt == null ? "" : salt);
-        if (md5 == null) {
-            return "";
-        }
+
         for (int i = 1; i <= hashIterations; i++) {
             md5 = md5(md5).toUpperCase();
         }
@@ -318,7 +328,7 @@ public class DataUtils {
                     ip = (InetAddress) nii.nextElement();
                     if (ip.getHostAddress().indexOf(':') == -1) {
                         res.add(ip.getHostAddress());
-                         System.out.println("本机的ip=" + ip.getHostAddress());
+                         log.info("本机的ip=" + ip.getHostAddress());
                         ipAddr = ip.getHostAddress();
                     }
                 }
@@ -344,8 +354,8 @@ public class DataUtils {
 		    headers.put("User-Agent","Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36");
             Connection connection = Jsoup.connect("http://city.ip138.com/ip2city.asp").headers(headers).timeout(Integer.MAX_VALUE);
             String html = connection.get().select("center").html();
-			 ip = html.substring(html.indexOf("[")+1,html.indexOf("]"));
-			log.info("公网ip："+html);
+			 ip = html.substring(html.indexOf('[')+1,html.indexOf(']'));
+			log.info("公网ip：{}",html);
 		} catch (IOException e) {
 			e.printStackTrace();
 			log.error("获取公网ip失败", e);
@@ -372,7 +382,7 @@ public class DataUtils {
             String str = new String(IOUtils.isToBytes(inputStream),"gb2312").trim();
             ip = str.substring(str.indexOf('[')+1, str.lastIndexOf(']'));
 
-//			log.info("公网ip："+ip);
+			log.info("公网ip：{}",ip);
 		} catch (IOException e) {
 			e.printStackTrace();
 			log.error("获取公网ip失败", e);
@@ -393,11 +403,11 @@ public class DataUtils {
 	 * @return
 	 */
 	public static String getLocalMac(String host) {
-		StringBuffer sb = new StringBuffer("");
+		StringBuilder sb = new StringBuilder();
 		try {
 			//获取网卡，获取地址
 			byte[] mac = NetworkInterface.getByInetAddress(InetAddress.getByName(host)).getHardwareAddress();
-			System.out.println("mac数组长度："+mac.length);
+			log.info("mac数组长度：{}",mac.length);
 			for(int i=0; i<mac.length; i++) {
 				if(i!=0) {
 					sb.append("-");
@@ -405,7 +415,6 @@ public class DataUtils {
 				//字节转换为整数
 				int temp = mac[i]&0xff;
 				String str = Integer.toHexString(temp);
-				//            System.out.println("每8位:"+str);
 				if(str.length()==1) {
 					sb.append("0"+str);
 				}else {
@@ -449,11 +458,11 @@ public class DataUtils {
 				macString.deleteCharAt(macString.length() - 1);
 				set.add(macString.toString());
 			}
-			System.out.println(set);
+
 			if(set.size() == 0){
-				System.out.println("Sorry, can't find your MAC Address.");
+				log.info("Sorry, can't find your MAC Address.");
 			}else{
-				System.out.println("Your MAC Address is " + set);
+				log.info("Your MAC Address is{} " , set);
 			}
 		}catch (Exception exception) {
 			exception.printStackTrace();
@@ -480,11 +489,87 @@ public class DataUtils {
 				}
 			}
 		} catch (SocketException ex) {
+		    ex.printStackTrace();
 		}
 		return null;
 	}
 
+    private static String getIpInfoBySina(String ip){
+	    String address = "";
+	    String url = "http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=";
+        try {
+            String json = HttpUtils.get(url + ip);
+            if(StringUtils.isNotEmpty(json)){
+                JSONObject jsonObject = JSON.parseObject(json);
+                String country = jsonObject.getString("country");
+                String province = jsonObject.getString("province");
+                String city = jsonObject.getString("city");
+                if (Objects.equals(city,province)) {
+                    address = country +" "+ province;
+                }else{
+                    address = country +" "+province +" "+ city;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return address;
+    }
 
+    private static String getIpInfoByTaobao(String ip){
+        String address = "";
+        String url = "http://ip.taobao.com/service/getIpInfo.php?ip=";
+        try {
+            String json = HttpUtils.get(url + ip);
+            if(StringUtils.isNotEmpty(json)){
+                JSONObject jsonObject = JSON.parseObject(json);
+                String country = jsonObject.getString("country");
+                String province = jsonObject.getString("region");
+                String city = jsonObject.getString("city");
+                if (Objects.equals(city,province)) {
+                    address = country +" "+ province;
+                }else{
+                    address = country +" "+province +" "+ city;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return address;
+    }
+
+    private static String getAddressFromIpByOthers(String ip){
+        String address = "";
+        address = getIpInfoByTaobao(ip);
+        if("".equals(address)){
+            address = getIpInfoBySina(ip);
+        }
+        return address;
+    }
+    /**
+     * 根据ip获取归属地
+     * @param ips ip地址，多个ip可用逗号隔开
+     * @return
+     */
+    public static String getAddressFromIp(String ips){
+        String address = "";
+        if (StringUtils.isEmpty(ips)) {
+            return address;
+        }
+        if(ips.indexOf(',') != -1){
+            StringBuilder sb = new StringBuilder();
+            for (String ip : ips.split(",")) {
+                String info = getAddressFromIpByOthers(ip);
+                sb.append(info).append(",");
+            }
+            sb.deleteCharAt(sb.length() -1);
+            address = sb.toString();
+        }else{
+            address = getAddressFromIpByOthers(ips);
+        }
+        return address;
+
+    }
 
     /**
      * 验证手机号是否合法
@@ -642,12 +727,12 @@ public class DataUtils {
      */
     public static String getSubString(String source, int start, int end) {
         if (start < 0 || end < 0) {
-            System.err.println("start or end < 0");
+            log.error("start or end < 0");
             return "";
         }
 
         if (source == null) {
-            System.err.println("传入字符串为null");
+           log.error("传入字符串为null");
             source = "";
         } else {
             int length = source.length();
@@ -784,6 +869,7 @@ public class DataUtils {
         return format.format(num);
     }
 
+    private static final char[] numbers = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
     /**
      * 获取几位随机数
      *
@@ -792,14 +878,12 @@ public class DataUtils {
      */
     public static String getRandomNumCode(int number) {
         StringBuilder codeNum = new StringBuilder();
-        char[] numbers = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+
         Random random = new Random();
         for (int i = 0; i < number; i++) {
             int next = random.nextInt(10000);
             codeNum .append(numbers[next % 10]);
         }
-        System.out.println(codeNum);
-
         return codeNum.toString();
     }
 
@@ -823,7 +907,6 @@ public class DataUtils {
             code[2] = lowercase;
             codeNum.append((char) code[random.nextInt(3)]);
         }
-        System.out.println(codeNum);
 
         return codeNum.toString();
     }
@@ -920,9 +1003,9 @@ public class DataUtils {
             Map<String, Object[]> map = new HashMap<>();
             map.put(fields[i], objects[i]);
             list2.add(map);
-            for (int j = 0; j < objects[i].length; j++) {
+            /*for (int j = 0; j < objects[i].length; j++) {
                 System.out.printf("%s  ", objects[i][j]);
-            }
+            }*/
         }
 
         return list2;
@@ -1166,6 +1249,12 @@ public class DataUtils {
         return obj;
     }
 
+    /**
+     * 把一个map转换为一个对象
+     * @param map
+     * @param beanClass
+     * @return
+     */
     public static Object mapToObject(Map<String, Object> map, Class<?> beanClass){
         if (map == null)
             return null;
@@ -1223,7 +1312,7 @@ public class DataUtils {
      */
     public static List<?> mapsToObjects(List<Map<String, Object>> maps, Class<?> t){
         if (maps ==null || maps.isEmpty())
-            return null;
+            return Collections.EMPTY_LIST;
         List<Object> list = new ArrayList<Object>();
         for (Map<String, Object> map : maps) {
             Object obj = mapToObject(map, t);
