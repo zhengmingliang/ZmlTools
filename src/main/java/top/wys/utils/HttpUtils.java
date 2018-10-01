@@ -57,7 +57,7 @@ public class HttpUtils {
         OkHttpClient client = getOkHttpClient();
 //		client.
         Request request = new Request.Builder()
-                .header("X-FORWARDED-FOR",DataUtils.getRandomIp())
+                .header("X-FORWARDED-FOR",RandomUtils.getRandomIp())
                 .header("User-Agent","Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36")
                 .url(url)
                 .build();
@@ -78,7 +78,7 @@ public class HttpUtils {
         Request request = new Request.Builder()
                 .url(url)
                 .headers(Headers.of(headers))
-                .header("X-FORWARDED-FOR",DataUtils.getRandomIp())
+                .header("X-FORWARDED-FOR",RandomUtils.getRandomIp())
                 .build();
         Response response = client.newCall(request).execute();
         return response.body().string();
@@ -148,7 +148,7 @@ public class HttpUtils {
         Request request = new Request.Builder()
                 .url(url)
                 .headers(Headers.of(headers))    //添加header参数；
-                .header("X-FORWARDED-FOR",DataUtils.getRandomIp())
+                .header("X-FORWARDED-FOR",RandomUtils.getRandomIp())
                 .post(builder.build()) //添加requestBody
                 .build();
         Response response = client.newCall(request).execute();
@@ -211,7 +211,7 @@ public class HttpUtils {
         Request request = new Request.Builder()
                 .url(url)
                 .post(body)
-                .header("X-FORWARDED-FOR",DataUtils.getRandomIp())
+                .header("X-FORWARDED-FOR",RandomUtils.getRandomIp())
                 .build();
         Response response = client.newCall(request).execute();
         return response.body();
@@ -564,8 +564,8 @@ public class HttpUtils {
 
         Request request = new Request.Builder()
                 .url(url)
-                .header("X-REAL-IP",DataUtils.getRandomIp())
-                .header("X-FORWARDED-FOR",DataUtils.getRandomIp())
+                .header("X-REAL-IP",RandomUtils.getRandomIp())
+                .header("X-FORWARDED-FOR",RandomUtils.getRandomIp())
                 .post(body)
                 .build();
         Response response = client.newCall(request).execute();
@@ -588,8 +588,8 @@ public class HttpUtils {
         Request request = new Request.Builder()
                 .url(url)
                 .post(body)
-                .header("X-REAL-IP",DataUtils.getRandomIp())
-                .header("X-FORWARDED-FOR",DataUtils.getRandomIp())
+                .header("X-REAL-IP",RandomUtils.getRandomIp())
+                .header("X-FORWARDED-FOR",RandomUtils.getRandomIp())
                 .headers(Headers.of(header))
                 .build();
         Response response = client.newCall(request).execute();
