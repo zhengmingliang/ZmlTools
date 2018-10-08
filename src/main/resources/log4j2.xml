@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN"  monitorInterval="300">
+    <properties>
+        <property name="LOG_HOME">${sys:user.home}/logs</property>
+    </properties>
+    <Appenders>
+
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level [%thread][%file:%line] %logger{36} - %msg%n" />
+        </Console>
+
+        <RollingRandomAccessFile name="InfoFile"
+                                 fileName="${LOG_HOME}/zml-info.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.log">
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="DENY"
+                                 onMismatch="NEUTRAL" />
+                <ThresholdFilter level="trace" onMatch="ACCEPT"
+                                 onMismatch="DENY" />
+                <RegexFilter regex=".*test.*" onMatch="NEUTRAL" onMismatch="DENY" />
+            </Filters>
+            <PatternLayout
+                pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line]  %logger{36} - %msg%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20" />
+        </RollingRandomAccessFile>
+
+        <!-- TimeBasedTriggeringPolicy 这个配置需要和filePattern结合使用，注意filePattern中配置的文件重命名规则是${FILE_NAME}-%d{yyyy-MM-dd
+            HH-mm}-%i， 最小的时间粒度是mm，即分钟，TimeBasedTriggeringPolicy指定的size是1，结合起来就是每1分钟生成一个新文件。
+            如果改成%d{yyyy-MM-dd HH}，最小粒度为小时，则每一个小时生成一个文件。 -->
+        <RollingRandomAccessFile name="ErrorFile"
+                                 fileName="${LOG_HOME}/zml-error.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log">
+            <Filters>
+                <ThresholdFilter level="fatal" onMatch="DENY"
+                                 onMismatch="NEUTRAL" />
+                <ThresholdFilter level="warn" onMatch="ACCEPT"
+                                 onMismatch="DENY" />
+            </Filters>
+            <PatternLayout
+                pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n" />
+            <!-- 1.每天生成一个日志文件 2.一天内的日志文件体积已经超过1G -->
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" />
+                <SizeBasedTriggeringPolicy size="100 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20" />
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="FatalFile"
+                                 fileName="${LOG_HOME}/zml-fatal.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/fatal-%d{yyyy-MM-dd}-%i.log">
+            <Filters>
+                <ThresholdFilter level="fatal" onMatch="ACCEPT"
+                                 onMismatch="DENY" />
+            </Filters>
+            <PatternLayout
+                pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20" />
+        </RollingRandomAccessFile>
+
+
+        <Async name="Async">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="InfoFile" />
+            <AppenderRef ref="ErrorFile" />
+            <AppenderRef ref="FatalFile" />
+
+        </Async>
+
+
+    </Appenders>
+
+    <Loggers>
+        <!-- <Logger name="mongolog" level="warn" additivity="false">
+            <AppenderRef ref="databaseAppender" />
+            <AppenderRef ref="Async" />
+        </Logger>
+        <Logger name="asynclog" level="trace" additivity="false">
+            <AppenderRef ref="Async" />
+        </Logger> -->
+        <Logger name="com" level="trace" additivity="false">
+            <AppenderRef ref="Async" />
+            <!--	<RegexFilter regex="com.zml.util*" onMatch="ACCEPT" onMismatch="DENY" />-->
+        </Logger>
+
+        <!--<Logger name="com" level="trace" additivity="false">
+            <AppenderRef ref="Console" />
+            &lt;!&ndash;<RegexFilter regex=".*util.*" onMatch="ACCEPT" onMismatch="DENY" />&ndash;&gt;
+        </Logger>-->
+
+        <Root level="info">
+            <AppenderRef ref="Console" />
+        </Root>
+
+
+
+    </Loggers>
+</Configuration>
