@@ -1,8 +1,13 @@
-package top.wys.utils;
-/**
- * Created by 郑明亮 on 2017/11/16 18:01.
+package top.wys.utils;/**
+ * Created by 郑明亮 on 2017/11/26 20:57.
  */
 
+/**
+ * @author 郑明亮   @email 1072307340@qq.com
+ * @version 1.0
+ * @time 2017/11/26 20:57
+ * TODO
+ */
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -262,14 +267,14 @@ public final class PropertiesUtil {
         return remove != null;
     }
 
-    public static boolean update(String key, String value, String comment, boolean updateToFile) throws FileNotFoundException {
+    public static boolean update(String key, String value, String comment, boolean updateToFile,String... path) throws FileNotFoundException {
         boolean flag = false;
         for (Map.Entry<String, Properties> propertiesEntry : propertiesMap.entrySet()) {
             Properties properties = propertiesEntry.getValue();
             if (properties.containsKey(key)) {
                 flag = properties.setProperty(key, value) != null;
                 if (updateToFile) {
-                    updateToFile(key, value, comment, propertiesEntry);
+                    updateToFile(key, value, comment, propertiesEntry,path);
                 }
                 break;
             }
@@ -287,11 +292,14 @@ public final class PropertiesUtil {
      * @param propertiesEntry
      * @throws FileNotFoundException
      */
-    private static void updateToFile(String key, String value, String comment, Map.Entry<String, Properties> propertiesEntry) throws FileNotFoundException {
+    private static void updateToFile(String key, String value, String comment, Map.Entry<String, Properties> propertiesEntry,String... filePath) throws FileNotFoundException {
         Properties properties;
         properties = new SafeProperties();//采用自定义Properties，读取配置文件时，记录注释等信息
         String fileName = propertiesEntry.getKey();
         String path = PropertiesUtil.class.getResource(File.separator + fileName).getPath();
+        if(filePath != null && filePath.length >0){
+            path = filePath[0];
+        }
 
         File file = new File(path);
         if (!file.exists()) {
