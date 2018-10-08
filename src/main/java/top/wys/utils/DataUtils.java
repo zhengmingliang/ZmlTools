@@ -381,7 +381,7 @@ public class DataUtils {
             String str = new String(IOUtils.isToBytes(inputStream),"gb2312").trim();
             ip = str.substring(str.indexOf('[')+1, str.lastIndexOf(']'));
 
-			log.info("公网ip：{}",ip);
+//			log.info("公网ip："+ip);
 		} catch (IOException e) {
 			e.printStackTrace();
 			log.error("获取公网ip失败", e);
@@ -578,7 +578,7 @@ public class DataUtils {
      */
     public static boolean isMobileNO(String mobiles) {
         Pattern p = Pattern
-                .compile("^((13[0-9])|(15[^4,\\D])|(18[0-9]))\\d{8}$");
+                .compile("^1\\d{10}$");
 
         Matcher m = p.matcher(mobiles);
 
