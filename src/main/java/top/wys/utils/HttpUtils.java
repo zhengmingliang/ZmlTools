@@ -32,8 +32,8 @@ import okhttp3.ResponseBody;
 /**
  * @author 郑明亮
  * @version 1.0
- * @Time 2017年2月15日 下午4:42:51
- * @Description <p>  </P>
+ * @time 2017年2月15日 下午4:42:51
+ * @description <p>  </P>
  */
 public class HttpUtils {
 
@@ -41,8 +41,8 @@ public class HttpUtils {
 
     /**
      * @author 郑明亮
-     * @Time 2017年3月19日 下午5:13:23
-     * @Description <p>网络失败最大尝试次数  </p>
+     * @time 2017年3月19日 下午5:13:23
+     * @description <p>网络失败最大尝试次数  </p>
      */
     protected static final int MAX_SERVER_LOAD_TIMES = 3;
 
@@ -70,7 +70,7 @@ public class HttpUtils {
      * @param headers 添加的header的map集合
      * @return
      * @throws IOException
-     * @Description <p>http的get请求，可添加header</p>
+     * @description <p>http的get请求，可添加header</p>
      */
     public static String get(String url, Map<String, String> headers) throws IOException {
         OkHttpClient client = getOkHttpClient();
@@ -235,8 +235,8 @@ public class HttpUtils {
      * @return 下载到本地的绝对路径地址
      * @throws IOException
      * @author 郑明亮
-     * @Time 2017年3月19日 下午3:17:47
-     * @Description <p>下载文件  </p>
+     * @time 2017年3月19日 下午3:17:47
+     * @description <p>下载文件  </p>
      */
     public static String getFileFromHttpData(String url, boolean isSynchronous) throws IOException {
         if (isSynchronous) {
@@ -249,8 +249,8 @@ public class HttpUtils {
 
     /**
      * @author 郑明亮
-     * @Time 2017年3月19日 下午4:59:41
-     * @Description <p> 文件绝对路径地址</p>
+     * @time 2017年3月19日 下午4:59:41
+     * @description <p> 文件绝对路径地址</p>
      */
     private static String fileAbsolutePath = null;
 
@@ -260,8 +260,8 @@ public class HttpUtils {
      * @return 下载到本地的绝对路径地址
      * @throws IOException
      * @author 郑明亮
-     * @Time 2017年3月19日 下午3:17:07
-     * @Description <p>下载文件（Http同步请求，阻塞线程,只有在得到返回路径值时，程序下方代码才会执行）   </p>
+     * @time 2017年3月19日 下午3:17:07
+     * @description <p>下载文件（Http同步请求，阻塞线程,只有在得到返回路径值时，程序下方代码才会执行）   </p>
      */
     public static String getFileFromHttpDataBySyn(final String url, final String fileName) throws IOException {
 
@@ -329,8 +329,8 @@ public class HttpUtils {
      * @throws UnsupportedEncodingException
      * @throws FileNotFoundException
      * @author 郑明亮
-     * @Time 2017年3月19日 下午6:20:08
-     * @Description <p>从网络获取文件，如果失败，需要重复执行的方法体   </p>
+     * @time 2017年3月19日 下午6:20:08
+     * @description <p>从网络获取文件，如果失败，需要重复执行的方法体   </p>
      */
     private static void httpReLoad(final String url, final OkHttpClient client,
                                    Request request, String fileName) throws IOException,
@@ -408,8 +408,8 @@ public class HttpUtils {
      * @return 下载到本地的绝对路径地址
      * @throws IOException
      * @author 郑明亮
-     * @Time 2017年3月19日 下午3:17:07
-     * @Description <p>下载文件（Http异步请求，方法尚未返回路径值时，程序下方代码仍会执行）   </p>
+     * @time 2017年3月19日 下午3:17:07
+     * @description <p>下载文件（Http异步请求，方法尚未返回路径值时，程序下方代码仍会执行）   </p>
      */
     public static String getFileFromHttpDataByAsyn(final String url, final String fileName_) throws IOException {
 
@@ -553,9 +553,9 @@ public class HttpUtils {
      * @return
      * @throws IOException
      * @author 郑明亮
-     * @Email zhengmingliang911@gmail.com
-     * @Time 2017年4月25日 下午5:46:51
-     * @Description <p> post请求，仅发送RequestBody </P>
+     * @email zhengmingliang911@gmail.com
+     * @time 2017年4月25日 下午5:46:51
+     * @description <p> post请求，仅发送RequestBody </P>
      */
     public static String sendRequestBody(String url, Object object) throws IOException {
         OkHttpClient client = new OkHttpClient();

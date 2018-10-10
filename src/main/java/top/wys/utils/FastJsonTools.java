@@ -23,7 +23,7 @@ public class FastJsonTools {
 	/**
 	 *  转换成json格式的字符串
 	 * @param object 要转换的对象
-	 * @return
+	 * @return json字符串
 	 */
 	public static String createJsonString(Object object) {
 		String jsonString = JSON.toJSONString(object);
@@ -33,7 +33,7 @@ public class FastJsonTools {
 	/**将json字符串转换为指定的bean对象
 	 * @param jsonString 
 	 * @param cls  要转换为对象的类型
-	 * @return
+	 * @return 指定对象
 	 */
 	public static <T> T createJsonBean(String jsonString, Class<T> cls) {
 		T t = JSON.parseObject(jsonString, cls);
@@ -41,9 +41,9 @@ public class FastJsonTools {
 	}
 
 	/**将json字符串转换为List&lt;T&gt;
-	 * @param jsonString
-	 * @param cls
-	 * @return
+	 * @param jsonString json字符串
+	 * @param cls 要转换成的对象类型
+	 * @return 指定对象
 	 */
 	public static <T> List<T> createJsonToListBean(String jsonString,
 			Class<T> cls) {
@@ -53,8 +53,8 @@ public class FastJsonTools {
 	}
 
 	/**将json字符串转换为List&lt;Map&lt;String,Object&gt;&gt;
-	 * @param jsonString
-	 * @return
+	 * @param jsonString json字符串
+	 * @return  List&lt;Map&lt;String,Object&gt;&gt;
 	 */
 	public static List<Map<String, Object>> createJsonToListMap(
 			String jsonString) {
@@ -65,8 +65,8 @@ public class FastJsonTools {
 	}
 
 	/**将json字符串转换为List&lt;String&gt;
-	 * @param jsonString
-	 * @return
+	 * @param jsonString json字符串
+	 * @return List&lt;String&gt;
 	 */
 	public static List<String> createJsonToListString(String jsonString) {
 		List<String> list2 = JSON.parseObject(jsonString,
@@ -75,9 +75,9 @@ public class FastJsonTools {
 		return list2;
 	}
 
-	/**将json字符串转换为Map&ltString,Object&gt;
-	 * @param jsonString
-	 * @return
+	/**将json字符串转换为Map&lt;String,Object&gt;
+	 * @param jsonString json字符串
+	 * @return Map&lt;String,Object&gt;
 	 */
 	public static Map<Object, Object> createJsonToMap(String jsonString) {
 		Map<Object, Object> list2 = JSON.parseObject(jsonString,
@@ -96,7 +96,7 @@ public class FastJsonTools {
 	 * @modifyDescription<p> <br>
 	 * @param jsonString  json字符串
 	 * @param ignoreSpace 是否忽略value中为空字符串的值
-	 * @return
+	 * @return Map&lt;Object,Object&gt;
 	 */
 	public static Map<Object, Object> createJsonToMap(String jsonString,boolean ignoreSpace) {
 		Map<Object, Object> map = JSON.parseObject(jsonString,

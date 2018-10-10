@@ -20,10 +20,10 @@ public class DateUtils {
 	}
 
 	/**
-	 * 将当前日期转换为int类型返回; 如20170201
+	 * 将当前日期转换为int类型返回;
 	 * 
-	 * @param pattern
-	 * @return
+	 * @param pattern 日期格式如yyyyMMdd
+	 * @return 返回数字，如20170201
 	 */
 	public static int getIntNowDate(String pattern) {
 		Date date = new Date();
@@ -45,8 +45,8 @@ public class DateUtils {
 	 *              因为有时在存入到数据库中的date类型带有微秒值，在再次从数据库中读取为String类型时，仍会带有微秒值，
 	 *              所以为保险起见，经格式化后，再保存就不会出现微秒值
 	 *              <br>
-	 * @param datePattern
-	 * @return
+	 * @param datePattern 日期格式
+	 * @return getFormatNowDate
 	 */
 	public static Date getFormatNowDate(String datePattern) {
 
@@ -65,8 +65,8 @@ public class DateUtils {
 	/**
 	 * 当前时间转换成特定形式Date
 	 * 
-	 * @param datePattern
-	 * @return
+	 * @param datePattern 日期格式
+	 * @return getNowDateStrByPattern
 	 */
 	public static String getNowDateStrByPattern(String datePattern) {
 		Date currentTime = new Date();
@@ -77,7 +77,7 @@ public class DateUtils {
 	/**
 	 * 获取当前年
 	 * 
-	 * @return
+	 * @return getCurrentYear
 	 */
 	public static Integer getCurrentYear() {
 		Calendar c = Calendar.getInstance();
@@ -87,7 +87,7 @@ public class DateUtils {
 	/**
 	 * 获取当前天，当月的当天
 	 * 
-	 * @return
+	 * @return getCurrentDay
 	 */
 	public static Integer getCurrentDay(Date date) {
 		Calendar c = Calendar.getInstance();
@@ -98,7 +98,7 @@ public class DateUtils {
 	/**
 	 * 获取当前小时,24时制
 	 * 
-	 * @return
+	 * @return Date
 	 */
 	public static Integer getCurrentHour(Date date) {
 		Calendar c = Calendar.getInstance();
@@ -109,9 +109,9 @@ public class DateUtils {
 	/**
 	 * 得到下一个日期
 	 * 
-	 * @param date
-	 * @param step
-	 * @return
+	 * @param date 日期
+	 * @param step 日期位移，位移单位为天
+	 * @return 位移后的Date日期
 	 */
 	public static Date getNextDate(Date date, int step) {
 		Calendar c = Calendar.getInstance();
@@ -123,9 +123,9 @@ public class DateUtils {
 	/**
 	 * 根据日期和格式得到Date形式日期
 	 * 
-	 * @param date
-	 * @param pattern
-	 * @return
+	 * @param date 日期
+	 * @param pattern 日期格式
+	 * @return Date
 	 */
 	public static Date getDateByPattern(Date date, String pattern) {
 		SimpleDateFormat formatter = new SimpleDateFormat(pattern);
@@ -146,8 +146,8 @@ public class DateUtils {
 	 * @description <p>UTC时间转换为本地时间，默认的UTC的格式为yyyy-MM-dd'T'HH:mm:ss.SSS'Z'  </P>
 	 * @param utcTime  utc时间字符串
 	 * @param localTimePatten  要转换成的本地时间格式
-	 * @return
-	 * @throws ParseException 
+	 * @return 被转换后的日期字符串
+	 * @throws ParseException  解析异常
 	 */
 	public static String utc2Local(String utcTime,String localTimePatten) throws ParseException {
 		String defaultPartern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
@@ -163,8 +163,8 @@ public class DateUtils {
 	 * @param utcTime utc时间字符串
 	 * @param utcTimePatten UTC时间符合的pattern
 	 * @param localTimePatten 要转换成的本地时间格式
-	 * @return
-	 * @throws ParseException 
+	 * @return 被转换后的日期字符串
+	 * @throws ParseException  解析异常
 	 */
 	public static String utc2Local(String utcTime, String utcTimePatten,
 												   String localTimePatten) throws ParseException {
@@ -196,7 +196,7 @@ public class DateUtils {
 	 * @description <p> UTC时间字符串转换为Date类型 时间 </P>
 	 * @param utcTime UTC时间字符
 	 * @param utcTimePatten UTC时间格式
-	 * @return
+	 * @return Date
 	 */
 	public static Date utc2LocalDate(String utcTime,String utcTimePatten) {
 		SimpleDateFormat utcFormater = new SimpleDateFormat(utcTimePatten);
@@ -213,9 +213,9 @@ public class DateUtils {
 	/**
 	 * 根据日期和格式得到String形式日期
 	 * 
-	 * @param date
-	 * @param pattern
-	 * @return
+	 * @param date 日期
+	 * @param pattern 日期格式
+	 * @return 得到指定String形式日期
 	 */
 	public static String getStringByPattern(Date date, String pattern) {
 		return new SimpleDateFormat(pattern).format(date);
@@ -224,8 +224,8 @@ public class DateUtils {
 	/**
 	 * 根据给定的字符串日期，和形式，转化成Date
 	 * 
-	 * @param date
-	 * @param pattern
+	 * @param date 日期
+	 * @param pattern 日期格式
 	 * @return
 	 */
 	public static Date getDateByGiven(String date, String pattern) {
@@ -242,9 +242,9 @@ public class DateUtils {
 	/**
 	 * 计算两个日期相差多少天
 	 * 
-	 * @param startday
-	 * @param endday
-	 * @return
+	 * @param startday 开始日期
+	 * @param endday 结束日期
+	 * @return getTimeGapsInDays
 	 */
 	public static int getTimeGapsInDays(Date startday, Date endday) {
 		if (startday.after(endday)) {
@@ -268,7 +268,7 @@ public class DateUtils {
 	 *
 	 * @param endday  结束日期
 	 *
-	 * @return
+	 * @return getTimeGapsInMilliseconds
 	 */
 	public static long getTimeGapsInMilliseconds(Date startday, Date endday) {
 		if (startday.after(endday)) {
@@ -292,7 +292,7 @@ public class DateUtils {
 	 *            开始日期
 	 * @param end
 	 *            结束日期
-	 * @return
+	 * @return getTimeGapsInMonth
 	 */
 	public static int getTimeGapsInMonth(Date start, Date end) {
 		if (start.after(end)) {
@@ -347,7 +347,7 @@ public class DateUtils {
 	 * 根据给出的日期获取本年的第一天的日期
 	 * 
 	 * @param date
-	 * @return
+	 * @return getBeginOfYear
 	 */
 	public static Date getBeginOfYear(Date date) {
 		Calendar c = Calendar.getInstance();
@@ -360,8 +360,8 @@ public class DateUtils {
 	/**
 	 * 根据给出的日期获取本年的最后一天的日期
 	 * 
-	 * @param date
-	 * @return
+	 * @param date 日期
+	 * @return getEndOfYear
 	 */
 	public static Date getEndOfYear(Date date) {
 		Calendar c = Calendar.getInstance();
@@ -374,8 +374,8 @@ public class DateUtils {
 	/**
 	 * 获取上个月的第一天日期
 	 * 
-	 * @param date
-	 * @return
+	 * @param date 日期
+	 * @return getFirstDayOfLastMonth
 	 */
 	public static Date getFirstDayOfLastMonth(Date date) {
 		Calendar c = Calendar.getInstance();
@@ -388,8 +388,8 @@ public class DateUtils {
 	/**
 	 * 获取上个月的最后一天日期
 	 * 
-	 * @param date
-	 * @return
+	 * @param date 日期
+	 * @return getLastDayOfLastMonth
 	 */
 	public static Date getLastDayOfLastMonth(Date date) {
 		Calendar c = Calendar.getInstance();
@@ -402,7 +402,7 @@ public class DateUtils {
 	/**
 	 * 生成日期格式为： yyyy-MM-dd HH:mm:ss
 	 * 
-	 * @return
+	 * @return getNowDateTime
 	 */
 	public static String getNowDateTime() {
 		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
@@ -412,8 +412,8 @@ public class DateUtils {
 	/**
 	 * isLeapYear:[判断是否为闰年].
 	 *
-	 * @param year
-	 * @return
+	 * @param year 当前年
+	 * @return ture of false
 	 * @author 郑明亮
 	 */
 	public static boolean isLeapYear(int year) {
@@ -485,9 +485,9 @@ public class DateUtils {
 	/**
 	 * [根据传入的month 和day拼接成一个日期字符串 ;如：传入getMonthsAndDays(1,1) 返回0101]
 	 *
-	 * @param month
+	 * @param month 月份
 	 * @param day  Noncompliant; creates & discards an Integer object
-	 * @return
+	 * @return getMonthsAndDays
 	 * @author 郑明亮
 	 */
 	public static String getMonthsAndDays(int month, int day) {

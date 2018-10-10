@@ -6,11 +6,6 @@ package top.wys.utils;
 import java.util.Random;
 
 /**
- * <ol>
- * 2018/10/1 16:43 <br>
- *
- * </ol>
- *
  * @author 郑明亮
  * @version 1.0
  */

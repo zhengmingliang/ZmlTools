@@ -15,10 +15,6 @@ import org.springframework.core.io.support.PropertiesLoaderUtils;
 /**
  * @author 郑明亮
  * @time 2017年6月21日 上午8:55:18
- * @description <p> </p>
- * @modifyBy
- * @modifyTime 
- * @modifyDescription<p> </p>
  */
 public class AutoLoadProperties implements Runnable {
 	private static Logger log = LogManager.getLogger();   
@@ -95,11 +91,7 @@ public class AutoLoadProperties implements Runnable {
 	 /**
 	 * @author 郑明亮
 	 * @time 2017年6月21日 上午8:58:01
-	 * @description <p> </p>
-	 * @modifyBy
-	 * @modifyTime 
-	 * @modifyDescription<p> </p>
-	 * @param configFile
+	 * @param configFile 文件
 	 */
 	private void loadPropertieFile(File configFile) {  
 	        try {  

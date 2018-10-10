@@ -40,6 +40,12 @@
 	</properties>
 
 	<dependencies>
+        <!--含有邮件发送-->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+        </dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -104,14 +110,18 @@
 			<artifactId>guava</artifactId>
 			<version>21.0</version>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
+		<dependency>
+			<groupId>com.monitorjbl</groupId>
+			<artifactId>xlsx-streamer</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+	    <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
 		<dependency>
 		<groupId>org.apache.logging.log4j</groupId>
 		<artifactId>log4j-core</artifactId>
 		<version>2.8.2</version>
 		</dependency>
-    </dependencies>
+	</dependencies>
     <profiles>
         <profile>
             <id>release</id>
@@ -132,10 +142,70 @@
                         </executions>
                     </plugin>
                     <!-- Javadoc -->
-                   <!-- <plugin>
+                    <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>2.10.4</version>
+						<configuration>
+							<aggregate>true</aggregate>
+							<tags>
+								<tag>
+									<name>&lt;ol&gt;</name>
+									<placement>a</placement>
+									<head>略过checkstyle规则</head>
+								</tag>
+								<tag>
+									<name>time</name>
+									<placement>a</placement>
+									<head>time</head>
+								</tag>
+								<tag>
+									<name>description</name>
+									<placement>a</placement>
+									<head>description</head>
+								</tag>
+								<tag>
+									<name>email</name>
+									<placement>a</placement>
+									<head>email</head>
+								</tag>
+								<tag>
+									<name>return</name>
+									<placement>a</placement>
+									<head>return</head>
+								</tag>
+								<tag>
+									<name>throws</name>
+									<placement>a</placement>
+									<head>throws</head>
+								</tag>
+								<tag>
+									<name>param</name>
+									<placement>a</placement>
+									<head>param</head>
+								</tag>
+								<tag>
+									<name>modifyTime</name>
+									<placement>a</placement>
+									<head>modifyTime</head>
+								</tag>
+								<tag>
+									<name>modifyDescription</name>
+									<placement>a</placement>
+									<head>modifyDescription</head>
+								</tag>
+								<tag>
+									<name>modifyBy</name>
+									<placement>a</placement>
+									<head>modifyBy</head>
+								</tag>
+								<tag>
+									<name>modifyDescription</name>
+									<placement>a</placement>
+									<head>modifyDescription</head>
+								</tag>
+							</tags>
+						</configuration>
                         <executions>
                             <execution>
                                 <phase>package</phase>
@@ -144,9 +214,9 @@
                                 </goals>
                             </execution>
                         </executions>
-                    </plugin>-->
-                    <!-- GPG -->
-                    <!--<plugin>
+                    </plugin>
+                     <!--GPG-->
+                    <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
                         <version>1.6</version>
@@ -158,7 +228,7 @@
                                 </goals>
                             </execution>
                         </executions>
-                    </plugin>-->
+                    </plugin>
                 </plugins>
             </build>
             <distributionManagement>
@@ -186,7 +256,7 @@
 
             <!-- Copying Allatori configuration file to 'target' directory.
                  The destination file will be filtered (Maven properties used in configuration file will be resolved). -->
-            <plugin>
+            <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.6</version>
@@ -213,7 +283,7 @@
                 </executions>
             </plugin>
 
-            <!-- Running Allatori -->
+            &lt;!&ndash; Running Allatori &ndash;&gt;
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -234,14 +304,14 @@
                         <argument>-Xmx512m</argument>
                         <argument>-jar</argument>
 
-                        <!-- Copy allatori.jar to 'allatori' directory to use the commented line -->
+                        &lt;!&ndash; Copy allatori.jar to 'allatori' directory to use the commented line &ndash;&gt;
                         <argument>${basedir}/allatori/allatori.jar</argument>
-                        <!-- <argument>${basedir}/allatori/allatori.jar</argument> -->
+                        &lt;!&ndash; <argument>${basedir}/allatori/allatori.jar</argument> &ndash;&gt;
 
                         <argument>${basedir}/target/allatori.xml</argument>
                     </arguments>
                 </configuration>
-            </plugin>
+            </plugin>-->
 		</plugins>
 	</build>
 </project>

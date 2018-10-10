@@ -8,19 +8,19 @@ import java.util.regex.Pattern;
 
 /**
  * @author 郑明亮
- * @Time 2017年2月1日 下午8:48:58
- * @Description <p>字符串相关工具类  </p>
+ * @time 2017年2月1日 下午8:48:58
+ * @description <p>字符串相关工具类  </p>
  */
 public class StringUtils {
-	 
+
     private StringUtils() {
         throw new UnsupportedOperationException("Can not be instantiated...");
     }
  
 /**
  * @author 郑明亮
- * @Time 2017年1月23日 上午9:58:07
- * @Description <p> 将Unicode编码的文本进行解码</p>
+ * @time 2017年1月23日 上午9:58:07
+ * @description <p> 将Unicode编码的文本进行解码</p>
  * @param str Unicode编码文本
  * @return 解码后的文本
  */
@@ -38,8 +38,8 @@ public static String unicodeToString(String str) {
  
 /**
  * @author 郑明亮
- * @Time 2017年1月23日 上午9:57:20
- * @Description <p>将中文转换为Unicode编码   </p>
+ * @time 2017年1月23日 上午9:57:20
+ * @description <p>将中文转换为Unicode编码   </p>
  * @param s 想要进行编码的文本
  * @return Unicode编码 文本
  */
@@ -92,8 +92,8 @@ public static String ISO2UTF(String inStr) throws UnsupportedEncodingException {
     
     /**
      * @author 郑明亮
-     * @Time 2017年2月6日 上午11:13:48
-     * @Description <p> 判断字符串是否不为null或长度大于0  </p>
+     * @time 2017年2月6日 上午11:13:48
+     * @description <p> 判断字符串是否不为null或长度大于0  </p>
      * @param s 待校验字符串
      * @return {@code false}: 空 {@code true}: 不为空
      */
@@ -252,8 +252,8 @@ public static String ISO2UTF(String inStr) throws UnsupportedEncodingException {
      
     /**
      * @author 郑明亮
-     * @Time 2017年1月12日 下午1:16:39
-     * @Description <p>去掉浮点类型的小数点，并进行四舍五入   </p>
+     * @time 2017年1月12日 下午1:16:39
+     * @description <p>去掉浮点类型的小数点，并进行四舍五入   </p>
      *              <p>应用场景：将浮点型转换为整型数据，并保留1位小数</p>
      * @param amountString 浮点型金额字符串
      * @return 整型数字符串
@@ -284,9 +284,9 @@ public static String ISO2UTF(String inStr) throws UnsupportedEncodingException {
     }
 /**
      * @author 郑明亮
-     * @Time 2017年1月13日 下午4:18:14
-     @param amount 金额
-     * @param pattern 将数字转换为指定格式    {@value AmountPattern}
+     * @time 2017年1月13日 下午4:18:14
+     * @param amount 金额
+     * @param pattern 将数字转换为指定格式
      * <p>如 amount： 10000000  ，当传入金额为null时，默认为0 </p>
      * <p>如 pattern：  \u00A5,###.00 ，当pattern为null时，使用默认pattern ,即"\u00A5,##0.00" </p>
      * <p>如 return： ¥10,000,000   </p>

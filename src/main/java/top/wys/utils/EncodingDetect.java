@@ -161,7 +161,7 @@ class BytesEncodingDetect extends Encoding {
 
 	  /**
 	   * Function : detectEncoding Aruguments: URL Returns : One of the encodings from the Encoding enumeration (GB2312, HZ, BIG5,
-	   * EUC_TW, ASCII, or OTHER) Description: This function looks at the URL contents and assigns it a probability score for each
+	   * EUC_TW, ASCII, or OTHER) description: This function looks at the URL contents and assigns it a probability score for each
 	   * encoding type. The encoding type with the highest probability is returned.
 	   */
 	  public int detectEncoding(URL testurl) {
@@ -186,7 +186,7 @@ class BytesEncodingDetect extends Encoding {
 
 	  /**
 	   * Function : detectEncoding Aruguments: File Returns : One of the encodings from the Encoding enumeration (GB2312, HZ, BIG5,
-	   * EUC_TW, ASCII, or OTHER) Description: This function looks at the file and assigns it a probability score for each encoding
+	   * EUC_TW, ASCII, or OTHER) description: This function looks at the file and assigns it a probability score for each encoding
 	   * type. The encoding type with the highest probability is returned.
 	   */
 	  public int detectEncoding(File testfile) {
@@ -205,7 +205,7 @@ class BytesEncodingDetect extends Encoding {
 
 	  /**
 	   * Function : detectEncoding Aruguments: byte array Returns : One of the encodings from the Encoding enumeration (GB2312, HZ,
-	   * BIG5, EUC_TW, ASCII, or OTHER) Description: This function looks at the byte array and assigns it a probability score for
+	   * BIG5, EUC_TW, ASCII, or OTHER) description: This function looks at the byte array and assigns it a probability score for
 	   * each encoding type. The encoding type with the highest probability is returned.
 	   */
 	  public int detectEncoding(byte[] rawtext) {
@@ -771,7 +771,7 @@ class BytesEncodingDetect extends Encoding {
 
 	  /*
 	   * Function: ascii_probability Argument: byte array Returns : number from 0 to 100 representing probability text in array uses
-	   * all ASCII Description: Sees if array has any characters not in ASCII range, if so, score is reduced
+	   * all ASCII description: Sees if array has any characters not in ASCII range, if so, score is reduced
 	   */
 	  int ascii_probability(byte[] rawtext) {
 	    int score = 75;

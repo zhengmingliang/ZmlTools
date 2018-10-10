@@ -19,7 +19,7 @@ public class EncryptUtils {
      * @time 2018年10月4日20:43:12
      * @param orignString 需要加密的原字符串
      * @param time 时间戳
-     * @return
+     * @return 编码后的字符串
      */
     public static String zmlEncode(String orignString, long time){
         Long anotherTime = Long.valueOf(new StringBuilder(time + "").reverse().toString());
@@ -45,12 +45,13 @@ public class EncryptUtils {
 
 
     /**
-     * <li>自定义对称解密</li>
+     *
+     * <li>自定义对称解密，time字段必需为encryptString加密时的时间戳</li>
      * @author 郑明亮
      * @time 2018年10月4日20:42:47
-     * @param encryptString
-     * @param time
-     * @return
+     * @param encryptString 要解码的字符串
+     * @param time 时间戳
+     * @return 解码后的字符串
      */
     public static String zmlDecode(String encryptString, long time){
         Long anotherTime = Long.valueOf(new StringBuilder(time + "").reverse().toString());

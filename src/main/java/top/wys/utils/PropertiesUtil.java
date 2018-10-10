@@ -324,7 +324,7 @@ public final class PropertiesUtil {
      * <li>获取所有的已加载配置文件的key值</li>
      * <li>在配置文件较少时，使用该方法更省时，当加载配置文件较多时，采用{@link PropertiesUtil#getKeys(String)}方法会更快</li>
      *
-     * @return
+     * @return 获取所有的key值
      */
     public static Set<String> getAllKeys() {
         Set<String> stringPropertyNames = new HashSet<>();
@@ -345,7 +345,7 @@ public final class PropertiesUtil {
      * <li>在配置文件较多时时，使用该方法更省时，当加载配置文件较少时采用{@link PropertiesUtil#getAllKeys()}方法会更快</li>
      *
      * @param fileName 文件名称
-     * @return
+     * @return 获取指定文件中的所有key
      */
     public static Set<String> getKeys(String fileName) {
         Properties properties = propertiesMap.get(fileName);

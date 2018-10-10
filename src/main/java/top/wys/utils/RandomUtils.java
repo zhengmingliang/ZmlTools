@@ -9,13 +9,9 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * <ol>
- * 2018/10/1 15:58 <br>
- *
- * </ol>
- *
  * @author 郑明亮
  * @version 1.0
+ * @description 随机数生成工具类
  */
 public class RandomUtils {
     private static String ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";

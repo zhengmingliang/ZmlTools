@@ -57,7 +57,7 @@ import okhttp3.Response;
  *
  * @author 郑明亮
  * @version 1.0
- * @time 2016-1-27 下午6:26:55
+ * 2016-1-27 下午6:26:55
  */
 public class DataUtils {
 
@@ -70,9 +70,9 @@ public class DataUtils {
 
     /**
      * 当source 和targets中的任意一个相等，则返回true，否则返回false
-     * @param source
-     * @param targets
-     * @return
+     * @param source 源字符串
+     * @param targets 要比较的字符串
+     * @return true or false
      */
     public static boolean orEquals(String source,String... targets){
         if (source == null) {
@@ -91,6 +91,8 @@ public class DataUtils {
     }
     /**
      * 参数排序
+     * @param map 参数
+     * @return 计算的sign
      */
     public static String getRequestSign(Map<String, Object> map) {
         if (map == null)
@@ -119,7 +121,7 @@ public class DataUtils {
 
     /**
      * @param longSign 除了sign以外的所有参数拼接起来的值
-     * @return
+     * @return getRequestSign
      * @author 郑明亮
      * @email zhengmingliang911@gmail.com
      * @time 2017年6月17日 下午3:16:35
@@ -135,6 +137,8 @@ public class DataUtils {
 
     /***
      * MD5加码 生成32位md5码
+     * @param inStr 待加密字符串
+     * @return md5
      */
     public static String string2MD5(String inStr) {
         MessageDigest md5 = null;
@@ -176,7 +180,7 @@ public class DataUtils {
 
 
     /**
-     * @param strName
+     * @param strName 字符串
      * @return 包含返回true，否则返回false
      * @author 郑明亮
      * @email zhengmingliang911@gmail.com
@@ -196,7 +200,7 @@ public class DataUtils {
 
     /**
      * @param num 数字字符串
-     * @return
+     * @return 获得一个非null的double
      * @author 郑明亮
      * @time 2017年3月10日 下午12:17:34
      * @description <p> 将字符串转换为double类型,当值为null时，返回0.0  <br>
@@ -215,9 +219,9 @@ public class DataUtils {
     }
 
     /**
-     * @param base64
+     * @param base64 base64编码
      * @param fileName
-     * @return
+     * @return 得到转成图片的存储路径
      * @author 郑明亮
      * @email zhengmingliang911@gmail.com
      * @time 2017年2月28日 下午12:43:01
@@ -257,6 +261,8 @@ public class DataUtils {
 
     /**
      * MD5加密
+     * @param string 待加密字符
+     * @return 加密后的字符，大写字符
      */
     public static String md5(String string) {
         byte[] hash;
@@ -281,7 +287,7 @@ public class DataUtils {
     /**
      * @param source 需要加密的文本（明文密码）
      * @param salt   作料、盐值
-     * @return
+     * @return getEncryptionPasswd
      * @author 郑明亮
      * @time 2017年2月6日 上午9:38:29
      * @description <p>得到对明文加密后的文本   <br>
@@ -294,7 +300,7 @@ public class DataUtils {
      * @param source         需要加密的文本（明文密码）
      * @param salt           需要对明文密码进行随机组合的任意字符（用户不需要记住，只是对于文本加密使用）
      * @param hashIterations MD5加密散列次数
-     * @return
+     * @return getEncryptionPasswd
      * @author 郑明亮
      * @time 2017年2月6日 上午9:33:27
      * @description <p> 得到对明文加密后的文本  <br>
@@ -342,7 +348,7 @@ public class DataUtils {
     /**
      * 通过jsoup方式解析公网ip
      * @author 郑明亮
-     * @return
+     * @return 公网ip
      */
 	public static String getWebIpAddress1(){
 		String ip = "公网ip获取失败";
@@ -366,7 +372,7 @@ public class DataUtils {
      * @author 郑明亮
      * @time 2017年11月7日15:39:52
      * @description <p>获取公网ip<br>
-     * @return
+     * @return 公网ip
      */
     public static String getWebIpAddress2(){
 		String ip = "公网ip获取失败";
@@ -389,8 +395,7 @@ public class DataUtils {
 		return ip;
 	}
 	/**
-	 * 获取本机mac
-	 * @return
+	 * @return  获取本机mac
 	 */
 	public static String getLocalMac() {
 		return getLocalMac(getLocalHostIP());
@@ -399,7 +404,7 @@ public class DataUtils {
 	/**
 	 * 根据本地ip地址获取 该网卡的物理地址
 	 * @param host
-	 * @return
+	 * @return 获取本机mac
 	 */
 	public static String getLocalMac(String host) {
 		StringBuilder sb = new StringBuilder();
@@ -431,8 +436,8 @@ public class DataUtils {
 	}
 
 	/**
-	 * 获取所有的物理地址
-	 * @return
+	 *
+	 * @return 获取所有的物理地址
 	 */
 	public static Set<String> getAllMacAddress() {
 		Set<String> set = new TreeSet<>();
@@ -472,7 +477,7 @@ public class DataUtils {
 	 * getLocalIpAddress:[获得手机的ip地址].
 	 *
 	 * @author 郑明亮 （应该联网权限）
-	 * @return
+	 * @return 获得手机的ip地址
 	 */
 	public static String getLocalIpAddress() {
 		try {
@@ -548,7 +553,7 @@ public class DataUtils {
     /**
      * 根据ip获取归属地
      * @param ips ip地址，多个ip可用逗号隔开
-     * @return
+     * @return 归属地
      */
     public static String getAddressFromIp(String ips){
         String address = "";
@@ -574,7 +579,7 @@ public class DataUtils {
      * 验证手机号是否合法
      *
      * @param mobiles 手机号码
-     * @return
+     * @return true or false
      */
     public static boolean isMobileNO(String mobiles) {
         Pattern p = Pattern
@@ -587,7 +592,7 @@ public class DataUtils {
 
     /**
      * @param url
-     * @return
+     * @return true of false
      * @author 郑明亮
      * @email zhengmingliang911@gmail.com
      * @time 2017年4月24日 上午11:51:18
@@ -616,7 +621,7 @@ public class DataUtils {
      * 校验邮箱是否合法
      *
      * @param s 传入的邮箱字符串
-     * @return
+     * @return true or false
      */
     public static boolean isEmail1(String s) {
         Pattern pattern = Pattern
@@ -628,8 +633,8 @@ public class DataUtils {
     /**
      * Android 工具包自带验证Email方法
      *
-     * @param email
-     * @return
+     * @param email 邮箱
+     * @return true or false
      */
     public static boolean isEmail2(String email) {
 
@@ -637,7 +642,7 @@ public class DataUtils {
     }
 
     /**
-     * @param text
+     * @param text 文本
      * @return {@code true}全是中文 <br>   {@code false} 不全是中文、或不是中文
      * @author 郑明亮
      * @time 2017年3月13日 下午6:48:31
@@ -745,7 +750,7 @@ public class DataUtils {
     /**
      * @param url 网络请求
      * @return 文件名称
-     * @throws IOException
+     * @throws IOException 网络超时等异常
      * @author 郑明亮
      * @time 2017年3月19日 下午4:35:13
      * @description <p>获取 从网络请求中请求到的文件名称  <br>
@@ -770,7 +775,6 @@ public class DataUtils {
     /**
      * @param head OkHttp3  Header
      * @return 文件名称
-     * @throws IOException
      * @author 郑明亮
      * @time 2017年3月19日 下午4:35:13
      * @description <p>从网络请求中获取请求到的文件名称   <br>
@@ -792,7 +796,7 @@ public class DataUtils {
     /**
      * @param url 从URL中截取文件名称
      * @return
-     * @throws UnsupportedEncodingException
+     * @throws UnsupportedEncodingException 解码异常
      * @author 郑明亮
      * @time 2017年3月19日 下午4:41:50
      * @description <p> 从URL中截取文件名称  <br>
@@ -813,7 +817,7 @@ public class DataUtils {
 
     /**
      * @param byteSize
-     * @return
+     * @return 文件大小
      * @author 郑明亮
      * @time 2017年4月3日11:47:00
      * @description <p>将文件的大小传入（单位byte），返回转换成KB、MB、GB单位的文件大小（带单位）<br>
@@ -840,8 +844,8 @@ public class DataUtils {
     /**
      * 四舍五入，默认保留两位小数
      *
-     * @param num
-     * @return
+     * @param num 数字
+     * @return 处理后的数字
      */
     public static String getRoundNum(double num) {
         return getRoundNum(num, null);
@@ -871,13 +875,10 @@ public class DataUtils {
 
     /**
      * @param text 文本信息
-     * @return
+     * @return 日期
      * @author 郑明亮
      * @time 2017年6月29日 上午9:21:15
      * @description <p>从文本中截取出日期，并返回,格式为yyyy-MM-dd <br>
-     * @modifyBy
-     * @modifyTime
-     * @modifyDescription<p> <br>
      */
     public static String getDateFromText(String text) {
         Pattern pattern = Pattern.compile("\\d+-[0-9]{2}-[0-9]{2}");
@@ -890,8 +891,8 @@ public class DataUtils {
     }
 
     /**
-     * @param text
-     * @return
+     * @param text 文本
+     * @return 日期
      * @author 郑明亮
      * @time 2017年6月29日 上午9:22:33
      * @description <p>从文本中截取出日期  格式为yyyy-MM-dd HH:mm:ss <br>
@@ -910,9 +911,9 @@ public class DataUtils {
     }
 
     /**
-     * @param text
-     * @param pattern
-     * @return
+     * @param text 文本
+     * @param pattern 正则
+     * @return 根据正则表达式获取文本中的指定内容
      * @author 郑明亮
      * @time 2017年7月3日 下午4:13:26
      * @description <p>根据正则表达式获取文本中的指定内容<br>
@@ -930,17 +931,17 @@ public class DataUtils {
     }
 
     /**
-     * @param list
-     * @return
-     * @throws IllegalAccessException
-     * @throws IllegalArgumentException
-     * @throws InvocationTargetException
-     * @throws NoSuchMethodException
-     * @throws SecurityException
+     * @param list 指定集合
+     * @return 指定对象
+     * @throws IllegalAccessException 反射异常
+     * @throws IllegalArgumentException 反射异常
+     * @throws InvocationTargetException 反射异常
+     * @throws NoSuchMethodException 反射异常
+     * @throws SecurityException 反射异常
      * @author 郑明亮
      * @email zhengmingliang911@gmail.com
      * @time 2017年7月5日 下午9:19:51
-     * @description <p> 将对象集合转换为List<Map<String, Object[]>>   <br>
+     * @description <p> 将对象集合转换为List&lt;Mapt&lt;String, Object[]&gt;&gt; </p>
      * @version 1.0.0
      */
     public static <T> List<Map<String, Object[]>> List2Array(List<T> list) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
@@ -971,6 +972,10 @@ public class DataUtils {
     }
 
 
+    /**
+     * @param e 异常
+     * @return 堆栈错误信息
+     */
     public static String getStackTrace(Throwable e) {
         String detail = null;
         try (StringWriter sw = new StringWriter();
@@ -984,6 +989,10 @@ public class DataUtils {
         return detail;
     }
 
+    /**
+     * @param e 异常
+     * @return 堆栈错误信息
+     */
     public static Throwable getCauseException(Exception e) {
         if (e == null) return null;
         Throwable cause = e.getCause();
@@ -994,8 +1003,8 @@ public class DataUtils {
     public static final char UNDERLINE = '_';
 
     /**
-     * @param param
-     * @return
+     * @param param 驼峰式字符串
+     * @return 驼峰转下划线
      */
     public static String camelToUnderline(String param) {
         if (param == null || "".equals(param.trim())) {
@@ -1015,6 +1024,10 @@ public class DataUtils {
         return sb.toString().toUpperCase();
     }
 
+    /**
+     * @param param 带下划线的字符串
+     * @return 下划线转驼峰
+     */
     public static String underlineToCamel(String param) {
         if (param == null || "".equals(param.trim())) {
             return "";
@@ -1034,6 +1047,11 @@ public class DataUtils {
         return sb.toString();
     }
 
+    /**
+     * 将下划线转为驼峰字符串
+     * @param param 带下划线的字符串
+     * @return 驼峰字符串
+     */
     public static String underlineToCamel2(String param) {
         if (param == null || "".equals(param.trim())) {
             return "";
@@ -1113,9 +1131,9 @@ public class DataUtils {
     }
 
     /**
-     * @param list
-     * @return
-     * @throws IllegalAccessException
+     * @param list 集合
+     * @return 指定map集合
+     * @throws IllegalAccessException 反射异常
      * @author 郑明亮
      * @time 2017年10月17日14:09:03
      * @description <p>将Bean集合转换为map集合<br>
@@ -1139,10 +1157,10 @@ public class DataUtils {
     /**
      * TODO 当类型不一致时，会导致设值失败
      *<li> map转换成bean</li>
-     * @param map
-     * @param t
-     * @param <T>
-     * @return
+     * @param map map集合
+     * @param t 要转换的类型
+     * @param <T> 泛型
+     * @return 转换后的对象
      */
     public static <T> T mapToBean(Map<String, Object> map, Class<T> t){
         if (map == null)
@@ -1166,9 +1184,9 @@ public class DataUtils {
 
     /**
      * 把一个map转换为一个对象
-     * @param map
-     * @param beanClass
-     * @return
+     * @param map map集合
+     * @param beanClass 要转换的类型
+     * @return 转换后的对象
      */
     public static Object mapToObject(Map<String, Object> map, Class<?> beanClass){
         if (map == null)
@@ -1222,8 +1240,7 @@ public class DataUtils {
      *
      * @param maps map集合
      * @param t    要转换成的对象集合的类型
-     * @return
-     * @throws Exception
+     * @return 转换后的对象
      */
     public static List<?> mapsToObjects(List<Map<String, Object>> maps, Class<?> t){
         if (maps ==null || maps.isEmpty())
@@ -1236,6 +1253,13 @@ public class DataUtils {
         return list;
     }
 
+    /**
+     * 将map数组集合转换为对象集合
+     * @param maps map数组
+     * @param t 要转换成的对象集合
+     * @param <T> 泛型
+     * @return 转换结果
+     */
     public static <T> List<T> mapsToBeans(List<Map<String, Object>> maps, Class<T> t) {
         if (maps == null || maps.isEmpty())
             return null;
@@ -1249,7 +1273,7 @@ public class DataUtils {
 
     /**
      * 从jsonp中获取json字符串
-     * @param jsonp
+     * @param jsonp jsonp格式字符串
      * @param callback 回调方法名称
      * @return
      */

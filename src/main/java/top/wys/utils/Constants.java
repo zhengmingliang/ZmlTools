@@ -7,7 +7,6 @@ package top.wys.utils;
  * @author 郑明亮   @email 1072307340@qq.com
  * @version 1.0
  * @time 2017/11/22 8:43
- * @description <p> </p>
  */
 public class Constants {
     /**
