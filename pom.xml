@@ -124,7 +124,8 @@
 	</dependencies>
     <profiles>
         <profile>
-            <id>release</id>
+            <id>snapshots</id>
+            <!--<id>release</id>-->
             <build>
                 <plugins>
                     <!-- Source -->
@@ -149,11 +150,8 @@
 						<configuration>
 							<aggregate>true</aggregate>
 							<tags>
-								<tag>
-									<name>&lt;ol&gt;</name>
-									<placement>a</placement>
-									<head>略过checkstyle规则</head>
-								</tag>
+
+
 								<tag>
 									<name>time</name>
 									<placement>a</placement>
@@ -169,7 +167,7 @@
 									<placement>a</placement>
 									<head>email</head>
 								</tag>
-								<tag>
+								<!--<tag>
 									<name>return</name>
 									<placement>a</placement>
 									<head>return</head>
@@ -183,7 +181,7 @@
 									<name>param</name>
 									<placement>a</placement>
 									<head>param</head>
-								</tag>
+								</tag>-->
 								<tag>
 									<name>modifyTime</name>
 									<placement>a</placement>
@@ -199,11 +197,7 @@
 									<placement>a</placement>
 									<head>modifyBy</head>
 								</tag>
-								<tag>
-									<name>modifyDescription</name>
-									<placement>a</placement>
-									<head>modifyDescription</head>
-								</tag>
+
 							</tags>
 						</configuration>
                         <executions>

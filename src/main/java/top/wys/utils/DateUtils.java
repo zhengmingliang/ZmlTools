@@ -483,10 +483,10 @@ public class DateUtils {
 	}
 
 	/**
-	 * [根据传入的month 和day拼接成一个日期字符串 ;如：传入getMonthsAndDays(1,1) 返回0101]
+	 * 根据传入的month 和day拼接成一个日期字符串 ;如：传入getMonthsAndDays(1,1) 返回0101
 	 *
 	 * @param month 月份
-	 * @param day  Noncompliant; creates & discards an Integer object
+	 * @param day  日期
 	 * @return getMonthsAndDays
 	 * @author 郑明亮
 	 */
