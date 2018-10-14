@@ -6,20 +6,20 @@
 	<artifactId>ZmlTools</artifactId>
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
-
+    <description>Common tool class encapsulation </description>
 	<name>ZmlTools</name>
 	<url>https://gitee.com/zml2015/ZmlTools</url>
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
 		</license>
 	</licenses>
 	<developers>
 		<developer>
 			<name>zhengmingliang</name>
 			<email>zhengmingliang911@gmail.com</email>
-			<url>http://wuyongshi.top</url>
+			<url>https://wuyongshi.top</url>
 		</developer>
 	</developers>
 	<scm>
@@ -33,10 +33,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<slf4j.version>1.7.22</slf4j.version>
+		<log4j.version>2.8.2</log4j.version>
 		<spring.version>4.3.6.RELEASE</spring.version>
 		<jdk.version>1.7</jdk.version>
-		<gpg.skip>false</gpg.skip>
-		<javadoc.skip>false</javadoc.skip>
 	</properties>
 
 	<dependencies>
@@ -85,20 +84,24 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
-		<!--<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${slf4j.version}</version>
-		</dependency>-->
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+			<scope>compile</scope>
+        </dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>2.8.2</version>
+			<version>${log4j.version}</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>
-			<version>2.8.2</version>
+			<version>${log4j.version}</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-beanutils</groupId>
@@ -115,17 +118,12 @@
 			<artifactId>xlsx-streamer</artifactId>
 			<version>1.2.1</version>
 		</dependency>
-	    <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
-		<dependency>
-		<groupId>org.apache.logging.log4j</groupId>
-		<artifactId>log4j-core</artifactId>
-		<version>2.8.2</version>
-		</dependency>
+
 	</dependencies>
     <profiles>
         <profile>
-            <id>snapshots</id>
-            <!--<id>release</id>-->
+            <!--<id>snapshots</id>-->
+            <id>release</id>
             <build>
                 <plugins>
                     <!-- Source -->
@@ -167,21 +165,7 @@
 									<placement>a</placement>
 									<head>email</head>
 								</tag>
-								<!--<tag>
-									<name>return</name>
-									<placement>a</placement>
-									<head>return</head>
-								</tag>
-								<tag>
-									<name>throws</name>
-									<placement>a</placement>
-									<head>throws</head>
-								</tag>
-								<tag>
-									<name>param</name>
-									<placement>a</placement>
-									<head>param</head>
-								</tag>-->
+
 								<tag>
 									<name>modifyTime</name>
 									<placement>a</placement>
@@ -231,7 +215,7 @@
                     <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
                 </snapshotRepository>
                 <repository>
-                    <id>oss</id>
+                    <id>release</id>
                     <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
                 </repository>
             </distributionManagement>
