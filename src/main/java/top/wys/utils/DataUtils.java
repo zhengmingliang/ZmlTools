@@ -27,8 +27,6 @@ import java.net.SocketException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.UnknownHostException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,7 +40,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -116,7 +113,7 @@ public class DataUtils {
             }
         }
         builder.append(Constants.COUPON_KEY);
-        return string2MD5(builder.toString());
+        return EncryptUtils.md5(builder.toString());
     }
 
     /**
@@ -132,36 +129,10 @@ public class DataUtils {
         if (longSign == null)
             return "";
 
-        return string2MD5(longSign + Constants.COUPON_KEY);
+        return EncryptUtils.md5(longSign + Constants.COUPON_KEY);
     }
 
-    /***
-     * MD5加码 生成32位md5码
-     * @param inStr 待加密字符串
-     * @return md5
-     */
-    public static String string2MD5(String inStr) {
-        MessageDigest md5 = null;
-        try {
-            md5 = MessageDigest.getInstance("MD5");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-        char[] charArray = inStr.toCharArray();
-        byte[] byteArray = new byte[charArray.length];
-        for (int i = 0; i < charArray.length; i++)
-            byteArray[i] = (byte) charArray[i];
-        byte[] md5Bytes = md5.digest(byteArray);
-        StringBuilder hexValue = new StringBuilder();
-        for (int i = 0; i < md5Bytes.length; i++) {
-            int val = ((int) md5Bytes[i]) & 0xff;
-            if (val < 16)
-                hexValue.append("0");
-            hexValue.append(Integer.toHexString(val));
-        }
-        return hexValue.toString();
-    }
+
 
     // 根据Unicode编码完美的判断中文汉字和符号
     private static boolean isChinese(char c) {
@@ -241,80 +212,6 @@ public class DataUtils {
     }
 
 
-
-    /**
-     * @return 32位UUID
-     * @author 郑明亮
-     * @time 2017年2月5日 下午2:50:58
-     * @description <p>
-     * 获取唯一标识id字符串（32位）
-     * <br>
-     */
-    public static String getUUID() {
-        //生成一个唯一的36位UUID
-        UUID uuid = UUID.randomUUID();
-        String id = uuid.toString();
-        //把"-"去掉，则剩下为32位数字和字母随机组合的唯一字符id
-        id = id.replaceAll("-", "");
-        return id;
-    }
-
-    /**
-     * MD5加密
-     * @param string 待加密字符
-     * @return 加密后的字符，大写字符
-     */
-    public static String md5(String string) {
-        byte[] hash;
-        try {
-            hash = MessageDigest.getInstance("MD5").digest(
-                    string.getBytes("UTF-8"));
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Huh, MD5 should be supported?", e);
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException("Huh, UTF-8 should be supported?", e);
-        }
-
-        StringBuilder hex = new StringBuilder(hash.length * 2);
-        for (byte b : hash) {
-            if ((b & 0xFF) < 0x10)
-                hex.append("0");
-            hex.append(Integer.toHexString(b & 0xFF));
-        }
-        return hex.toString().toUpperCase();
-    }
-
-    /**
-     * @param source 需要加密的文本（明文密码）
-     * @param salt   作料、盐值
-     * @return getEncryptionPasswd
-     * @author 郑明亮
-     * @time 2017年2月6日 上午9:38:29
-     * @description <p>得到对明文加密后的文本   <br>
-     */
-    public static String getEncryptionPasswd(String source, String salt) {
-        return md5(source + md5(salt));
-    }
-
-    /**
-     * @param source         需要加密的文本（明文密码）
-     * @param salt           需要对明文密码进行随机组合的任意字符（用户不需要记住，只是对于文本加密使用）
-     * @param hashIterations MD5加密散列次数
-     * @return getEncryptionPasswd
-     * @author 郑明亮
-     * @time 2017年2月6日 上午9:33:27
-     * @description <p> 得到对明文加密后的文本  <br>
-     */
-    @SuppressWarnings("unused")
-    public static synchronized String getEncryptionPasswd(String source, String salt, int hashIterations) {
-        String md5 = source + md5(salt == null ? "" : salt);
-
-        for (int i = 1; i <= hashIterations; i++) {
-            md5 = md5(md5).toUpperCase();
-        }
-        return md5;
-    }
-
     /**
      * 获取【电脑】本机所有IP
      */
@@ -387,7 +284,6 @@ public class DataUtils {
             String str = new String(IOUtils.isToBytes(inputStream),"gb2312").trim();
             ip = str.substring(str.indexOf('[')+1, str.lastIndexOf(']'));
 
-//			log.info("公网ip："+ip);
 		} catch (IOException e) {
 			e.printStackTrace();
 			log.error("获取公网ip失败", e);
@@ -431,7 +327,7 @@ public class DataUtils {
 			e.printStackTrace();
 		}
 		String addr = sb.toString().toUpperCase();
-		System.out.println("本机MAC地址:"+addr);
+		log.debug("本机MAC地址:"+addr);
 		return addr;
 	}
 
@@ -962,9 +858,6 @@ public class DataUtils {
             Map<String, Object[]> map = new HashMap<>();
             map.put(fields[i], objects[i]);
             list2.add(map);
-            /*for (int j = 0; j < objects[i].length; j++) {
-                System.out.printf("%s  ", objects[i][j]);
-            }*/
         }
 
         return list2;
@@ -1264,7 +1157,7 @@ public class DataUtils {
      */
     public static <T> List<T> mapsToBeans(List<Map<String, Object>> maps, Class<T> t) {
         if (maps == null || maps.isEmpty())
-            return null;
+            return Collections.emptyList();
         List<T> list = new ArrayList<T>();
         for (Map<String, Object> map : maps) {
             T obj = mapToBean(map, t);

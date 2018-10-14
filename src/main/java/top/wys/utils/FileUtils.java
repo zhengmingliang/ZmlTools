@@ -1,5 +1,8 @@
 package top.wys.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -10,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.channels.FileChannel;
+import java.nio.file.Paths;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -19,7 +23,7 @@ import java.util.zip.ZipOutputStream;
  *
  */
 public class FileUtils {
-	
+	private static final Logger log = LoggerFactory.getLogger(FileUtils.class);
 	/**
 	 * Enhancement of java.io.File#createNewFile()
 	 * Create the given file. If the parent directory  don't exists, we will create them all.
@@ -69,8 +73,8 @@ public class FileUtils {
                 writefile = new File(path); // 重新实例化
             }
 
-            fw = new FileOutputStream(writefile,true);
-            System.out.println("###content:" + content);
+            fw = new FileOutputStream(writefile,append);
+            log.debug("###content:{}" , content);
             fw.write(content.getBytes());
             fw.flush();
         } catch (Exception ex) {
@@ -127,16 +131,16 @@ public class FileUtils {
         String zipName = "";  
         
         if(sourceFile.exists() == false){  
-            System.out.println("待压缩的文件目录："+sourceFilePath+"不存在.");
+            log.debug("待压缩的文件目录：{}不存在.",sourceFilePath);
         }else{  
             try {  
                 File zipFile = new File(zipFilePath + "/" + fileName +".zip");  
-                if(zipFile.exists()){  
-                    System.out.println(zipFilePath + "目录下存在名字为:" + fileName +".zip" +"打包文件.");  
+                if(zipFile.exists()){
+                    log.debug("{}目录下存在名字为:{}.zip 打包文件.",zipFilePath, fileName);
                 }else{  
                     File[] sourceFiles = sourceFile.listFiles();
-                    if(null == sourceFiles || sourceFiles.length<1){  
-                        System.out.println("待压缩的文件目录：" + sourceFilePath + "里面不存在文件，无需压缩.");
+                    if(null == sourceFiles || sourceFiles.length<1){
+                        log.debug("待压缩的文件目录：{} 里面不存在文件，无需压缩." , sourceFilePath);
                     }else{  
                         fos = new FileOutputStream(zipFile);  
                         zos = new ZipOutputStream(new BufferedOutputStream(fos));  
@@ -147,14 +151,14 @@ public class FileUtils {
                             zos.putNextEntry(zipEntry);  
                             //读取待压缩的文件并写进压缩包里  
                             fis = new FileInputStream(sourceFiles[i]);
+                            //fixme 这里需要对流关闭一下，不然可能会因为文件过大，导致内存溢出
                             bis = new BufferedInputStream(fis, 1024*10);  
                             int read = 0;  
                             while((read=bis.read(bufs, 0, 1024*10)) != -1){  
                                 zos.write(bufs,0,read);  
                             }  
                         }  
-//                        flag = true;  
-                    }  
+                    }
                 }  
                 zipName = zipFile.getName();  
             } catch (FileNotFoundException e) {  
@@ -165,8 +169,8 @@ public class FileUtils {
                 //关闭流
                 IOUtils.close(zos);
                 IOUtils.close(bis);
-                 IOUtils.close(fis);
-                 IOUtils.close(fos);
+                IOUtils.close(fis);
+                IOUtils.close(fos);
             }  
         }  
         return zipName;  
@@ -196,6 +200,8 @@ public class FileUtils {
                 }
             }
         }
+
+//        Files.delete();
         // 目录此时为空，可以删除
         return dir.delete();
     }
@@ -273,32 +279,31 @@ public class FileUtils {
     public static String readTxtFile(File file,String encoding) {
         FileInputStream fis = null;
         InputStreamReader read = null;
+        BufferedReader bufferedReader = null;
     	try {
     	    String filePath = file.getAbsolutePath();
     		encoding =  encoding==null?EncodingDetect.getJavaEncode(filePath):encoding;
-//    		File file = new File(filePath);
-    		System.out.println(filePath);
+    		log.debug(filePath);
     		String str = "";
     		if (file.isFile() && file.exists()) { // 判断文件是否存在
                 fis = new FileInputStream(file);
                 read = new InputStreamReader(fis, encoding);// 考虑到编码格式
-    			BufferedReader bufferedReader = new BufferedReader(read);
+                bufferedReader = new BufferedReader(read);
     			String lineTxt = null;
     			while ((lineTxt = bufferedReader.readLine()) != null) {
-//    				System.out.println(lineTxt);
     				str += lineTxt + "\r\n";
     			}
 
     		} else {
-    			System.out.println("找不到指定的文件");
+    			log.error("找不到指定的文件");
     		}
     		return str;
     	} catch (Exception e) {
-    		System.out.println("读取文件内容出错");
-    		e.printStackTrace();
+    		log.error("读取文件内容出错",e);
     	}finally {
     	    IOUtils.close(read);
             IOUtils.close(fis);
+            IOUtils.close(bufferedReader);
         }
         return "";
     }
@@ -332,7 +337,7 @@ public class FileUtils {
                 }  
             }  
 		}else{
-			System.err.println(f.getAbsolutePath()+"不存在");
+			log.error("{}不存在",f.getAbsolutePath());
 		}
         
         return size;  
@@ -357,7 +362,7 @@ public class FileUtils {
 			}  
         } else {  
             file.createNewFile();  
-           System.err.println(file.getAbsolutePath()+"不存在"); 
+           log.error("{}不存在,已创建新文件",file.getAbsolutePath());
         }  
         return size;  
     }  

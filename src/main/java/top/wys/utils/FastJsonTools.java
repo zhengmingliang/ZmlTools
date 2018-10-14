@@ -3,6 +3,8 @@ package top.wys.utils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 import java.util.Iterator;
@@ -15,6 +17,8 @@ import java.util.Map;
  * @version 1.0
  */
 public class FastJsonTools {
+
+    private static final Logger log = LoggerFactory.getLogger(FastJsonTools.class);
 
 	private FastJsonTools() {
 		throw new UnsupportedOperationException("不能被实例化");
@@ -102,12 +106,12 @@ public class FastJsonTools {
 		Map<Object, Object> map = JSON.parseObject(jsonString,
 													new TypeReference<Map<Object, Object>>() {});
 		if (ignoreSpace) {//是否忽略空字符串
-			System.out.println("忽略value为空字符串的值");
+            log.debug("忽略value为空字符串的值");
 			Iterator<Object> keys = map.keySet().iterator();
 			while (keys.hasNext()) {
 				Object key = keys.next();
 				if (StringUtils.isEmpty(map.get(key))) {
-					System.out.println("移除的key值:"+key);
+					log.debug("移除的key值:{}",key);
 					keys.remove();
 				}
 				
@@ -151,12 +155,12 @@ public class FastJsonTools {
 		Map<Object, Object> map = JSON.parseObject(jsonString,
 				new TypeReference<Map<Object, Object>>() {	});
 		if (ignoreSpace) {//是否忽略空字符串
-			System.out.println("忽略value为空字符串的值");
+			log.debug("忽略value为空字符串的值");
 			Iterator<Object> keys = map.keySet().iterator();
 			while (keys.hasNext()) {
 				Object key = keys.next();
 				if (StringUtils.isEmpty(map.get(key))) {
-					System.out.println("移除的key值:"+key);
+					log.debug("移除的key值:{}",key);
 					keys.remove();
 				}
 				

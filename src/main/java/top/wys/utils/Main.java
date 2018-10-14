@@ -17,6 +17,6 @@ public class Main {
 		System.out.println(map);
 		String path = Main.class.getClassLoader().getResource("").getPath();
 		System.out.println(path);
-		System.out.println(DataUtils.getUUID());
+		System.out.println(RandomUtils.getUUID());
 	}
 }

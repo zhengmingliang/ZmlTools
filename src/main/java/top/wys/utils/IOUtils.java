@@ -10,6 +10,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 
 /**
  * @author 郑明亮   @email 1072307340@qq.com
@@ -43,10 +44,29 @@ public class IOUtils {
             bos.flush();
             temp = bos;
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("输入流转字节异常",e);
         }
 
         return temp != null ?temp.toByteArray() : new byte[0];
+    }
+
+    /**
+     * 将输入流转为字符串，默认编码为UTF-8
+     * @param inputStream 输入流
+     * @return
+     */
+    public static String is2String(InputStream inputStream){
+        return new String(isToBytes(inputStream), Charset.forName("UTF-8"));
+    }
+
+    /**
+     * 将输入流转为指定编码的字符串
+     * @param inputStream 输入流
+     * @param charset 指定编码，如果编码不存在，则可能会抛出异常
+     * @return
+     */
+    public static String is2String(InputStream inputStream,String charset){
+        return new String(isToBytes(inputStream), Charset.forName(charset));
     }
 
     /**
