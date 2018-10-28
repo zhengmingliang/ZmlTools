@@ -219,7 +219,6 @@ public class EncryptUtils {
      * @param message
      * @param secret
      * @return
-     * @throws Exception
      */
     public static String sha256_HMAC(String message, String secret){
         byte[] bs = new byte[0];

@@ -1,5 +1,7 @@
 package top.wys.utils;
 
+import com.google.common.collect.Maps;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -55,7 +57,6 @@ public class HttpUtils {
      */
     public static String get(String url) throws IOException {
         OkHttpClient client = getOkHttpClient();
-//		client.
         Request request = new Request.Builder()
                 .header("X-FORWARDED-FOR",RandomUtils.getRandomIp())
                 .header("User-Agent","Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36")
@@ -65,23 +66,66 @@ public class HttpUtils {
         return response.body().string();
     }
 
+
     /**
-     * @param url     访问地址+参数
+     * @param url  请求host地址
+     * @param params 请求key-value参数
+     * @return
+     * @throws IOException
+     */
+    public static String get(String url, Map<String, Object> params) throws IOException{
+        return get(url,params,null);
+    }
+
+    /**
+     * @param url 请求host地址
+     * @param params 请求key-value参数
      * @param headers 添加的header的map集合
      * @return
      * @throws IOException
-     * @description <p>http的get请求，可添加header</p>
      */
-    public static String get(String url, Map<String, String> headers) throws IOException {
+    public static String get(String url, Map<String, Object> params,Map<String, String> headers) throws IOException {
         OkHttpClient client = getOkHttpClient();
-//		client.
-        Request request = new Request.Builder()
+        if(url == null){
+            throw new RuntimeException("the request URL can not be null");
+        }
+        //拼接url
+        String requestParamString = getRequestParamString(params);
+        if (url.indexOf('?') != -1) {
+            url+="&"+requestParamString;
+        }else{
+            url+="?"+requestParamString;
+        }
+        log.debug(url);
+        Request.Builder build = new Request.Builder()
                 .url(url)
-                .headers(Headers.of(headers))
                 .header("X-FORWARDED-FOR",RandomUtils.getRandomIp())
-                .build();
+                .headers(Headers.of(getDefaultHeaders()));
+
+        if(headers != null || headers.size() > 0){
+            build.headers(Headers.of(headers));
+        }
+        Request request = build.build();
         Response response = client.newCall(request).execute();
         return response.body().string();
+    }
+
+    /**
+     * 获取get请求的url拼接参数
+     * @param params get请求的key-value集合
+     * @return url拼接参数，eg: name=zhangsan&age=11&sex=male
+     */
+    public static String getRequestParamString(Map<String,Object> params){
+        if(params == null || params.size() == 0){
+            return "";
+        }
+        StringBuilder urlParam = new StringBuilder();
+        for (Map.Entry<String, Object> entry : params.entrySet()) {
+            urlParam.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
+        }
+         urlParam = urlParam.deleteCharAt(urlParam.length() - 1);
+
+        return urlParam.toString();
     }
 
     private static Proxy proxy;
@@ -113,9 +157,19 @@ public class HttpUtils {
      * @param host 主机名/ip
      * @param port 端口
      */
-    public static void setProxy(String host,int port){
+    public static void setHttpProxy(String host,int port){
         SocketAddress address = new InetSocketAddress(host,port);
        HttpUtils.proxy = new Proxy(Proxy.Type.HTTP,address);
+    }
+
+    /**
+     * 设置代理，默认使用socks代理,支持SOCKS (V4 or V5) ，无授权方式
+     * @param host 主机名/ip
+     * @param port 端口
+     */
+    public static void setSocksProxy(String host,int port){
+        SocketAddress address = new InetSocketAddress(host,port);
+        HttpUtils.proxy = new Proxy(Proxy.Type.SOCKS,address);
     }
 
     /**
@@ -584,7 +638,9 @@ public class HttpUtils {
         OkHttpClient client = new OkHttpClient();
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         RequestBody body = RequestBody.create(JSON, GsonTools.createJsonString(object));
-
+        if(header == null){
+            header = getDefaultHeaders();
+        }
         Request request = new Request.Builder()
                 .url(url)
                 .post(body)
@@ -594,6 +650,12 @@ public class HttpUtils {
                 .build();
         Response response = client.newCall(request).execute();
         return response.body().string();
+    }
+
+    public static Map<String,String> getDefaultHeaders(){
+        Map<String,String> header = Maps.newHashMap();
+        header.put("User-Agent",RandomUtils.getRandomUserAgent());
+        return header;
     }
 
     public static void main(String[] args) {

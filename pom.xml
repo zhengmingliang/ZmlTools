@@ -4,7 +4,7 @@
 
 	<groupId>top.wuyongshi</groupId>
 	<artifactId>ZmlTools</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.1</version>
 	<packaging>jar</packaging>
     <description>Common tool class encapsulation </description>
 	<name>ZmlTools</name>
