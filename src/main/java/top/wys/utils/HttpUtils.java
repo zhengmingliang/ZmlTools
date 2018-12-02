@@ -48,6 +48,9 @@ public class HttpUtils {
      */
     protected static final int MAX_SERVER_LOAD_TIMES = 3;
 
+    public static void supportHttps(){
+        System.setProperty("jsse.enableSNIExtension","false");
+    }
 
     /**
      * @param url
@@ -102,7 +105,7 @@ public class HttpUtils {
                 .header("X-FORWARDED-FOR",RandomUtils.getRandomIp())
                 .headers(Headers.of(getDefaultHeaders()));
 
-        if(headers != null || headers.size() > 0){
+        if(headers != null && headers.size() > 0){
             build.headers(Headers.of(headers));
         }
         Request request = build.build();
@@ -113,7 +116,7 @@ public class HttpUtils {
     /**
      * 获取get请求的url拼接参数
      * @param params get请求的key-value集合
-     * @return url拼接参数，eg: name=zhangsan&age=11&sex=male
+     * @return url拼接参数，eg: name=zhangsan&amp;age=11&amp;sex=male
      */
     public static String getRequestParamString(Map<String,Object> params){
         if(params == null || params.size() == 0){
