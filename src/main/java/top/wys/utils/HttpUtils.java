@@ -471,7 +471,7 @@ public class HttpUtils {
     public static String getFileFromHttpDataByAsyn(final String url, final String fileName_) throws IOException {
 
 
-        final OkHttpClient client = new OkHttpClient().newBuilder()
+        final OkHttpClient client = getOkHttpClient().newBuilder()
                 .connectTimeout(1, TimeUnit.MINUTES)
                 .readTimeout(1, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true).build();
@@ -534,7 +534,7 @@ public class HttpUtils {
 
     public static String getFileFromHttpDataByAsyn(final String url, final String fileName_, final String dir) throws IOException {
 
-        final OkHttpClient client = new OkHttpClient().newBuilder()
+        final OkHttpClient client = getOkHttpClient().newBuilder()
                 .connectTimeout(1, TimeUnit.MINUTES)
                 .readTimeout(1, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true).build();
@@ -615,7 +615,7 @@ public class HttpUtils {
      * @description <p> post请求，仅发送RequestBody </P>
      */
     public static String sendRequestBody(String url, Object object) throws IOException {
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = getOkHttpClient();
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         RequestBody body = RequestBody.create(JSON, GsonTools.createJsonString(object));
 
@@ -638,7 +638,7 @@ public class HttpUtils {
      * @throws IOException
      */
     public static String sendRequestBody(String url, Object object,Map<String,String> header) throws IOException {
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = getOkHttpClient();
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         RequestBody body = RequestBody.create(JSON, GsonTools.createJsonString(object));
         if(header == null){
