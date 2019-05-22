@@ -2,13 +2,22 @@ package top.wys.utils;/**
  * Created by 郑明亮 on 2018/10/4 20:44.
  */
 
-import org.apache.commons.codec.binary.Hex;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.security.InvalidKeyException;
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 
+import javax.crypto.Cipher;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -18,6 +27,7 @@ import javax.crypto.spec.SecretKeySpec;
  * @time 2018/10/4 20:44
  */
 public class EncryptUtils {
+
     private EncryptUtils() {
         throw new UnsupportedOperationException("you can not instantiate me !");
     }
@@ -28,7 +38,9 @@ public class EncryptUtils {
     private static final String SHA_256 = "SHA-256";
     private static final String SHA_1 = "SHA1";
     private static final String MD5 = "MD5";
-    private static final String UTF_8 = "UTF-8";
+    private static final String DEFAULT_CHARSET = "UTF-8";
+    private static final String UTF_8 = DEFAULT_CHARSET;
+    private static final String RSA = "RSA";
     /**
      *  <p>自定义对称加密</p>
      * <ol>
@@ -191,13 +203,25 @@ public class EncryptUtils {
         try {
             messageDigest = MessageDigest.getInstance(type);
             byte[] hash = messageDigest.digest(str.getBytes(UTF_8));
-            encdeStr = Hex.encodeHexString(hash);
+            encdeStr = bytesToHexString(hash);
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(String.format("Huh, %s should be supported?", type), e);
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("Huh, UTF-8 should be supported?", e);
         }
         return encdeStr;
+    }
+
+    public static String bytesToHexString(byte[] src){
+        StringBuilder stringBuilder = new StringBuilder("");
+        if (src == null || src.length <= 0) {
+            return null;
+        }
+
+        for (int i=0; i < src.length; i++) {
+            stringBuilder.append(Integer.toString( ( src[i] & 0xff ) + 0x100, 16).substring( 1 ));
+        }
+        return stringBuilder.toString();
     }
     /**
      * 将byte数组转为16进制
@@ -234,5 +258,95 @@ public class EncryptUtils {
         }
         return byte2Hex(bs);
     }
+
+
+static class RSA{
+    private static Charset charset = Charset.forName(DEFAULT_CHARSET);
+
+     public static KeyPair buildKeyPair() throws NoSuchAlgorithmException {
+         final int keySize = 1024;
+         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(RSA);
+         keyPairGenerator.initialize(keySize);
+         return keyPairGenerator.genKeyPair();
+     }
+
+     //公钥加密
+     public static byte[] encrypt(byte[] content, PublicKey publicKey) throws Exception {
+         Cipher cipher = Cipher.getInstance(RSA);//java默认"RSA"="RSA/ECB/PKCS1Padding"
+         cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+         return cipher.doFinal(content);
+     }
+
+     //私钥解密
+     public static byte[] decrypt(byte[] content, PrivateKey privateKey) throws Exception {
+         Cipher cipher = Cipher.getInstance(RSA);
+         cipher.init(Cipher.DECRYPT_MODE, privateKey);
+         return cipher.doFinal(content);
+     }
+
+     public static String encrypt(String content, String publicKey){
+        String encodeString = "";
+         try {
+             byte[] encrypt = encrypt(content.getBytes(), getPublicKey(publicKey));
+             encodeString =  new String(encrypt);
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+
+         return encodeString;
+     }
+
+    public static String decrypt(String content, String privateKey){
+        String decodeString = "";
+        try {
+            byte[] decrypt = decrypt(content.getBytes(), getPrivateKey(privateKey));
+            decodeString = new String(decrypt);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return decodeString;
+    }
+
+
+    /**
+     * 将base64编码后的公钥字符串转成PublicKey实例
+     * @param publicKey  公钥字符串
+     * @return 公钥实例
+     */
+     public static PublicKey getPublicKey(String publicKey){
+         try {
+             byte[] keyBytes= Base64Coder.decode(publicKey);
+             X509EncodedKeySpec keySpec=new X509EncodedKeySpec(keyBytes);
+             KeyFactory keyFactory=KeyFactory.getInstance(RSA);
+             return keyFactory.generatePublic(keySpec);
+         } catch (NoSuchAlgorithmException e) {
+             e.printStackTrace();
+         } catch (InvalidKeySpecException e) {
+             e.printStackTrace();
+         }
+         return null;
+     }
+
+
+    /**
+     * 将base64编码后的私钥字符串转成PrivateKey实例
+     * @param privateKey 私钥字符串
+     * @return 私钥实例
+     */
+     public static PrivateKey getPrivateKey(String privateKey) {
+         try {
+             byte[] keyBytes = Base64Coder.decode(privateKey);
+             PKCS8EncodedKeySpec keySpec=new PKCS8EncodedKeySpec(keyBytes);
+             KeyFactory keyFactory=KeyFactory.getInstance(RSA);
+             return keyFactory.generatePrivate(keySpec);
+         } catch (NoSuchAlgorithmException e) {
+             e.printStackTrace();
+         } catch (InvalidKeySpecException e) {
+             e.printStackTrace();
+         }
+         return null;
+     }
+ }
+
 
 }
