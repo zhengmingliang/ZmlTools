@@ -1,5 +1,10 @@
 package top.wys.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
@@ -7,17 +12,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.support.PropertiesLoaderUtils;
-
 /**
  * @author 郑明亮
  * @time 2017年6月21日 上午8:55:18
  */
 public class AutoLoadProperties implements Runnable {
-	private static Logger log = LogManager.getLogger();   
+	private static Logger log = LoggerFactory.getLogger(AutoLoadProperties.class);
 	  
     private Map<String,Long> configFileModifyDate = new HashMap<String, Long>();  
     /** 
