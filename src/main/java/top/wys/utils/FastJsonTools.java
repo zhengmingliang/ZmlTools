@@ -45,7 +45,7 @@ public class FastJsonTools {
 	}
 
 	/**将json字符串转换为指定的bean对象,可以是复杂的对象
-	 * @param jsonString 
+	 * @param jsonString
 	 * @param type  要转换为对象的类型 eg:new TypeReference&lt;T&gt;(){}
 	 * @return 指定对象
 	 * @param <T>
