@@ -47,6 +47,10 @@ public class HttpUtils {
      * @description <p>网络失败最大尝试次数  </p>
      */
     protected static final int MAX_SERVER_LOAD_TIMES = 3;
+    /**
+     * 是否伪造IP头
+     */
+    public static boolean fakeIp = false;
 
     public static void supportHttps(){
         System.setProperty("jsse.enableSNIExtension","false");
@@ -60,10 +64,13 @@ public class HttpUtils {
      */
     public static String get(String url) throws IOException {
         OkHttpClient client = getOkHttpClient();
-        Request request = new Request.Builder()
-                .header("X-FORWARDED-FOR",RandomUtils.getRandomIp())
-                .header("User-Agent","Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36")
-                .url(url)
+        Request.Builder builder = new Request.Builder()
+                .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36")
+                .url(url);
+        if(fakeIp){
+            builder.addHeader("X-FORWARDED-FOR", RandomUtils.getRandomIp());
+        }
+        Request request = builder
                 .build();
         Response response = client.newCall(request).execute();
         return response.body().string();
@@ -102,9 +109,10 @@ public class HttpUtils {
         log.debug(url);
         Request.Builder build = new Request.Builder()
                 .url(url)
-                .header("X-FORWARDED-FOR",RandomUtils.getRandomIp())
                 .headers(Headers.of(getDefaultHeaders()));
-
+        if(fakeIp){
+            build.addHeader("X-FORWARDED-FOR",RandomUtils.getRandomIp());
+        }
         if(headers != null && headers.size() > 0){
             build.headers(Headers.of(headers));
         }
@@ -202,18 +210,22 @@ public class HttpUtils {
                 builder.add(entry.getKey()+"", entry.getValue()+ "");
             }
         }
-        Request request = new Request.Builder()
+        Request.Builder requestBuilder = new Request.Builder()
                 .url(url)
                 .headers(Headers.of(headers))    //添加header参数；
-                .header("X-FORWARDED-FOR",RandomUtils.getRandomIp())
-                .post(builder.build()) //添加requestBody
-                .build();
+                .post(builder.build()); //添加requestBody;
+        // 添加伪造IP
+        if(fakeIp){
+            requestBuilder.addHeader("X-FORWARDED-FOR", RandomUtils.getRandomIp());
+        }
+
+        Request request = requestBuilder.build();
         Response response = client.newCall(request).execute();
         return response.body();
     }
 
     /**
-     * GET请求
+     * POST请求
      * @param url 访问地址
      * @param params 请求参数
      * @param headers 请求Header
@@ -225,7 +237,7 @@ public class HttpUtils {
     }
 
     /**
-     * GET请求
+     * POST请求
      * @param url 访问地址
      * @param params 请求参数
      * @param headers 请求Header
@@ -237,7 +249,7 @@ public class HttpUtils {
     }
 
     /**
-     *  GET请求
+     *  POST请求
      * @param url 访问地址
      * @param params 请求参数
      * @param headers 请求Header
@@ -265,11 +277,13 @@ public class HttpUtils {
         }
         RequestBody body = builder.build();
 
-        Request request = new Request.Builder()
-                .url(url)
-                .post(body)
-                .header("X-FORWARDED-FOR",RandomUtils.getRandomIp())
-                .build();
+        Request.Builder requestBuilder = new Request.Builder()
+                                                .url(url)
+                                                .post(body);
+        if(fakeIp){
+            requestBuilder.addHeader("X-FORWARDED-FOR", RandomUtils.getRandomIp());
+        }
+        Request request = requestBuilder.build();
         Response response = client.newCall(request).execute();
         return response.body();
     }
@@ -619,12 +633,15 @@ public class HttpUtils {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         RequestBody body = RequestBody.create(JSON, GsonTools.createJsonString(object));
 
-        Request request = new Request.Builder()
+        Request.Builder builder = new Request.Builder()
                 .url(url)
-                .header("X-REAL-IP",RandomUtils.getRandomIp())
-                .header("X-FORWARDED-FOR",RandomUtils.getRandomIp())
-                .post(body)
-                .build();
+                .post(body);
+
+        if(fakeIp){
+            builder.addHeader("X-REAL-IP",RandomUtils.getRandomIp());
+            builder.addHeader("X-FORWARDED-FOR", RandomUtils.getRandomIp());
+        }
+        Request request = builder.build();
         Response response = client.newCall(request).execute();
         return response.body().string();
     }
@@ -644,13 +661,17 @@ public class HttpUtils {
         if(header == null){
             header = getDefaultHeaders();
         }
-        Request request = new Request.Builder()
+        Request.Builder builder = new Request.Builder()
                 .url(url)
                 .post(body)
-                .header("X-REAL-IP",RandomUtils.getRandomIp())
-                .header("X-FORWARDED-FOR",RandomUtils.getRandomIp())
-                .headers(Headers.of(header))
-                .build();
+                .headers(Headers.of(header));
+
+        //伪造IP头
+        if(fakeIp){
+            builder.addHeader("X-REAL-IP",RandomUtils.getRandomIp());
+            builder.addHeader("X-FORWARDED-FOR", RandomUtils.getRandomIp());
+        }
+        Request request = builder.build();
         Response response = client.newCall(request).execute();
         return response.body().string();
     }
