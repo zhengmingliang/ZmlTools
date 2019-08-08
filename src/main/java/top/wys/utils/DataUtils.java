@@ -9,6 +9,8 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -34,6 +36,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +46,9 @@ import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 import okhttp3.Headers;
 import okhttp3.OkHttpClient;
@@ -566,6 +572,17 @@ public class DataUtils {
                     + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" + "(" + "\\."
                     + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" + ")+");
 
+    /**
+     * 判断是否为合法IP
+     * @param ipAddress
+     * @return
+     */
+    public static boolean isIp(String ipAddress) {
+        String ip = "([1-9]|[1-9]\\d|1\\d{2}|2[0-4]\\d|25[0-5])(\\.(\\d|[1-9]\\d|1\\d{2}|2[0-4]\\d|25[0-5])){3}";
+        Pattern pattern = Pattern.compile(ip);
+        Matcher matcher = pattern.matcher(ipAddress);
+        return matcher.matches();
+    }
     /**
      * @author 郑明亮
      * @time 2017年3月13日 下午5:50:29
@@ -1182,6 +1199,85 @@ public class DataUtils {
         }
         String json = jsonp.substring(offset,jsonp.length() -2);
         return json;
+    }
+
+    /**
+     * 将数据写回到客户端
+     *
+     * @param response
+     * @param object
+     */
+    public static void writeToClient(ServletResponse response, Object object) {
+        try {
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(JSON.toJSONString(object));
+        } catch (IOException e) {
+            log.error("Write the request data back to the client exception",e);
+        }
+    }
+
+    /**
+     * 从request中获取一个已排序的Map集合
+     * @param request
+     * @return
+     */
+    public static Map<String, Object> getSortedRequestParam(HttpServletRequest request) {
+        Map<String,Object> params = Maps.newTreeMap();
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
+            String key = entry.getKey();
+            String[] value = entry.getValue();
+            params.put(key,value[0]);
+        }
+        return params;
+    }
+
+    private static final String UNKNOWN = "unknown";
+    /**
+     *
+     * 获取访问系统的IP地址
+     * @param request
+     * @return
+     */
+    public static String getRemoteIp(HttpServletRequest request) {
+        if (request != null) {
+            String ip = request.getHeader("x-forwarded-for");
+            if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
+                ip = request.getHeader("Proxy-Client-IP");
+            }
+            if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
+                ip = request.getHeader("WL-Proxy-Client-IP");
+            }
+            if (ip == null || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
+                ip = request.getRemoteAddr();
+            }
+            if ("0:0:0:0:0:0:0:1".equals(ip)) {
+                ip = "127.0.0.1";
+            }
+            return ip;
+        } else {
+            return "";
+        }
+    }
+
+    /**
+     * 获取对象中空值的属性名
+     * @param source
+     * @return
+     */
+    public static String[] getNullPropertyNames(Object source) {
+        final BeanWrapper src = new BeanWrapperImpl(source);
+        java.beans.PropertyDescriptor[] pds = src.getPropertyDescriptors();
+
+        Set<String> emptyNames = new HashSet<>();
+        for (java.beans.PropertyDescriptor pd : pds) {
+            Object srcValue = src.getPropertyValue(pd.getName());
+            if (srcValue == null) {
+                emptyNames.add(pd.getName());
+            }
+        }
+        String[] result = new String[emptyNames.size()];
+        return emptyNames.toArray(result);
     }
 
 
