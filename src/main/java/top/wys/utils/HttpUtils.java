@@ -15,12 +15,13 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.SocketAddress;
 import java.net.SocketTimeoutException;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
+import okhttp3.Cookie;
 import okhttp3.FormBody.Builder;
 import okhttp3.Headers;
 import okhttp3.MediaType;
@@ -58,43 +59,62 @@ public class HttpUtils {
 
     /**
      * @param url
-     * @return
+     * @return a response from a request
      * @throws IOException
      * @description <p>简单的http get请求</p>
      */
-    public static String get(String url) throws IOException {
+    public static Response getResponse(String url) throws IOException {
         OkHttpClient client = getOkHttpClient();
         Request.Builder builder = new Request.Builder()
                 .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36")
                 .url(url);
         if(fakeIp){
-            builder.addHeader("X-FORWARDED-FOR", RandomUtils.getRandomIp());
+            setFakeIpHeader(builder);
         }
         Request request = builder
                 .build();
-        Response response = client.newCall(request).execute();
-        return response.body().string();
+        return client.newCall(request).execute();
     }
 
+    /**
+     *  简单的Http get请求
+     * @param url 请求的http地址
+     * @return result String from a request
+     * @throws IOException
+     */
+    public static String get(String url) throws IOException {
+        return getResponse(url).body().string();
+    }
 
     /**
      * @param url  请求host地址
      * @param params 请求key-value参数
-     * @return
+     * @return result String from a request
      * @throws IOException
      */
     public static String get(String url, Map<String, Object> params) throws IOException{
-        return get(url,params,null);
+        return getResponse(url,params,null).body().string();
     }
 
     /**
      * @param url 请求host地址
      * @param params 请求key-value参数
      * @param headers 添加的header的map集合
-     * @return
+     * @return result String from a request
      * @throws IOException
      */
-    public static String get(String url, Map<String, Object> params,Map<String, String> headers) throws IOException {
+    public static String get(String url, Map<String, Object> params,Map<String, String> headers) throws IOException{
+        return getResponse(url,params,headers).body().string();
+    }
+
+    /**
+     * @param url 请求host地址
+     * @param params 请求key-value参数
+     * @param headers 添加的header的map集合
+     * @return a response from a request
+     * @throws IOException
+     */
+    public static Response getResponse(String url, Map<String, Object> params,Map<String, String> headers) throws IOException {
         OkHttpClient client = getOkHttpClient();
         if(url == null){
             throw new RuntimeException("the request URL can not be null");
@@ -111,14 +131,13 @@ public class HttpUtils {
                 .url(url)
                 .headers(Headers.of(getDefaultHeaders()));
         if(fakeIp){
-            build.addHeader("X-FORWARDED-FOR",RandomUtils.getRandomIp());
+            setFakeIpHeader(build);
         }
         if(headers != null && headers.size() > 0){
             build.headers(Headers.of(headers));
         }
         Request request = build.build();
-        Response response = client.newCall(request).execute();
-        return response.body().string();
+        return client.newCall(request).execute();
     }
 
     /**
@@ -202,26 +221,45 @@ public class HttpUtils {
      * @throws IOException
      */
     public static ResponseBody post(String url, Map<String, Object> params, Map<String, String> headers) throws IOException {
+        Response response = getResponseFromPost(url, params, headers);
+        return response.body();
+    }
+
+    /**
+     * 通过Post请求获取Response，如果需要获取除了body以外的数据，如header、状态码等信息，则
+     * @param url
+     * @param params
+     * @param headers
+     * @return
+     * @throws IOException
+     */
+    public static Response getResponseFromPost(String url, Map<String, Object> params, Map<String, String> headers) throws IOException {
         OkHttpClient client = getOkHttpClient();
-        FormBody.Builder builder = new FormBody.Builder();
+        Builder builder = new Builder();
         //添加request参数
         if (params != null) {
             for (Map.Entry entry : params.entrySet()) {
                 builder.add(entry.getKey()+"", entry.getValue()+ "");
             }
         }
+        // 添加header参数
+        if (headers == null) {
+            headers = getDefaultHeaders();
+        }
+
         Request.Builder requestBuilder = new Request.Builder()
                 .url(url)
-                .headers(Headers.of(headers))    //添加header参数；
-                .post(builder.build()); //添加requestBody;
+                //添加header参数；
+                .headers(Headers.of(headers))
+                //添加requestBody;
+                .post(builder.build());
         // 添加伪造IP
         if(fakeIp){
-            requestBuilder.addHeader("X-FORWARDED-FOR", RandomUtils.getRandomIp());
+            setFakeIpHeader(requestBuilder);
         }
 
         Request request = requestBuilder.build();
-        Response response = client.newCall(request).execute();
-        return response.body();
+        return client.newCall(request).execute();
     }
 
     /**
@@ -268,23 +306,7 @@ public class HttpUtils {
      * @throws IOException
      */
     public static ResponseBody post(String url, Map<String, Object> param) throws IOException {
-        OkHttpClient client = getOkHttpClient();
-        Builder builder = new FormBody.Builder();
-        if (param != null) {
-            for (Map.Entry entry : param.entrySet()) {
-                builder.add(entry.getKey()+"", entry.getValue()+ "");
-            }
-        }
-        RequestBody body = builder.build();
-
-        Request.Builder requestBuilder = new Request.Builder()
-                                                .url(url)
-                                                .post(body);
-        if(fakeIp){
-            requestBuilder.addHeader("X-FORWARDED-FOR", RandomUtils.getRandomIp());
-        }
-        Request request = requestBuilder.build();
-        Response response = client.newCall(request).execute();
+        Response response = getResponseFromPost(url, param, null);
         return response.body();
     }
 
@@ -629,20 +651,7 @@ public class HttpUtils {
      * @description <p> post请求，仅发送RequestBody </P>
      */
     public static String sendRequestBody(String url, Object object) throws IOException {
-        OkHttpClient client = getOkHttpClient();
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        RequestBody body = RequestBody.create(JSON, GsonTools.createJsonString(object));
-
-        Request.Builder builder = new Request.Builder()
-                .url(url)
-                .post(body);
-
-        if(fakeIp){
-            builder.addHeader("X-REAL-IP",RandomUtils.getRandomIp());
-            builder.addHeader("X-FORWARDED-FOR", RandomUtils.getRandomIp());
-        }
-        Request request = builder.build();
-        Response response = client.newCall(request).execute();
+        Response response = getResponseFromRequestBody(url, object, null);
         return response.body().string();
     }
 
@@ -655,6 +664,11 @@ public class HttpUtils {
      * @throws IOException
      */
     public static String sendRequestBody(String url, Object object,Map<String,String> header) throws IOException {
+        Response response = getResponseFromRequestBody(url, object, header);
+        return response.body().string();
+    }
+
+    public static Response getResponseFromRequestBody(String url, Object object, Map<String, String> header) throws IOException {
         OkHttpClient client = getOkHttpClient();
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         RequestBody body = RequestBody.create(JSON, GsonTools.createJsonString(object));
@@ -668,18 +682,48 @@ public class HttpUtils {
 
         //伪造IP头
         if(fakeIp){
-            builder.addHeader("X-REAL-IP",RandomUtils.getRandomIp());
-            builder.addHeader("X-FORWARDED-FOR", RandomUtils.getRandomIp());
+            setFakeIpHeader(builder);
         }
         Request request = builder.build();
-        Response response = client.newCall(request).execute();
-        return response.body().string();
+        return client.newCall(request).execute();
     }
 
+    /**
+     * 设置伪装IP的header头
+     * @param builder
+     */
+    public static void setFakeIpHeader(Request.Builder builder) {
+        String randomIp = RandomUtils.getRandomIp();
+        builder.addHeader("X-REAL-IP", randomIp);
+        builder.addHeader("X-FORWARDED-FOR", randomIp);
+    }
+
+    /**
+     * 获取默认的header头
+     * @return
+     */
     public static Map<String,String> getDefaultHeaders(){
         Map<String,String> header = Maps.newHashMap();
         header.put("User-Agent",RandomUtils.getRandomUserAgent());
         return header;
+    }
+
+    /**
+     * 从响应结果中拿取cookie信息
+     * @param response
+     * @return 返回Cookie的value信息
+     */
+    public static String getCookieValue(Response response) {
+        Headers headers = response.headers();
+        List<Cookie> cookieList = Cookie.parseAll(response.request().url(), headers);
+        StringBuilder cookies = null;
+        if(!cookieList.isEmpty()){
+            cookies = new StringBuilder();
+        }
+        for (Cookie cookie : cookieList) {
+            cookies.append(cookie.name()).append('=').append(cookie.value()).append(';');
+        }
+        return cookies == null ? "" : cookies.toString();
     }
 
     public static void main(String[] args) {
