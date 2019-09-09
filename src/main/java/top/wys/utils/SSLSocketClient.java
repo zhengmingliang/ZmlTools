@@ -14,17 +14,17 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 /**
- * <ol>
- *  2019/9/6 14:28 <br>
- *
- * </ol>
- *
+ * @description https 连接支持类
  * @author 郑明亮
  * @version 1.0
+ * @time 2019/9/6 14:28
  */
 public class SSLSocketClient {
 
-    //获取这个SSLSocketFactory
+    /**
+     * 获取SSLSocketFactory
+     * @return
+     */
     public static SSLSocketFactory getSSLSocketFactory() {
         try {
             SSLContext sslContext = SSLContext.getInstance("SSL");
@@ -35,7 +35,10 @@ public class SSLSocketClient {
         }
     }
 
-    //获取TrustManager
+    /**
+     * TrustManager
+     * @return
+     */
     public static TrustManager[] getTrustManager() {
         TrustManager[] trustAllCerts = new TrustManager[]{
                 new X509TrustManager() {
@@ -56,7 +59,10 @@ public class SSLSocketClient {
         return trustAllCerts;
     }
 
-    //获取HostnameVerifier
+    /**
+     * 获取HostnameVerifier
+     * @return
+     */
     public static HostnameVerifier getHostnameVerifier() {
         HostnameVerifier hostnameVerifier = new HostnameVerifier() {
             @Override
