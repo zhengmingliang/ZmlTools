@@ -52,8 +52,9 @@ public class HttpUtils {
      * 是否伪造IP头
      */
     public static boolean fakeIp = false;
-
+    private static boolean ignoreSSL = false;
     public static void supportHttps(){
+        ignoreSSL = true;
         System.setProperty("jsse.enableSNIExtension","false");
     }
 
@@ -167,6 +168,10 @@ public class HttpUtils {
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder().connectTimeout(1, TimeUnit.MINUTES)
                 .readTimeout(1, TimeUnit.MINUTES)
                 .retryOnConnectionFailure(true);
+        if(ignoreSSL){
+            builder.sslSocketFactory(SSLSocketClient.getSSLSocketFactory())
+                    .hostnameVerifier(SSLSocketClient.getHostnameVerifier());
+        }
         if(proxy == null){
             return builder.build();
         }else{
