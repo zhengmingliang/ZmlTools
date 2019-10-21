@@ -59,6 +59,12 @@ public class HttpUtils {
     }
 
     /**
+     * 发送 body请求时，默认的请求内容格式为json，修改该值，可修改所有sendRequestBody方法的默认请求类型
+     * 如果需要修改某次请求的参数类型，可使用sendRequestBody的含有contentType的重载方法
+     */
+    public static  MediaType defaultMediaType = MediaType.parse("application/json; charset=utf-8") ;
+
+    /**
      * @param url
      * @return a response from a request
      * @throws IOException
@@ -164,7 +170,7 @@ public class HttpUtils {
     /**
      * 获取OKHttpClient实例
      */
-    private static OkHttpClient getOkHttpClient() {
+    public static OkHttpClient getOkHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder().connectTimeout(1, TimeUnit.MINUTES)
                 .readTimeout(1, TimeUnit.MINUTES)
                 .retryOnConnectionFailure(true);
@@ -258,6 +264,7 @@ public class HttpUtils {
                 .headers(Headers.of(headers))
                 //添加requestBody;
                 .post(builder.build());
+        log.debug("url:{},requestBody:{},headers:{}",url,params,headers);
         // 添加伪造IP
         if(fakeIp){
             setFakeIpHeader(requestBuilder);
@@ -656,10 +663,70 @@ public class HttpUtils {
      * @description <p> post请求，仅发送RequestBody </P>
      */
     public static String sendRequestBody(String url, Object object) throws IOException {
-        Response response = getResponseFromRequestBody(url, object, null);
+        Response response = getResponseFromRequestBody(url, object, null,null);
         return response.body().string();
     }
 
+
+    /**
+     * @param url  服务器地址
+     * @param object 要发送的对象
+     * @param contentType 发送请求的内容类型，默认为json，如需要设置成application/xml或 html/plan 等，请传入contentType值
+     * @return
+     * @throws IOException
+     */
+    public static String sendRequestBody(String url, Object object,String contentType) throws IOException {
+        Response response = getResponseFromRequestBody(url, object, null,contentType);
+        return response.body().string();
+    }
+
+    /**
+     * @param url  服务器地址
+     * @param json 要发送的json内容
+     * @return
+     * @throws IOException
+     */
+    public static String sendRequestBody(String url, String json) throws IOException {
+        Response response = getResponseFromRequestBody(url, json, null,null);
+        return response.body().string();
+    }
+
+    /**
+     * @param url  服务器地址
+     * @param json 要发送的json内容
+     * @param contentType 发送请求的内容类型，默认为json，如需要设置成application/xml或 html/plan 等，请传入contentType值
+     * @return
+     * @throws IOException
+     */
+    public static String sendRequestBody(String url, String json,String contentType) throws IOException {
+        Response response = getResponseFromRequestBody(url, json, null,contentType);
+        return response.body().string();
+    }
+
+    /**
+     * @param url 服务器地址
+     * @param json 要发送的json内容
+     * @param header 要添加的header信息
+     * @return
+     * @throws IOException
+     */
+    public static String sendRequestBody(String url, String json,Map<String,String> header) throws IOException {
+        Response response = getResponseFromRequestBody(url, json, header,null);
+        return response.body().string();
+    }
+
+    /**
+     * @param url 服务器地址
+     * @param json 要发送的json内容
+     * @param header 要添加的header信息
+     * @param contentType 发送请求的内容类型，默认为json，如需要设置成application/xml或 html/plan 等，请传入contentType值
+     * @return
+     * @throws IOException
+     */
+    public static String sendRequestBody(String url, String json,Map<String,String> header,String contentType) throws IOException {
+        Response response = getResponseFromRequestBody(url, json, header,contentType);
+        return response.body().string();
+    }
     /**
      * 以requestBody的形式发送
      * @param url  服务器地址
@@ -669,14 +736,28 @@ public class HttpUtils {
      * @throws IOException
      */
     public static String sendRequestBody(String url, Object object,Map<String,String> header) throws IOException {
-        Response response = getResponseFromRequestBody(url, object, header);
+        Response response = getResponseFromRequestBody(url, object, header,null);
         return response.body().string();
     }
 
-    public static Response getResponseFromRequestBody(String url, Object object, Map<String, String> header) throws IOException {
+
+     public static String sendRequestBody(String url, Object object,Map<String,String> header,String contentType) throws IOException {
+        Response response = getResponseFromRequestBody(url, object, header,contentType);
+        return response.body().string();
+    }
+
+    public static Response getResponseFromRequestBody(String url, Object object, Map<String, String> header,String contentType) throws IOException{
+        return  getResponseFromRequestBody(url, GsonTools.createJsonString(object), header,null);
+    }
+
+    public static Response getResponseFromRequestBody(String url, String json, Map<String, String> header,String contentType) throws IOException {
         OkHttpClient client = getOkHttpClient();
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        RequestBody body = RequestBody.create(JSON, GsonTools.createJsonString(object));
+
+        MediaType mediaType = defaultMediaType;
+        if(contentType != null ){
+            mediaType  = MediaType.parse(contentType);
+        }
+        RequestBody body = RequestBody.create(json,mediaType);
         if(header == null){
             header = getDefaultHeaders();
         }
