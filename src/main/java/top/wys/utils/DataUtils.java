@@ -761,7 +761,7 @@ public class DataUtils {
      * @return 处理后的数字
      */
     public static String getRoundNum(double num) {
-        return getRoundNum(num, null);
+        return getRoundNum(num, 2);
     }
 
     /**
