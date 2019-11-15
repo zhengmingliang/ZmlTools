@@ -6,14 +6,21 @@ import org.slf4j.LoggerFactory;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Optional;
+import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -23,6 +30,14 @@ import java.util.zip.ZipOutputStream;
  */
 public class FileUtils {
     private static final Logger log = LoggerFactory.getLogger(FileUtils.class);
+    /**
+     * 默认缓存区大小（默认50KB）
+     */
+    private static final int DEFAULT_BUFFER_SIZE = 1024 * 50;
+    /**
+     * 读取大文件时的默认缓存区大小（默认5M）
+     */
+    private static final int DEFAULT_LARGE_BUFFER_SIEZE = 5 * 1024 * 1024;
 
     /**
      * Enhancement of java.io.File#createNewFile()
@@ -148,7 +163,7 @@ public class FileUtils {
                     } else {
                         fos = new FileOutputStream(zipFile);
                         zos = new ZipOutputStream(new BufferedOutputStream(fos));
-                        byte[] bufs = new byte[1024 * 10];
+                        byte[] bufs = new byte[DEFAULT_BUFFER_SIZE];
                         for (int i = 0; i < sourceFiles.length; i++) {
                             //创建ZIP实体，并添加进压缩包
                             ZipEntry zipEntry = new ZipEntry(sourceFiles[i].getName());
@@ -156,9 +171,9 @@ public class FileUtils {
                             //读取待压缩的文件并写进压缩包里
                             fis = new FileInputStream(sourceFiles[i]);
                             //fixme 这里需要对流关闭一下，不然可能会因为文件过大，导致内存溢出
-                            bis = new BufferedInputStream(fis, 1024 * 10);
+                            bis = new BufferedInputStream(fis, DEFAULT_BUFFER_SIZE);
                             int read = 0;
-                            while ((read = bis.read(bufs, 0, 1024 * 10)) != -1) {
+                            while ((read = bis.read(bufs, 0, DEFAULT_BUFFER_SIZE)) != -1) {
                                 zos.write(bufs, 0, read);
                             }
                         }
@@ -295,7 +310,7 @@ public class FileUtils {
             if (file.isFile() && file.exists()) { // 判断文件是否存在
                 fis = new FileInputStream(file);
                 read = new InputStreamReader(fis, encoding);// 考虑到编码格式
-                bufferedReader = new BufferedReader(read, 5 * 1024 * 1024);
+                bufferedReader = new BufferedReader(read, DEFAULT_LARGE_BUFFER_SIEZE);
                 String lineTxt = null;
                 while ((lineTxt = bufferedReader.readLine()) != null) {
                     sb.append(lineTxt).append("\r\n");
@@ -319,8 +334,9 @@ public class FileUtils {
 
         try {
             BufferedInputStream fis = new BufferedInputStream(new FileInputStream(file));
-            BufferedReader reader = new BufferedReader(new InputStreamReader(fis, encoding), 5 * 1024 * 1024);// 用5M的缓冲读取文本文件
-            String line = "";
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fis, encoding), DEFAULT_LARGE_BUFFER_SIEZE);// 用5M的缓冲读取文本文件
+            String line = reader.readLine();
+            callback.getFirstLine(line);
             int lineCount = 0;
             StringBuilder sb = new StringBuilder();
             while ((line = reader.readLine()) != null) {
@@ -350,15 +366,283 @@ public class FileUtils {
     public static void readLargeFileByLine(File file, String encoding, Callback callback) {
 
         try {
-            BufferedInputStream fis = new BufferedInputStream(new FileInputStream(file));
-            BufferedReader reader = new BufferedReader(new InputStreamReader(fis, encoding), 5 * 1024 * 1024);// 用5M的缓冲读取文本文件
-            String line = "";
+            FileInputStream fis = new FileInputStream(file);
+            // 用5M的缓冲读取文本文件
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fis, encoding), DEFAULT_LARGE_BUFFER_SIEZE);
+            String line = reader.readLine();
+            callback.getFirstLine(line);
             while ((line = reader.readLine()) != null) {
                 callback.apply(line);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void readLargeFileByLineNIO(String path, String encoding, Callback callback) {
+
+        try {
+            Optional<String> first = Files.lines(Paths.get(path), Charset.forName(encoding)).findFirst();
+            Stream<String> lines = java.nio.file.Files.lines(Paths.get(path), Charset.forName(encoding));
+
+            callback.getFirstLine(first.isPresent() ? first.get() : "");
+
+            lines.forEach(strings -> {
+                callback.apply(strings);
+            });
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /*public static void readLargeFile(File file, String encoding, Callback callback) {
+
+        try {
+            long counts = 0;
+            FileInputStream fis = new FileInputStream(file);
+            FileChannel fc = fis.getChannel();
+            ByteBuffer byteBuffer = ByteBuffer.allocate(2048);
+            int offset = 0;
+            byte[] buffer = new byte[2048];
+
+            while((offset = fc.read(byteBuffer)) != -1) {
+                byteBuffer.flip();
+                byteBuffer.get(buffer,0,byteBuffer.limit());
+//                if(offset <= 10000){
+                    String str = new String(buffer, "UTF-8");
+//                    System.out.println(str);
+
+//                }
+                counts = counts + offset;
+                byteBuffer.clear();
+            }
+            fc.close();
+            fis.close();
+//            return counts;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
+
+    /**
+     * 按指定文件大小切割文件（可能会存在字符被切割的问题）
+     *
+     * @param sourceFileName 需要切割的源文件
+     * @param targetFolder   切割的目标文件放置的文件夹
+     * @param size           每个文件的大小（单位：字节）
+     */
+    public static void cutFile(String sourceFileName, String targetFolder, int size) {
+        BufferedOutputStream bos = null;
+        File targetFolderFile = new File(targetFolder);
+        File sourceFile = new File(sourceFileName);
+        try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(sourceFile));) {
+            String fullName = sourceFile.getName();
+            int beginIndex = fullName.indexOf(".");
+            if (beginIndex == -1) {
+                beginIndex = fullName.length() - 1;
+            }
+            //源文件名称（不含后缀名）
+            String fileName = fullName.substring(0, beginIndex);
+            // 源文件后缀名
+            String suffixName = fullName.substring(beginIndex, fullName.length());
+
+            byte[] bytes = new byte[DEFAULT_BUFFER_SIZE];
+            int count = 0;
+            int len = 0;
+            int suffixCount = 0;
+            while ((len = bis.read(bytes)) != -1) {
+                if (bos == null) {
+                    suffixCount++;
+                    String targetFileName = String.format("%s%s%s_%s%s", targetFolderFile.getAbsolutePath(), File.separator,
+                            fileName, suffixCount, suffixName);
+                    bos = new BufferedOutputStream(new FileOutputStream(new File(targetFileName)));
+                }
+                bos.write(bytes, 0, len);
+                count += len;
+
+                // 分次写入文件
+                if (count >= size) {
+                    bos.flush();
+                    bos.close();
+                    bos = null;
+                    count = 0;
+                }
+            }
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            IOUtils.flush(bos);
+            IOUtils.close(bos);
+        }
+    }
+
+
+    /**
+     * 将源文件拆分成多个子文件（根据行数）
+     *
+     * @param sourceFileName 需要拆分的源文件全路径文件名
+     * @param encoding       源文件编码
+     * @param targetFolder   拆分的文件存储路径
+     * @param maxLine        每个拆分的文件最多多少行
+     * @description 该方法在拆分大文件（几个G）时最多需要消耗1G多的内存，可使用 top.wys.utils.FileUtils#cutFileByNIO(java.lang.String, java.lang.String, java.lang.String, long)方法拆分大文件
+     * @see FileUtils#cutFileByLine(java.lang.String, java.lang.String, java.lang.String, long)
+     */
+    @Deprecated
+    public static void cutFile(String sourceFileName, String encoding, String targetFolder, long maxLine) {
+        FileInputStream fis = null;
+        BufferedReader reader = null;
+        BufferedWriter writer = null;
+        try {
+
+            File targetFolderFile = new File(targetFolder);
+            if (!targetFolderFile.exists()) {
+                targetFolderFile.mkdirs();
+            }
+            File sourceFile = new File(sourceFileName);
+            String fullName = sourceFile.getName();
+            int beginIndex = fullName.indexOf('.');
+            if (beginIndex == -1) {
+                beginIndex = fullName.length() - 1;
+            }
+            //源文件名称（不含后缀名）
+            String fileName = fullName.substring(0, beginIndex);
+            // 源文件后缀名
+            String suffixName = fullName.substring(beginIndex, fullName.length());
+
+            fis = new FileInputStream(sourceFile);
+            reader = new BufferedReader(new InputStreamReader(fis, encoding), DEFAULT_LARGE_BUFFER_SIEZE);// 用5M的缓冲读取文本文件
+            String line = "";
+            writer = null;
+            int lineCount = 0;
+            int suffixCount = 0;
+
+            while ((line = reader.readLine()) != null) {
+                lineCount++;
+                if (writer == null) {
+                    // 文件后缀数量累计
+                    suffixCount++;
+                    // 拆分的新文件名称
+                    String targetFileName = String.format("%s%s%s_%s%s", targetFolderFile.getAbsolutePath(), File.separator,
+                            fileName, suffixCount, suffixName);
+                    writer = new BufferedWriter(new FileWriter(new File(targetFileName)), DEFAULT_LARGE_BUFFER_SIEZE);
+                }
+                writer.write(line + "\r\n");
+
+                // 当总行数大于等于设定最大行时，写入文件，并重新初始化
+                if (lineCount >= maxLine) {
+                    writer.flush();
+                    writer.close();
+                    writer = null;
+                    // 重新初始化累计和
+                    lineCount = 0;
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            IOUtils.flush(writer);
+            IOUtils.close(writer);
+            IOUtils.close(reader);
+            IOUtils.close(fis);
+        }
+    }
+
+
+    /**
+     * 将源文件拆分成多个子文件（根据行数）
+     *
+     * @param sourceFileName 需要拆分的源文件全路径文件名
+     * @param encoding       源文件编码
+     * @param targetFolder   拆分的文件存储路径
+     * @param maxLine        每个拆分的文件最多多少行
+     * @description 该方法在拆分大文件（5个G）时最多需要消耗800M的内存，后续稳定在几十到200M内存之间
+     * @see FileUtils#cutFile(java.lang.String, java.lang.String, java.lang.String, long)
+     */
+    public static void cutFileByLine(String sourceFileName, String encoding, String targetFolder, long maxLine) {
+        try {
+            File targetFolderFile = new File(targetFolder);
+            if (!targetFolderFile.exists()) {
+                targetFolderFile.mkdirs();
+            }
+            File sourceFile = new File(sourceFileName);
+            String fullName = sourceFile.getName();
+            int beginIndex = fullName.indexOf('.');
+            if (beginIndex == -1) {
+                beginIndex = fullName.length() - 1;
+            }
+            //源文件名称（不含后缀名）
+            String fileName = fullName.substring(0, beginIndex);
+            // 源文件后缀名
+            String suffixName = fullName.substring(beginIndex);
+
+            final BufferedWriter[] writer = {null};
+            // 行计数器
+            final int[] lineCount = {0};
+            //拆分的目标文件数量计数器
+            final int[] suffixCount = {0};
+            //拆分的目标文件名称
+            final String[] targetFileName = {""};
+
+            Files.lines(Paths.get(sourceFileName), Charset.forName(encoding)).forEach(
+                    line -> {
+                        try {
+                            //1. 需要写入新的文件时，对相关参数进行初始化
+                            if (lineCount[0] == 0) {
+                                // 文件后缀数量累计
+                                suffixCount[0]++;
+                                // 拆分的新文件名称
+                                targetFileName[0] = String.format("%s%s%s_%s%s", targetFolderFile.getAbsolutePath(), File.separator,
+                                        fileName, suffixCount[0], suffixName);
+                                File file = new File(targetFileName[0]);
+                                if (!file.exists()) {
+                                    file.createNewFile();
+                                }
+                                writer[0] = Files.newBufferedWriter(Paths.get(targetFileName[0]), Charset.forName(encoding));
+
+                            }
+                            //写入缓冲区
+                            writer[0].write(line + "\r\n");
+                            lineCount[0]++;
+
+                            //写入文件行数达到要求行数时，数据刷盘，并重新计数
+                            if (lineCount[0] >= maxLine) {
+                                // 从缓冲区刷盘，并关闭释放io资源
+                                writer[0].flush();
+                                writer[0].close();
+                                writer[0] = null;
+                                // 重新初始化累计和
+                                lineCount[0] = 0;
+
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+            );
+
+
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
