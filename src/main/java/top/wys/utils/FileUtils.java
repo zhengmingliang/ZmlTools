@@ -85,7 +85,11 @@ public class FileUtils {
             writefile = new File(path);
 
             // 如果文本文件不存在则创建它
-            if (writefile.exists() == false) {
+            File parentFile = writefile.getParentFile();
+            if (!parentFile.exists()) {
+                parentFile.mkdirs();
+            }
+            if (!writefile.exists()) {
                 writefile.createNewFile();
                 writefile = new File(path); // 重新实例化
             }
@@ -686,7 +690,6 @@ public class FileUtils {
     /**
      * @param file
      * @return
-     * @throws Exception
      * @author 郑明亮
      * @email zhengmingliang911@gmail.com
      * @time 2017年4月13日 下午7:21:43
