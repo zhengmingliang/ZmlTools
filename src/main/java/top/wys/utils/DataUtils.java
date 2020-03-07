@@ -674,7 +674,7 @@ public class DataUtils {
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .build();
-        Request request = new Request.Builder().build();
+        Request request = new Request.Builder().url(url).build();
         Response response = client.newCall(request).execute();
         String disposition = response.header("Content-Disposition");
         if (disposition != null) {
