@@ -53,8 +53,18 @@ public class HttpUtils {
      */
     public static boolean fakeIp = false;
     private static boolean ignoreSSL = false;
+
+    /**
+     * 使所有请求支持对https证书忽略验证
+     */
     public static void supportHttps(){
         ignoreSSL = true;
+    }
+
+    /**
+     * 忽略SNI
+     */
+    public static void ignoreSNI(){
         System.setProperty("jsse.enableSNIExtension","false");
     }
 
