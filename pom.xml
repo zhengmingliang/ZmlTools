@@ -5,7 +5,7 @@
 
     <groupId>top.wuyongshi</groupId>
     <artifactId>ZmlTools</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <packaging>jar</packaging>
     <description>Common tool class encapsulation</description>
     <name>ZmlTools</name>
@@ -182,6 +182,16 @@
                                     <name>time</name>
                                     <placement>a</placement>
                                     <head>time</head>
+                                </tag>
+                                <tag>
+                                    <name>ol</name>
+                                    <placement>a</placement>
+                                    <head>ol</head>
+                                </tag>
+                                <tag>
+                                    <name>date</name>
+                                    <placement>a</placement>
+                                    <head>date</head>
                                 </tag>
                                 <tag>
                                     <name>description</name>
