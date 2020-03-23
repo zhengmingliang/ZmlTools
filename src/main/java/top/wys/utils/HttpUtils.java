@@ -369,6 +369,7 @@ public class HttpUtils {
      */
     private static String fileAbsolutePath = null;
 
+
     /**
      * @param url
      * @param fileName 文件名（含扩展名）/路径+文件名（含扩展名）
@@ -379,6 +380,20 @@ public class HttpUtils {
      * @description <p>下载文件（Http同步请求，阻塞线程,只有在得到返回路径值时，程序下方代码才会执行）   </p>
      */
     public static String getFileFromHttpDataBySyn(final String url, final String fileName) throws IOException {
+        return getFileFromHttpDataBySyn(url,fileName,"");
+    }
+
+    /**
+     * @param url
+     * @param fileName 文件名（含扩展名）/路径+文件名（含扩展名）
+     * @param dir 文件存储的路径
+     * @return 下载到本地的绝对路径地址
+     * @throws IOException
+     * @author 郑明亮
+     * @time 2017年3月19日 下午3:17:07
+     * @description <p>下载文件（Http同步请求，阻塞线程,只有在得到返回路径值时，程序下方代码才会执行）   </p>
+     */
+    public static String getFileFromHttpDataBySyn(final String url, final String fileName,String dir) throws IOException {
 
 
         final OkHttpClient client = getOkHttpClient();
@@ -388,14 +403,14 @@ public class HttpUtils {
         int serverLoadTimes = 0;
 
         try {
-            httpReLoad(url, client, request, fileName);
+            httpReLoad(url, client, request, fileName,dir);
         } catch (Exception e) {
             e.printStackTrace();
 
             if (SocketTimeoutException.class.equals(e) && serverLoadTimes <= MAX_SERVER_LOAD_TIMES) {
                 serverLoadTimes++;
                 log.error("网络连接超时" + serverLoadTimes + "次");
-                httpReLoad(url, client, request, fileName);
+                httpReLoad(url, client, request, fileName,dir);
             } else {
                 e.printStackTrace();
                 log.error("连接超时" + MAX_SERVER_LOAD_TIMES + "次", e);
@@ -483,11 +498,16 @@ public class HttpUtils {
     private static void httpReLoad(final String url, final OkHttpClient client,
                                    Request request, String fileName,String dir) throws IOException,
             UnsupportedEncodingException, FileNotFoundException {
-        File pathFile = new File(dir);
-        if (!pathFile.exists()) {
-            pathFile.mkdirs();
+
+        String basePath = "";
+        if(StringUtils.isNotEmpty(dir)){
+            File pathFile = new File(dir);
+            if (!pathFile.exists()) {
+                pathFile.mkdirs();
+            }
+            basePath = pathFile.getAbsolutePath() + File.separator;
         }
-        String basePath = pathFile.getAbsolutePath() + File.separator;
+
         File file;
         Response response = client.newCall(request).execute();
 
