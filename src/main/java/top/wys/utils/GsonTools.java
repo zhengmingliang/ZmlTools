@@ -1,6 +1,7 @@
 package top.wys.utils;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
@@ -9,6 +10,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import lombok.Getter;
+import lombok.Setter;
+import top.wys.utils.gson.MapTypeAdapter;
+
 /**
  * @author 郑明亮
  * @version 1.0
@@ -16,7 +21,11 @@ import java.util.Map;
  */
 public class GsonTools {
 
-	private static Gson gson = new Gson();
+    @Setter
+    @Getter
+	private static Gson gson = new GsonBuilder().registerTypeAdapterFactory(MapTypeAdapter.FACTORY).create();;
+
+
 
     /**
      * 将对象转换为json字符串
@@ -40,6 +49,24 @@ public class GsonTools {
         T t = null;
         try {
             t = gson.fromJson(jsonString, type);
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+        }
+        return t;
+    }
+
+    /**
+     * 将json字符串转换为指定类型对象
+     *
+     * @param jsonString json字符串
+     * @param type       要转换成的对象的类型
+     * @return
+     */
+    public static <T> T getBeanFromJson(String jsonString, TypeToken<T> type) {
+
+        T t = null;
+        try {
+            t = gson.fromJson(jsonString, type.getType());
         } catch (JsonSyntaxException e) {
             e.printStackTrace();
         }
@@ -102,6 +129,19 @@ public class GsonTools {
         return gson.fromJson(jsonString,
 				new TypeToken<List<Map<String, Object>>>() {
 				}.getType());
+
+    }
+
+    /**
+     * 将json转为Map对象
+     * @param jsonString
+     *
+     * @return
+     */
+    public static Map<String, Object> getMapFromJson(String jsonString) {
+        return gson.fromJson(jsonString,
+                new com.google.common.reflect.TypeToken<Map<String, Object>>() {
+                }.getType());
 
     }
 }
