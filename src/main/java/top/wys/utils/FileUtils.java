@@ -17,8 +17,11 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
+import java.nio.file.CopyOption;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Optional;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
@@ -38,6 +41,10 @@ public class FileUtils {
      * 读取大文件时的默认缓存区大小（默认5M）
      */
     private static final int DEFAULT_LARGE_BUFFER_SIEZE = 5 * 1024 * 1024;
+    /**
+     * 默认读写文件编码
+     */
+    private static String DEFAULT_ENCODING  = "UTF-8";;
 
     /**
      * Enhancement of java.io.File#createNewFile()
@@ -285,6 +292,24 @@ public class FileUtils {
      */
     public static String readTxtFile(String filePath, String encoding) {
         return readTxtFile(new File(filePath), encoding);
+    }
+
+    /**
+     * @param filePath 纯文本文件路径
+     * @since 1.1.2
+     * @return
+     */
+    public static String readTxtFile(String filePath) {
+        return readTxtFile(new File(filePath), DEFAULT_ENCODING);
+    }
+
+    /**
+     * @param file 纯文本文件路径
+     * @since 1.1.2
+     * @return
+     */
+    public static String readTxtFile(File file) {
+        return readTxtFile(file, DEFAULT_ENCODING);
     }
 
     /**
@@ -704,5 +729,32 @@ public class FileUtils {
             log.error("{}不存在,已创建新文件", file.getAbsolutePath());
         }
         return size;
+    }
+
+
+    /**
+     * 修改文件或目录的文件名，不变更路径，只是简单修改文件名<br>
+     *
+     *
+     * <pre>
+     * FileUtil.rename(file, "aaa.jpg", false) xx/xx.png =》xx/aaa.jpg
+     * </pre>
+     *
+     * @param file 被修改的文件
+     * @param newName 新的文件名，包括扩展名
+     * @param isOverride 是否覆盖目标文件
+     * @return 目标文件
+     * @since 1.1.2
+     */
+    public static File rename(File file, String newName, boolean isOverride) {
+
+        final Path path = file.toPath();
+        final CopyOption[] options = isOverride ? new CopyOption[] { StandardCopyOption.REPLACE_EXISTING } : new CopyOption[] {};
+        try {
+            return Files.move(path, path.resolveSibling(newName), options).toFile();
+        } catch (IOException e) {
+            log.error("rename异常",e);
+        }
+        return null;
     }
 }
