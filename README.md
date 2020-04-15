@@ -21,6 +21,6 @@
 ### Gradle集成
 ```
 // https://mvnrepository.com/artifact/top.wuyongshi/ZmlTools
-compile group: 'top.wuyongshi', name: 'ZmlTools', version: '1.1.0'
+compile group: 'top.wuyongshi', name: 'ZmlTools', version: '1.1.3'
 
 ```
