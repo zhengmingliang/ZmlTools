@@ -92,7 +92,9 @@ public class FileUtils {
             writefile = new File(path);
 
             // 如果文本文件不存在则创建它
-            File parentFile = writefile.getParentFile();
+            // modify by zml 修正当传入的文件是相对路径时，直接获取parent会有空指针问题
+            String parentPath = writefile.getAbsoluteFile().getParent();
+            File parentFile = new File(parentPath);
             if (!parentFile.exists()) {
                 parentFile.mkdirs();
             }
