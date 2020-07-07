@@ -2,8 +2,8 @@ package top.wys.utils;
 
 import com.google.common.collect.Maps;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,8 +40,7 @@ import okhttp3.ResponseBody;
  */
 public class HttpUtils {
 
-    private static final Logger log = LogManager.getLogger();
-
+    private static final Logger log = LoggerFactory.getLogger(HttpUtils.class);
     /**
      * @author 郑明亮
      * @time 2017年3月19日 下午5:13:23
