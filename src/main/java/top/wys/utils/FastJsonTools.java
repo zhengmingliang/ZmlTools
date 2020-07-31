@@ -2,6 +2,7 @@ package top.wys.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,12 +25,16 @@ public class FastJsonTools {
 	}
 
 	/**
+	 * 默认序列化方式
+	 */
+	private static final SerializerFeature[] DEFAULT_SERIALIZER_FEATURE = {SerializerFeature.DisableCircularReferenceDetect};
+	/**
 	 *  转换成json格式的字符串
 	 * @param object 要转换的对象
 	 * @return json字符串
 	 */
 	public static String createJsonString(Object object) {
-		String jsonString = JSON.toJSONString(object);
+		String jsonString = JSON.toJSONString(object,DEFAULT_SERIALIZER_FEATURE);
 		return jsonString;
 	}
 
