@@ -5,6 +5,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -81,8 +84,7 @@ public class GsonTools {
      * @return
      */
     public static <T> List<T> getList(String jsonString, Class<T> type) {
-        return gson.fromJson(jsonString, new TypeToken<List<T>>() {
-		}.getType());
+        return gson.fromJson(jsonString, new ListParameterizedType(type));
 
     }
 
@@ -143,5 +145,28 @@ public class GsonTools {
                 new com.google.common.reflect.TypeToken<Map<String, Object>>() {
                 }.getType());
 
+    }
+
+    private static class ListParameterizedType implements ParameterizedType {
+        private Type type;
+
+        private ListParameterizedType(Type type) {
+            this.type = type;
+        }
+
+        @Override
+        public Type[] getActualTypeArguments() {
+            return new Type[]{type};
+        }
+
+        @Override
+        public Type getRawType() {
+            return ArrayList.class;
+        }
+
+        @Override
+        public Type getOwnerType() {
+            return null;
+        }
     }
 }
