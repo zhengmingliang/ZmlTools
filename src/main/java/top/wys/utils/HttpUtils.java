@@ -15,6 +15,7 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.SocketAddress;
 import java.net.SocketTimeoutException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -24,12 +25,15 @@ import okhttp3.Callback;
 import okhttp3.Cookie;
 import okhttp3.FormBody.Builder;
 import okhttp3.Headers;
+import okhttp3.HttpUrl;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import top.wys.utils.entity.UploadInfo;
 
 
 /**
@@ -47,6 +51,7 @@ public class HttpUtils {
      * @description <p>网络失败最大尝试次数  </p>
      */
     protected static final int MAX_SERVER_LOAD_TIMES = 3;
+    private static final MediaType MEDIA_TYPE_STREAM = MediaType.parse("application/octet-stream");
     /**
      * 是否伪造IP头
      */
@@ -841,24 +846,67 @@ public class HttpUtils {
         return cookies == null ? "" : cookies.toString();
     }
 
-    public static void main(String[] args) {
-//		try {
-//			 OkHttpClient client = new OkHttpClient();
-//		        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-//		        SysUser user = new SysUser("developerclub@126.com", "郑明亮", "123");
-//		        RequestBody body = RequestBody.create(JSON, GsonTools.createJsonString(user));
-//		        Request request = new Request.Builder()
-//		                .url("http://localhost:8087/DeveloperClub/SysUserController/register")
-////		                .header("User-Agent", "OkHttp Headers.java")
-////		                .addHeader("Accept", "application/json; q=0.5")
-//		                .post(body)
-//		                .build();
-//		    Response   response = client.newCall(request).execute();
-//		    System.out.println(response.body().string());
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+
+    public static Response upload(String url, UploadInfo uploadInfo) throws IOException {
+        return upload(url,uploadInfo,null,null);
     }
+
+    public static Response upload(String url, UploadInfo uploadInfo, Map<String, String> params) throws IOException {
+        return upload(url,uploadInfo,params,null);
+    }
+    /**
+     * 上传文件
+     * @param url 上传服务器的url地址
+     * @param uploadInfo 上传文件的相关信息
+     * @param params 除了上传文件额外的请求参数
+     * @param headers header头
+     * @return
+     * @throws IOException
+     */
+    public static Response upload(String url, UploadInfo uploadInfo, Map<String, String> params, Map<String,String> headers) throws IOException {
+
+        OkHttpClient client = getOkHttpClient();
+        File file = new File(uploadInfo.getFilePath());
+        String uploadFileName = uploadInfo.getFileName();
+        if (StringUtils.isEmpty(uploadFileName)) {
+            uploadFileName = file.getName();
+        }
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart(uploadInfo.getKey(), uploadFileName,
+//                        RequestBody.create(file, MEDIA_TYPE_STREAM));
+                        RequestBody.create(MEDIA_TYPE_STREAM,file));
+        if(params != null){
+            for (Map.Entry<String, String> entry : params.entrySet()) {
+                builder.addFormDataPart(entry.getKey(),entry.getValue());
+
+            }
+        }
+        Map<String,String> defaultHeaders = getDefaultHeaders();
+        if (headers != null) {
+            defaultHeaders.putAll(headers);
+        }
+        RequestBody body = builder.build();
+        Request request = new Request.Builder()
+                .url(url)
+                .method("POST", body)
+                .headers(Headers.of(defaultHeaders))
+                .build();
+        return client.newCall(request).execute();
+    }
+
+    public static void main(String[] args) throws IOException {
+//        String url = "https://my.apipost.cn/";
+//        HashMap<String, String> headers = Maps.newHashMap();
+//        headers.put("cookie","PHPSESSID=f6uhla10t82okrmssd2den2028; Hm_lvt_a046ce178828e393614822a297b8d296=1599299319; UM_distinctid=1745daaf5f95-0b5b41fa8229cf-f7b1332-16e360-1745daaf5fa37f; cdc8c88ee08326da=1; reffer=https%3A%2F%2Fmy.apipost.cn%2Fmyqa; CNZZDATA1276797738=1653307937-1599296240-%7C1599299717; Hm_lpvt_a046ce178828e393614822a297b8d296=1599300179");
+//        Response response = HttpUtils.getResponse(url, null, headers);
+//        String cookieValue = HttpUtils.getCookieValue(response);
+//        System.out.println(cookieValue);
+
+
+    }
+
+
+
+
 
 }
