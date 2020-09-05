@@ -896,37 +896,6 @@ public class HttpUtils {
     }
 
     public static void main(String[] args) throws IOException {
-        HttpServletRequest request;
-        /*OkHttpClient client = new OkHttpClient().newBuilder()
-                .build();
-        MediaType mediaType = MediaType.parse("text/plain");
-        RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                .addFormDataPart("pic","/C:/Users/zml/Pictures/BI/1595474308.jpg",
-                        RequestBody.create(MediaType.parse("image/jpeg"),
-                                new File("/C:/Users/zml/Pictures/BI/1595474308.jpg")))
-                .build();
-        Request request = new Request.Builder()
-                .url("https://shopapi.io.mi.com/homemanage/shop/uploadpic")
-                .method("POST", body)
-                .addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36")
-                .build();
-        Response response = client.newCall(request).execute();
-        System.out.println(response.body().string());*/
-
-        OkHttpClient client = new OkHttpClient().newBuilder()
-                .build();
-        MediaType mediaType = MediaType.parse("text/plain");
-        RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                .addFormDataPart("file","/D:/data/tencent/tim/data/1072307340/Image/Group/$$(UO1M$PHNQIZ97~K[1U5J.jpg",
-                        RequestBody.create(MediaType.parse("image/png"),
-                                new File("/D:/data/tencent/tim/data/1072307340/Image/Group/$$(UO1M$PHNQIZ97~K[1U5J.jpg")))
-                .build();
-        Request request = new Request.Builder()
-                .url("http://upload.likeyunba.com/upload/xiaomi.php")
-                .method("POST", body)
-                .build();
-        Response response = client.newCall(request).execute();
-        System.out.println(response.body().string());
     }
 
 
