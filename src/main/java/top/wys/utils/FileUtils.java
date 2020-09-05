@@ -759,4 +759,37 @@ public class FileUtils {
         }
         return null;
     }
+
+    /**
+     * 获取文件Content-Type(Mime-Type)
+     * @param filePath
+     * @return
+     */
+    public static String getContentType(String filePath){
+        String contentType = "application/octet-stream";
+        Path path = Paths.get(filePath);
+        try {
+            contentType = Files.probeContentType(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("File content type is : " + contentType);
+        return contentType;
+    }
+
+    /**
+     * 获取文件Content-Type(Mime-Type)
+     * @param path
+     * @return
+     */
+    public static String getContentType(File file){
+        String contentType = "application/octet-stream";
+        try {
+            contentType = Files.probeContentType(file.toPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("File content type is : " + contentType);
+        return contentType;
+    }
 }
