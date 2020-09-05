@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import javax.servlet.http.HttpServletRequest;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Cookie;
@@ -873,8 +875,7 @@ public class HttpUtils {
         }
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart(uploadInfo.getKey(), uploadFileName,
-//                        RequestBody.create(file, MEDIA_TYPE_STREAM));
-                        RequestBody.create(MEDIA_TYPE_STREAM,file));
+                        RequestBody.create(file, MediaType.parse(FileUtils.getContentType(file))));
         if(params != null){
             for (Map.Entry<String, String> entry : params.entrySet()) {
                 builder.addFormDataPart(entry.getKey(),entry.getValue());
@@ -895,14 +896,37 @@ public class HttpUtils {
     }
 
     public static void main(String[] args) throws IOException {
-//        String url = "https://my.apipost.cn/";
-//        HashMap<String, String> headers = Maps.newHashMap();
-//        headers.put("cookie","PHPSESSID=f6uhla10t82okrmssd2den2028; Hm_lvt_a046ce178828e393614822a297b8d296=1599299319; UM_distinctid=1745daaf5f95-0b5b41fa8229cf-f7b1332-16e360-1745daaf5fa37f; cdc8c88ee08326da=1; reffer=https%3A%2F%2Fmy.apipost.cn%2Fmyqa; CNZZDATA1276797738=1653307937-1599296240-%7C1599299717; Hm_lpvt_a046ce178828e393614822a297b8d296=1599300179");
-//        Response response = HttpUtils.getResponse(url, null, headers);
-//        String cookieValue = HttpUtils.getCookieValue(response);
-//        System.out.println(cookieValue);
+        HttpServletRequest request;
+        /*OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        MediaType mediaType = MediaType.parse("text/plain");
+        RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart("pic","/C:/Users/zml/Pictures/BI/1595474308.jpg",
+                        RequestBody.create(MediaType.parse("image/jpeg"),
+                                new File("/C:/Users/zml/Pictures/BI/1595474308.jpg")))
+                .build();
+        Request request = new Request.Builder()
+                .url("https://shopapi.io.mi.com/homemanage/shop/uploadpic")
+                .method("POST", body)
+                .addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36")
+                .build();
+        Response response = client.newCall(request).execute();
+        System.out.println(response.body().string());*/
 
-
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        MediaType mediaType = MediaType.parse("text/plain");
+        RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart("file","/D:/data/tencent/tim/data/1072307340/Image/Group/$$(UO1M$PHNQIZ97~K[1U5J.jpg",
+                        RequestBody.create(MediaType.parse("image/png"),
+                                new File("/D:/data/tencent/tim/data/1072307340/Image/Group/$$(UO1M$PHNQIZ97~K[1U5J.jpg")))
+                .build();
+        Request request = new Request.Builder()
+                .url("http://upload.likeyunba.com/upload/xiaomi.php")
+                .method("POST", body)
+                .build();
+        Response response = client.newCall(request).execute();
+        System.out.println(response.body().string());
     }
 
 
