@@ -779,7 +779,7 @@ public class FileUtils {
 
     /**
      * 获取文件Content-Type(Mime-Type)
-     * @param path
+     * @param file
      * @return
      */
     public static String getContentType(File file){

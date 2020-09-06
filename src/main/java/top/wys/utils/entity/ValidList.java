@@ -22,7 +22,7 @@ import lombok.Data;
 
 /**
  * <ol>
- *  用于可校验集合中的实体类的可替换的List集合
+ *  <li>用于可校验集合中的实体类的可替换的List集合
  * </ol>
  *
  * @author 郑明亮

@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <ol>
- *  上传文件的相关信息
+ *  <li>上传文件的相关信息
  * </ol>
  *
  * @author 郑明亮
@@ -19,8 +19,6 @@ import lombok.experimental.Accessors;
  * @time 2020/9/5 16:00
  * @email mpro@vip.qq.com
  */
-//@Data
-//@Accessors(chain = true)
 public class UploadInfo {
     /**
      * 上传文件时作为请求的key值
