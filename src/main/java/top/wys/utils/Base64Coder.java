@@ -127,6 +127,19 @@ public class Base64Coder {
     }
 
     /**
+     * 将文件转换为base64字符串,并拼接上图片标识的base64前缀
+     * @param file
+     * @return
+     */
+    public static String encodeFileWithPrefix(File file) {
+        String str = encodeFile(file);
+        if(StringUtils.isNotEmpty(str)){
+            return "data:image/png;base64," + str;
+        }
+        return str;
+    }
+
+    /**
      * 将文件转换为base64字符串
      * @param file
      * @return
@@ -134,7 +147,7 @@ public class Base64Coder {
     public static String encodeFile(File file) {
         try (FileInputStream fileInputStream = new FileInputStream(file)) {
             char[] encodeChars = encode(IOUtils.isToBytes(fileInputStream));
-            String base64Str = "data:image/png;base64," + String.valueOf(encodeChars);
+            String base64Str = String.valueOf(encodeChars);
             return base64Str;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
