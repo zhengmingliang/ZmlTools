@@ -674,7 +674,7 @@ public class DataUtils {
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .build();
-        Request request = new Request.Builder().build();
+        Request request = new Request.Builder().url(url).build();
         Response response = client.newCall(request).execute();
         String disposition = response.header("Content-Disposition");
         if (disposition != null) {
@@ -761,7 +761,7 @@ public class DataUtils {
      * @return 处理后的数字
      */
     public static String getRoundNum(double num) {
-        return getRoundNum(num, null);
+        return getRoundNum(num, 2);
     }
 
     /**

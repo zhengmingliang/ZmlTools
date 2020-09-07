@@ -2,8 +2,8 @@ package top.wys.utils;
 
 import com.google.common.collect.Maps;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,20 +15,27 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.SocketAddress;
 import java.net.SocketTimeoutException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import javax.servlet.http.HttpServletRequest;
+
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
+import okhttp3.Cookie;
 import okhttp3.FormBody.Builder;
 import okhttp3.Headers;
+import okhttp3.HttpUrl;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import top.wys.utils.entity.UploadInfo;
 
 
 /**
@@ -39,62 +46,98 @@ import okhttp3.ResponseBody;
  */
 public class HttpUtils {
 
-    private static final Logger log = LogManager.getLogger();
-
+    private static final Logger log = LoggerFactory.getLogger(HttpUtils.class);
     /**
      * @author 郑明亮
      * @time 2017年3月19日 下午5:13:23
      * @description <p>网络失败最大尝试次数  </p>
      */
     protected static final int MAX_SERVER_LOAD_TIMES = 3;
+    private static final MediaType MEDIA_TYPE_STREAM = MediaType.parse("application/octet-stream");
     /**
      * 是否伪造IP头
      */
     public static boolean fakeIp = false;
+    private static boolean ignoreSSL = false;
 
+    /**
+     * 使所有请求支持对https证书忽略验证
+     */
     public static void supportHttps(){
+        ignoreSSL = true;
+    }
+
+    /**
+     * 忽略SNI
+     */
+    public static void ignoreSNI(){
         System.setProperty("jsse.enableSNIExtension","false");
     }
 
     /**
+     * 发送 body请求时，默认的请求内容格式为json，修改该值，可修改所有sendRequestBody方法的默认请求类型
+     * 如果需要修改某次请求的参数类型，可使用sendRequestBody的含有contentType的重载方法
+     */
+    public static  MediaType defaultMediaType = MediaType.parse("application/json; charset=utf-8") ;
+
+    /**
      * @param url
-     * @return
+     * @return a response from a request
      * @throws IOException
      * @description <p>简单的http get请求</p>
      */
-    public static String get(String url) throws IOException {
+    public static Response getResponse(String url) throws IOException {
         OkHttpClient client = getOkHttpClient();
         Request.Builder builder = new Request.Builder()
                 .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36")
                 .url(url);
         if(fakeIp){
-            builder.addHeader("X-FORWARDED-FOR", RandomUtils.getRandomIp());
+            setFakeIpHeader(builder);
         }
         Request request = builder
                 .build();
-        Response response = client.newCall(request).execute();
-        return response.body().string();
+        return client.newCall(request).execute();
     }
 
+    /**
+     *  简单的Http get请求
+     * @param url 请求的http地址
+     * @return result String from a request
+     * @throws IOException
+     */
+    public static String get(String url) throws IOException {
+        return getResponse(url).body().string();
+    }
 
     /**
      * @param url  请求host地址
      * @param params 请求key-value参数
-     * @return
+     * @return result String from a request
      * @throws IOException
      */
     public static String get(String url, Map<String, Object> params) throws IOException{
-        return get(url,params,null);
+        return getResponse(url,params,null).body().string();
     }
 
     /**
      * @param url 请求host地址
      * @param params 请求key-value参数
      * @param headers 添加的header的map集合
-     * @return
+     * @return result String from a request
      * @throws IOException
      */
-    public static String get(String url, Map<String, Object> params,Map<String, String> headers) throws IOException {
+    public static String get(String url, Map<String, Object> params,Map<String, String> headers) throws IOException{
+        return getResponse(url,params,headers).body().string();
+    }
+
+    /**
+     * @param url 请求host地址
+     * @param params 请求key-value参数
+     * @param headers 添加的header的map集合
+     * @return a response from a request
+     * @throws IOException
+     */
+    public static Response getResponse(String url, Map<String, Object> params,Map<String, String> headers) throws IOException {
         OkHttpClient client = getOkHttpClient();
         if(url == null){
             throw new RuntimeException("the request URL can not be null");
@@ -111,14 +154,13 @@ public class HttpUtils {
                 .url(url)
                 .headers(Headers.of(getDefaultHeaders()));
         if(fakeIp){
-            build.addHeader("X-FORWARDED-FOR",RandomUtils.getRandomIp());
+            setFakeIpHeader(build);
         }
         if(headers != null && headers.size() > 0){
             build.headers(Headers.of(headers));
         }
         Request request = build.build();
-        Response response = client.newCall(request).execute();
-        return response.body().string();
+        return client.newCall(request).execute();
     }
 
     /**
@@ -144,10 +186,14 @@ public class HttpUtils {
     /**
      * 获取OKHttpClient实例
      */
-    private static OkHttpClient getOkHttpClient() {
+    public static OkHttpClient getOkHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder().connectTimeout(1, TimeUnit.MINUTES)
                 .readTimeout(1, TimeUnit.MINUTES)
                 .retryOnConnectionFailure(true);
+        if(ignoreSSL){
+            builder.sslSocketFactory(SSLSocketClient.getSSLSocketFactory())
+                    .hostnameVerifier(SSLSocketClient.getHostnameVerifier());
+        }
         if(proxy == null){
             return builder.build();
         }else{
@@ -202,26 +248,46 @@ public class HttpUtils {
      * @throws IOException
      */
     public static ResponseBody post(String url, Map<String, Object> params, Map<String, String> headers) throws IOException {
+        Response response = getResponseFromPost(url, params, headers);
+        return response.body();
+    }
+
+    /**
+     * 通过Post请求获取Response，如果需要获取除了body以外的数据，如header、状态码等信息，则
+     * @param url
+     * @param params
+     * @param headers
+     * @return
+     * @throws IOException
+     */
+    public static Response getResponseFromPost(String url, Map<String, Object> params, Map<String, String> headers) throws IOException {
         OkHttpClient client = getOkHttpClient();
-        FormBody.Builder builder = new FormBody.Builder();
+        Builder builder = new Builder();
         //添加request参数
         if (params != null) {
             for (Map.Entry entry : params.entrySet()) {
                 builder.add(entry.getKey()+"", entry.getValue()+ "");
             }
         }
+        // 添加header参数
+        if (headers == null) {
+            headers = getDefaultHeaders();
+        }
+
         Request.Builder requestBuilder = new Request.Builder()
                 .url(url)
-                .headers(Headers.of(headers))    //添加header参数；
-                .post(builder.build()); //添加requestBody;
+                //添加header参数；
+                .headers(Headers.of(headers))
+                //添加requestBody;
+                .post(builder.build());
+        log.debug("url:{},requestBody:{},headers:{}",url,params,headers);
         // 添加伪造IP
         if(fakeIp){
-            requestBuilder.addHeader("X-FORWARDED-FOR", RandomUtils.getRandomIp());
+            setFakeIpHeader(requestBuilder);
         }
 
         Request request = requestBuilder.build();
-        Response response = client.newCall(request).execute();
-        return response.body();
+        return client.newCall(request).execute();
     }
 
     /**
@@ -268,23 +334,7 @@ public class HttpUtils {
      * @throws IOException
      */
     public static ResponseBody post(String url, Map<String, Object> param) throws IOException {
-        OkHttpClient client = getOkHttpClient();
-        Builder builder = new FormBody.Builder();
-        if (param != null) {
-            for (Map.Entry entry : param.entrySet()) {
-                builder.add(entry.getKey()+"", entry.getValue()+ "");
-            }
-        }
-        RequestBody body = builder.build();
-
-        Request.Builder requestBuilder = new Request.Builder()
-                                                .url(url)
-                                                .post(body);
-        if(fakeIp){
-            requestBuilder.addHeader("X-FORWARDED-FOR", RandomUtils.getRandomIp());
-        }
-        Request request = requestBuilder.build();
-        Response response = client.newCall(request).execute();
+        Response response = getResponseFromPost(url, param, null);
         return response.body();
     }
 
@@ -325,6 +375,7 @@ public class HttpUtils {
      */
     private static String fileAbsolutePath = null;
 
+
     /**
      * @param url
      * @param fileName 文件名（含扩展名）/路径+文件名（含扩展名）
@@ -335,6 +386,20 @@ public class HttpUtils {
      * @description <p>下载文件（Http同步请求，阻塞线程,只有在得到返回路径值时，程序下方代码才会执行）   </p>
      */
     public static String getFileFromHttpDataBySyn(final String url, final String fileName) throws IOException {
+        return getFileFromHttpDataBySyn(url,fileName,"");
+    }
+
+    /**
+     * @param url
+     * @param fileName 文件名（含扩展名）/路径+文件名（含扩展名）
+     * @param dir 文件存储的路径
+     * @return 下载到本地的绝对路径地址
+     * @throws IOException
+     * @author 郑明亮
+     * @time 2017年3月19日 下午3:17:07
+     * @description <p>下载文件（Http同步请求，阻塞线程,只有在得到返回路径值时，程序下方代码才会执行）   </p>
+     */
+    public static String getFileFromHttpDataBySyn(final String url, final String fileName,String dir) throws IOException {
 
 
         final OkHttpClient client = getOkHttpClient();
@@ -344,14 +409,14 @@ public class HttpUtils {
         int serverLoadTimes = 0;
 
         try {
-            httpReLoad(url, client, request, fileName);
+            httpReLoad(url, client, request, fileName,dir);
         } catch (Exception e) {
             e.printStackTrace();
 
             if (SocketTimeoutException.class.equals(e) && serverLoadTimes <= MAX_SERVER_LOAD_TIMES) {
                 serverLoadTimes++;
                 log.error("网络连接超时" + serverLoadTimes + "次");
-                httpReLoad(url, client, request, fileName);
+                httpReLoad(url, client, request, fileName,dir);
             } else {
                 e.printStackTrace();
                 log.error("连接超时" + MAX_SERVER_LOAD_TIMES + "次", e);
@@ -439,11 +504,16 @@ public class HttpUtils {
     private static void httpReLoad(final String url, final OkHttpClient client,
                                    Request request, String fileName,String dir) throws IOException,
             UnsupportedEncodingException, FileNotFoundException {
-        File pathFile = new File(dir);
-        if (!pathFile.exists()) {
-            pathFile.mkdirs();
+
+        String basePath = "";
+        if(StringUtils.isNotEmpty(dir)){
+            File pathFile = new File(dir);
+            if (!pathFile.exists()) {
+                pathFile.mkdirs();
+            }
+            basePath = pathFile.getAbsolutePath() + File.separator;
         }
-        String basePath = pathFile.getAbsolutePath() + File.separator;
+
         File file;
         Response response = client.newCall(request).execute();
 
@@ -629,23 +699,70 @@ public class HttpUtils {
      * @description <p> post请求，仅发送RequestBody </P>
      */
     public static String sendRequestBody(String url, Object object) throws IOException {
-        OkHttpClient client = getOkHttpClient();
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        RequestBody body = RequestBody.create(JSON, GsonTools.createJsonString(object));
-
-        Request.Builder builder = new Request.Builder()
-                .url(url)
-                .post(body);
-
-        if(fakeIp){
-            builder.addHeader("X-REAL-IP",RandomUtils.getRandomIp());
-            builder.addHeader("X-FORWARDED-FOR", RandomUtils.getRandomIp());
-        }
-        Request request = builder.build();
-        Response response = client.newCall(request).execute();
+        Response response = getResponseFromRequestBody(url, object, null,null);
         return response.body().string();
     }
 
+
+    /**
+     * @param url  服务器地址
+     * @param object 要发送的对象
+     * @param contentType 发送请求的内容类型，默认为json，如需要设置成application/xml或 html/plan 等，请传入contentType值
+     * @return
+     * @throws IOException
+     */
+    public static String sendRequestBody(String url, Object object,String contentType) throws IOException {
+        Response response = getResponseFromRequestBody(url, object, null,contentType);
+        return response.body().string();
+    }
+
+    /**
+     * @param url  服务器地址
+     * @param json 要发送的json内容
+     * @return
+     * @throws IOException
+     */
+    public static String sendRequestBody(String url, String json) throws IOException {
+        Response response = getResponseFromRequestBody(url, json, null,null);
+        return response.body().string();
+    }
+
+    /**
+     * @param url  服务器地址
+     * @param json 要发送的json内容
+     * @param contentType 发送请求的内容类型，默认为json，如需要设置成application/xml或 html/plan 等，请传入contentType值
+     * @return
+     * @throws IOException
+     */
+    public static String sendRequestBody(String url, String json,String contentType) throws IOException {
+        Response response = getResponseFromRequestBody(url, json, null,contentType);
+        return response.body().string();
+    }
+
+    /**
+     * @param url 服务器地址
+     * @param json 要发送的json内容
+     * @param header 要添加的header信息
+     * @return
+     * @throws IOException
+     */
+    public static String sendRequestBody(String url, String json,Map<String,String> header) throws IOException {
+        Response response = getResponseFromRequestBody(url, json, header,null);
+        return response.body().string();
+    }
+
+    /**
+     * @param url 服务器地址
+     * @param json 要发送的json内容
+     * @param header 要添加的header信息
+     * @param contentType 发送请求的内容类型，默认为json，如需要设置成application/xml或 html/plan 等，请传入contentType值
+     * @return
+     * @throws IOException
+     */
+    public static String sendRequestBody(String url, String json,Map<String,String> header,String contentType) throws IOException {
+        Response response = getResponseFromRequestBody(url, json, header,contentType);
+        return response.body().string();
+    }
     /**
      * 以requestBody的形式发送
      * @param url  服务器地址
@@ -655,9 +772,28 @@ public class HttpUtils {
      * @throws IOException
      */
     public static String sendRequestBody(String url, Object object,Map<String,String> header) throws IOException {
+        Response response = getResponseFromRequestBody(url, object, header,null);
+        return response.body().string();
+    }
+
+
+     public static String sendRequestBody(String url, Object object,Map<String,String> header,String contentType) throws IOException {
+        Response response = getResponseFromRequestBody(url, object, header,contentType);
+        return response.body().string();
+    }
+
+    public static Response getResponseFromRequestBody(String url, Object object, Map<String, String> header,String contentType) throws IOException{
+        return  getResponseFromRequestBody(url, GsonTools.createJsonString(object), header,null);
+    }
+
+    public static Response getResponseFromRequestBody(String url, String json, Map<String, String> header,String contentType) throws IOException {
         OkHttpClient client = getOkHttpClient();
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        RequestBody body = RequestBody.create(JSON, GsonTools.createJsonString(object));
+
+        MediaType mediaType = defaultMediaType;
+        if(contentType != null ){
+            mediaType  = MediaType.parse(contentType);
+        }
+        RequestBody body = RequestBody.create(json,mediaType);
         if(header == null){
             header = getDefaultHeaders();
         }
@@ -668,38 +804,102 @@ public class HttpUtils {
 
         //伪造IP头
         if(fakeIp){
-            builder.addHeader("X-REAL-IP",RandomUtils.getRandomIp());
-            builder.addHeader("X-FORWARDED-FOR", RandomUtils.getRandomIp());
+            setFakeIpHeader(builder);
         }
         Request request = builder.build();
-        Response response = client.newCall(request).execute();
-        return response.body().string();
+        return client.newCall(request).execute();
     }
 
+    /**
+     * 设置伪装IP的header头
+     * @param builder
+     */
+    public static void setFakeIpHeader(Request.Builder builder) {
+        String randomIp = RandomUtils.getRandomIp();
+        builder.addHeader("X-REAL-IP", randomIp);
+        builder.addHeader("X-FORWARDED-FOR", randomIp);
+    }
+
+    /**
+     * 获取默认的header头
+     * @return
+     */
     public static Map<String,String> getDefaultHeaders(){
         Map<String,String> header = Maps.newHashMap();
         header.put("User-Agent",RandomUtils.getRandomUserAgent());
         return header;
     }
 
-    public static void main(String[] args) {
-//		try {
-//			 OkHttpClient client = new OkHttpClient();
-//		        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-//		        SysUser user = new SysUser("developerclub@126.com", "郑明亮", "123");
-//		        RequestBody body = RequestBody.create(JSON, GsonTools.createJsonString(user));
-//		        Request request = new Request.Builder()
-//		                .url("http://localhost:8087/DeveloperClub/SysUserController/register")
-////		                .header("User-Agent", "OkHttp Headers.java")
-////		                .addHeader("Accept", "application/json; q=0.5")
-//		                .post(body)
-//		                .build();
-//		    Response   response = client.newCall(request).execute();
-//		    System.out.println(response.body().string());
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+    /**
+     * 从响应结果中拿取cookie信息
+     * @param response
+     * @return 返回Cookie的value信息
+     */
+    public static String getCookieValue(Response response) {
+        Headers headers = response.headers();
+        List<Cookie> cookieList = Cookie.parseAll(response.request().url(), headers);
+        StringBuilder cookies = null;
+        if(!cookieList.isEmpty()){
+            cookies = new StringBuilder();
+        }
+        for (Cookie cookie : cookieList) {
+            cookies.append(cookie.name()).append('=').append(cookie.value()).append(';');
+        }
+        return cookies == null ? "" : cookies.toString();
     }
+
+
+    public static Response upload(String url, UploadInfo uploadInfo) throws IOException {
+        return upload(url,uploadInfo,null,null);
+    }
+
+    public static Response upload(String url, UploadInfo uploadInfo, Map<String, String> params) throws IOException {
+        return upload(url,uploadInfo,params,null);
+    }
+    /**
+     * 上传文件
+     * @param url 上传服务器的url地址
+     * @param uploadInfo 上传文件的相关信息
+     * @param params 除了上传文件额外的请求参数
+     * @param headers header头
+     * @return
+     * @throws IOException
+     */
+    public static Response upload(String url, UploadInfo uploadInfo, Map<String, String> params, Map<String,String> headers) throws IOException {
+
+        OkHttpClient client = getOkHttpClient();
+        File file = new File(uploadInfo.getFilePath());
+        String uploadFileName = uploadInfo.getFileName();
+        if (StringUtils.isEmpty(uploadFileName)) {
+            uploadFileName = file.getName();
+        }
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart(uploadInfo.getKey(), uploadFileName,
+                        RequestBody.create(file, MediaType.parse(FileUtils.getContentType(file))));
+        if(params != null){
+            for (Map.Entry<String, String> entry : params.entrySet()) {
+                builder.addFormDataPart(entry.getKey(),entry.getValue());
+
+            }
+        }
+        Map<String,String> defaultHeaders = getDefaultHeaders();
+        if (headers != null) {
+            defaultHeaders.putAll(headers);
+        }
+        RequestBody body = builder.build();
+        Request request = new Request.Builder()
+                .url(url)
+                .method("POST", body)
+                .headers(Headers.of(defaultHeaders))
+                .build();
+        return client.newCall(request).execute();
+    }
+
+    public static void main(String[] args) throws IOException {
+    }
+
+
+
+
 
 }

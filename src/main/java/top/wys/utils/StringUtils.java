@@ -16,7 +16,7 @@ public class StringUtils {
     private StringUtils() {
         throw new UnsupportedOperationException("Can not be instantiated...");
     }
- 
+
 /**
  * @author 郑明亮
  * @time 2017年1月23日 上午9:58:07
@@ -25,17 +25,17 @@ public class StringUtils {
  * @return 解码后的文本
  */
 public static String unicodeToString(String str) {
-  
-    Pattern pattern = Pattern.compile("(\\\\u(\\p{XDigit}{4}))");    
+
+    Pattern pattern = Pattern.compile("(\\\\u(\\p{XDigit}{4}))");
     Matcher matcher = pattern.matcher(str);
     char ch;
     while (matcher.find()) {
         ch = (char) Integer.parseInt(matcher.group(2), 16);
-        str = str.replace(matcher.group(1), ch + "");    
+        str = str.replace(matcher.group(1), ch + "");
     }
     return str;
 }
- 
+
 /**
  * @author 郑明亮
  * @time 2017年1月23日 上午9:57:20
@@ -56,7 +56,7 @@ public static String getUnicode(String s) {
             String str1 = Integer.toHexString(bytes[i] & 0xff);
             out.append(str1);
             out.append(str);
-              
+
         }
         return out.toString();
     } catch (UnsupportedEncodingException e) {
@@ -67,7 +67,7 @@ public static String getUnicode(String s) {
 
 /**
  * 将 inStr 转为 UTF-8 的编码形式
- * 
+ *
  * @param inStr 输入字符串
  * @return UTF - 8 的编码形式的字符串
  * @throws UnsupportedEncodingException
@@ -79,17 +79,17 @@ public static String ISO2UTF(String inStr) throws UnsupportedEncodingException {
     }
     return outStr;
 }
- 
+
     /**
      * 判断字符串是否为null或长度为0
      *
      * @param s 待校验字符串
      * @return {@code true}: 空 {@code false}: 不为空
      */
-    public static boolean isEmpty(CharSequence s) {
-        return s == null || s.length() == 0;
+    public static boolean isEmpty(Object s) {
+        return s == null || "".equals(s) || "null".equals(s);
     }
-    
+
     /**
      * @author 郑明亮
      * @time 2017年2月6日 上午11:13:48
@@ -100,7 +100,7 @@ public static String ISO2UTF(String inStr) throws UnsupportedEncodingException {
     public static boolean isNotEmpty(CharSequence s) {
         return !isEmpty(s);
     }
- 
+
     /**
      * 判断字符串是否为null或全为空格
      *
@@ -110,7 +110,7 @@ public static String ISO2UTF(String inStr) throws UnsupportedEncodingException {
     public static boolean isSpace(String s) {
         return (s == null || s.trim().length() == 0);
     }
- 
+
     /**
      * 判断两字符串是否相等
      *
@@ -133,7 +133,7 @@ public static String ISO2UTF(String inStr) throws UnsupportedEncodingException {
         }
         return false;
     }
- 
+
     /**
      * 判断两字符串忽略大小写是否相等
      *
@@ -142,10 +142,10 @@ public static String ISO2UTF(String inStr) throws UnsupportedEncodingException {
      * @return {@code true}: 相等{@code false}: 不相等
      */
     public static boolean equalsIgnoreCase(String a, String b) {
-    	
+
         return (a != null && b != null && (a.length() == b.length()) && a.regionMatches(true, 0, b, 0, b.length()));
     }
- 
+
     /**
      * null转为长度为0的字符串
      *
@@ -155,7 +155,7 @@ public static String ISO2UTF(String inStr) throws UnsupportedEncodingException {
     public static String null2Length0(String s) {
         return s == null ? "" : s;
     }
- 
+
     /**
      * 返回字符串长度
      *
@@ -165,7 +165,7 @@ public static String ISO2UTF(String inStr) throws UnsupportedEncodingException {
     public static int length(CharSequence s) {
         return s == null ? 0 : s.length();
     }
- 
+
     /**
      * 首字母大写
      *
@@ -176,7 +176,7 @@ public static String ISO2UTF(String inStr) throws UnsupportedEncodingException {
         if (isEmpty(s) || !Character.isLowerCase(s.charAt(0))) return s;
         return String.valueOf((char) (s.charAt(0) - 32)) + s.substring(1);
     }
- 
+
     /**
      * 首字母小写
      *
@@ -187,7 +187,7 @@ public static String ISO2UTF(String inStr) throws UnsupportedEncodingException {
         if (isEmpty(s) || !Character.isUpperCase(s.charAt(0))) return s;
         return String.valueOf((char) (s.charAt(0) + 32)) + s.substring(1);
     }
- 
+
     /**
      * 反转字符串
      *
@@ -207,7 +207,7 @@ public static String ISO2UTF(String inStr) throws UnsupportedEncodingException {
         }
         return new String(chars);
     }
- 
+
     /**
      * 转化为半角字符
      *
@@ -228,7 +228,7 @@ public static String ISO2UTF(String inStr) throws UnsupportedEncodingException {
         }
         return new String(chars);
     }
- 
+
     /**
      * 转化为全角字符
      *
@@ -249,7 +249,7 @@ public static String ISO2UTF(String inStr) throws UnsupportedEncodingException {
         }
         return new String(chars);
     }
-     
+
     /**
      * @author 郑明亮
      * @time 2017年1月12日 下午1:16:39
@@ -271,7 +271,7 @@ public static String ISO2UTF(String inStr) throws UnsupportedEncodingException {
                     int num = Integer.parseInt(pointNum.substring(1, 2));
                     if (num >=5) {
                         amount ++;
-                         
+
                     }
                 }
                 noPointString = ""+amount;
@@ -280,7 +280,7 @@ public static String ISO2UTF(String inStr) throws UnsupportedEncodingException {
             }
             return noPointString;
         }
-             
+
     }
 /**
      * @author 郑明亮

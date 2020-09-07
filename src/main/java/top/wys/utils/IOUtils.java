@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
+import java.io.Flushable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -82,4 +83,17 @@ public class IOUtils {
         }
     }
 
+
+    /**
+     * @param flushable
+     */
+    public static void flush(Flushable flushable) {
+        try {
+            if (flushable != null) {
+                flushable.flush();
+            }
+        } catch (IOException e) {
+            log.error("刷盘异常",e);
+        }
+    }
 }

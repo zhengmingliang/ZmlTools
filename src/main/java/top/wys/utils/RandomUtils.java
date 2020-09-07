@@ -281,7 +281,7 @@ public class RandomUtils {
      * 返回地址
      * @return
      */
-    private static String getRandomRoad() {
+    public static String getRandomRoad() {
         int index=getNum(0,road.length-1);
         String first=road[index];
         String second=String.valueOf(getNum(11,150))+"号";
@@ -294,7 +294,7 @@ public class RandomUtils {
      * @return
      */
     public static Map getRandomPerson() {
-        Map map=new HashMap();
+        Map map=new HashMap(6);
         map.put("name", getChineseName());
         map.put("sex", name_sex);
         map.put("company", getRandomCompany(2,4));
