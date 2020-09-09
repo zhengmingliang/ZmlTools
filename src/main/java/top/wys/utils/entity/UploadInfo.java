@@ -32,6 +32,10 @@ public class UploadInfo {
      * 上传文件的文件名称
      */
     private String fileName;
+    /**
+     * 上传文件类型
+     */
+    private String mediaType;
 
     public UploadInfo(String filePath) {
         this.filePath = filePath;
@@ -70,5 +74,13 @@ public class UploadInfo {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public String getMediaType() {
+        return mediaType;
+    }
+
+    public void setMediaType(String mediaType) {
+        this.mediaType = mediaType;
     }
 }
