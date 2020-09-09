@@ -873,9 +873,16 @@ public class HttpUtils {
         if (StringUtils.isEmpty(uploadFileName)) {
             uploadFileName = file.getName();
         }
+        // 上传的文件允许指定上传文件的mediaType
+        MediaType mediaType;
+        if(uploadInfo.getMediaType() != null){
+            mediaType = MediaType.parse(uploadInfo.getMediaType());
+        }else {
+            mediaType = MediaType.parse(FileUtils.getContentType(file));
+        }
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart(uploadInfo.getKey(), uploadFileName,
-                        RequestBody.create(file, MediaType.parse(FileUtils.getContentType(file))));
+                        RequestBody.create(file, mediaType));
         if(params != null){
             for (Map.Entry<String, String> entry : params.entrySet()) {
                 builder.addFormDataPart(entry.getKey(),entry.getValue());
