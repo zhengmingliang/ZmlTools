@@ -24,10 +24,15 @@ import top.wys.utils.gson.MapTypeAdapter;
  */
 public class GsonTools {
 
+    /**
+     * 默认的时间格式化格式
+     */
+    public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     @Setter
     @Getter
-	private static Gson gson = new GsonBuilder().registerTypeAdapterFactory(MapTypeAdapter.FACTORY).create();;
-
+	private static Gson gson = new GsonBuilder()
+            .setDateFormat(DEFAULT_DATE_FORMAT)
+            .registerTypeAdapterFactory(MapTypeAdapter.FACTORY).create();;
 
 
     /**
