@@ -1280,5 +1280,31 @@ public class DataUtils {
         return emptyNames.toArray(result);
     }
 
+    /**
+     * 获取文件名或任意字符串的后缀字符
+     * @param fileName 文件名或任意字符串
+     * @param splitRegex 分隔符（支持正则表达式）
+     * @return
+     */
+    public static String getSuffix(String fileName,String splitRegex) {
+        if (StringUtils.isEmpty(splitRegex)) {
+            splitRegex = "\\.";
+        }
+        String[] split = fileName.split(splitRegex);
+        String suffix = "";
+        if(split.length> 1){
+            suffix = split[split.length - 1];
+        }
+        return suffix;
+    }
+
+    /**
+     * 获取文件名的后缀名，默认分隔符为“.”
+     * @param fileName 文件名或任意字符串
+     * @return
+     */
+    public static String getSuffix(String fileName) {
+        return getSuffix(fileName,"\\.");
+    }
 
 }
