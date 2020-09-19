@@ -54,6 +54,7 @@ import okhttp3.Headers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import top.wys.utils.entity.Patterns;
 
 /**
  * 数据类型转换、格式校验、简易信息的获取，如系统时间
@@ -98,11 +99,13 @@ public class DataUtils {
      * @return 计算的sign
      */
     public static String getRequestSign(Map<String, Object> map) {
-        if (map == null)
+        if (map == null) {
             return "";
+        }
         map.remove("sign");
         List<Map.Entry<String, Object>> infoIds = new ArrayList<Map.Entry<String, Object>>(map.entrySet());
         Collections.sort(infoIds, new Comparator<Map.Entry<String, Object>>() {
+            @Override
             public int compare(Map.Entry<String, Object> o1,
                                Map.Entry<String, Object> o2) {
                 return (o1.getKey()).compareTo(o2.getKey());
@@ -112,8 +115,7 @@ public class DataUtils {
         for (int i = 0; i < infoIds.size(); i++) {
             Map.Entry<String, Object> map1 =  infoIds.get(i);
             // value是数组 不加入签名
-            Pattern p = Pattern.compile("^.*\\[[.*]+\\]$");
-            Matcher m = p.matcher(map1.getKey());
+            Matcher m = Patterns.ARRAY.matcher(map1.getKey());
             if (!m.matches()) {
                 builder.append(map1.getKey() + map1.getValue());
             }
@@ -132,8 +134,9 @@ public class DataUtils {
      * @version 1.0.0
      */
     public static String getRequestSign(String longSign) {
-        if (longSign == null)
+        if (longSign == null) {
             return "";
+        }
 
         return EncryptUtils.md5(longSign + Constants.COUPON_KEY);
     }
@@ -501,9 +504,7 @@ public class DataUtils {
      * @description <p>判断是不是网址  </P>
      */
     public static boolean isWebUrl(String url) {
-        String patternString = "(https://|http://)?([\\w-]+\\.)+[\\w-]+(:\\d+)*(/[\\w- ./?%&=]*)?";
-        Pattern p = Pattern
-                .compile(patternString);
+        Pattern p = Patterns.HTTP_URL;
 
         Matcher m = p.matcher(url);
 
@@ -517,8 +518,7 @@ public class DataUtils {
      * @return true or false
      */
     public static boolean isEmail1(String s) {
-        Pattern pattern = Pattern
-                .compile("^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$");
+        Pattern pattern = Patterns.EMAIL;
         Matcher matcher = pattern.matcher(s);
         return matcher.matches();
     }
@@ -531,7 +531,7 @@ public class DataUtils {
      */
     public static boolean isEmail2(String email) {
 
-        return EMAIL_ADDRESS.matcher(email).matches();
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     /**
@@ -543,7 +543,7 @@ public class DataUtils {
      */
     public static boolean isChinessOnly(String text) {
 
-        return PATTERN_IS_CHICHNESS.matcher(text).matches();
+        return Patterns.PATTERN_IS_CHICHNESS.matcher(text).matches();
     }
 
     /**
@@ -554,14 +554,10 @@ public class DataUtils {
      * @description <p>判断是否是身份证号    <br>
      */
     public static boolean isIdCardNumber(String idCardNum) {
-        return PATTERN_IS_ID_CARD_NUMBER_15.matcher(idCardNum).matches() || PATTERN_IS_ID_CARD_NUMBER_18.matcher(idCardNum).matches();
+        return Patterns.PATTERN_IS_ID_CARD_NUMBER_15.matcher(idCardNum).matches() || Patterns.PATTERN_IS_ID_CARD_NUMBER_18.matcher(idCardNum).matches();
     }
 
-    // 引用于Android.util.Patterns
-    public static final Pattern EMAIL_ADDRESS = Pattern
-            .compile("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" + "\\@"
-                    + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" + "(" + "\\."
-                    + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" + ")+");
+
 
     /**
      * 判断是否为合法IP
@@ -574,29 +570,8 @@ public class DataUtils {
         Matcher matcher = pattern.matcher(ipAddress);
         return matcher.matches();
     }
-    /**
-     * @author 郑明亮
-     * @time 2017年3月13日 下午5:50:29
-     * @description <p>匹配中文 <br>
-     */
-    public static final Pattern PATTERN_IS_CHICHNESS = Pattern
-            .compile("^[\\u4e00-\\u9fa5]{0,}$");
 
-    /**
-     * @author 郑明亮
-     * @time 2017年3月13日 下午6:58:08
-     * @description <p> 15位身份证号验证<br>
-     */
-    public static final Pattern PATTERN_IS_ID_CARD_NUMBER_15 = Pattern
-            .compile("^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}$");
 
-    /**
-     * @author 郑明亮
-     * @time 2017年3月13日 下午6:58:13
-     * @description <p>18位身份证号验证 <br>
-     */
-    public static final Pattern PATTERN_IS_ID_CARD_NUMBER_18 = Pattern
-            .compile("^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}([0-9]|X)$");
 
     /**
      * 判断字符串是否非空非null
@@ -895,10 +870,16 @@ public class DataUtils {
      * @return 堆栈错误信息
      */
     public static Throwable getCauseException(Exception e) {
-        if (e == null) return null;
+        if (e == null) {
+            return null;
+        }
         Throwable cause = e.getCause();
-        if (cause != null) return cause;
-        else return e;
+        if (cause != null) {
+            return cause;
+        }
+        else {
+            return e;
+        }
     }
 
     public static final char UNDERLINE = '_';
@@ -1066,8 +1047,9 @@ public class DataUtils {
      * @return 转换后的对象
      */
     public static <T> T mapToBean(Map<String, Object> map, Class<T> t){
-        if (map == null)
+        if (map == null){
             return null;
+        }
 
         T obj = null;
         try {
@@ -1092,8 +1074,9 @@ public class DataUtils {
      * @return 转换后的对象
      */
     public static Object mapToObject(Map<String, Object> map, Class<?> beanClass){
-        if (map == null)
+        if (map == null){
             return null;
+        }
 
         Object obj = null;
         try {
@@ -1146,8 +1129,9 @@ public class DataUtils {
      * @return 转换后的对象
      */
     public static List<?> mapsToObjects(List<Map<String, Object>> maps, Class<?> t){
-        if (maps ==null || maps.isEmpty())
+        if (maps ==null || maps.isEmpty()){
             return Collections.EMPTY_LIST;
+        }
         List<Object> list = new ArrayList<Object>();
         for (Map<String, Object> map : maps) {
             Object obj = mapToObject(map, t);
@@ -1164,8 +1148,9 @@ public class DataUtils {
      * @return 转换结果
      */
     public static <T> List<T> mapsToBeans(List<Map<String, Object>> maps, Class<T> t) {
-        if (maps == null || maps.isEmpty())
+        if (maps == null || maps.isEmpty()){
             return Collections.emptyList();
+        }
         List<T> list = new ArrayList<T>();
         for (Map<String, Object> map : maps) {
             T obj = mapToBean(map, t);
