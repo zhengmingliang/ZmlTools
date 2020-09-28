@@ -15,19 +15,21 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.SocketAddress;
 import java.net.SocketTimeoutException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.ConnectionPool;
 import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.Dispatcher;
 import okhttp3.FormBody.Builder;
 import okhttp3.Headers;
-import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -36,6 +38,8 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import top.wys.utils.entity.UploadInfo;
+import top.wys.utils.http.CookieJarImpl;
+import top.wys.utils.http.SSLSocketClient;
 
 
 /**
@@ -58,7 +62,7 @@ public class HttpUtils {
      * 是否伪造IP头
      */
     public static boolean fakeIp = false;
-    private static boolean ignoreSSL = false;
+    private static boolean ignoreSSL = true;
 
     /**
      * 使所有请求支持对https证书忽略验证
@@ -182,23 +186,32 @@ public class HttpUtils {
     }
 
     private static Proxy proxy;
+    private static CookieJar cookieJar;
 
     /**
      * 获取OKHttpClient实例
      */
     public static OkHttpClient getOkHttpClient() {
+        Dispatcher dispatcher = new Dispatcher(Executors.newFixedThreadPool(20));
+        dispatcher.setMaxRequests(20);
+        dispatcher.setMaxRequestsPerHost(1);
+        OkHttpClient okHttpClient;
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder().connectTimeout(1, TimeUnit.MINUTES)
                 .readTimeout(1, TimeUnit.MINUTES)
+                .dispatcher(dispatcher)
+                .cookieJar(new CookieJarImpl())
+                .connectionPool(new ConnectionPool(100,30,TimeUnit.SECONDS))
                 .retryOnConnectionFailure(true);
         if(ignoreSSL){
-            builder.sslSocketFactory(SSLSocketClient.getSSLSocketFactory())
+            builder.sslSocketFactory(SSLSocketClient.getSSLSocketFactory(),SSLSocketClient.getX509TrustManager())
                     .hostnameVerifier(SSLSocketClient.getHostnameVerifier());
         }
         if(proxy == null){
-            return builder.build();
+            okHttpClient = builder.build();
         }else{
-            return builder.proxy(proxy).build();
+            okHttpClient = builder.proxy(proxy).build();
         }
+        return okHttpClient;
     }
 
     /**
@@ -265,7 +278,7 @@ public class HttpUtils {
         Builder builder = new Builder();
         //添加request参数
         if (params != null) {
-            for (Map.Entry entry : params.entrySet()) {
+            for (Map.Entry<String, Object> entry : params.entrySet()) {
                 builder.add(entry.getKey()+"", entry.getValue()+ "");
             }
         }
@@ -413,13 +426,13 @@ public class HttpUtils {
         } catch (Exception e) {
             e.printStackTrace();
 
-            if (SocketTimeoutException.class.equals(e) && serverLoadTimes <= MAX_SERVER_LOAD_TIMES) {
+            if (e instanceof SocketTimeoutException && serverLoadTimes <= MAX_SERVER_LOAD_TIMES) {
                 serverLoadTimes++;
-                log.error("网络连接超时" + serverLoadTimes + "次");
+                log.error("网络连接超时{}次",serverLoadTimes);
                 httpReLoad(url, client, request, fileName,dir);
             } else {
                 e.printStackTrace();
-                log.error("连接超时" + MAX_SERVER_LOAD_TIMES + "次", e);
+                log.error("连接超时{}次",MAX_SERVER_LOAD_TIMES, e);
             }
         }
         System.out.println(fileAbsolutePath);
@@ -436,7 +449,6 @@ public class HttpUtils {
                 .headers(Headers.of(headers[0]))
                 .build();
         int serverLoadTimes = 0;
-//		String fileName = fileName_;
         try {
             httpReLoad(url, client, request, fileName,dir);
         } catch (Exception e) {
@@ -901,12 +913,6 @@ public class HttpUtils {
                 .build();
         return client.newCall(request).execute();
     }
-
-    public static void main(String[] args) throws IOException {
-    }
-
-
-
 
 
 }
