@@ -1,4 +1,4 @@
-package top.wys.utils;
+package top.wys.utils.http;
 /**
  * Created by 郑明亮 on 2019/9/6 14:28.
  */
@@ -57,6 +57,23 @@ public class SSLSocketClient {
                 }
         };
         return trustAllCerts;
+    }
+
+    public static X509TrustManager getX509TrustManager(){
+        return new X509TrustManager() {
+            @Override
+            public void checkClientTrusted(X509Certificate[] chain, String authType) {
+            }
+
+            @Override
+            public void checkServerTrusted(X509Certificate[] chain, String authType) {
+            }
+
+            @Override
+            public X509Certificate[] getAcceptedIssuers() {
+                return new X509Certificate[]{};
+            }
+        };
     }
 
     /**
