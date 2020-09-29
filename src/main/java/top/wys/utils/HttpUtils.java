@@ -186,6 +186,18 @@ public class HttpUtils {
     }
 
     private static Proxy proxy;
+
+    public static void setCookieJar(CookieJar cookieJar) {
+        HttpUtils.cookieJar = cookieJar;
+    }
+
+    public static CookieJar getCookieJar() {
+        if (HttpUtils.cookieJar == null) {
+            HttpUtils.cookieJar = new CookieJarImpl();
+        }
+        return HttpUtils.cookieJar;
+    }
+
     private static CookieJar cookieJar;
 
     /**
@@ -199,7 +211,7 @@ public class HttpUtils {
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder().connectTimeout(1, TimeUnit.MINUTES)
                 .readTimeout(1, TimeUnit.MINUTES)
                 .dispatcher(dispatcher)
-                .cookieJar(new CookieJarImpl())
+                .cookieJar(getCookieJar())
                 .connectionPool(new ConnectionPool(100,30,TimeUnit.SECONDS))
                 .retryOnConnectionFailure(true);
         if(ignoreSSL){
