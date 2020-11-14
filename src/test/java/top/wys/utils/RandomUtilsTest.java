@@ -1,8 +1,12 @@
 package top.wys.utils;
 
+import com.google.common.collect.Maps;
+
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by 郑明亮 on 2018/10/14 16:49.
@@ -87,5 +91,15 @@ public class RandomUtilsTest {
         for (int i = 0; i < 100; i++) {
             System.out.println(RandomUtils.getRandomUserAgent());
         }
+    }
+
+    @Test
+    public void cookieJarTest() throws IOException {
+        Map<String,Object> params = Maps.newHashMap();
+        params.put("name","zhangsan");
+        String testResult = HttpUtils.get("http://localhost:8084/conf/test",params);
+        System.out.println("testResult = " + testResult);
+        String testCookieResult = HttpUtils.get("http://localhost:8084/conf/testCookie");
+        System.out.println("testCookieResult = " + testCookieResult);
     }
 }

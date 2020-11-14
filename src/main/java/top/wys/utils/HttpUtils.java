@@ -39,6 +39,7 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import top.wys.utils.entity.UploadInfo;
 import top.wys.utils.http.CookieJarImpl;
+import top.wys.utils.http.HttpCallBack;
 import top.wys.utils.http.SSLSocketClient;
 
 
@@ -533,10 +534,10 @@ public class HttpUtils {
         if (StringUtils.isEmpty(fileName)) {
             fileName = DataUtils.getFileNameFromHttp(response.headers());
             if (fileName == null) {//如果从Head中获取文件名失败，则从URL中进行截取名
-                fileName = basePath + DataUtils.getFileNameFromUrl(url);
+                fileName = DataUtils.getFileNameFromUrl(url);
             }
 
-            file = new File(fileName);
+            file = new File(basePath + fileName);
         } else if (!fileName.contains(".")) {//如果文件名不含“.”，则说明不包含扩展名，则改为截取URL中的文件名
             //如果从Head中获取文件名失败，则从URL中进行截取文件名
             fileName = basePath + DataUtils.getFileNameFromHttp(response.headers()) == null ? DataUtils.getFileNameFromUrl(url) : DataUtils.getFileNameFromHttp(response.headers());
@@ -628,9 +629,9 @@ public class HttpUtils {
         return fileAbsolutePath;
     }
 
-    public static String getFileFromHttpDataByAsyn(final String url, final String fileName_, final String dir) throws IOException {
+    public static void getFileFromHttpDataByAsyn(final String url, final String fileName_, final String dir, HttpCallBack httpCallBack){
 
-        final OkHttpClient client = getOkHttpClient().newBuilder()
+    final OkHttpClient client = getOkHttpClient().newBuilder()
                 .connectTimeout(1, TimeUnit.MINUTES)
                 .readTimeout(1, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true).build();
@@ -652,22 +653,27 @@ public class HttpUtils {
                     }
                 }
                 String basePath =pathFile.getAbsolutePath() + File.separator;
-                String fileName = basePath +fileName_;
+                String filePath = basePath ;
+
                 //如果不传入文件名的话，则截取URL的“/”后的字符串为文件名
-                if (StringUtils.isEmpty(fileName)) {
-                    fileName = DataUtils.getFileNameFromHttp(response.headers());
+                if (StringUtils.isEmpty(fileName_)) {
+                    String fileName = DataUtils.getFileNameFromHttp(response.headers());
                     if (fileName == null) {//如果从Head中获取文件名失败，则从URL中进行截取名
-                        fileName = basePath + DataUtils.getFileNameFromUrl(url);
+                        fileName =  DataUtils.getFileNameFromUrl(url);
                     }
-
-                    file = new File(fileName);
-                } else if (!fileName.contains(".")) {//如果文件名不含“.”，则说明不包含扩展名，则改为截取URL中的文件名
+                    if (fileName == null) {
+                        fileName = RandomUtils.getUUID();
+                    }
+                    filePath += fileName;
+                    file = new File(filePath);
+                } else if (!fileName_.contains(".")) {//如果文件名不含“.”，则说明不包含扩展名，则改为截取URL中的文件名
                     //如果从Head中获取文件名失败，则从URL中进行截取文件名
-                    fileName = basePath + DataUtils.getFileNameFromHttp(response.headers()) == null ? DataUtils.getFileNameFromUrl(url) : DataUtils.getFileNameFromHttp(response.headers());
+                    filePath = basePath + DataUtils.getFileNameFromHttp(response.headers()) == null ? DataUtils.getFileNameFromUrl(url) : DataUtils.getFileNameFromHttp(response.headers());
 
-                    file = new File(fileName);
+                    file = new File(filePath);
                 } else {
-                    file = new File(fileName);
+                    filePath += fileName_;
+                    file = new File(filePath);
                 }
                 //如果文件夹不存在，则创建父级文件夹
 //						FileUtils.createFile(file);
@@ -677,6 +683,7 @@ public class HttpUtils {
                     fos.flush();
                 }
                 fileAbsolutePath = file.getAbsolutePath();
+                httpCallBack.onResponse(call,response,fileAbsolutePath);
             }
 
             @Override
@@ -690,13 +697,13 @@ public class HttpUtils {
                     e.printStackTrace();
                     log.error("连接超时" + MAX_SERVER_LOAD_TIMES + "次", e);
                 }
+                httpCallBack.onFailure(call,e);
 
             }
         });
         ;
 
 
-        return fileAbsolutePath;
     }
 
 
@@ -798,14 +805,14 @@ public class HttpUtils {
         return  getResponseFromRequestBody(url, GsonTools.createJsonString(object), header,null);
     }
 
-    public static Response getResponseFromRequestBody(String url, String json, Map<String, String> header,String contentType) throws IOException {
+    public static Response getResponseFromRequestBody(String url, String content, Map<String, String> header,String contentType) throws IOException {
         OkHttpClient client = getOkHttpClient();
 
         MediaType mediaType = defaultMediaType;
         if(contentType != null ){
             mediaType  = MediaType.parse(contentType);
         }
-        RequestBody body = RequestBody.create(json,mediaType);
+        RequestBody body = RequestBody.create(content,mediaType);
         if(header == null){
             header = getDefaultHeaders();
         }

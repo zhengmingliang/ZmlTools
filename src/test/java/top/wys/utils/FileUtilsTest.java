@@ -2,17 +2,32 @@ package top.wys.utils;
 
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.base.Stopwatch;
 import com.google.common.io.Files;
 
 import org.junit.Test;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileFilter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.file.FileStore;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by 郑明亮 on 2018/10/14 19:31.
@@ -94,5 +109,558 @@ public class FileUtilsTest {
 //        String nameWithoutExtension = Files.getNameWithoutExtension(filePath);
 //        System.out.println(nameWithoutExtension);
 //        Files.
+    }
+
+    @Test
+    public void writeTest() throws Exception {
+        Stopwatch watch = Stopwatch.createStarted();
+//        String read = Files.asCharSource(new File("C:\\softwares\\AshampooWinOptimizer 17\\automatic_protocol.txt"), Charset.forName("UTF-8")).read();
+//        String read = Files.asCharSource(new File("G:\\test\\test1.txt"), Charset.forName("UTF-8")).read();
+        File file = new File("G:\\test\\test1.txt");
+        String read = FileUtils.readTxtFile(file, "UTF-8");
+        System.out.println(watch.toString());
+        watch.reset().start();
+        for (int i = 0; i < 10; i++) {
+            FileUtils.readTxtFile(file, "UTF-8");
+//            FileUtils.writeFile("G:\\test\\test1.txt",read,true);
+        }
+        long elapsed = watch.elapsed(TimeUnit.SECONDS);
+        System.out.println(watch);
+        long fileSize = FileUtils.getFileSize(file);
+        double size = fileSize / 1024.0 / 1024;
+        System.out.println(size +" MB");
+        double spead = size / (elapsed/10);
+        System.out.println("spead = " + spead);
+    }
+
+    @Test
+    public void write1Test() throws Exception {
+        Stopwatch watch = Stopwatch.createStarted();
+//        String read = Files.asCharSource(new File("C:\\softwares\\AshampooWinOptimizer 17\\automatic_protocol.txt"), Charset.forName("UTF-8")).read();
+//        String read = Files.asCharSource(new File("G:\\test\\test1.txt"), Charset.forName("UTF-8")).read();
+        File file = new File("G:\\test\\test1.txt");
+//        String read = FileUtils.readFile(file, "UTF-8");
+        System.out.println(watch.toString());
+        watch.reset().start();
+        for (int i = 0; i < 10; i++) {
+//            FileUtils.readFile(file, "UTF-8");
+//            FileUtils.writeFile("G:\\test\\test1.txt",read,true);
+        }
+        long elapsed = watch.elapsed(TimeUnit.SECONDS);
+        System.out.println(watch);
+        long fileSize = FileUtils.getFileSize(file);
+        double size = fileSize / 1024.0 / 1024;
+        System.out.println(size +" MB");
+        double spead = size / (elapsed/10);
+        System.out.println("spead = " + spead);
+    }
+
+    @Test
+    public void fileCopy() throws Exception {
+        writeTest();
+        System.out.println("------");
+        write1Test();
+
+    }
+
+    @Test
+    public void fileRead() {
+        File file = new File("G:\\test\\test1.txt");
+        String read = FileUtils.readTxtFile(file, "UTF-8");
+        System.out.println(read);
+    }
+    Stopwatch watch = Stopwatch.createUnstarted(); ;
+    @Test
+    public void fileReadCallback() throws Exception {
+
+        System.out.println("sleep 3 s");
+        TimeUnit.SECONDS.sleep(3);
+        File file = new File("G:\\test\\test3.txt");
+        watch.start();
+        System.out.println(watch.toString());
+        FileUtils.readLargeFile(file, "UTF-8",1000, new Callback() {
+            long len = 0;
+
+            @Override
+            public void apply(String data) {
+
+                len+=1000;
+                System.out.println(len);
+            }
+
+            @Override
+            public void getFirstLine(String firstLine) {
+
+            }
+        });
+
+        long elapsed = watch.elapsed(TimeUnit.SECONDS);
+        System.out.println(watch);
+        long fileSize = FileUtils.getFileSize(file);
+        double size = fileSize / 1024.0 / 1024;
+        System.out.println(size +" MB");
+        double spead = size / (elapsed);
+        System.out.println("spead = " + spead);
+    }
+
+
+    @Test
+    public void fileReadByLineCallback() throws Exception {
+        Stopwatch watch = Stopwatch.createStarted(); ;
+        File file = new File("G:\\test\\test1.txt");
+        FileUtils.readLargeFileByLine(file, "UTF-8", new Callback() {
+            long len = 0;
+
+            @Override
+            public void apply(String line) {
+                String[] split = line.split("\t");
+
+            }
+
+            @Override
+            public void getFirstLine(String firstLine) {
+
+            }
+        });
+
+        long elapsed = watch.elapsed(TimeUnit.SECONDS);
+        System.out.println(watch);
+        long fileSize = FileUtils.getFileSize(file);
+        double size = fileSize / 1024.0 / 1024;
+        System.out.println(size +" MB");
+        double spead = size / (elapsed);
+        System.out.println("spead = " + spead);
+    }
+
+    @Test
+    public void fileSize() throws Exception {
+        File file = new File("G:\\test");
+        long fileSize = FileUtils.getFileSize(file);
+        double size = fileSize / 1024.0 / 1024;
+        System.out.println(size +" MB");
+//        double spead = size / (elapsed);
+//        System.out.println("spead = " + spead);
+    }
+
+    @Test
+    public void byteBufferReader() throws IOException {
+        File fff = new File("G:\\test\\test1.txt");
+        int bufSize = 1024;
+        byte[] bs = new byte[bufSize];
+        ByteBuffer byteBuf = ByteBuffer.allocate(1024);
+        FileChannel channel = new RandomAccessFile(fff, "r").getChannel();
+        while (channel.read(byteBuf) != -1) {
+            int size = byteBuf.position();
+            byteBuf.rewind();
+            byteBuf.get(bs); // 把文件当字符串处理，直接打印做为一个例子。
+            System.out.print(new String(bs, 0, size));
+            byteBuf.clear();
+        }
+    }
+
+
+    @Test
+    public void largeFileIoTest() throws IOException {
+        watch.start();
+        File file = new File("G:\\test\\test.txt");
+
+//        largeFileIO2("G:\\test\\test.txt","G:\\test\\test6.txt");
+        java.nio.file.Files.copy(Paths.get("G:\\test\\test.txt"),Paths.get("G:\\test\\test7.txt"));
+
+        long elapsed = watch.elapsed(TimeUnit.SECONDS);
+        System.out.println(watch);
+        long fileSize = FileUtils.getFileSize(file);
+        double size = fileSize / 1024.0 / 1024;
+        System.out.println(size +" MB");
+        double spead = size / (elapsed);
+        System.out.println("spead = " + spead);
+    }
+
+    void largeFileIO(String inputFile, String outputFile) {
+        try {
+            BufferedInputStream bis = new BufferedInputStream(new FileInputStream(new File(inputFile)));
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(bis, "utf-8"), 10 * 1024 * 1024);// 10M缓存
+            FileWriter fw = new FileWriter(outputFile);
+            while (in.ready()) {
+                String line = in.readLine();
+                fw.append(line).append("\r\n");
+            }
+            in.close();
+            fw.flush();
+            fw.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    void largeFileIO2(String inputFile, String outputFile) {
+        try {
+            BufferedInputStream bis = new BufferedInputStream(new FileInputStream(new File(inputFile)));
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(new File(outputFile)));
+
+             byte[] bytes = new byte[1024*50];
+            int len = 0;
+            while ((len = bis.read(bytes)) != -1) {
+                bos.write(bytes,0,len);
+            }
+            bos.flush();
+            bos.close();
+            bis.close();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
+    @Test
+    public void randomFileReader() throws IOException {
+        String path = "你要读的文件的路径";
+        RandomAccessFile br = new RandomAccessFile(path, "r");// 这里rw看你了。要是之都就只写r
+        String str = null, app = null;
+        int i = 0;
+        FileChannel channel = br.getChannel();
+        long size = channel.size();
+        channel.map(FileChannel.MapMode.READ_ONLY,0,size);
+
+        while ((str = br.readLine()) != null) {
+            i++;
+            app = app + str;
+            if (i >= 100) {// 假设读取100行
+                i = 0;
+                // 这里你先对这100行操作，然后继续读
+                app = null;
+            }
+        }
+        br.close();
+    }
+
+
+    @Test
+    public void writeFileTest() throws IOException {
+
+        String str = "world";
+        java.nio.file.Files.write(Paths.get("G:\\test\\hello.txt"),str.getBytes());
+    }
+
+
+    @Test
+    public void readTxtFile2() {
+        watch.start();
+        String splitStr = "\t";
+//        File file = new File("C:\\Users\\zml\\Documents\\sql_bak\\east\\EAST_300102_YGB_O.txt");
+        File file = new File("G:\\test\\EAST_300102_YGB_O.txt");
+        FileUtils.readLargeFile(file, "UTF-8",500, new Callback() {
+
+            int size = 0;
+            String[] head;
+            @Override
+            public void apply(String data) {
+                String[] lines = data.split("\r\n");
+                for (String line : lines) {
+                    String[] split = line.split(splitStr);
+                    if(split.length < size){
+                        String[] newArr = Arrays.copyOf(split, size);
+                        System.err.println(JSON.toJSONString(newArr));
+                        continue;
+                    }
+                    for (int i = 0; i < head.length; i++) {
+//                    String format = String.format("%s : %s", head[i], split[i]);
+//                    System.out.println(format);
+                    }
+                }
+
+//                System.out.println("-------------------------\r\n");
+            }
+
+            @Override
+            public void getFirstLine(String firstLine) {
+                if (firstLine != null) {
+                    head = firstLine.split(splitStr);
+                    size = head.length;
+                }
+            }
+        });
+
+        long elapsed = watch.elapsed(TimeUnit.SECONDS);
+        System.out.println(watch);
+        long fileSize = FileUtils.getFileSize(file);
+        double size = fileSize / 1024.0 / 1024;
+        System.out.println(size +" MB");
+        double spead = size / (elapsed);
+        System.out.println("spead = " + spead);
+    }
+    int lineCount = 1;
+    int errLineCount = 0;
+
+    @Test
+    public void readTxtFile() {
+
+        watch.start();
+        String splitStr = ",";
+//        File file = new File("C:\\Users\\zml\\Documents\\sql_bak\\east\\EAST_300102_YGB_O.txt");// line: 8839
+//        File file = new File("C:\\Users\\zml\\Documents\\sql_bak\\east\\EAST_300204_GRHQCKFHZ_O.txt"); //line: 2296563
+        File file = new File("G:\\test\\EAST_300201_ZZHJQKMB_O.txt"); //line: 25037591
+
+//        File file = new File("C:\\Users\\zml\\Desktop\\City.csv"); //line: 2296563
+        FileUtils.readLargeFileByLine(file, "UTF-8", new Callback() {
+
+            int size = 0;
+            String[] head;
+
+            @Override
+            public void apply(String data) {
+                data.split("@#@");
+//               lineCount++;
+                /* String[] split = data.split(splitStr);
+                if(split.length < size){
+                    String[] newArr = Arrays.copyOf(split, size);
+                    System.err.println(JSON.toJSONString(newArr));
+                    errLineCount++;
+                    return;
+                }
+
+                for (int i = 0; i < head.length; i++) {
+
+//                    String format = String.format("%s : %s", head[i], split[i]);
+//                    System.out.println(format);
+                }*/
+//                System.out.println("-------------------------\r\n");
+            }
+
+            @Override
+            public void getFirstLine(String firstLine) {
+                if (firstLine != null) {
+                    System.out.println(firstLine);
+//                    head = firstLine.split(splitStr);
+//                    size = head.length;
+                }
+            }
+        });
+        System.out.println("lineCount = " + lineCount);
+        System.out.println("errLineCount = " + errLineCount);
+        long elapsed = watch.elapsed(TimeUnit.SECONDS);
+        System.out.println(watch);
+        long fileSize = FileUtils.getFileSize(file);
+        double size = fileSize / 1024.0 / 1024;
+        System.out.println(size +" MB");
+        double spead = size / (elapsed);
+        System.out.println("spead = " + spead);
+    }
+
+    int count = 0;
+    @Test
+    public void nioLines() throws IOException {
+//        Stream<String> lines = java.nio.file.Files.lines(Paths.get());
+/*
+
+        lines.map(line -> {
+            count ++;
+           return line.split("@#@");
+
+        }).forEach(strings -> {
+
+        });
+*/
+//        Stream<String> lines = java.nio.file.Files.lines(Paths.get(path));
+        FileUtils.readLargeFileByLineNIO("G:\\test\\EAST_300201_ZZHJQKMB_O.txt", "UTF-8", new Callback() {
+            @Override
+            public void apply(String data) {
+                String[] split = data.split("@#@");
+                count++;
+            }
+
+            @Override
+            public void getFirstLine(String firstLine) {
+                System.out.println(firstLine);
+            }
+        });
+        System.out.println(count);
+
+//        callback.getFirstLine(first.isPresent() ? first.get() : "");
+//        streamSupplier.get().forEach(strings -> {
+//            callback.apply(strings);
+//        });
+//        System.out.println(count);
+    }
+
+    @Test
+    public void cutFile() {
+        watch.start();
+        String sourceFile = "G:\\test\\test2.txt";
+        FileUtils.cutFile(sourceFile,"G:\\test\\split",500 * 1024* 1024);
+        System.out.println("lineCount = " + lineCount);
+        System.out.println("errLineCount = " + errLineCount);
+        long elapsed = watch.elapsed(TimeUnit.SECONDS);
+        System.out.println(watch);
+        long fileSize = FileUtils.getFileSize(new File(sourceFile));
+        double size = fileSize / 1024.0 / 1024;
+        System.out.println(size +" MB");
+        double spead = size / (elapsed);
+        System.out.println("spead = " + spead);
+    }
+
+    @Test
+    public void cutFile1() {
+        watch.start();
+        //TODO 待优化，目前最大内存占用的大小和被拆分的文件大小一致
+        String sourceFile = "G:\\test\\test2.txt";
+//        FileUtils.cutFileByNIO(sourceFile,"UTF-8","G:\\test\\split\\3",1210770);
+        System.out.println("lineCount = " + lineCount);
+        System.out.println("errLineCount = " + errLineCount);
+        long elapsed = watch.elapsed(TimeUnit.SECONDS);
+        System.out.println(watch);
+        long fileSize = FileUtils.getFileSize(new File(sourceFile));
+        double size = fileSize / 1024.0 / 1024;
+        System.out.println(size +" MB");
+        double spead = size / (elapsed);
+        System.out.println("spead = " + spead);
+    }
+
+
+ @Test
+    public void cutFile2() {
+        watch.start();
+        String sourceFile = "G:\\test\\test2.txt";
+        cutFile(sourceFile,"G:\\test\\split",500 * 1024 * 1024);
+        System.out.println("lineCount = " + lineCount);
+        System.out.println("errLineCount = " + errLineCount);
+        long elapsed = watch.elapsed(TimeUnit.SECONDS);
+        System.out.println(watch);
+        long fileSize = FileUtils.getFileSize(new File(sourceFile));
+        double size = fileSize / 1024.0 / 1024;
+        System.out.println(size +" MB");
+        double spead = size / (elapsed);
+        System.out.println("spead = " + spead);
+    }
+
+
+
+    private static void cutFile(String src, String endsrc, int num) {
+        FileInputStream fis = null;
+        File file = null;
+        try {
+            fis = new FileInputStream(src);
+            file = new File(src);
+            //创建规定大小的byte数组
+            byte[] b = new byte[num];
+            int len = 0;
+            //name为以后的小文件命名做准备
+            int name = 1;
+            //遍历将大文件读入byte数组中，当byte数组读满后写入对应的小文件中
+            while ((len = fis.read(b)) != -1) {
+                //分别找到原大文件的文件名和文件类型，为下面的小文件命名做准备
+                String name2 = file.getName();
+                int lastIndexOf = name2.lastIndexOf(".");
+                String substring = name2.substring(0, lastIndexOf);
+                String substring2 = name2.substring(lastIndexOf, name2.length());
+                FileOutputStream fos = new FileOutputStream(endsrc + "\\\\"+ substring + "-" + name + substring2);
+                //将byte数组写入对应的小文件中
+                fos.write(b, 0, len);
+                //结束资源
+                fos.close();
+                name++;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (fis != null) {
+                    //结束资源
+                    fis.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Test
+    public void rename() {
+        File fodler = new File("D:\\bakup\\sunland");
+        for (File file : fodler.listFiles()) {
+            String oldName = file.getName();
+            if(!oldName.contains("%3A")){
+                continue;
+            }
+            String newName = oldName.replace("%3A", "");
+            System.out.printf("oldName:%s ,newName: %s \n",oldName,newName);
+            FileUtils.rename(file,newName,false);
+        }
+
+    }
+
+    @Test
+    public void reanme2() throws Exception {
+        File fodler = new File("D:\\bakup\\sunlands_live");
+        for (File file : fodler.listFiles()) {
+            File[] courseInfos = file.listFiles(new FileFilter() {
+                @Override
+                public boolean accept(File pathname) {
+                    return "course_info".equals(pathname.getName()) || pathname.getName().length() == 32 || pathname.getName().contains(".mp4");
+                }
+
+            });
+            if(courseInfos == null || courseInfos.length != 2){
+                continue;
+            }
+            File courseInfo = null;
+            File video = null;
+            if(courseInfos[0].getName().length() == 32){
+                video = courseInfos[0];
+                courseInfo = courseInfos[1];
+            }else{
+                courseInfo = courseInfos[0];
+                video = courseInfos[1];
+            }
+            String json = FileUtils.readTxtFile(courseInfo, "UTF-8");
+            CourseInfoDTO courseInfoDTO = GsonTools.getBeanFromJson(json, CourseInfoDTO.class);
+            String sName = courseInfoDTO.getRoomInfo().getSName();
+            sName = sName.replaceAll("\\<","(").replaceAll("\\>",")");
+
+            String oldName = video.getName();
+            String targetName = sName + ".mp4";
+            System.out.printf("oldName:%s ,newName: %s \n", oldName,targetName);
+            FileUtils.rename(video,targetName,false);
+
+
+            oldName = file.getName();
+            targetName = sName;
+
+
+            String targetFullPath = file.getParent() + File.separator + targetName;
+            File targetFile = new File(targetFullPath);
+            if(targetFile.exists()){
+                long targetFileSize = FileUtils.getFileSizes(targetFile);
+                long sourceFileSize = FileUtils.getFileSizes(file);
+                if (targetFileSize < sourceFileSize) {
+                    String newName = targetFile.getName() + "【精华版】";
+                    System.out.printf("文件已存在，重命名：oldName:%s ,newName: %s \n", targetFile.getName(),newName);
+                    FileUtils.rename(targetFile, newName,false);
+                }else{
+                    targetName += "【精华版】";
+                }
+            }
+
+            System.out.printf("oldName:%s ,newName: %s \n", oldName,targetName);
+                FileUtils.rename(file,targetName,false);
+
+
+
+        }
+
+
+    }
+
+    @Test
+    public void readLargeFile() throws Exception {
+      File file = new File("D:\\bakup\\sunlands_live\\【数学】管理类联考(必修课1)");
+        long fileSizes = FileUtils.getFileSizes(file);
+        String size = DataUtils.getSize(fileSizes);
+//        file.renameTo()
+        System.out.println("size = " + size);
     }
 }
