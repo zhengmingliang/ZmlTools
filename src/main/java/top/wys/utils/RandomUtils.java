@@ -64,7 +64,7 @@ public class RandomUtils {
             "44", "45", "46", "50", "51", "52", "53", "54", "61", "62",
             "63", "64", "65", "71", "81", "82" };
 
-    private static final String ID_CARD_SEX_CHECK_NUMS[] = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9","X" };
+    private static final char[] ID_CARD_SEX_CHECK_NUMS = {'1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'};
     /**
      * 获取随机ip地址
      *
@@ -155,11 +155,12 @@ public class RandomUtils {
         String birth = randomBirth(20, 50);
         // 随机生成顺序号 15-17(随机性别)
         String no = RANDOM.nextInt(899) + 100+"";
-        // 随机生成校验码 18
-
-        String check = randomOne(ID_CARD_SEX_CHECK_NUMS);
+        String partId = province + city + county + birth + no;
+        // 计算第 18 位校验码
+//        String check = randomOne(ID_CARD_SEX_CHECK_NUMS);
+        char check = getIdCardCheckNum(partId);
         // 拼接身份证号码
-        id = province + city + county + birth + no + check;
+        id = partId + check;
         return id;
     }
 
@@ -180,14 +181,44 @@ public class RandomUtils {
         String birth = randomBirth(minAge, maxAge);
         // 随机生成顺序号 15-17(随机性别)
         String no = RANDOM.nextInt(899) + 100+"";
-        // 随机生成校验码 18
-
-        String check = randomOne(ID_CARD_SEX_CHECK_NUMS);
+        String partId = province + city + county + birth + no;
+        // 计算第 18 位校验码
+//        String check = randomOne(ID_CARD_SEX_CHECK_NUMS);
+        char check = getIdCardCheckNum(partId);
         // 拼接身份证号码
-        id = province + city + county + birth + no + check;
+        id = partId + check;
         return id;
     }
 
+    /**
+     * 获取身份证号的校验位数字（第18位校验码）
+     * @param id
+     */
+    public static char getIdCardCheckNum(String id) {
+        char[] chars = id.toCharArray();
+        if(chars.length < 17){
+            return ' ';
+        }
+        int total = Integer.parseInt(chars[0] + "") * 7
+                + Integer.parseInt(chars[1] + "") * 9
+                + Integer.parseInt(chars[2] + "") * 10
+                + Integer.parseInt(chars[3] + "") * 5
+                + Integer.parseInt(chars[4] + "") * 8
+                + Integer.parseInt(chars[5] + "") * 4
+                + Integer.parseInt(chars[6] + "") * 2
+                + Integer.parseInt(chars[7] + "") * 1
+                + Integer.parseInt(chars[8] + "") * 6
+                + Integer.parseInt(chars[9] + "") * 3
+                + Integer.parseInt(chars[10] + "") * 7
+                + Integer.parseInt(chars[11] + "") * 9
+                + Integer.parseInt(chars[12] + "") * 10
+                + Integer.parseInt(chars[13] + "") * 5
+                + Integer.parseInt(chars[14] + "") * 8
+                + Integer.parseInt(chars[15] + "") * 4
+                + Integer.parseInt(chars[16] + "") * 2;
+        int check = total % 11;
+       return ID_CARD_SEX_CHECK_NUMS[check];
+    }
 
     /**
      * 从String[] 数组中随机取出其中一个String字符串
@@ -195,8 +226,17 @@ public class RandomUtils {
      * @param randomArray
      * @return
      */
-    public static String randomOne(String randomArray[]) {
+    public static String randomOne(String[] randomArray) {
         return randomArray[RANDOM.nextInt(randomArray.length - 1)];
+    }
+
+    /**
+     * 从char[] 数组中随机取出其中一个char
+     * @param randomArray
+     * @return
+     */
+    public static String randomOne(char[] randomArray) {
+        return randomArray[RANDOM.nextInt(randomArray.length - 1)]+"";
     }
 
     /**
@@ -217,7 +257,7 @@ public class RandomUtils {
      * @param maxAge 最大年龄
      * @return
      */
-    private static String randomBirth(int minAge, int maxAge) {
+    public static String randomBirth(int minAge, int maxAge) {
         SimpleDateFormat dft = new SimpleDateFormat("yyyyMMdd");// 设置日期格式
         Calendar date = Calendar.getInstance();
         date.setTime(new Date());// 设置当前日期
@@ -294,13 +334,14 @@ public class RandomUtils {
      * @return
      */
     public static Map getRandomPerson() {
-        Map map=new HashMap(6);
+        Map map=new HashMap(7);
         map.put("name", getChineseName());
         map.put("sex", name_sex);
         map.put("company", getRandomCompany(2,4));
         map.put("road", getRandomRoad());
         map.put("telephone", getRandomTel());
         map.put("mailbox", getRandomEmail(6,9));
+        map.put("idCard", getRandomIdCard(18,40));
         return map;
     }
 
