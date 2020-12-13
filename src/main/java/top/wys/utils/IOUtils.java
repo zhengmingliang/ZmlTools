@@ -73,12 +73,29 @@ public class IOUtils {
     /**
      * @param closeable
      */
-    public static void close(Closeable closeable) {
+    public static void close(AutoCloseable closeable) {
         try {
             if (closeable != null) {
                 closeable.close();
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
+            log.error("流关闭异常",e);
+        }
+    }
+
+    /**
+     * 关闭多个流
+     * @param closeable
+     */
+    public static void close(AutoCloseable... closeable) {
+        try {
+            if (closeable != null) {
+                for (AutoCloseable item : closeable) {
+                    close(item);
+                }
+            }
+
+        } catch (Exception e) {
             log.error("流关闭异常",e);
         }
     }
@@ -91,6 +108,23 @@ public class IOUtils {
         try {
             if (flushable != null) {
                 flushable.flush();
+            }
+        } catch (IOException e) {
+            log.error("刷盘异常",e);
+        }
+    }
+
+    /**
+     * 刷新多个
+     * @param flushable
+     */
+    public static void flush(Flushable... flushable) {
+        try {
+            if (flushable != null) {
+                for (Flushable item : flushable) {
+                    item.flush();
+                }
+
             }
         } catch (IOException e) {
             log.error("刷盘异常",e);
