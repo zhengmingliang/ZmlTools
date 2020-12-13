@@ -46,7 +46,7 @@ public class Print {
 
     90-97  比颜色1更鲜艳一些，我也不太清楚为什么又两种
     * */
-    public static void Normal(Object object) {
+    public static void normal(Object object) {
         String print = "\033[32;1m" + object + "\033[0m";
         System.out.println(print);
         log.info(print);
