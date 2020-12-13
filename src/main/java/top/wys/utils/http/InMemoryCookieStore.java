@@ -7,17 +7,13 @@
 package top.wys.utils.http;
 
 import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Lists;
-import com.sun.jndi.toolkit.url.Uri;
 
+import java.net.URI;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Cache;
 import okhttp3.Cookie;
-import okhttp3.HttpUrl;
 
 /**
  * <ol>
@@ -36,7 +32,7 @@ public class InMemoryCookieStore implements CookieStore {
             .maximumSize(10000)
             .build();
     @Override
-    public void add(Uri uri, Cookie cookie) {
+    public void add(URI uri, Cookie cookie) {
         String cookieToken = getCookieToken(cookie);
         List<Cookie> cookies = cache.getIfPresent(cookieToken);
         if (cookies == null) {
@@ -53,7 +49,7 @@ public class InMemoryCookieStore implements CookieStore {
     }
 
     @Override
-    public List<Cookie> get(Uri uri) {
+    public List<Cookie> get(URI uri) {
         return null;
     }
 

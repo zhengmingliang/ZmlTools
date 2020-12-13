@@ -6,8 +6,8 @@
 
 package top.wys.utils.http;
 
-import com.sun.jndi.toolkit.url.Uri;
 
+import java.net.URI;
 import java.util.List;
 
 import okhttp3.Cookie;
@@ -23,8 +23,8 @@ import okhttp3.Cookie;
  * @email mpro@vip.qq.com
  */
 public interface CookieStore {
-    void add(Uri uri,Cookie cookie);
-    List<Cookie> get(Uri uri);
+    void add(URI uri, Cookie cookie);
+    List<Cookie> get(URI uri);
     List<Cookie> get(String host);
     List<Cookie> getCookies();
 }

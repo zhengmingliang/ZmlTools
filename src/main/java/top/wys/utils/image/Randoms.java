@@ -1,16 +1,17 @@
 package top.wys.utils.image;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 /**
  * <p>随机工具类</p>
  *
- * @author: wuhongjun
- * @version:1.0
+ * @author wuhongjun
+ * @version 1.0
  */
 public class Randoms
 {
-    private static final Random RANDOM = new Random();
+    private static final Random RANDOM = new SecureRandom();
     //定义验证码字符.去除了O和I等容易混淆的字母
     public static final char ALPHA[]={'A','B','C','D','E','F','G','H','G','K','M','N','P','Q','R','S','T','U','V','W','X','Y','Z'
             ,'a','b','c','d','e','f','g','h','i','j','k','m','n','p','q','r','s','t','u','v','w','x','y','z','2','3','4','5','6','7','8','9'};

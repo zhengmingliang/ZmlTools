@@ -3,8 +3,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * @author: wuhongjun
- * @version:1.0
+ * @author wuhongjun
+ * @version 1.0
  */
 public class Encoder
 {

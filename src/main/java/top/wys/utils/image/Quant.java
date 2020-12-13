@@ -3,8 +3,8 @@ package top.wys.utils.image;
 /**
  * <p></p>
  *
- * @author: wuhongjun
- * @version:1.0
+ * @author wuhongjun
+ * @version 1.0
  */
 public class Quant
 {
