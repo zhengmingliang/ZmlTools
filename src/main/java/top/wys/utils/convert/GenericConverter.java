@@ -21,6 +21,7 @@ import static java.util.stream.Collectors.toList;
  * @version 1.0
  * @date 2021/4/4 15:05
  * @email mpro@vip.qq.com
+ * @since 1.2.2
  */
 public interface GenericConverter<I, O> extends Function<I, O> {
 

@@ -10,6 +10,7 @@ import top.wys.utils.DataUtils;
  *
  * @param <DtoT> the implementation class type
  * @param <D> domain type
+ * @since 1.2.2
  */
 public interface OutputConverter<DtoT extends OutputConverter<DtoT, D>, D> {
 

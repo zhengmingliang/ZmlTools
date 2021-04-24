@@ -13,6 +13,7 @@ import top.wys.utils.ReflectionUtils;
 
 /**
  * Converter interface for input DTO.
+ * @since 1.2.2
  */
 public interface InputConverter<D> {
 
