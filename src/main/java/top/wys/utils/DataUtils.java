@@ -1191,6 +1191,10 @@ public class DataUtils {
     public static void writeToClient(ServletResponse response, Object object) {
         try {
             response.setCharacterEncoding("UTF-8");
+            String contentType = response.getContentType();
+            if (contentType == null) {
+                response.setContentType("application/json;charset=UTF-8");
+            }
             response.getWriter().write(JSON.toJSONString(object));
         } catch (IOException e) {
             log.error("Write the request data back to the client exception",e);
