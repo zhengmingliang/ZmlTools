@@ -3558,7 +3558,7 @@ public class IdCardGenerator {
      * @return
      */
     private static int randomAreaCode() {
-        int index = (int) (Math.random() * IdCardGenerator.areaCode.size());
+        int index = RandomUtils.nextInt(IdCardGenerator.areaCode.size());
         Collection<Integer> values = IdCardGenerator.areaCode.values();
         Iterator<Integer> it = values.iterator();
         int i = 0;
@@ -3576,9 +3576,9 @@ public class IdCardGenerator {
      */
     private static String randomBirthday() {
         Calendar birthday = Calendar.getInstance();
-        birthday.set(Calendar.YEAR, (int) (Math.random() * 60) + 1950);
-        birthday.set(Calendar.MONTH, (int) (Math.random() * 12));
-        birthday.set(Calendar.DATE, (int) (Math.random() * 31));
+        birthday.set(Calendar.YEAR,  RandomUtils.nextInt(60) + 1950);
+        birthday.set(Calendar.MONTH, RandomUtils.getNum(1,12));
+        birthday.set(Calendar.DATE, RandomUtils.getNum(1,31));
 
         StringBuilder builder = new StringBuilder();
         builder.append(birthday.get(Calendar.YEAR));
@@ -3630,7 +3630,7 @@ public class IdCardGenerator {
      * @return
      */
     private static String randomCode() {
-        int code = (int) (Math.random() * 1000);
+        int code = RandomUtils.nextInt(1000);
         if (code < 10) {
             return "00" + code;
         } else if (code < 100) {
