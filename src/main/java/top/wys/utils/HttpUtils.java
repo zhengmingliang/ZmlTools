@@ -467,7 +467,7 @@ public class HttpUtils {
         } catch (Exception e) {
             e.printStackTrace();
 
-            if (SocketTimeoutException.class.equals(e) && serverLoadTimes <= MAX_SERVER_LOAD_TIMES) {
+            if (e instanceof SocketTimeoutException && serverLoadTimes <= MAX_SERVER_LOAD_TIMES) {
                 serverLoadTimes++;
                 log.error("网络连接超时" + serverLoadTimes + "次");
                 httpReLoad(url, client, request, fileName);
