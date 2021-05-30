@@ -363,9 +363,9 @@ public class FileUtils {
 
     public static void readLargeFile(File file, String encoding, long maxLinePerTime, Callback callback) {
 
-        try {
-            BufferedInputStream fis = new BufferedInputStream(new FileInputStream(file));
-            BufferedReader reader = new BufferedReader(new InputStreamReader(fis, encoding), DEFAULT_LARGE_BUFFER_SIEZE);// 用5M的缓冲读取文本文件
+        try (BufferedInputStream fis = new BufferedInputStream(new FileInputStream(file));
+             // 用5M的缓冲读取文本文件
+             BufferedReader reader = new BufferedReader(new InputStreamReader(fis, encoding), DEFAULT_LARGE_BUFFER_SIEZE);) {
             String line = reader.readLine();
             callback.getFirstLine(line);
             int lineCount = 0;
@@ -383,7 +383,6 @@ public class FileUtils {
                 callback.apply(sb.toString());
                 sb = null;
             }
-//        return counts;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
