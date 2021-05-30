@@ -311,10 +311,10 @@ public final class PropertiesUtil {
             }
         }
 
-        try (FileInputStream fis = new FileInputStream(file)) {
+        try (FileInputStream fis = new FileInputStream(file);
+             FileOutputStream fos = new FileOutputStream(file);) {
             properties.load(fis);
             properties.setProperty(key, value);
-            FileOutputStream fos = new FileOutputStream(file);
             properties.store(fos, comment);
         } catch (IOException e) {
             log.error("更新配置文件发生异常", e);
