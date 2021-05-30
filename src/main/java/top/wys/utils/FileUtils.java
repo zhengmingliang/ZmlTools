@@ -56,10 +56,16 @@ public class FileUtils {
      * @see File#createNewFile
      */
     public static boolean createFile(File file) throws IOException {
-        if (!file.exists()) {
-            makeDir(file.getParentFile());
+        boolean flag = false;
+        try {
+            if (!file.exists()) {
+                makeDir(file.getParentFile());
+            }
+            flag = file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return file.createNewFile();
+        return flag;
     }
 
     /**
@@ -70,10 +76,14 @@ public class FileUtils {
      * @see File#mkdir()
      */
     public static void makeDir(File dir) {
-        if (!dir.getParentFile().exists()) {
-            makeDir(dir.getParentFile());
+        try {
+            if (!dir.getParentFile().exists()) {
+                makeDir(dir.getParentFile());
+            }
+            dir.mkdir();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
-        dir.mkdir();
     }
 
     /**
@@ -395,10 +405,10 @@ public class FileUtils {
 
     public static void readLargeFileByLine(File file, String encoding, Callback callback) {
 
-        try {
-            FileInputStream fis = new FileInputStream(file);
+        try(FileInputStream fis = new FileInputStream(file);
             // 用5M的缓冲读取文本文件
-            BufferedReader reader = new BufferedReader(new InputStreamReader(fis, encoding), DEFAULT_LARGE_BUFFER_SIEZE);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fis, encoding), DEFAULT_LARGE_BUFFER_SIEZE)) {
+
             String line = reader.readLine();
             callback.getFirstLine(line);
             while ((line = reader.readLine()) != null) {
