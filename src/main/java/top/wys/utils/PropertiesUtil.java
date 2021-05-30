@@ -16,6 +16,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -70,8 +71,8 @@ public final class PropertiesUtil {
 
         if (!loadOnce || properties == null) {
             properties = new Properties();
-            try {
-                properties.load(PropertiesUtil.class.getResourceAsStream("/" + fileName));
+            try (InputStream resourceAsStream = PropertiesUtil.class.getResourceAsStream("/" + fileName)){
+                properties.load(resourceAsStream);
                 flag = true;
                 propertiesMap.put(fileName, properties);
                 propertySize = propertiesMap.keySet().size();
