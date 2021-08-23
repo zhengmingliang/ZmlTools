@@ -46,7 +46,7 @@
     <!-- use guava to require jdk1.7 or older , visit here:
             https://github.com/google/guava/wiki/ReleaseHistory-->
         <guava.version>30.0-jre</guava.version>
-        <jsoup.version>1.13.1</jsoup.version>
+        <jsoup.version>1.14.2</jsoup.version>
         <javaee-api.version>7.0</javaee-api.version>
         <commons-csv.version>1.8</commons-csv.version>
         <lombok.version>1.18.16</lombok.version>
