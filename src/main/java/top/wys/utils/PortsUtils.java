@@ -6,13 +6,10 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.LinkedBlockingDeque;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 public class PortsUtils {
-    private static ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(100, 100, 10, TimeUnit.SECONDS, new LinkedBlockingDeque<>());
+    private static ThreadPoolExecutor pool = null;
     private static final int DEFAULT_CONNECT_TIME_OUT = 200;
 
     private PortsUtils() {
@@ -46,7 +43,7 @@ public class PortsUtils {
                 CountDownLatch countLatch = new CountDownLatch(end - start + 1);
                 for (int port = start; port <= end; port++) {
                     int finalPort = port;
-                    poolExecutor.execute(new Runnable() {
+                    getDefaultThreadPool().execute(new Runnable() {
                         @Override
                         public void run() {
                             boolean open = isOpen(host, finalPort);
@@ -64,7 +61,82 @@ public class PortsUtils {
                     e.printStackTrace();
                 }
             }else {
-                poolExecutor.execute(new Runnable() {
+                getDefaultThreadPool().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        int port = Integer.parseInt(ports[0]);
+                        boolean open = isOpen(host, port);
+                        if (open) {
+                            openPorts.add(port);
+                        }
+                        countDownLatch.countDown();
+                    }
+                });
+
+            }
+            countDownLatch.countDown();
+        }
+        try {
+            countDownLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        getDefaultThreadPool().shutdown();
+        return openPorts;
+    }
+
+
+    /**
+     * 获取默认的线程池
+     * @return
+     */
+    public static ExecutorService getDefaultThreadPool(){
+        if (pool == null || pool.isShutdown()) {
+            pool = new ThreadPoolExecutor(100, 100, 10, TimeUnit.SECONDS, new LinkedBlockingDeque<>());
+        }
+
+        return pool;
+    }
+
+
+    /**
+     * 端口扫描
+     * @param host 要扫描的服务ip或域名
+     * @param portsRule 端口规则，如：1-65535 即扫描端口1到65535端口； 22,3306,80,443即只扫描这几个端口
+     * @param threadPool 线程池
+     * @return
+     */
+    public static List<Integer> scanPorts(String host, String portsRule, ExecutorService threadPool){
+        List<Integer> openPorts = Lists.newArrayList();
+        String[] split = portsRule.split(",");
+        CountDownLatch countDownLatch = new CountDownLatch(split.length);
+        for (String item : split) {
+            String[] ports = item.split("-");
+            if(ports.length > 1){
+                int start = Integer.parseInt(ports[0]);
+                int end = Integer.parseInt(ports[1]);
+                CountDownLatch countLatch = new CountDownLatch(end - start + 1);
+                for (int port = start; port <= end; port++) {
+                    int finalPort = port;
+                    threadPool.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            boolean open = isOpen(host, finalPort);
+                            if (open) {
+                                openPorts.add(finalPort);
+                            }
+                            countLatch.countDown();
+                        }
+                    });
+
+                }
+                try {
+                    countLatch.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }else {
+                threadPool.execute(new Runnable() {
                     @Override
                     public void run() {
                         int port = Integer.parseInt(ports[0]);
