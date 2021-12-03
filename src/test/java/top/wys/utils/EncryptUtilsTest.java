@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.security.KeyPair;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.util.Base64;
 
 /**
  * Created by 郑明亮 on 2018/10/14 17:49.
@@ -61,5 +62,37 @@ public class EncryptUtilsTest {
         System.out.println("encryptString:"+encryptString);
         String decryptString =new String(EncryptUtils.RSA.decrypt(encryptString.getBytes(), EncryptUtils.RSA.getPrivateKey(privateKeyString)));
         System.out.println("decryptString:"+decryptString);
+    }
+
+    @Test
+    public void aes() {
+        EncryptUtils.AES aes = EncryptUtils.AES.newInstance("alianga",128);
+
+        String encrypt = aes.encrypt("https://alianga.com");
+        System.out.println(encrypt);
+        System.out.println(Base64.getDecoder().decode(encrypt));
+        System.out.println(aes.decrypt(encrypt));
+
+        aes = EncryptUtils.AES.newInstance("alianga",192);
+        encrypt = aes.encrypt("https://alianga.com");
+        System.out.println(encrypt);
+        System.out.println(Base64.getDecoder().decode(encrypt));
+        System.out.println(aes.decrypt(encrypt));
+
+        aes = EncryptUtils.AES.newInstance("alianga",256);
+        encrypt = aes.encrypt("https://alianga.com");
+        System.out.println(encrypt);
+        System.out.println(Base64.getDecoder().decode(encrypt));
+        System.out.println(aes.decrypt(encrypt));
+    }
+    @Test
+    public void des() {
+        EncryptUtils.DES des = EncryptUtils.DES.newInstance("alianga");
+
+        String encrypt = des.encrypt("https://alianga.com");
+        System.out.println(encrypt);
+        System.out.println(Base64.getDecoder().decode(encrypt));
+        System.out.println(des.decrypt(encrypt));
+
     }
 }
