@@ -3,8 +3,18 @@ package top.wys.utils;/**
  */
 
 
-import java.io.UnsupportedEncodingException;
+import com.google.common.collect.Lists;
+import top.wys.utils.crypto.AESCrypt;
+import top.wys.utils.crypto.AwaruaTiger;
+import top.wys.utils.crypto.Crypt;
+import top.wys.utils.crypto.DESCrypt;
+
+import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
 import java.security.KeyPair;
@@ -16,6 +26,10 @@ import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.crypto.Cipher;
 import javax.crypto.Mac;
@@ -38,9 +52,13 @@ public class EncryptUtils {
     private static final String SHA_256 = "SHA-256";
     private static final String SHA_1 = "SHA1";
     private static final String MD5 = "MD5";
-    private static final String DEFAULT_CHARSET = "UTF-8";
-    private static final String UTF_8 = DEFAULT_CHARSET;
+    private static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
+    private static final String UTF_8 = DEFAULT_CHARSET.name();
     private static final String RSA = "RSA";
+    
+    static {
+        fixKeyLength();
+    }
     /**
      *  <p>自定义对称加密</p>
      * <ol>
@@ -212,6 +230,513 @@ public class EncryptUtils {
         return encdeStr;
     }
 
+    public static class DES extends Encrypt{
+        /**
+         * 加解密对象
+         */
+        Crypt crypt ;
+
+        /**
+         *
+         * @param password 加密文本的密码
+         * @return
+         */
+        public DES newInstance(String password){
+            return newInstance(password,null);
+        }
+
+        /**
+         * @param password 加密文本的密码
+         * @param iv 加密文本的初始向量
+         * @return
+         */
+        public DES newInstance(String password,String iv){
+            final byte[] keyByte,ivByte;
+
+            keyByte = getCRC64Hash(password.getBytes(DEFAULT_CHARSET));
+
+            if(iv != null){
+                ivByte = getCRC64Hash(iv.getBytes(DEFAULT_CHARSET));
+            } else {
+                ivByte = new byte[]{0, 0, 0, 0, 0, 0, 0, 0};
+            }
+            crypt = new DESCrypt(keyByte, ivByte);
+
+            return this;
+        }
+
+
+
+        @Override
+        public Crypt getCrypt() {
+            return crypt;
+        }
+    }
+
+
+
+    public static class AES extends Encrypt{
+
+        /**
+         * 128位
+         */
+        public static int BIT_128 = 128;
+        /**
+         * 192位
+         */
+        public static int BIT_192 = 192;
+        /**
+         * 256位
+         */
+        public static int BIT_256 = 256; 
+         
+        /**
+         * 加解密对象
+         */
+        Crypt crypt ;
+
+        public AES(Crypt crypt) {
+            this.crypt = crypt;
+        }
+
+        /**
+         * @param password 加解密文本的密码
+         * @param 
+         * @return
+         */
+        public static AES newInstance(String password){
+            return newInstance(password,BIT_256);
+        }
+
+        /**
+         *
+         * @param password 加密文本的密码
+         * @param bit     传入密钥长度，可以是128、192、256(位元)
+         * @return
+         */
+        public static AES newInstance(String password,int bit){
+            return newInstance(password,bit,null);
+        }
+
+        /**
+         * @param password 加密文本的密码
+         * @param bit   传入密钥长度，可以是128、192、256(位元)   
+         * @param iv 加密文本的初始向量
+         * @return
+         */
+        public static AES newInstance(String password,int bit,String iv){
+
+            final byte[] keyByte,ivByte;
+            
+            switch (bit){
+                case 128:
+                    keyByte = getHash("MD5", password);
+                    break;
+                case 192:
+                    keyByte = getHash("TIGER", password);
+                    break;
+                case 256:
+                    keyByte = getSha256Hash(password);
+                    break;
+                default:
+                    throw new IllegalStateException("The key must be 16 bytes(128 bits), 24 bytes(192 bits) or 32 bytes(256 bits) " + bit);
+            }
+           
+
+
+
+            if(iv != null){
+                ivByte = getHash("MD5",iv.getBytes(DEFAULT_CHARSET));
+            } else {
+                ivByte = new byte[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+            }
+
+            return new AES(new AESCrypt(keyByte, ivByte));
+        }
+
+
+
+        @Override
+        public Crypt getCrypt() {
+            return crypt;
+        }
+    }
+
+    /**
+     * 修正由于jdk低版本key的长度限制问题
+     */
+    public static void fixKeyLength() {
+        String errorString = "Failed manually overriding key-length permissions.";
+        int newMaxKeyLength;
+        try {
+            if ((newMaxKeyLength = Cipher.getMaxAllowedKeyLength("AES")) < 256) {
+                Class c = Class.forName("javax.crypto.CryptoAllPermissionCollection");
+                Constructor con = c.getDeclaredConstructor();
+                con.setAccessible(true);
+                Object allPermissionCollection = con.newInstance();
+                Field f = c.getDeclaredField("all_allowed");
+                f.setAccessible(true);
+                f.setBoolean(allPermissionCollection, true);
+
+                c = Class.forName("javax.crypto.CryptoPermissions");
+                con = c.getDeclaredConstructor();
+                con.setAccessible(true);
+                Object allPermissions = con.newInstance();
+                f = c.getDeclaredField("perms");
+                f.setAccessible(true);
+                ((Map) f.get(allPermissions)).put("*", allPermissionCollection);
+
+                c = Class.forName("javax.crypto.JceSecurityManager");
+                f = c.getDeclaredField("defaultPolicy");
+                f.setAccessible(true);
+                Field mf = Field.class.getDeclaredField("modifiers");
+                mf.setAccessible(true);
+                mf.setInt(f, f.getModifiers() & ~Modifier.FINAL);
+                f.set(null, allPermissions);
+
+                newMaxKeyLength = Cipher.getMaxAllowedKeyLength("AES");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(errorString, e);
+        }
+        if (newMaxKeyLength < 256)
+            throw new RuntimeException(errorString); // hack failed
+    }
+
+    private static abstract class Encrypt{
+
+        /**
+         * 
+         * @return 获取加解密对象
+         */
+        public abstract Crypt getCrypt(); 
+
+        /**
+         * 加密文字。
+         *
+         * @param str 传入要加密的文字
+         * @return 传回加密后的文字
+         */
+        public String encrypt(final String str) {
+            try {
+                return encrypt(str, null);
+            } catch (final Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+
+        /**
+         * 加密文字。
+         *
+         * @param str 传入要加密的文字
+         * @param listener 传入监听者组件
+         * @return 传回加密后的文字
+         */
+        public String encrypt(final String str, final Crypt.CryptListener listener) {
+            try {
+                final byte[] data = encrypt(str.getBytes("UTF-8"), listener);
+                return Base64.getEncoder().encodeToString(data);
+            } catch (final Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+
+        /**
+         * 加密内容。
+         *
+         * @param data 要加密的内容
+         * @return 返回加密后的内容
+         */
+        public byte[] encrypt(final byte[] data) {
+            try {
+                return encrypt(data, null);
+            } catch (final Exception ex) {
+                throw new RuntimeException(ex.getMessage());
+            }
+        }
+
+        /**
+         * 加密内容。
+         *
+         * @param data 传入要加密的内容
+         * @param listener 传入监听者组件
+         * @return 返回加密后的内容
+         */
+        public byte[] encrypt(final byte[] data, final Crypt.CryptListener listener) {
+            try {
+                return getCrypt().encrypt(data, listener);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+
+        /**
+         * 加密资料。
+         *
+         * @param inputFile 传入要加密的文件
+         * @param outputFile 传入已加密的文件
+         * @throws java.io.IOException 当输入输出处理时发生问题，会抛出这个异常
+         */
+        public void encrypt(final File inputFile, final File outputFile) throws IOException {
+            encrypt(inputFile, outputFile, null);
+        }
+
+        /**
+         * 加密资料。
+         *
+         * @param inputFile 传入要加密的文件
+         * @param outputFile 传入已加密完成的文件
+         * @param listener 传入监听者组件
+         * @throws java.io.IOException 当输入输出处理时发生问题，会抛出这个异常
+         */
+        public void encrypt(final File inputFile, final File outputFile, final Crypt.CryptListener listener) throws IOException {
+            try (final BufferedInputStream bis = new BufferedInputStream(new FileInputStream(inputFile)); final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(outputFile))) {
+                encrypt(bis, bos, listener);
+                bos.flush();
+            }
+        }
+
+        /**
+         * 加密内容。
+         *
+         * @param inputData 传入要加密的内容流
+         * @param outputData 传入已加密的内容流
+         * @throws java.io.IOException 当输入输出处理时发生问题，会抛出这个异常
+         */
+        public void encrypt(final InputStream inputData, final OutputStream outputData) throws IOException {
+            encrypt(inputData, outputData, null);
+        }
+
+        /**
+         * 加密资料。
+         *
+         * @param inputData 传入要加密的内容流
+         * @param outputData 传入已加密的内容流
+         * @param listener 传入监听者组件
+         * @throws java.io.IOException 当输入输出处理时发生问题，会抛出这个异常
+         */
+        public void encrypt(final InputStream inputData, final OutputStream outputData, final Crypt.CryptListener listener) throws IOException {
+            getCrypt().encrypt(inputData, outputData, listener);
+        }
+
+        /**
+         * 解密文字。
+         *
+         * @param str 传入要解密的文字
+         * @return 传回解密后的文字
+         */
+        public String decrypt(final String str) {
+            try {
+                return decrypt(str, null);
+            } catch (final Exception ex) {
+                throw new RuntimeException(ex.getMessage());
+            }
+        }
+
+        /**
+         * 解密文字。
+         *
+         * @param str 传入要解密的文字
+         * @param listener 传入监听者组件
+         * @return 传回解密后的文字
+         */
+        public String decrypt(final String str, final Crypt.CryptListener listener) {
+            try {
+                final byte[] data = decrypt(Base64.getDecoder().decode(str), listener);
+                return new String(data, DEFAULT_CHARSET);
+            } catch (final Exception ex) {
+                throw new RuntimeException(ex.getMessage());
+            }
+        }
+
+        /**
+         * 解密文本。
+         *
+         * @param data 传入要解密的文本
+         * @return 传回解密后的文本
+         */
+        public byte[] decrypt(final byte[] data) {
+            try {
+                return decrypt(data, null);
+            } catch (final Exception ex) {
+                throw new RuntimeException(ex.getMessage());
+            }
+        }
+
+        /**
+         * 解密文本。
+         *
+         * @param data 传入要解密的数据
+         * @param listener 传入监听者组件
+         * @return 传回解密后的文本
+         */
+        public byte[] decrypt(final byte[] data, final Crypt.CryptListener listener) {
+            try {
+                return getCrypt().decrypt(data, listener);
+            } catch (final Exception ex) {
+                throw new RuntimeException(ex.getMessage());
+            }
+        }
+
+        /**
+         * 解密文本。
+         *
+         * @param inputFile 传入解密的档案
+         * @param outputFile 传入已解密完成的档案
+         * @throws java.io.IOException 当输入输出处理时发生问题，会抛出这个异常
+         */
+        public void decrypt(final File inputFile, final File outputFile) throws IOException {
+            decrypt(inputFile, outputFile, null);
+        }
+
+        /**
+         * 解密文本。
+         *
+         * @param inputFile 传入解密的档案
+         * @param outputFile 传入已解密完成的档案
+         * @param listener 传入监听者组件
+         * @throws java.io.IOException 当输入输出处理时发生问题，会抛出这个异常
+         */
+        public void decrypt(final File inputFile, final File outputFile, final Crypt.CryptListener listener) throws IOException {
+            try (final BufferedInputStream bis = new BufferedInputStream(new FileInputStream(inputFile)); final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(outputFile))) {
+                decrypt(bis, bos, listener);
+                bos.flush();
+            }
+        }
+
+        /**
+         * 解密文本。
+         *
+         * @param inputData 传入要解密的数据流
+         * @param outputData 传入已解密的数据流
+         * @throws java.io.IOException 当输入输出处理时发生问题，会抛出这个异常
+         */
+        public void decrypt(final InputStream inputData, final OutputStream outputData) throws IOException {
+            getCrypt().decrypt(inputData, outputData, null);
+        }
+
+        /**
+         * 解密文本。
+         *
+         * @param inputData 传入要解密的数据流
+         * @param outputData 传入已解密的数据流
+         * @param listener 传入监听者组件
+         * @throws java.io.IOException 当输入输出处理时发生问题，会抛出这个异常
+         */
+        public void decrypt(final InputStream inputData, final OutputStream outputData, final Crypt.CryptListener listener) throws IOException {
+            getCrypt().decrypt(inputData, outputData, listener);
+        }
+
+    }
+
+    // -----类別常亮-----
+    private static final long POLY64REV = 0x42F0E1EBA9EA3693L;
+    private static final long[] LOOKUPTABLE = new long[256];
+    static {
+        final long mask1 = 1L << 63;
+        long mask2 = 1;
+        for (int i = 1; i < 64; ++i) {
+            mask2 = (mask2 << 1) + 1;
+        }
+        for (int i = 0; i < 256; ++i) {
+            long v = i;
+            for (int j = 0; j < 64; ++j) {
+                if ((v & mask1) == 0) {
+                    v = v << 1;
+                } else {
+                    v = v << 1;
+                    v = v ^ POLY64REV;
+                }
+            }
+            LOOKUPTABLE[i] = v & mask2;
+        }
+    }
+
+    public static void main(String[] args) {
+        List<Integer> list = Lists.newArrayList();
+        list.add(1);
+        list.add(10);
+        list.add(17);
+        System.out.println(list.stream().filter(item -> item > 4).map(item -> "" + item).collect(Collectors.toList()));
+    }
+
+
+    /**
+     * 获取文本的Hash值。
+     *
+     * @param algorithm 传入哈希算法名称
+     * @param data 传入要哈希的文本
+     * @return 传回哈希后的内容
+     */
+    private static byte[] getHash(final String algorithm, final String data) {
+        return getHash(algorithm, data.getBytes(DEFAULT_CHARSET));
+    }
+
+    /**
+     * 获取文本的Hash值。
+     *
+     * @param algorithm 传入哈希算法名称
+     * @param data 传入要哈希的文本
+     * @return 传回哈希后的内容
+     */
+    private static byte[] getHash(final String algorithm, final byte[] data) {
+        try {
+            if(data == null){
+                return null;
+            }
+            switch (algorithm.toUpperCase()) {
+                case "CRC64":
+                    return getCRC64Hash(data);
+                case "TIGER":
+                    return new AwaruaTiger().computeHash(data);
+                default:
+                    final MessageDigest digest = MessageDigest.getInstance(algorithm);
+                    digest.update(data);
+                    return digest.digest();
+            }
+
+        } catch (final Exception ex) {
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+    /**
+     * 取得数据的CRC64哈希值。
+     *
+     * @param data 传入要哈希的数据
+     * @return 传回哈希后数据內容
+     */
+    public static byte[] getSha256Hash(final String data) {
+        return getHash(SHA_256,data);
+    }
+
+
+    /**
+     * 取得数据的CRC64哈希值。
+     *
+     * @param data 传入要哈希的数据
+     * @return 传回哈希后数据內容
+     */
+    public static byte[] getCRC64Hash(final byte[] data) {
+        if (data == null) {
+            return null;
+        }
+        long sum = ~0;
+        for (final byte b : data) {
+            final int lookupidx = (int) (((sum >>> 56) ^ b) & 0xff);
+            sum = (sum << 8) ^ LOOKUPTABLE[lookupidx];
+        }
+        sum = sum ^ ~0;
+        final byte[] crc64 = new byte[8];
+        crc64[0] = (byte) (sum >>> 56);
+        crc64[1] = (byte) ((sum << 8) >>> 56);
+        crc64[2] = (byte) ((sum << 16) >>> 56);
+        crc64[3] = (byte) ((sum << 24) >>> 56);
+        crc64[4] = (byte) ((sum << 32) >>> 56);
+        crc64[5] = (byte) ((sum << 40) >>> 56);
+        crc64[6] = (byte) ((sum << 48) >>> 56);
+        crc64[7] = (byte) ((sum << 56) >>> 56);
+        return crc64;
+    }
     public static String bytesToHexString(byte[] src){
         StringBuilder stringBuilder = new StringBuilder("");
         if (src == null || src.length <= 0) {
@@ -261,7 +786,7 @@ public class EncryptUtils {
 
 
 static class RSA{
-    private static Charset charset = Charset.forName(DEFAULT_CHARSET);
+    private static Charset charset = DEFAULT_CHARSET;
 
      public static KeyPair buildKeyPair() throws NoSuchAlgorithmException {
          final int keySize = 1024;
