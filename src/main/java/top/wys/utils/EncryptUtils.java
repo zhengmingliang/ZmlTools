@@ -236,12 +236,16 @@ public class EncryptUtils {
          */
         Crypt crypt ;
 
+        private DES(Crypt crypt) {
+            this.crypt = crypt;
+        }
+
         /**
          *
          * @param password 加密文本的密码
          * @return
          */
-        public DES newInstance(String password){
+        public static DES newInstance(String password){
             return newInstance(password,null);
         }
 
@@ -250,7 +254,7 @@ public class EncryptUtils {
          * @param iv 加密文本的初始向量
          * @return
          */
-        public DES newInstance(String password,String iv){
+        public static DES newInstance(String password,String iv){
             final byte[] keyByte,ivByte;
 
             keyByte = getCRC64Hash(password.getBytes(DEFAULT_CHARSET));
@@ -260,9 +264,7 @@ public class EncryptUtils {
             } else {
                 ivByte = new byte[]{0, 0, 0, 0, 0, 0, 0, 0};
             }
-            crypt = new DESCrypt(keyByte, ivByte);
-
-            return this;
+            return new DES(new DESCrypt(keyByte, ivByte));
         }
 
 
