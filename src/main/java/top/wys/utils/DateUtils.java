@@ -1,5 +1,7 @@
 package top.wys.utils;
 
+import top.wys.utils.convert.ConvertUtils;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -14,6 +16,34 @@ import java.util.TimeZone;
  *              <br>
  */
 public class DateUtils {
+
+	/**
+	 * 1 分钟
+	 */
+	private static final int ONE_SECOND = 1000;
+	/**
+	 * 1 分钟
+	 */
+	private static final int ONE_MINUTE = 60 * ONE_SECOND;
+	/**
+	 * 1小时
+	 */
+	private static final int ONE_HOUR = 60 * ONE_MINUTE;
+	/**
+	 * 1天
+	 */
+	private static final long ONE_DAY = 24 * ONE_HOUR;
+	/**
+	 * 1个月（按30天算）
+	 */
+	private static final long ONE_MONTH = 30 * ONE_DAY;
+	/**
+	 * 1年（按365天算）
+	 */
+	private static final long ONE_YEAR = 365 * ONE_DAY;
+
+	public static final String[] ZH_CN_TIME_PATTERN = {"年","月","天","小时","分钟","秒","毫秒"};
+	public static final String[] EN_US_TIME_PATTERN = {"year","month","day","hour","minute","s","ms"};
 
 	private DateUtils() {
 		throw new UnsupportedOperationException("不能对我进行实例化哦");
@@ -522,4 +552,183 @@ public class DateUtils {
 		return dateFormat.format(new Date());
 
 	}
+
+	/**
+	 * 将毫秒时间间隔转换为 xx年xx月xx天xx小时xx分钟xx秒
+	 * <p>
+	 * @param timeMillisGap 毫秒时间间隔
+	 * @return
+	 */
+	public static String pastTimes(long timeMillisGap) {
+		return pastTimes(timeMillisGap,ZH_CN_TIME_PATTERN);
+	}
+
+	/**
+	 * 将毫秒时间间隔转换为 xx年xx月xx天xx小时xx分钟xx秒
+	 * <p>
+	 * @param timeMillisGap  毫秒时间间隔
+	 * @param patterns 年月日时分秒格式，{@link DateUtils.ZH_CN_TIME_PATTERN},{@link DateUtils.EN_US_TIME_PATTERN}
+	 * @return
+	 */
+	public static String pastTimes(long timeMillisGap,String[] patterns) {
+		patterns = ConvertUtils.toNoneNullObject(patterns,ZH_CN_TIME_PATTERN);
+		patterns = patterns.length != 7 ? ZH_CN_TIME_PATTERN : patterns;
+		StringBuilder builder = new StringBuilder();
+		long l = 0L;
+		if(timeMillisGap > ONE_YEAR){
+			builder.append(toYear(timeMillisGap)).append(patterns[0]);
+			builder.append(toMonth(l = timeMillisGap % ONE_YEAR)).append(patterns[1]);
+			builder.append(toDays(l = l % ONE_MONTH)).append(patterns[2]);
+			builder.append(toHours(l = l % ONE_DAY)).append(patterns[3]);
+			builder.append(toMinutes(l = l % ONE_HOUR)).append(patterns[4]);
+			builder.append(toSecond(l = l % ONE_MINUTE)).append(patterns[5]);
+
+		}else if(timeMillisGap > ONE_MONTH){
+			builder.append(timeMillisGap / ONE_MONTH).append(patterns[1]);
+			builder.append(toDays(l = timeMillisGap % ONE_MONTH)).append(patterns[2]);
+			builder.append(toHours(l = l % ONE_DAY)).append(patterns[3]);
+			builder.append(toMinutes(l = l % ONE_HOUR)).append(patterns[4]);
+			builder.append(toSecond(l = l % ONE_MINUTE)).append(patterns[5]);
+		}else if(timeMillisGap > ONE_DAY){
+			builder.append(timeMillisGap / ONE_DAY).append(patterns[2]);
+			builder.append(toHours(l = timeMillisGap % ONE_DAY)).append(patterns[3]);
+			builder.append(toMinutes(l = l % ONE_HOUR)).append(patterns[4]);
+			builder.append(toSecond(l = l % ONE_MINUTE)).append(patterns[5]);
+		}else if(timeMillisGap > ONE_HOUR){
+			builder.append(timeMillisGap / ONE_HOUR).append(patterns[3]);
+			builder.append(toMinutes(l = timeMillisGap % ONE_HOUR)).append(patterns[4]);
+			builder.append(toSecond(l = l % ONE_MINUTE)).append(patterns[5]);
+		}else if(timeMillisGap > ONE_MINUTE){
+			builder.append(timeMillisGap / ONE_MINUTE).append(patterns[4]);
+			builder.append(toSecond(l = timeMillisGap % ONE_MINUTE)).append(patterns[5]);
+		}else if(timeMillisGap > ONE_SECOND){
+			builder.append(timeMillisGap / ONE_SECOND).append(patterns[5]);
+		}
+
+		if ((l = l % ONE_SECOND) > 0) {
+			builder.append((l)).append(patterns[6]);
+		}
+		return builder.toString();
+	}
+
+
+	/**
+	 * 单位转换：毫秒转年
+	 * @param timeMillis
+	 * @return
+	 */
+	public static long toYear(long timeMillis){
+		return timeMillis/ ONE_YEAR;
+	}
+	/**
+	 * 单位转换：毫秒转月
+	 * @param timeMillis
+	 * @return
+	 */
+	public static long toMonth(long timeMillis){
+		return timeMillis/ ONE_MONTH;
+	}
+
+	/**单位转换：毫秒转天
+	 * @param timeMillis
+	 * @return
+	 */
+	public static long toDays(long timeMillis){
+		return timeMillis/ ONE_DAY;
+	}
+
+	/**单位转换：毫秒转小时
+	 * @param timeMillis
+	 * @return
+	 */
+	public static long toHours(long timeMillis){
+		return timeMillis/ ONE_HOUR;
+	}
+
+	/**
+	 * 单位转换：毫秒转分钟
+	 * @param timeMillis
+	 * @return
+	 */
+	public static long toMinutes(long timeMillis){
+		return timeMillis/ ONE_MINUTE;
+	}
+
+	/**
+	 * 单位转换：毫秒转秒
+	 * @param timeMillis
+	 * @return
+	 */
+	public static long toSecond(long timeMillis){
+		return timeMillis/ ONE_SECOND;
+	}
+	/**
+	 * 获取过去的年数
+	 * <p>
+	 * param date
+	 * return
+	 */
+	public static long pastYears(Date date) {
+		long t = System.currentTimeMillis() -date.getTime();
+		return t / ONE_YEAR;
+	}
+	/**
+	 * 获取过去的月数
+	 * <p>
+	 * param date
+	 * return
+	 */
+	public static long pastMonths(Date date) {
+		long t = System.currentTimeMillis() -date.getTime();
+		return t / ONE_MONTH;
+	}
+	/**
+	 * 获取过去的天数
+	 * <p>
+	 * param date
+	 * return
+	 */
+	public static long pastDays(Date date) {
+		long t = System.currentTimeMillis() -date.getTime();
+		return t / ONE_DAY;
+	}
+
+	/**
+	 * 获取过去的小时
+	 * <p>
+	 * param date
+	 * return
+	 */
+	public static long pastHour(Date date) {
+		long  t = System.currentTimeMillis() - date.getTime();
+		return t / ONE_HOUR;
+	}
+
+	/**
+	 * 获取过去的分钟
+	 * <p>
+	 * param date
+	 * return
+	 */
+	public static long pastMinutes(Date date) {
+		long t = System.currentTimeMillis()  - date.getTime();
+		return t / ONE_MINUTE;
+	}
+
+	/**
+	 * 转换为时间（天,时:分:秒.毫秒）
+	 * <p>
+	 * param timeMillis
+	 * return
+	 */
+	public static String formatDateTime(long timeMillis) {
+		long day = timeMillis / (24 * 60 * 60 * 1000);
+		long hour = (timeMillis / ONE_HOUR - day * 24);
+		long min = ((timeMillis / ONE_MINUTE) - day * 24 * 60 - hour * 60);
+		long s = (timeMillis / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
+		long sss = (timeMillis - day * 24 * 60 * 60 * 1000 - hour * 60 * 60 * 1000 - min * 60 * 1000 - s * 1000);
+		return (day > 0 ? day + "," : "") + hour + ":" + min + ":" + s + "." + sss;
+	}
+
+
 }

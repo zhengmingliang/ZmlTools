@@ -86,6 +86,25 @@ public class ConvertUtils {
         return strValue;
     }
 
+    /**
+     * 转换为非null对象实例
+     * @param obj
+     * @param defaultValue 当被转换的字符串为null时，返回的默认值
+     * @return
+     */
+    public static <T> T  toNoneNullObject(Object obj,T defaultValue){
+        if(obj == null){
+            return defaultValue;
+        }
+
+        String strValue = obj.toString();
+        if (NULL_STRING.equalsIgnoreCase(strValue)) {
+            return defaultValue;
+        }
+
+        return defaultValue;
+    }
+
 
     /**
      * 转换为非null字符串
