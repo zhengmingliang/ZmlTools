@@ -22,6 +22,8 @@ import java.util.Objects;
  */
 public class ConvertUtils {
 
+    private static final String NULL_STRING = "null";
+
     /**
      * 转换为字符串类型的数据
      *
@@ -44,6 +46,62 @@ public class ConvertUtils {
             return defaultValue;
         }
         return obj.toString();
+    }
+
+    /**
+     * 转换为非null的字符串，当为null或“null”时，默认转为 "";
+     * @param obj
+     * @return
+     */
+    public static String toNoneNullString(Object obj){
+
+        return toNoneNullString(obj,"");
+    }
+    /**
+     * 转换为非null的字符串，当为null或“null”时，默认转为 "";
+     * @param str
+     * @return
+     */
+    public static String toNoneNullString(String str){
+
+        return toNoneNullString(str,"");
+    }
+
+    /**
+     * 转换为非null字符串
+     * @param obj
+     * @param defaultValue 当被转换的字符串为null时，返回的默认值
+     * @return
+     */
+    public static String toNoneNullString(Object obj,String defaultValue){
+        if(obj == null){
+            return defaultValue;
+        }
+
+        String strValue = obj.toString();
+        if (NULL_STRING.equalsIgnoreCase(strValue)) {
+            return defaultValue;
+        }
+
+        return strValue;
+    }
+
+
+    /**
+     * 转换为非null字符串
+     * @param str
+     * @param defaultValue 当被转换的字符串为null时，返回的默认值
+     * @return
+     */
+    public static String toNoneNullString(String str,String defaultValue){
+        if(str == null){
+            return defaultValue;
+        }
+        if(str.equalsIgnoreCase(NULL_STRING)){
+            return defaultValue;
+        }
+
+        return str;
     }
 
     /**

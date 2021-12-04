@@ -94,7 +94,7 @@ public class ConvertUtilsTest {
         System.out.println("ConvertUtils.toDate(\"2021-11-12\",null) = " + ConvertUtils.toDate("2021-11-12", null));
         System.out.println("ConvertUtils.toDate(\"2021/11/12\",null) = " + ConvertUtils.toDate("2021/11/12", null));
         System.out.println("ConvertUtils.toDate(\"2021年11月12日\",null) = " + ConvertUtils.toDate("2021年11月12日", null));
-//        System.out.println("ConvertUtils.toDate(\"2021년11월12일\",null) = " + ConvertUtils.toDate("2021년11월12일"));//
+        System.out.println("ConvertUtils.toDate(\"2021년11월12일\",null) = " + ConvertUtils.toDate("2021년11월12일"));//
         System.out.println("ConvertUtils.toDate(\"20211112214532\",null) = " + ConvertUtils.toDate("20211112214532", null));
         System.out.println("ConvertUtils.toDate(\"20211112 22:45:32\",null) = " + ConvertUtils.toDate("20211112 22:45:32", null));
         System.out.println("ConvertUtils.toDate(\"2021.11.12 22:45:32\",null) = " + ConvertUtils.toDate("2021.11.12 22:45:32", null));
@@ -109,7 +109,6 @@ public class ConvertUtilsTest {
         System.out.println("ConvertUtils.toDate(\"2021-11-28T22:33:31+0800\") = " + ConvertUtils.toDate("2021-11-28T22:33:31+0800"));
 
         System.out.println("ConvertUtils.toDate(\"202111122145\") = " + ConvertUtils.toDate("202111122145"));
-        System.out.println("ConvertUtils.toDate(\"1638702321\") = " + ConvertUtils.toDate("1638702321"));
         System.out.println("ConvertUtils.toDate(\"1638702321\") = " + ConvertUtils.toDate("1638702321"));
         System.out.println("ConvertUtils.toDate(\"1638702321200\") = " + ConvertUtils.toDate("1638702321200"));
     }
