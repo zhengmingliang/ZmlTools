@@ -67,10 +67,19 @@ public class NumberUtils {
     /**
      * 是否是数字
      * @param ch 字符
-     * @return
+     * @return 是数字返回true，否则返回false
      */
     public static boolean isNumber(char ch){
         return ch > '0' && ch < '9';
+    }
+
+    /**
+     * 是否不是数字
+     * @param ch 字符
+     * @return 不是数字返回true，否则返回false
+     */
+    public static boolean isNotNumber(char ch){
+        return !isNumber(ch);
     }
 
     /**
