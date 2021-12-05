@@ -70,7 +70,30 @@ public class NumberUtils {
      * @return 是数字返回true，否则返回false
      */
     public static boolean isNumber(char ch){
-        return ch > '0' && ch < '9';
+        return ch >= '0' && ch <= '9';
+    }
+
+    /**
+     * 是否是数字
+     * @param str 字符
+     * @return 是数字返回true，否则返回false
+     */
+    public static boolean isNumber(String str){
+       return isNumber(str.toCharArray());
+    }
+
+    /**
+     * 是否是数字
+     * @param chars 字符
+     * @return 是数字返回true，否则返回false
+     */
+    public static boolean isNumber(char[] chars){
+        for (char ch : chars) {
+            if(isNotNumber(ch)){
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -80,6 +103,14 @@ public class NumberUtils {
      */
     public static boolean isNotNumber(char ch){
         return !isNumber(ch);
+    }
+    /**
+     * 是否不是数字
+     * @param str 字符
+     * @return 不是数字返回true，否则返回false
+     */
+    public static boolean isNotNumber(String str){
+        return !isNumber(str);
     }
 
     /**
