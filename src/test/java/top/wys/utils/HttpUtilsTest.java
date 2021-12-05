@@ -1,5 +1,7 @@
 package top.wys.utils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Stopwatch;
 
 import org.junit.Test;
@@ -45,6 +47,24 @@ public class HttpUtilsTest {
         }
     }
 
+
+    @Test
+    public void bulkTest() throws IOException {
+        String url = "http://192.168.4.77:9240/_bulk";
+        JSONObject index = new JSONObject();
+        index.put("_index","system_log111");
+//        index.put("_type","doc");
+        JSONObject table = new JSONObject();
+        table.put("index",index);
+        String json1 = "{\"logType\":\"business\",\"hostName\":\"DESKTOP-B520200\",\"level\":\"INFO\",\"projectPath\":\"D:zmlgithubdtszBI\",\"nodeIp\":\"192.168.56.1\",\"message\":\"eee\",\"threadName\":\"main\",\"time\":\"2021-01-04 19:15:59\",\"position\":\"com.dtsz.davin.util.file.FileUtilsTest.main() L:95\",\"projectName\":\"davin\",\"loggerName\":\"com.dtsz.davin.util.file.FileUtilsTest\",\"timestamp\":1609758959005}";
+        String json2 = "{\"logType\":\"business\",\"hostName\":\"DESKTOP-B520200\",\"level\":\"INFO\",\"projectPath\":\"D:zmlgithubdtszBI\",\"nodeIp\":\"192.168.56.1\",\"message\":\"rrr\",\"threadName\":\"main\",\"time\":\"2021-01-04 19:15:59\",\"position\":\"com.dtsz.davin.util.file.FileUtilsTest.main() L:95\",\"projectName\":\"davin\",\"loggerName\":\"com.dtsz.davin.util.file.FileUtilsTest\",\"timestamp\":1609758959005}";
+        JSONObject jsonObject = JSON.parseObject(json1);
+        JSONObject jsonObject2 = JSON.parseObject(json2);
+        String requestJson = table.toJSONString()+"\n"+jsonObject.toJSONString()+"\n"+table.toJSONString()+"\n"+jsonObject2.toJSONString()+"\n";
+        System.out.println(requestJson);
+        String result = HttpUtils.sendRequestBody(url, requestJson);
+        System.out.println(result);
+    }
     @Test
     public void getStringFromPost() {
         String url = "http://localhost:8888/er";
