@@ -171,6 +171,9 @@ public class ConvertUtils {
             return ((Number) obj).intValue();
         }
         String strValue = obj.toString();
+        if (strValue.trim().length() == 0) {
+            throw new  NumberFormatException("当前字符不是数字");
+        }
         if (obj instanceof CharSequence) {
 
             try {
@@ -209,7 +212,7 @@ public class ConvertUtils {
         try {
             return toInt(obj);
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return defaultValue;
     }
