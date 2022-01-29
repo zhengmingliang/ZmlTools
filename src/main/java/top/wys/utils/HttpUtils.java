@@ -179,7 +179,11 @@ public class HttpUtils {
         }
         StringBuilder urlParam = new StringBuilder();
         for (Map.Entry<String, Object> entry : params.entrySet()) {
-            urlParam.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
+            Object value = entry.getValue();
+            if(value == null){
+                continue;
+            }
+            urlParam.append(entry.getKey()).append("=").append(value).append("&");
         }
          urlParam = urlParam.deleteCharAt(urlParam.length() - 1);
 
