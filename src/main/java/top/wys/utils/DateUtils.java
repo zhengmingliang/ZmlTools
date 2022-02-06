@@ -20,30 +20,42 @@ public class DateUtils {
 	/**
 	 * 1 分钟
 	 */
-	private static final int ONE_SECOND = 1000;
+	public static final int ONE_SECOND = 1000;
 	/**
 	 * 1 分钟
 	 */
-	private static final int ONE_MINUTE = 60 * ONE_SECOND;
+	public static final int ONE_MINUTE = 60 * ONE_SECOND;
 	/**
 	 * 1小时
 	 */
-	private static final int ONE_HOUR = 60 * ONE_MINUTE;
+	public static final int ONE_HOUR = 60 * ONE_MINUTE;
 	/**
 	 * 1天
 	 */
-	private static final long ONE_DAY = 24 * ONE_HOUR;
+	public static final long ONE_DAY = 24 * ONE_HOUR;
 	/**
 	 * 1个月（按30天算）
 	 */
-	private static final long ONE_MONTH = 30 * ONE_DAY;
+	public static final long ONE_MONTH = 30 * ONE_DAY;
 	/**
 	 * 1年（按365天算）
 	 */
-	private static final long ONE_YEAR = 365 * ONE_DAY;
+	public static final long ONE_YEAR = 365 * ONE_DAY;
 
 	public static final String[] ZH_CN_TIME_PATTERN = {"年","月","天","小时","分钟","秒","毫秒"};
 	public static final String[] EN_US_TIME_PATTERN = {"year","month","day","hour","minute","s","ms"};
+	/**
+	 * 日期时间模式
+	 */
+	public static final String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
+	/**
+	 * 日期模式
+	 */
+	public static final String DATE_PATTERN = "yyyy-MM-dd";
+	/**
+	 * utc时间模式
+	 */
+	private static final String UTC_TIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
 	private DateUtils() {
 		throw new UnsupportedOperationException("不能对我进行实例化哦");
@@ -180,7 +192,7 @@ public class DateUtils {
 	 * @throws ParseException  解析异常
 	 */
 	public static String utc2Local(String utcTime,String localTimePatten) throws ParseException {
-		String defaultPartern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+		String defaultPartern = UTC_TIME_PATTERN;
 		return utc2Local(utcTime, defaultPartern, localTimePatten);
 	}
 
@@ -216,8 +228,7 @@ public class DateUtils {
 	 * @return Date类型时间
 	 */
 	public static Date utc2LocalDate(String utcTime) {
-		String defaultPartern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
-		return utc2LocalDate(utcTime,defaultPartern);
+		return utc2LocalDate(utcTime,UTC_TIME_PATTERN);
 	}
 	/**
 	 * @author 郑明亮
@@ -435,7 +446,7 @@ public class DateUtils {
 	 * @return getNowDateTime
 	 */
 	public static String getNowDateTime() {
-		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+		return new SimpleDateFormat(DATE_TIME_PATTERN).format(new Date());
 	}
 
 
@@ -544,7 +555,7 @@ public class DateUtils {
 	public static String getSystemTime(String formateString) {
 		SimpleDateFormat dateFormat = null;
 		if (formateString == null) {
-			dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			dateFormat = new SimpleDateFormat(DATE_TIME_PATTERN);
 		} else {
 			dateFormat = new SimpleDateFormat(formateString);
 		}
@@ -730,5 +741,28 @@ public class DateUtils {
 		return (day > 0 ? day + "," : "") + hour + ":" + min + ":" + s + "." + sss;
 	}
 
+
+	/**
+	 * 获取今天的开始时间 即 某天的 00:00:00.000 时间
+	 * @return
+	 */
+	public static Date getBeginOfDay(){
+		return getBeginOfDay(new Date());
+	}
+
+	/**
+	 * 获取一天中开始的时间 即 {@code date}的 00:00:00.000 时间
+	 * @param date
+	 * @return
+	 */
+	public static Date getBeginOfDay(Date date){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.HOUR_OF_DAY,0);
+		calendar.set(Calendar.MINUTE,0);
+		calendar.set(Calendar.SECOND,0);
+		calendar.set(Calendar.MILLISECOND,0);
+		return calendar.getTime();
+	}
 
 }
