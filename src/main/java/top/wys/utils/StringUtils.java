@@ -364,6 +364,40 @@ public class StringUtils {
     }
 
     /**
+     * 用另一个字符串替换字符串中所有出现的子字符串.
+     * @param text {@code String} 要进行替换字符的文本
+     * @param searchChar {@code char} 要查找去替换的字符
+     * @param replacement {@code String}  要替换为的字符串
+     * @return a {@code String} 返回替换为新字符的字符串
+     * @since 1.3.3
+     */
+    public static String replace(String text, char searchChar, String replacement) {
+        if (!hasLength(text) || replacement == null) {
+            return text;
+        }
+        int index = text.indexOf(searchChar);
+        if(index == -1){
+            return text;
+        }
+        char[] chars = text.toCharArray();
+        int length = text.length();
+        if(replacement.length() > 1){
+            length += 10;
+        }
+        StringBuilder builder = new StringBuilder(length);
+        builder.append(text.substring(0,index)).append(replacement);
+        for (int i = index+1; i < chars.length; i++) {
+            if(chars[i] == searchChar){
+                builder.append(replacement);
+            }else {
+                builder.append(chars[i]);
+            }
+        }
+
+        return builder.toString();
+    }
+
+    /**
      * Normalize the path by suppressing sequences like "path/.." and
      * inner simple dots.
      * <p>The result is convenient for path comparison. For other uses,
