@@ -101,11 +101,11 @@ public abstract class Assert {
          * <pre class="code">Assert.hasLength(name, "Name must not be empty");</pre>
          * @param text the String to check
          * @param message the exception message to use if the assertion fails
-         * @see org.springframework.util.StringUtils#hasLength
+         * @see StringUtils#hasLength
          * @throws IllegalArgumentException if the text is empty
          */
         public static void hasLength(String text, String message) {
-            if (!org.springframework.util.StringUtils.hasLength(text)) {
+            if (!StringUtils.hasLength(text)) {
                 throw new IllegalArgumentException(message);
             }
         }
@@ -115,7 +115,7 @@ public abstract class Assert {
          * it must not be {@code null} and not the empty String.
          * <pre class="code">Assert.hasLength(name);</pre>
          * @param text the String to check
-         * @see org.springframework.util.StringUtils#hasLength
+         * @see StringUtils#hasLength
          * @throws IllegalArgumentException if the text is empty
          */
         public static void hasLength(String text) {
@@ -129,11 +129,11 @@ public abstract class Assert {
          * <pre class="code">Assert.hasText(name, "'name' must not be empty");</pre>
          * @param text the String to check
          * @param message the exception message to use if the assertion fails
-         * @see org.springframework.util.StringUtils#hasText
+         * @see StringUtils#hasText
          * @throws IllegalArgumentException if the text does not contain valid text content
          */
         public static void hasText(String text, String message) {
-            if (!org.springframework.util.StringUtils.hasText(text)) {
+            if (!StringUtils.hasText(text)) {
                 throw new IllegalArgumentException(message);
             }
         }
@@ -143,7 +143,7 @@ public abstract class Assert {
          * be {@code null} and must contain at least one non-whitespace character.
          * <pre class="code">Assert.hasText(name, "'name' must not be empty");</pre>
          * @param text the String to check
-         * @see org.springframework.util.StringUtils#hasText
+         * @see StringUtils#hasText
          * @throws IllegalArgumentException if the text does not contain valid text content
          */
         public static void hasText(String text) {
@@ -160,7 +160,7 @@ public abstract class Assert {
          * @throws IllegalArgumentException if the text contains the substring
          */
         public static void doesNotContain(String textToSearch, String substring, String message) {
-            if (org.springframework.util.StringUtils.hasLength(textToSearch) && org.springframework.util.StringUtils.hasLength(substring) &&
+            if (StringUtils.hasLength(textToSearch) && StringUtils.hasLength(substring) &&
                     textToSearch.contains(substring)) {
                 throw new IllegalArgumentException(message);
             }
@@ -311,7 +311,7 @@ public abstract class Assert {
             notNull(type, "Type to check against must not be null");
             if (!type.isInstance(obj)) {
                 throw new IllegalArgumentException(
-                        (org.springframework.util.StringUtils.hasLength(message) ? message + " " : "") +
+                        (StringUtils.hasLength(message) ? message + " " : "") +
                                 "Object of class [" + (obj != null ? obj.getClass().getName() : "null") +
                                 "] must be an instance of " + type);
             }

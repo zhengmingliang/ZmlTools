@@ -47,7 +47,7 @@ public interface InputConverter<D> {
             // New instance for the target class
             T targetInstance = targetClass.newInstance();
             // Copy properties
-            org.springframework.beans.BeanUtils
+            BeanUtils
                     .copyProperties(source, targetInstance, DataUtils.getNullPropertyNames(source));
             // Return the target instance
             return targetInstance;

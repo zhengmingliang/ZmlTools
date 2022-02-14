@@ -118,7 +118,7 @@ public abstract class Crypt {
      *
      * @param inputData 传入要加密的内容流
      * @param outputData 传入已加密的内容流
-     * @throws java.io.IOException 当输入输出处理时发生问题，会抛出这个异常
+     * @throws IOException 当输入输出处理时发生问题，会抛出这个异常
      */
     public void encrypt(final InputStream inputData, final OutputStream outputData) throws IOException {
         encrypt(inputData, outputData, null);
@@ -129,7 +129,7 @@ public abstract class Crypt {
      *
      * @param inputData 传入要解密的内容流
      * @param outputData 传入已解密的内容流
-     * @throws java.io.IOException  当输入输出处理时发生问题，会抛出这个异常
+     * @throws IOException  当输入输出处理时发生问题，会抛出这个异常
      */
     public void decrypt(final InputStream inputData, final OutputStream outputData) throws IOException {
         decrypt(inputData, outputData, null);
@@ -142,7 +142,7 @@ public abstract class Crypt {
      * @param inputData 传入要加密的内容流
      * @param outputData 传入已加密的内容流
      * @param listener 传入监听者物件
-     * @throws java.io.IOException 当输入输出处理时发生问题，会抛出这个异常
+     * @throws IOException 当输入输出处理时发生问题，会抛出这个异常
      */
     public abstract void encrypt(final InputStream inputData, final OutputStream outputData, final CryptListener listener) throws IOException;
 
@@ -152,7 +152,7 @@ public abstract class Crypt {
      * @param inputData 传入要解密的内容流
      * @param outputData 传入已解密的内容流
      * @param listener 传入监听者
-     * @throws java.io.IOException 当输入输出处理时发生问题，会抛出这个异常
+     * @throws IOException 当输入输出处理时发生问题，会抛出这个异常
      */
     public abstract void decrypt(final InputStream inputData, final OutputStream outputData, final CryptListener listener) throws IOException;
 }
