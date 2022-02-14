@@ -4,12 +4,16 @@ package top.wys.utils;/**
 
 
 import com.google.common.collect.Lists;
-import top.wys.utils.crypto.AESCrypt;
-import top.wys.utils.crypto.AwaruaTiger;
-import top.wys.utils.crypto.Crypt;
-import top.wys.utils.crypto.DESCrypt;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -34,6 +38,11 @@ import java.util.stream.Collectors;
 import javax.crypto.Cipher;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+
+import top.wys.utils.crypto.AESCrypt;
+import top.wys.utils.crypto.AwaruaTiger;
+import top.wys.utils.crypto.Crypt;
+import top.wys.utils.crypto.DESCrypt;
 
 /**
  * @author 郑明亮   @email 1072307340@qq.com
@@ -477,7 +486,7 @@ public class EncryptUtils {
          *
          * @param inputFile 传入要加密的文件
          * @param outputFile 传入已加密的文件
-         * @throws java.io.IOException 当输入输出处理时发生问题，会抛出这个异常
+         * @throws IOException 当输入输出处理时发生问题，会抛出这个异常
          */
         public void encrypt(final File inputFile, final File outputFile) throws IOException {
             encrypt(inputFile, outputFile, null);
@@ -489,7 +498,7 @@ public class EncryptUtils {
          * @param inputFile 传入要加密的文件
          * @param outputFile 传入已加密完成的文件
          * @param listener 传入监听者组件
-         * @throws java.io.IOException 当输入输出处理时发生问题，会抛出这个异常
+         * @throws IOException 当输入输出处理时发生问题，会抛出这个异常
          */
         public void encrypt(final File inputFile, final File outputFile, final Crypt.CryptListener listener) throws IOException {
             try (final BufferedInputStream bis = new BufferedInputStream(new FileInputStream(inputFile)); final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(outputFile))) {
@@ -503,7 +512,7 @@ public class EncryptUtils {
          *
          * @param inputData 传入要加密的内容流
          * @param outputData 传入已加密的内容流
-         * @throws java.io.IOException 当输入输出处理时发生问题，会抛出这个异常
+         * @throws IOException 当输入输出处理时发生问题，会抛出这个异常
          */
         public void encrypt(final InputStream inputData, final OutputStream outputData) throws IOException {
             encrypt(inputData, outputData, null);
@@ -515,7 +524,7 @@ public class EncryptUtils {
          * @param inputData 传入要加密的内容流
          * @param outputData 传入已加密的内容流
          * @param listener 传入监听者组件
-         * @throws java.io.IOException 当输入输出处理时发生问题，会抛出这个异常
+         * @throws IOException 当输入输出处理时发生问题，会抛出这个异常
          */
         public void encrypt(final InputStream inputData, final OutputStream outputData, final Crypt.CryptListener listener) throws IOException {
             getCrypt().encrypt(inputData, outputData, listener);
@@ -585,7 +594,7 @@ public class EncryptUtils {
          *
          * @param inputFile 传入解密的档案
          * @param outputFile 传入已解密完成的档案
-         * @throws java.io.IOException 当输入输出处理时发生问题，会抛出这个异常
+         * @throws IOException 当输入输出处理时发生问题，会抛出这个异常
          */
         public void decrypt(final File inputFile, final File outputFile) throws IOException {
             decrypt(inputFile, outputFile, null);
@@ -597,7 +606,7 @@ public class EncryptUtils {
          * @param inputFile 传入解密的档案
          * @param outputFile 传入已解密完成的档案
          * @param listener 传入监听者组件
-         * @throws java.io.IOException 当输入输出处理时发生问题，会抛出这个异常
+         * @throws IOException 当输入输出处理时发生问题，会抛出这个异常
          */
         public void decrypt(final File inputFile, final File outputFile, final Crypt.CryptListener listener) throws IOException {
             try (final BufferedInputStream bis = new BufferedInputStream(new FileInputStream(inputFile)); final BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(outputFile))) {
@@ -611,7 +620,7 @@ public class EncryptUtils {
          *
          * @param inputData 传入要解密的数据流
          * @param outputData 传入已解密的数据流
-         * @throws java.io.IOException 当输入输出处理时发生问题，会抛出这个异常
+         * @throws IOException 当输入输出处理时发生问题，会抛出这个异常
          */
         public void decrypt(final InputStream inputData, final OutputStream outputData) throws IOException {
             getCrypt().decrypt(inputData, outputData, null);
@@ -623,7 +632,7 @@ public class EncryptUtils {
          * @param inputData 传入要解密的数据流
          * @param outputData 传入已解密的数据流
          * @param listener 传入监听者组件
-         * @throws java.io.IOException 当输入输出处理时发生问题，会抛出这个异常
+         * @throws IOException 当输入输出处理时发生问题，会抛出这个异常
          */
         public void decrypt(final InputStream inputData, final OutputStream outputData, final Crypt.CryptListener listener) throws IOException {
             getCrypt().decrypt(inputData, outputData, listener);

@@ -427,7 +427,7 @@ public class FileUtils {
 
         try {
             Optional<String> first = Files.lines(Paths.get(path), Charset.forName(encoding)).findFirst();
-            Stream<String> lines = java.nio.file.Files.lines(Paths.get(path), Charset.forName(encoding));
+            Stream<String> lines = Files.lines(Paths.get(path), Charset.forName(encoding));
 
             callback.getFirstLine(first.isPresent() ? first.get() : "");
 
@@ -543,7 +543,7 @@ public class FileUtils {
      * @param targetFolder   拆分的文件存储路径
      * @param maxLine        每个拆分的文件最多多少行
      * @description 该方法在拆分大文件（几个G）时最多需要消耗1G多的内存，可使用 top.wys.utils.FileUtils#cutFileByNIO(java.lang.String, java.lang.String, java.lang.String, long)方法拆分大文件
-     * @see FileUtils#cutFileByLine(java.lang.String, java.lang.String, java.lang.String, long)
+     * @see FileUtils#cutFileByLine(String, String, String, long)
      */
     @Deprecated
     public static void cutFile(String sourceFileName, String encoding, String targetFolder, long maxLine) {
@@ -617,7 +617,7 @@ public class FileUtils {
      * @param targetFolder   拆分的文件存储路径
      * @param maxLine        每个拆分的文件最多多少行
      * @description 该方法在拆分大文件（5个G）时最多需要消耗800M的内存，后续稳定在几十到200M内存之间
-     * @see FileUtils#cutFile(java.lang.String, java.lang.String, java.lang.String, long)
+     * @see FileUtils#cutFile(String, String, String, long)
      */
     public static void cutFileByLine(String sourceFileName, String encoding, String targetFolder, long maxLine) {
         try {

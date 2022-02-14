@@ -49,9 +49,9 @@ public abstract class CipherCrpyt extends Crypt {
      * @param inputData 传入输入的资料流
      * @param outputData 传入输出的资料流
      * @param listener 传入监听者组件
-     * @throws java.io.IOException 当输入输出处理时发生问题，会抛出这个异常
+     * @throws IOException 当输入输出处理时发生问题，会抛出这个异常
      */
-    protected void crypt(final InputStream inputData, final OutputStream outputData, final Crypt.CryptListener listener) throws IOException {
+    protected void crypt(final InputStream inputData, final OutputStream outputData, final CryptListener listener) throws IOException {
         final int totalBytes = inputData.available();
 
         if (listener != null) {
@@ -87,10 +87,10 @@ public abstract class CipherCrpyt extends Crypt {
      * @param inputData 传入要加密的资料流
      * @param outputData 传入已加密的资料流
      * @param listener 传入监听者组件
-     * @throws java.io.IOException 当输入输出处理时发生问题，会抛出这个异常
+     * @throws IOException 当输入输出处理时发生问题，会抛出这个异常
      */
     @Override
-    public void encrypt(final InputStream inputData, final OutputStream outputData, final Crypt.CryptListener listener) throws IOException {
+    public void encrypt(final InputStream inputData, final OutputStream outputData, final CryptListener listener) throws IOException {
         try {
             cipher.init(Cipher.ENCRYPT_MODE, key, iv);
             crypt(inputData, outputData, listener);
@@ -107,10 +107,10 @@ public abstract class CipherCrpyt extends Crypt {
      * @param inputData 傳入要解密的資料流
      * @param outputData 傳入已解密的資料流
      * @param listener 傳入監聽者组件
-     * @throws java.io.IOException 当输入输出处理时发生问题，会抛出这个异常
+     * @throws IOException 当输入输出处理时发生问题，会抛出这个异常
      */
     @Override
-    public void decrypt(final InputStream inputData, final OutputStream outputData, final Crypt.CryptListener listener) throws IOException {
+    public void decrypt(final InputStream inputData, final OutputStream outputData, final CryptListener listener) throws IOException {
         try {
             cipher.init(Cipher.DECRYPT_MODE, key, iv);
             crypt(inputData, outputData, listener);
