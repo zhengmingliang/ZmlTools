@@ -55,6 +55,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import top.wys.utils.entity.Patterns;
+import top.wys.utils.math.Numbers;
 
 /**
  * 数据类型转换、格式校验、简易信息的获取，如系统时间
@@ -765,13 +766,27 @@ public class DataUtils {
      * @description <p>从文本中截取出日期，并返回,格式为yyyy-MM-dd <br>
      */
     public static String getDateFromText(String text) {
-        Pattern pattern = Pattern.compile("\\d+-[0-9]{2}-[0-9]{2}");
-        String date = "";
-        Matcher matcher = pattern.matcher(text);
+        Matcher matcher = Patterns.PATTERN_IS_DATE.matcher(text);
         while (matcher.find()) {
-            date = matcher.group(0);
+            return matcher.group(0);
         }
-        return date;
+        return "";
+    }
+
+    /**
+     * @param text 文本信息
+     * @return 日期
+     * @author 郑明亮
+     * @time 2022年2月13日 16:36:31
+     * @description <p>从文本中截取出日期，并返回,格式为yyyy-MM-dd 或yyyy/MM/dd或yyyy年MM月dd日 <br>
+     */
+    public static List<String> getDatesFromText(String text) {
+        Matcher matcher = Patterns.PATTERN_IS_DATE.matcher(text);
+        List<String> dates = new ArrayList<>();
+        while (matcher.find()) {
+            dates.add(matcher.group(0));
+        }
+        return dates;
     }
 
     /**
@@ -785,13 +800,48 @@ public class DataUtils {
      * @modifyDescription<p> <br>
      */
     public static String getDateTimeFromText(String text) {
-        Pattern pattern = Pattern.compile("\\d+-[0-9]{2}-[0-9]{2}\\s{1}[0-2][0-9](:[0-5][0-9]){2}");
-        String date = "";
-        Matcher matcher = pattern.matcher(text);
+        Matcher matcher = Patterns.PATTERN_IS_DATETIME.matcher(text);
         while (matcher.find()) {
-            date = matcher.group(0);
+            return matcher.group(0);
         }
-        return date;
+        return "";
+    }
+
+    /**
+     * @param text 文本
+     * @return 日期
+     * @author 郑明亮
+     * @time 2022年2月13日 16:38:31
+     * @description <p>从文本中截取出日期  格式为yyyy-MM-dd HH:mm:ss <br>
+     * @modifyBy
+     * @modifyTime
+     * @modifyDescription<p> <br>
+     */
+    public static List<String> getDateTimesFromText(String text) {
+        Matcher matcher = Patterns.PATTERN_IS_DATETIME.matcher(text);
+        List<String> dates = new ArrayList<>();
+        while (matcher.find()) {
+            dates.add(matcher.group(0));
+        }
+        return dates;
+    }
+
+    /**
+     * 从文本中找到数字并返回
+     * @param text
+     * @return
+     */
+    public static String getNumber(String text){
+        return Numbers.getNumber(text);
+    }
+
+    /**
+     * 从文本中找到第一个数字（整数或浮点数）并返回
+     * @param text
+     * @return
+     */
+    public static String getFirstNumber(String text){
+        return Numbers.getFirstNumber(text);
     }
 
     /**

@@ -65,4 +65,14 @@ public class Patterns {
 
     public static final Pattern ARRAY = Pattern.compile("^.*\\[[.*]+\\]$");
 
+    /**
+     * 验证日期的正则表达式（2021-01-10,2022/10/11,2012年10月12日）
+     */
+    public static final Pattern PATTERN_IS_DATE = Pattern.compile("\\d+(-|/|年)[0-9]{2}(-|/|月)[0-9]{2}(日)?");
+
+    /**
+     * 验证时间格式的正则表达式（2021-01-10 12:00:12,2022/10/11 12:32,2012年10月12日 12:10:12）
+     */
+    public static final Pattern PATTERN_IS_DATETIME =  Pattern.compile("\\d+(-|/|年)[0-9]{2}(-|/|月)[0-9]{2}(日)?\\s{1}[0-2][0-9](:[0-5][0-9]){1,2}");
+
 }
