@@ -87,6 +87,25 @@ public class ConvertUtils {
     }
 
     /**
+     * 转换为非空字符串
+     * @param obj
+     * @param defaultValue 当被转换的字符串为空字符串时，返回的默认值
+     * @return
+     */
+    public static String toNoneEmptyString(String obj,String defaultValue){
+        if(obj == null){
+            return defaultValue;
+        }
+
+        String strValue = obj;
+        if (strValue.length() == 0 || NULL_STRING.equalsIgnoreCase(strValue)) {
+            return defaultValue;
+        }
+
+        return strValue;
+    }
+
+    /**
      * 转换为非null对象实例
      * @param obj
      * @param defaultValue 当被转换的字符串为null时，返回的默认值
