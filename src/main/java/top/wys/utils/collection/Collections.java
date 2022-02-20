@@ -3,8 +3,10 @@
  */
 package top.wys.utils.collection;
 
+import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -44,4 +46,46 @@ public class Collections {
             }
         }
     }
+
+    /**
+     * 判定是否为空集合
+     *
+     * @param collection 集合
+     * @return boolean 如果集合为空，则返回<code>true</code>，否则返回<code>false</code>
+     */
+    public static boolean isEmpty(@Nullable Collection<?> collection) {
+        return (collection == null || collection.isEmpty());
+    }
+    /**
+     * 判定是否不为空集合
+     *
+     * @param collection 集合
+     * @return boolean 如果集合不为空，则返回<code>true</code>，否则返回<code>false</code>
+     */
+    public static boolean isNotEmpty(@Nullable Collection<?> collection) {
+        return !isEmpty(collection);
+    }
+
+    /**
+     * 判定是否为空map
+     *
+     * @param map map集合
+     * @return boolean 如果map为空，则返回<code>true</code>，否则返回<code>false</code>
+     */
+    public static boolean isEmpty(@Nullable Map<?, ?> map) {
+        return (map == null || map.isEmpty());
+    }
+
+    /**
+     * 判定是否不为空map
+     *
+     * @param map map集合
+     * @return boolean 如果map不为空，则返回<code>true</code>，否则返回<code>false</code>
+     */
+    public static boolean isNotEmpty(@Nullable Map<?, ?> map) {
+        return !isEmpty(map);
+    }
+
+
+
 }
