@@ -161,6 +161,23 @@ public class DateUtils {
 		c.add(Calendar.DATE, step);
 		return c.getTime();
 	}
+	/**
+	 * 得到下一个日期 ,默认是传入日期的下一天
+	 *
+	 * @param date 日期
+	 * @return 位移后的Date日期
+	 */
+	public static Date getNextDate(Date date) {
+		return getNextDate(date,1);
+	}
+
+	/**
+	 * 获取下一天的日期（明天）
+	 * @return 位移后的Date日期
+	 */
+	public static Date getNextDay() {
+		return getNextDate(new Date(),1);
+	}
 
 	/**
 	 * 根据日期和格式得到Date形式日期
@@ -263,6 +280,26 @@ public class DateUtils {
 	}
 
 	/**
+	 * 根据日期和格式得到String形式日期
+	 *
+	 * @param date 日期
+	 * @return 得到指定String形式日期
+	 */
+	public static String getDateTimeString(Date date) {
+		return new SimpleDateFormat(DATE_TIME_PATTERN).format(date);
+	}
+
+	/**
+	 * 根据日期和格式得到String形式日期
+	 *
+	 * @param date 日期
+	 * @return 得到指定String形式日期
+	 */
+	public static String getDateString(Date date) {
+		return new SimpleDateFormat(DATE_PATTERN).format(date);
+	}
+
+	/**
 	 * 根据给定的字符串日期，和形式，转化成Date
 	 * 
 	 * @param date 日期
@@ -321,6 +358,60 @@ public class DateUtils {
 		long el = endday.getTime();
 		long ei = el - sl;
 		return ei;
+	}
+
+	/**
+	 * @author 郑明亮
+	 * @time 2022年2月19日 10:38:40
+	 * @since 1.3.6
+	 * @description <p>
+	 *              获取两个时间相差的秒数值
+	 *              <br>
+	 * @param startDay  开始日期
+	 *
+	 * @param endDay  结束日期
+	 *
+	 * @return getTimeGapsInMilliseconds
+	 */
+	public static long getTimeGapsInSeconds(Date startDay, Date endDay) {
+		long milliseconds = getTimeGapsInMilliseconds(startDay, endDay);
+		return milliseconds / ONE_SECOND;
+	}
+
+	/**
+	 * @author 郑明亮
+	 * @time 2022年2月19日 10:39:00
+	 * @since 1.3.6
+	 * @description <p>
+	 *              获取两个时间相差的分钟数值
+	 *              <br>
+	 * @param startDay  开始日期
+	 *
+	 * @param endDay  结束日期
+	 *
+	 * @return 间隔分钟数
+	 */
+	public static long getTimeGapsInMinutes(Date startDay, Date endDay) {
+		long milliseconds = getTimeGapsInMilliseconds(startDay, endDay);
+		return milliseconds / ONE_MINUTE;
+	}
+
+	/**
+	 * @author 郑明亮
+	 * @time 2022年2月19日 10:39:46
+	 * @since 1.3.6
+	 * @description <p>
+	 *              获取两个时间相差的小时值
+	 *              <br>
+	 * @param startDay  开始日期
+	 *
+	 * @param endDay  结束日期
+	 *
+	 * @return 间隔小时数
+	 */
+	public static long getTimeGapsInHours(Date startDay, Date endDay) {
+		long milliseconds = getTimeGapsInMilliseconds(startDay, endDay);
+		return milliseconds / ONE_HOUR;
 	}
 
 	/**
@@ -751,6 +842,22 @@ public class DateUtils {
 	}
 
 	/**
+	 * 获取今天的结束时间 即 某天的 23:59:59.999 时间
+	 * @return
+	 */
+	public static Date getEndOfDay(){
+		return getEndOfDay(new Date());
+	}
+
+	/**
+	 * 获取明天的开始时间 即 某天的 00:00:00.000 时间
+	 * @return
+	 */
+	public static Date getBeginOfTomorrow(){
+		return getBeginOfDay(getNextDay());
+	}
+
+	/**
 	 * 获取一天中开始的时间 即 {@code date}的 00:00:00.000 时间
 	 * @param date
 	 * @return
@@ -762,6 +869,21 @@ public class DateUtils {
 		calendar.set(Calendar.MINUTE,0);
 		calendar.set(Calendar.SECOND,0);
 		calendar.set(Calendar.MILLISECOND,0);
+		return calendar.getTime();
+	}
+
+	/**
+	 * 获取一天中结束的时间 即 {@code date}的 23:59:59.999 时间
+	 * @param date
+	 * @return
+	 */
+	public static Date getEndOfDay(Date date){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.HOUR_OF_DAY,23);
+		calendar.set(Calendar.MINUTE,59);
+		calendar.set(Calendar.SECOND,59);
+		calendar.set(Calendar.MILLISECOND,999);
 		return calendar.getTime();
 	}
 
