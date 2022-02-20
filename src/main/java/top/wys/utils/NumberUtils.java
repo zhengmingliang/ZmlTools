@@ -3,6 +3,8 @@ package top.wys.utils;
  * Created by 郑明亮 on 2021/12/4 16:49.
  */
 
+import top.wys.utils.convert.ConvertUtils;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.regex.Matcher;
@@ -243,6 +245,9 @@ public class NumberUtils {
      * @return num1 - num2
      */
     public static String subtract(String num1, String num2, int point) {
+        num1 = ConvertUtils.toNoneEmptyString(num1,"0");
+        num2 = ConvertUtils.toNoneEmptyString(num2,"0");
+
         BigDecimal subtract1Big = new BigDecimal(num1);
         BigDecimal subtract2Big = new BigDecimal(num2);
         String result = cutByPoint(subtract1Big.subtract(subtract2Big).toPlainString(), point);
@@ -258,6 +263,8 @@ public class NumberUtils {
      * @return
      */
     public static String add(String add1, String add2, int point) {
+        add1 = ConvertUtils.toNoneEmptyString(add1,"0");
+        add2 = ConvertUtils.toNoneEmptyString(add2,"0");
         BigDecimal add1Big = new BigDecimal(add1);
         BigDecimal add2Big = new BigDecimal(add2);
         String result = cutByPoint(add1Big.add(add2Big).toPlainString(), point);
@@ -275,9 +282,7 @@ public class NumberUtils {
         if (nums != null && nums.length > 0) {
             BigDecimal addDecimal = new BigDecimal(0);
             for (String num : nums) {
-                if (num == null) {
-                    num = "0";
-                }
+                num = ConvertUtils.toNoneEmptyString(num,"0");
                 BigDecimal decimal = new BigDecimal(num);
                 addDecimal = addDecimal.add(decimal);
             }
