@@ -299,6 +299,16 @@ public class RandomUtils {
     }
 
     /**
+     * 获取【start，end】之间的浮点数
+     * @param start 最小值
+     * @param end 最大值
+     * @return
+     */
+    public static double getDoubleNum(double start,double end) {
+        return (Math.random()*(end-start)+start);
+    }
+
+    /**
      * 返回中文姓名
      */
     private static String name_sex = "";
