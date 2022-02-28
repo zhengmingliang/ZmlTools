@@ -94,6 +94,50 @@ public class DataUtils {
         }
         return false;
     }
+
+    /**
+     * 当source 和targets中的任意一个相等，则返回true，否则返回false
+     * @param source 源对象
+     * @param targets 要比较的对象
+     * @return true or false
+     */
+    public static boolean orEquals(Object source,Object... targets){
+        if (source == null) {
+            return false;
+        }
+        if (targets == null){
+            return false;
+        }
+
+        for (Object target : targets) {
+            if (source.equals(target)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 当source 和targets中的任意一个相等，则返回true，否则返回false
+     * @param source 源对象
+     * @param targets 要比较的对象
+     * @return true or false
+     */
+    public static boolean orEqualsIgnoreCase(String source,Object... targets){
+        if (source == null) {
+            return false;
+        }
+        if (targets == null){
+            return false;
+        }
+
+        for (Object target : targets) {
+            if (source.equalsIgnoreCase(target.toString())){
+                return true;
+            }
+        }
+        return false;
+    }
     /**
      * 参数排序
      * @param map 参数
