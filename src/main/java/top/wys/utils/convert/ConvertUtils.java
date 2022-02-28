@@ -4,8 +4,10 @@ package top.wys.utils.convert;
  */
 
 import org.jetbrains.annotations.NotNull;
+import top.wys.utils.DataUtils;
 import top.wys.utils.DateUtils;
 import top.wys.utils.NumberUtils;
+import top.wys.utils.collection.Booleans;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -23,6 +25,7 @@ import java.util.Objects;
 public class ConvertUtils {
 
     private static final String NULL_STRING = "null";
+    private static final String[] TRUE_FLAGS = {"ok", "y","yes","t","true","1"};
 
     /**
      * 转换为字符串类型的数据
@@ -149,29 +152,35 @@ public class ConvertUtils {
      * @return
      */
     public static boolean toBoolean(Object obj) {
-        return toBoolean(obj, null);
+        return toBoolean(obj, TRUE_FLAGS);
     }
 
     /**
      * 转为布尔类型
      *
      * @param obj       要转换类型的对象
-     * @param trueValue 该对象和obj一样时，则返回true
+     * @param trueValues 该对象和obj一样时，则返回true
      * @return
      */
-    public static boolean toBoolean(Object obj, Object trueValue) {
+    public static boolean toBoolean(Object obj, Object... trueValues) {
         if (obj == null) {
             return false;
         }
         if (obj instanceof Boolean) {
             return Boolean.TRUE.equals(obj);
         }
-        if (trueValue != null) {
-            return Objects.equals(obj, trueValue);
+        if (obj instanceof CharSequence) {
+            boolean bool;
+            try {
+                bool = Boolean.parseBoolean(obj.toString());
+            } catch (Exception e) {
+                bool = DataUtils.orEqualsIgnoreCase(obj.toString(),trueValues);
+            }
+            return bool;
         }
 
-        if (obj instanceof CharSequence) {
-            return Boolean.parseBoolean(obj.toString());
+        if (trueValues != null && trueValues.length > 0) {
+            return DataUtils.orEqualsIgnoreCase(obj.toString(),trueValues);
         }
         return false;
     }
@@ -199,11 +208,33 @@ public class ConvertUtils {
                 return new BigDecimal(strValue).intValue();
             } catch (NumberFormatException e) {
                 strValue = getNumberString(strValue);
-                return new BigDecimal(strValue).intValue();
+                if (strValue.length() > 0) {
+                    return new BigDecimal(strValue).intValue();
+                } else {
+                    if (Booleans.isBoolean(strValue)) {
+                        return getNumberFromBoolean(strValue).intValue();
+                    }
+
+                }
+
             }
         }
 
         return Integer.parseInt(strValue);
+    }
+
+    /**
+     * 根据布尔类型获取数字， true 返回1，false返回0
+     * @param strValue
+     * @return 根据布尔类型获取数字， true 返回1，false返回0
+     */
+    public static Number getNumberFromBoolean(Object strValue) {
+        boolean bool = toBoolean(strValue,TRUE_FLAGS);
+        if(bool){
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     @NotNull
@@ -300,7 +331,13 @@ public class ConvertUtils {
                 return new BigDecimal(strValue).longValue();
             } catch (NumberFormatException e) {
                 strValue = getNumberString(strValue);
-                return new BigDecimal(strValue).longValue();
+                if (strValue.length() > 0) {
+                    return new BigDecimal(strValue).longValue();
+                } else {
+                    if (Booleans.isBoolean(strValue)) {
+                        return getNumberFromBoolean(strValue).longValue();
+                    }
+                }
             }
         }
 
@@ -350,10 +387,23 @@ public class ConvertUtils {
         if (obj == null) {
             return defaultValue;
         }
+        String strValue = obj.toString();
         try {
-            return new BigDecimal(obj.toString());
+            if (strValue.length() == 0) {
+                return BigDecimal.ZERO;
+            }
+            return new BigDecimal(strValue);
         } catch (Exception e) {
-            e.printStackTrace();
+            String numberString = getNumberString(strValue);
+            if (numberString.length() > 0) {
+                return new BigDecimal(numberString);
+            } else {
+                if (Booleans.isBoolean(numberString)) {
+                    return new BigDecimal(getNumberFromBoolean(numberString).intValue());
+                }
+
+            }
+
         }
         return defaultValue;
     }
