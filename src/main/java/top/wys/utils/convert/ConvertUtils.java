@@ -8,6 +8,7 @@ import top.wys.utils.DataUtils;
 import top.wys.utils.DateUtils;
 import top.wys.utils.NumberUtils;
 import top.wys.utils.collection.Booleans;
+import top.wys.utils.math.Numbers;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -207,9 +208,9 @@ public class ConvertUtils {
             try {
                 return new BigDecimal(strValue).intValue();
             } catch (NumberFormatException e) {
-                strValue = getNumberString(strValue);
-                if (strValue.length() > 0) {
-                    return new BigDecimal(strValue).intValue();
+                String number = DataUtils.getFirstNumber(strValue);
+                if (number.length() > 0) {
+                    return new BigDecimal(number).intValue();
                 } else {
                     if (Booleans.isBoolean(strValue)) {
                         return getNumberFromBoolean(strValue).intValue();
@@ -235,17 +236,6 @@ public class ConvertUtils {
         } else {
             return 0;
         }
-    }
-
-    @NotNull
-    private static String getNumberString(String strValue) {
-        char lastChar = strValue.charAt(strValue.length() - 1);
-        if(NumberUtils.isNotNumber(lastChar)){
-            strValue = strValue.substring(0, strValue.length() - 1);
-        }else if(strValue.charAt(0) == '.'){
-            strValue = "0" + strValue;
-        }
-        return strValue;
     }
 
     /**
@@ -284,8 +274,15 @@ public class ConvertUtils {
             try {
                 return new BigDecimal(strValue).doubleValue();
             } catch (NumberFormatException e) {
-                strValue = getNumberString(strValue);
-                return new BigDecimal(strValue).intValue();
+                String numberString = DataUtils.getFirstNumber(strValue);
+                if (numberString.length() > 0) {
+                    return new BigDecimal(numberString).doubleValue();
+                } else {
+                    if (Booleans.isBoolean(strValue)) {
+                        return getNumberFromBoolean(strValue).doubleValue();
+                    }
+                }
+
             }
         }
 
@@ -330,10 +327,11 @@ public class ConvertUtils {
             try {
                 return new BigDecimal(strValue).longValue();
             } catch (NumberFormatException e) {
-                strValue = getNumberString(strValue);
+                strValue = DataUtils.getFirstNumber(strValue);
                 if (strValue.length() > 0) {
                     return new BigDecimal(strValue).longValue();
                 } else {
+                    strValue = obj.toString();
                     if (Booleans.isBoolean(strValue)) {
                         return getNumberFromBoolean(strValue).longValue();
                     }
@@ -394,12 +392,12 @@ public class ConvertUtils {
             }
             return new BigDecimal(strValue);
         } catch (Exception e) {
-            String numberString = getNumberString(strValue);
+            String numberString = Numbers.getFirstNumber(strValue);
             if (numberString.length() > 0) {
                 return new BigDecimal(numberString);
             } else {
-                if (Booleans.isBoolean(numberString)) {
-                    return new BigDecimal(getNumberFromBoolean(numberString).intValue());
+                if (Booleans.isBoolean(strValue)) {
+                    return new BigDecimal(getNumberFromBoolean(strValue).intValue());
                 }
 
             }
