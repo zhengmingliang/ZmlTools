@@ -15,7 +15,7 @@ import top.wys.utils.StringUtils;
  * @version 1.0.0
  * @time 2022/2/7 0:27
  */
-public class Numbers {
+public class Numbers extends NumberUtils{
     private static final Integer ZERO_INT =   Integer.valueOf(0);
     private static final Long ZERO_LONG =   Long.valueOf(0);
 
