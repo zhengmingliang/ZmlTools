@@ -170,6 +170,16 @@ public class RandomUtils {
      * @return
      */
     public static String getRandomIdCard(int minAge,int maxAge) {
+        return IdCardGenerator.generate(minAge, maxAge);
+    }
+
+    /**
+     * 获取随机身份证号
+     * @see RandomUtils#getRandomIdCard(int, int)
+     * @return
+     */
+    @Deprecated
+    public static String getRandomIdCard2(int minAge,int maxAge) {
         String id = "";
 
         // 随机生成省、自治区、直辖市代码 1-2
