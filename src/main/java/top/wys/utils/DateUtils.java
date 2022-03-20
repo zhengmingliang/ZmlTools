@@ -4,6 +4,10 @@ import top.wys.utils.convert.ConvertUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
@@ -885,6 +889,60 @@ public class DateUtils {
 		calendar.set(Calendar.SECOND,59);
 		calendar.set(Calendar.MILLISECOND,999);
 		return calendar.getTime();
+	}
+
+	/**
+	 * 将LocalDateTime转为java.util.Date
+	 * @param localDateTime
+	 * @return
+	 */
+	public static Date toDate(LocalDateTime localDateTime){
+		Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
+		return Date.from(instant);
+	}
+
+	/**
+	 * 将localDateTime转为 java.util.Date
+	 * zoneId 时区id：
+	 * <ul>
+	 *      <li>{@code Z} - for UTC
+	 *      <li>{@code +h}
+	 *      <li>{@code +hh}
+	 *      <li>{@code +hh:mm}
+	 *      <li>{@code -hh:mm}
+	 *      <li>{@code +hhmm}
+	 *      <li>{@code -hhmm}
+	 *      <li>{@code +hh:mm:ss}
+	 *      <li>{@code -hh:mm:ss}
+	 *      <li>{@code +hhmmss}
+	 *      <li>{@code -hhmmss}
+	 *</ul>
+	 * @param localDateTime
+	 * @param zoneId 时区id（eg: +8 或 -8）{@link ZoneOffset#of(java.lang.String)}
+	 * @return
+	 */
+	public static Date toDate(LocalDateTime localDateTime,String zoneId){
+		Instant instant = localDateTime.toInstant(ZoneOffset.of(zoneId));
+		return Date.from(instant);
+	}
+
+	/**
+	 * 将java.util.Date 转换为 LocalDateTime（默认取当前环境所在时区）
+	 * @param date
+	 * @return
+	 */
+	public static LocalDateTime toLocalDateTime(Date date){
+		return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+	}
+
+	/**
+	 * 将java.util.Date 转换为 LocalDateTime（指定时区）
+	 * @param date
+	 * @param zoneId 时区id（eg: +8 或 -8）{@link ZoneOffset#of(java.lang.String)}
+	 * @return
+	 */
+	public static LocalDateTime toLocalDateTime(Date date,String zoneId){
+		return date.toInstant().atZone(ZoneId.of(zoneId)).toLocalDateTime();
 	}
 
 }
