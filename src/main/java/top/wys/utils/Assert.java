@@ -6,9 +6,7 @@
 
 package top.wys.utils;
 
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.ObjectUtils;
-import org.springframework.util.StringUtils;
+import top.wys.utils.collection.Collections;
 
 import java.util.Collection;
 import java.util.Map;
@@ -187,7 +185,7 @@ public abstract class Assert {
          * @throws IllegalArgumentException if the object array is {@code null} or has no elements
          */
         public static void notEmpty(Object[] array, String message) {
-            if (ObjectUtils.isEmpty(array)) {
+            if (Objects.isEmpty(array)) {
                 throw new IllegalArgumentException(message);
             }
         }
@@ -241,7 +239,7 @@ public abstract class Assert {
          * @throws IllegalArgumentException if the collection is {@code null} or has no elements
          */
         public static void notEmpty(Collection<?> collection, String message) {
-            if (CollectionUtils.isEmpty(collection)) {
+            if (Collections.isEmpty(collection)) {
                 throw new IllegalArgumentException(message);
             }
         }
@@ -267,7 +265,7 @@ public abstract class Assert {
          * @throws IllegalArgumentException if the map is {@code null} or has no entries
          */
         public static void notEmpty(Map<?, ?> map, String message) {
-            if (CollectionUtils.isEmpty(map)) {
+            if (Collections.isEmpty(map)) {
                 throw new IllegalArgumentException(message);
             }
         }
