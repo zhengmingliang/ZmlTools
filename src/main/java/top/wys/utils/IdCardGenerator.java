@@ -3552,6 +3552,18 @@ public class IdCardGenerator {
         generater.append(calcTrailingNumber(generater.toString().toCharArray()));
         return generater.toString();
     }
+    /**
+     * 生成18位随机身份证号
+     * @return
+     */
+    public static String generate(int minAge,int maxAge) {
+        StringBuilder generater = new StringBuilder();
+        generater.append(randomAreaCode());
+        generater.append(randomBirthday(minAge,maxAge));
+        generater.append(randomCode());
+        generater.append(calcTrailingNumber(generater.toString().toCharArray()));
+        return generater.toString();
+    }
 
     /**
      * 随机地区
@@ -3569,19 +3581,28 @@ public class IdCardGenerator {
         }
         return code;
     }
-
     /**
      * 随机出生日期
      * @return
      */
     private static String randomBirthday() {
+        return randomBirthday(18,50);
+    }
+    /**
+     * 随机出生日期
+     * @return
+     */
+    private static String randomBirthday(int minAge,int maxAge) {
         Calendar birthday = Calendar.getInstance();
-        birthday.set(Calendar.YEAR,  RandomUtils.nextInt(60) + 1950);
+        int year = birthday.get(Calendar.YEAR);
+        int age = RandomUtils.getNum(minAge, maxAge);
+        year = year - age ;
+        birthday.set(Calendar.YEAR, year);
         birthday.set(Calendar.MONTH, RandomUtils.getNum(1,12));
         birthday.set(Calendar.DATE, RandomUtils.getNum(1,31));
 
         StringBuilder builder = new StringBuilder();
-        builder.append(birthday.get(Calendar.YEAR));
+        builder.append(year);
         long month = birthday.get(Calendar.MONTH) + 1;
         if (month < 10) {
             builder.append("0");
