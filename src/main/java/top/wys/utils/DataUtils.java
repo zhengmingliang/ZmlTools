@@ -9,8 +9,6 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeanWrapperImpl;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -678,21 +676,11 @@ public class DataUtils {
      * @author 郑明亮
      * @time 2017年3月19日 下午4:35:13
      * @description <p>获取 从网络请求中请求到的文件名称  <br>
+     * @see FileUtils#getFileNameFromHttp(java.lang.String)
      */
+    @Deprecated
     public static String getFileNameFromHttp(String url) throws IOException {
-        String fileName = null;
-        OkHttpClient client = new OkHttpClient().newBuilder()
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .build();
-        Request request = new Request.Builder().url(url).build();
-        Response response = client.newCall(request).execute();
-        String disposition = response.header("Content-Disposition");
-        if (disposition != null) {
-            fileName = disposition.substring(disposition.indexOf('\"'), disposition.lastIndexOf('\"'));
-        }
-        //如果从Head中获取失败，则从URL中进行截取文件名称
-        return fileName == null ? getFileNameFromUrl(url) : fileName;
+        return FileUtils.getFileNameFromHttp(url);
 
     }
 
@@ -702,18 +690,11 @@ public class DataUtils {
      * @author 郑明亮
      * @time 2017年3月19日 下午4:35:13
      * @description <p>从网络请求中获取请求到的文件名称   <br>
+     * @see FileUtils#getFileNameFromHttp(okhttp3.Headers)
      */
+    @Deprecated
     public static String getFileNameFromHttp(Headers head){
-        log.info("Header中的值:{}" , head);
-        String fileName = null;
-        String disposition = head.get("Content-Disposition");
-        if (StringUtils.isNotEmpty(disposition)) {
-
-            disposition = disposition.replaceAll("\"", "");
-            fileName = disposition.substring(disposition.indexOf('=') + 1);
-        }
-        log.info("从Header中获取到的文件名称为：{}", fileName);
-        return fileName;
+        return FileUtils.getFileNameFromHttp(head);
 
     }
 
@@ -724,24 +705,12 @@ public class DataUtils {
      * @author 郑明亮
      * @time 2017年3月19日 下午4:41:50
      * @description <p> 从URL中截取文件名称  <br>
+     * @see FileUtils#getFileNameFromUrl(java.lang.String)
      */
+    @Deprecated
     public static String getFileNameFromUrl(String url)
             throws UnsupportedEncodingException {
-        String fileName = "";
-        //如果URL结尾不是文件名，而是相关参数，则截取?前的内容
-        if (url.contains("?")) {
-            url = url.substring(0, url.indexOf('?'));
-        }
-
-        //对URL进行解码处理
-        try {
-            fileName = URLDecoder.decode(url.substring(url.lastIndexOf('/') + 1), "utf-8");
-
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        log.info("从URL中截取到的文件名：{}", fileName);
-        return fileName;
+        return FileUtils.getFileNameFromUrl(url);
     }
 
     /**
@@ -1345,18 +1314,20 @@ public class DataUtils {
      * @return
      */
     public static String[] getNullPropertyNames(Object source) {
-        final BeanWrapper src = new BeanWrapperImpl(source);
-        java.beans.PropertyDescriptor[] pds = src.getPropertyDescriptors();
-
-        Set<String> emptyNames = new HashSet<>();
-        for (java.beans.PropertyDescriptor pd : pds) {
-            Object srcValue = src.getPropertyValue(pd.getName());
-            if (srcValue == null) {
-                emptyNames.add(pd.getName());
+        Field[] fields = ReflectionUtils.getAllFields(source);
+        List<String> list = new ArrayList<>();
+        for (Field field : fields) {
+            ReflectionUtils.makeAccessible(field);
+            try {
+                Object value = field.get(source);
+                if (value == null) {
+                    list.add(field.getName());
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
             }
         }
-        String[] result = new String[emptyNames.size()];
-        return emptyNames.toArray(result);
+        return list.toArray(new String[0]);
     }
 
     /**
