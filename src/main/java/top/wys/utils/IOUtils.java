@@ -6,12 +6,9 @@ package top.wys.utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.ByteArrayOutputStream;
-import java.io.Closeable;
-import java.io.Flushable;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author 郑明亮   @email 1072307340@qq.com
@@ -130,4 +127,47 @@ public class IOUtils {
             log.error("刷盘异常",e);
         }
     }
+
+    public static InputStream getInputStream(File file){
+        try {
+            return new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            log.error("文件不存在",e);
+        }
+        return null;
+
+    }
+
+    public static InputStream getInputStream(String path){
+       return getInputStream(new File(path));
+    }
+
+    public static InputStream getInputStream(byte[] bytes){
+       return new ByteArrayInputStream(bytes);
+    }
+
+
+    public static Reader getReader(File file){
+        try {
+            return new FileReader(file);
+        } catch (FileNotFoundException e) {
+            log.error("文件不存在",e);
+        }
+        return null;
+
+    }
+
+    public static Reader getReader(InputStream inputStream){
+        return new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+    }
+
+    public static Reader getReader(String path){
+       return getReader(new File(path));
+    }
+
+    public static Reader getReader(String path,Charset charset){
+       return new StringReader(FileUtils.readTxtFile(path,charset.name()));
+    }
+
+
 }
