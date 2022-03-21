@@ -3,14 +3,13 @@ package top.wys.utils;
 
 import com.google.common.collect.Lists;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
+import javax.annotation.Nullable;
+import java.lang.reflect.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
@@ -19,6 +18,22 @@ import java.util.List;
  * @description <p> 反射相关工具类<br>
  */
 public class ReflectionUtils {
+
+
+	private static final Method[] EMPTY_METHOD_ARRAY = new Method[0];
+
+	/**
+	 * Cache for {@link Class#getDeclaredFields()}, allowing for fast iteration.
+	 */
+	private static final Map<Class<?>, Field[]> declaredFieldsCache = new ConcurrentHashMap<>(256);
+
+	/**
+	 * Cache for {@link Class#getDeclaredMethods()} plus equivalent default methods
+	 * from Java 8 based interfaces, allowing for fast iteration.
+	 */
+	private static final Map<Class<?>, Method[]> declaredMethodsCache = new ConcurrentHashMap<>(256);
+
+
 	private ReflectionUtils() {
 		throw new UnsupportedOperationException(" you can not instantiate me");
 	}
@@ -153,13 +168,18 @@ public class ReflectionUtils {
 	 */
 	public static Field[] getAllFields(Object object){
 		Class clazz = object.getClass();
+		Field[] fields = declaredFieldsCache.get(clazz);
+		if (fields != null) {
+			return fields;
+		}
 		List<Field> fieldList = new ArrayList<Field>();
 		while (clazz != null){
 			fieldList.addAll(Arrays.asList(clazz.getDeclaredFields()));
 			clazz = clazz.getSuperclass();
 		}
-		Field[] fields = new Field[fieldList.size()];
+		fields = new Field[fieldList.size()];
 		fieldList.toArray(fields);
+		declaredFieldsCache.put(object.getClass(), fields);
 		return fields;
 	}
 
@@ -218,5 +238,119 @@ public class ReflectionUtils {
 		}
 
 		return currentType;
+	}
+
+	/**
+	 * 使给定的方法可访问，如果需要，显式地将其设置为可访问。setAccessible（true）方法仅在实际需要时调用，
+	 * 以避免与JVM SecurityManager（如果处于活动状态）发生不必要的冲突
+	 *
+	 * @param field 字段
+	 */
+	public static void makeAccessible(Field field) {
+		if ((!Modifier.isPublic(field.getModifiers()) ||
+				!Modifier.isPublic(field.getDeclaringClass().getModifiers()) ||
+				Modifier.isFinal(field.getModifiers())) && !field.isAccessible()) {
+			field.setAccessible(true);
+		}
+	}
+
+	/**
+	 * 使给定的字段可访问，如果需要，显式地将其设置为可访问。setAccessible（true）方法仅在实际需要时调用，
+	 * 以避免与JVM SecurityManager（如果处于活动状态）发生不必要的冲突
+	 * @param method 方法
+	 */
+	public static void makeAccessible(Method method) {
+		if ((!Modifier.isPublic(method.getModifiers()) ||
+				!Modifier.isPublic(method.getDeclaringClass().getModifiers())) && !method.isAccessible()) {
+			method.setAccessible(true);
+		}
+	}
+
+	public static boolean isEqualsMethod(@Nullable Method method) {
+		if (method == null || !method.getName().equals("equals")) {
+			return false;
+		}
+		if (method.getParameterCount() != 1) {
+			return false;
+		}
+		return method.getParameterTypes()[0] == Object.class;
+	}
+
+	/**
+	 * Determine whether the given method is a "hashCode" method.
+	 * @see java.lang.Object#hashCode()
+	 */
+	public static boolean isHashCodeMethod(@Nullable Method method) {
+		return (method != null && method.getName().equals("hashCode") && method.getParameterCount() == 0);
+	}
+
+	/**
+	 * Determine whether the given method is a "toString" method.
+	 * @see java.lang.Object#toString()
+	 */
+	public static boolean isToStringMethod(@Nullable Method method) {
+		return (method != null && method.getName().equals("toString") && method.getParameterCount() == 0);
+	}
+
+	/**
+	 * Determine whether the given method is originally declared by {@link java.lang.Object}.
+	 */
+	public static boolean isObjectMethod(@Nullable Method method) {
+		return (method != null && (method.getDeclaringClass() == Object.class ||
+				isEqualsMethod(method) || isHashCodeMethod(method) || isToStringMethod(method)));
+	}
+
+	public static Method[] getDeclaredMethods(Class<?> clazz) {
+		return getDeclaredMethods(clazz, true);
+	}
+
+	private static Method[] getDeclaredMethods(Class<?> clazz, boolean defensive) {
+		Assert.notNull(clazz, "Class must not be null");
+		Method[] result = declaredMethodsCache.get(clazz);
+		if (result == null) {
+			try {
+				Method[] declaredMethods = clazz.getDeclaredMethods();
+				List<Method> defaultMethods = findConcreteMethodsOnInterfaces(clazz);
+				if (defaultMethods != null) {
+					result = new Method[declaredMethods.length + defaultMethods.size()];
+					System.arraycopy(declaredMethods, 0, result, 0, declaredMethods.length);
+					int index = declaredMethods.length;
+					for (Method defaultMethod : defaultMethods) {
+						result[index] = defaultMethod;
+						index++;
+					}
+				}
+				else {
+					result = declaredMethods;
+				}
+				declaredMethodsCache.put(clazz, (result.length == 0 ? EMPTY_METHOD_ARRAY : result));
+			}
+			catch (Throwable ex) {
+				throw new IllegalStateException("Failed to introspect Class [" + clazz.getName() +
+						"] from ClassLoader [" + clazz.getClassLoader() + "]", ex);
+			}
+		}
+		return (result.length == 0 || !defensive) ? result : result.clone();
+	}
+
+	@Nullable
+	private static List<Method> findConcreteMethodsOnInterfaces(Class<?> clazz) {
+		List<Method> result = null;
+		for (Class<?> ifc : clazz.getInterfaces()) {
+			for (Method ifcMethod : ifc.getMethods()) {
+				if (!Modifier.isAbstract(ifcMethod.getModifiers())) {
+					if (result == null) {
+						result = new ArrayList<>();
+					}
+					result.add(ifcMethod);
+				}
+			}
+		}
+		return result;
+	}
+
+	public static void clearCache() {
+//		declaredMethodsCache.clear();
+		declaredFieldsCache.clear();
 	}
 }
