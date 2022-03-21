@@ -1,5 +1,7 @@
 package top.wys.utils;
 
+import top.wys.utils.io.AutoLoadProperties;
+
 import java.util.Map;
 
 /**
