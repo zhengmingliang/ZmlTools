@@ -1,5 +1,9 @@
 package top.wys.utils;
 
+import okhttp3.Headers;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +19,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.file.CopyOption;
@@ -22,16 +27,33 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+
+import static top.wys.utils.StringUtils.delimitedListToStringArray;
 
 
 /**
  * This class provides methods to create new file/directory
  */
 public class FileUtils {
+
+
+    private static final String FOLDER_SEPARATOR = "/";
+
+    private static final String WINDOWS_FOLDER_SEPARATOR = "\\";
+
+    private static final String TOP_PATH = "..";
+
+    private static final String CURRENT_PATH = ".";
+
+    private static final char EXTENSION_SEPARATOR = '.';
+
     private static final Logger log = LoggerFactory.getLogger(FileUtils.class);
     /**
      * 默认缓存区大小（默认50KB）
@@ -800,5 +822,151 @@ public class FileUtils {
         }
         System.out.println("File content type is : " + contentType);
         return contentType;
+    }
+
+
+    /**
+     * 通过抑制像 "../" 和 "." 这样的序列来规范化路径
+     * <p>结果便于路径比较。对于其他用途，请注意 Windows 分隔符 ("\") 被简单的斜杠替换
+     * @param path 原始路径
+     * @return 规范化后的路径
+     */
+    public static String cleanPath(String path) {
+        if (path == null) {
+            return null;
+        }
+        String pathToUse = StringUtils.replace(path, WINDOWS_FOLDER_SEPARATOR, FOLDER_SEPARATOR);
+
+        // Strip prefix from path to analyze, to not treat it as part of the
+        // first path element. This is necessary to correctly parse paths like
+        // "file:core/../core/io/Resource.class", where the ".." should just
+        // strip the first "core" directory while keeping the "file:" prefix.
+        int prefixIndex = pathToUse.indexOf(":");
+        String prefix = "";
+        if (prefixIndex != -1) {
+            prefix = pathToUse.substring(0, prefixIndex + 1);
+            if (prefix.contains("/")) {
+                prefix = "";
+            }
+            else {
+                pathToUse = pathToUse.substring(prefixIndex + 1);
+            }
+        }
+        if (pathToUse.startsWith(FOLDER_SEPARATOR)) {
+            prefix = prefix + FOLDER_SEPARATOR;
+            pathToUse = pathToUse.substring(1);
+        }
+
+        String[] pathArray = delimitedListToStringArray(pathToUse, FOLDER_SEPARATOR);
+        List<String> pathElements = new LinkedList<String>();
+        int tops = 0;
+
+        for (int i = pathArray.length - 1; i >= 0; i--) {
+            String element = pathArray[i];
+            if (CURRENT_PATH.equals(element)) {
+                // Points to current directory - drop it.
+            }
+            else if (TOP_PATH.equals(element)) {
+                // Registering top path found.
+                tops++;
+            }
+            else {
+                if (tops > 0) {
+                    // Merging path element with element corresponding to top path.
+                    tops--;
+                }
+                else {
+                    // Normal path element found.
+                    pathElements.add(0, element);
+                }
+            }
+        }
+
+        // Remaining top paths need to be retained.
+        for (int i = 0; i < tops; i++) {
+            pathElements.add(0, TOP_PATH);
+        }
+
+        return prefix + StringUtils.collectionToDelimitedString(pathElements, FOLDER_SEPARATOR);
+    }
+
+    /**
+     * @param url 网络请求
+     * @return 文件名称
+     * @throws IOException 网络超时等异常
+     * @author 郑明亮
+     * @time 2017年3月19日 下午4:35:13
+     * @description <p>获取 从网络请求中请求到的文件名称  <br>
+     */
+    public static String getFileNameFromHttp(String url) throws IOException {
+        String fileName = null;
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .build();
+        Request request = new Request.Builder().url(url).build();
+        Response response = client.newCall(request).execute();
+        String disposition = response.header("Content-Disposition");
+        if (disposition != null) {
+            fileName = disposition.substring(disposition.indexOf('\"'), disposition.lastIndexOf('\"'));
+        }
+        //如果从Head中获取失败，则从URL中进行截取文件名称
+        return fileName == null ? getFileNameFromUrl(url) : fileName;
+
+    }
+
+    /**
+     * @param head OkHttp3  Header
+     * @return 文件名称
+     * @author 郑明亮
+     * @time 2017年3月19日 下午4:35:13
+     * @description <p>从网络请求中获取请求到的文件名称   <br>
+     */
+    public static String getFileNameFromHttp(Headers head){
+        log.info("Header中的值:{}" , head);
+        String fileName = null;
+        String disposition = head.get("Content-Disposition");
+        if (StringUtils.isNotEmpty(disposition)) {
+
+            disposition = disposition.replaceAll("\"", "");
+            fileName = disposition.substring(disposition.indexOf('=') + 1);
+        }
+        log.info("从Header中获取到的文件名称为：{}", fileName);
+        return fileName;
+
+    }
+
+    /**
+     * @param url 从http URL中截取文件名称
+     * @return
+     * @throws UnsupportedEncodingException 解码异常
+     * @author 郑明亮
+     * @time 2017年3月19日 下午4:41:50
+     * @description <p> 从URL中截取文件名称  <br>
+     */
+    public static String getFileNameFromUrl(String url){
+        String fileName = "";
+        //如果URL结尾不是文件名，而是相关参数，则截取?前的内容
+        if (url.contains("?")) {
+            url = url.substring(0, url.indexOf('?'));
+        }
+
+        //对URL进行解码处理
+        try {
+            fileName = URLDecoder.decode(url.substring(url.lastIndexOf('/') + 1), "utf-8");
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        log.info("从URL中截取到的文件名：{}", fileName);
+        return fileName;
+    }
+
+    public static String getFileNameFromPath(String path){
+        if (path.startsWith("http")) {
+            return getFileNameFromUrl(path);
+        }
+        File file = new File(path);
+        return file.getName();
     }
 }
