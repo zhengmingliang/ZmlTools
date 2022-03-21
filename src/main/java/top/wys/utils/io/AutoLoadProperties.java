@@ -1,9 +1,7 @@
-package top.wys.utils;
+package top.wys.utils.io;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -95,7 +93,7 @@ public class AutoLoadProperties implements Runnable {
 	 */
 	private void loadPropertieFile(File configFile) {  
 	        try {  
-	            Properties properties = PropertiesLoaderUtils.loadProperties(new FileSystemResource(configFile));  
+	            Properties properties = PropertiesLoaderUtils.loadProperties(configFile);
 	            for(String key:properties.stringPropertyNames()){  
 	                String value=properties.getProperty(key);  
 	  
