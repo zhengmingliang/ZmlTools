@@ -3,7 +3,12 @@
  */
 package top.wys.utils;
 
+import top.wys.utils.collection.Collections;
+
 import javax.annotation.Nullable;
+import java.lang.reflect.Array;
+import java.util.Collection;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -34,5 +39,62 @@ public class Objects {
             return result;
         }
         return obj;
+    }
+
+    /**
+     * 确定给定对象是否为空.
+     * <p>此方法支持以下对象类型.
+     * <ul>
+     * <li>{@code Optional}: considered empty if {@link Optional#empty()}</li>
+     * <li>{@code Array}: considered empty if its length is zero</li>
+     * <li>{@link CharSequence}: considered empty if its length is zero</li>
+     * <li>{@link Collection}: delegates to {@link Collection#isEmpty()}</li>
+     * <li>{@link Map}: delegates to {@link Map#isEmpty()}</li>
+     * </ul>
+     * <p>If the given object is non-null and not one of the aforementioned
+     * supported types, this method returns {@code false}.
+     * @param obj the object to check
+     * @return {@code true} if the object is {@code null} or <em>empty</em>
+     * @since 4.2
+     * @see Optional#isPresent()
+     * @see Objects#isEmpty(Object[])
+     * @see StringUtils#hasLength(CharSequence)
+     * @see StringUtils#isEmpty(Object)
+     * @see Collections#isEmpty(java.util.Collection)
+     * @see Collections#isEmpty(java.util.Map)
+     */
+    public static boolean isEmpty(@Nullable Object obj) {
+        if (obj == null) {
+            return true;
+        }
+
+        if (obj instanceof Optional) {
+            return !((Optional) obj).isPresent();
+        }
+        if (obj instanceof CharSequence) {
+            return ((CharSequence) obj).length() == 0;
+        }
+        if (obj.getClass().isArray()) {
+            return Array.getLength(obj) == 0;
+        }
+        if (obj instanceof Collection) {
+            return ((Collection) obj).isEmpty();
+        }
+        if (obj instanceof Map) {
+            return ((Map) obj).isEmpty();
+        }
+
+        // else
+        return false;
+    }
+
+    /**
+     * 判断给定数组是否为空:
+     * i.e. {@code null} or of zero length.
+     * @param array the array to check
+     * @see #isEmpty(Object)
+     */
+    public static boolean isEmpty(@Nullable Object[] array) {
+        return (array == null || array.length == 0);
     }
 }
