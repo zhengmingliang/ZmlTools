@@ -1,8 +1,8 @@
 package top.wys.utils;
 
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.ObjectUtils;
+import org.apache.commons.collections.CollectionUtils;
 
+import javax.annotation.Nullable;
 import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -502,7 +502,7 @@ public class StringUtils {
      * @return the sorted array (never {@code null})
      */
     public static String[] sortStringArray(String[] array) {
-        if (ObjectUtils.isEmpty(array)) {
+        if (Objects.isEmpty(array)) {
             return new String[0];
         }
         Arrays.sort(array);
@@ -613,4 +613,29 @@ public class StringUtils {
     public static String collectionToDelimitedString(Collection<?> coll, String delim) {
         return collectionToDelimitedString(coll, delim, "", "");
     }
+
+    /**
+     * Check whether the given {@code String} contains actual <em>text</em>.
+     * <p>More specifically, this method returns {@code true} if the
+     * {@code String} is not {@code null}, its length is greater than 0,
+     * and it contains at least one non-whitespace character.
+     * @param str the {@code String} to check (may be {@code null})
+     * @return {@code true} if the {@code String} is not {@code null}, its
+     * length is greater than 0, and it does not contain whitespace only
+     * @see Character#isWhitespace
+     */
+    public static boolean hasText(@Nullable String str) {
+        return (str != null && !str.isEmpty() && containsText(str));
+    }
+
+    private static boolean containsText(CharSequence str) {
+        int strLen = str.length();
+        for (int i = 0; i < strLen; i++) {
+            if (!Character.isWhitespace(str.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
