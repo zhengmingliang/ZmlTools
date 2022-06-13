@@ -638,4 +638,48 @@ public class StringUtils {
         return false;
     }
 
+    /**
+     * 清理数据（去除掉文本前后不需要的引号）
+     *
+     * @param text 文本
+     * @return {@link String}
+     */
+    public static String cleanValue(String text) {
+        if(text == null){
+            return null;
+        }
+
+        if (text.startsWith("\"")) {
+            text = text.substring(1);
+        }
+        if (text.endsWith("\"")) {
+            text = text.substring(0,text.length()- 1);
+        }
+
+        return text;
+    }
+
+    /**
+     * 清理数据（去除掉文本前后不需要的数据）
+     *
+     * @param text   文本
+     * @param prefix 前缀，将把该前缀从{@param text}文本中移除掉
+     * @param suffix 后缀，将把该后缀从{@param text}文本中移除掉
+     * @return {@link String}
+     */
+    public static String cleanValue(String text,String prefix,String suffix) {
+        if(text == null){
+            return null;
+        }
+
+        if (text.startsWith(prefix)) {
+            text = text.substring(prefix.length());
+        }
+        if (text.endsWith(suffix)) {
+            text = text.substring(0,text.length()- suffix.length());
+        }
+
+        return text;
+    }
+
 }
