@@ -4,29 +4,23 @@ package top.wys.utils;/**
 
 
 import com.google.common.collect.Lists;
+import top.wys.utils.crypto.AESCrypt;
+import top.wys.utils.crypto.AwaruaTiger;
+import top.wys.utils.crypto.Crypt;
+import top.wys.utils.crypto.DESCrypt;
+import top.wys.utils.io.FileType;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
+import javax.crypto.Cipher;
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.io.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.security.InvalidKeyException;
-import java.security.KeyFactory;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.PublicKey;
+import java.nio.file.Files;
+import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
@@ -34,15 +28,6 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import javax.crypto.Cipher;
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-
-import top.wys.utils.crypto.AESCrypt;
-import top.wys.utils.crypto.AwaruaTiger;
-import top.wys.utils.crypto.Crypt;
-import top.wys.utils.crypto.DESCrypt;
 
 /**
  * @author 郑明亮   @email 1072307340@qq.com
@@ -165,6 +150,133 @@ public class EncryptUtils {
     public static String md5(String string) {
         return messageDigest(string,MD5);
     }
+
+    /**
+     * base64加密
+     * @param text 待加密字符
+     * @return 加密后的字符
+     */
+    public static String base64Encode(String text) {
+        if (text == null) {
+            return null;
+        }
+        return Base64.getEncoder().encodeToString(text.getBytes(StandardCharsets.UTF_8));
+    }
+
+    /**
+     * base64加密
+     * @param file 待加密文件
+     * @return 加密后的字符
+     */
+    public static String base64Encode(File file) {
+        if (file == null || !(file.isFile() && file.canRead())) {
+            return null;
+        }
+        try {
+            return Base64.getEncoder().encodeToString(Files.readAllBytes(file.toPath()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * base64加密
+     * @param bytes 待加密字节
+     * @return 加密后的字符
+     */
+    public static byte[] base64Encode(byte[] bytes) {
+        return Base64.getEncoder().encode(bytes);
+    }
+
+    /**
+     * @param text 待解密字符串
+     * @return 加密后的字符
+     */
+    public static String base64Decode(String text) {
+
+        if (text == null) {
+            return null;
+        }
+        byte[] decode = Base64.getDecoder().decode(text);
+        return new String(decode, StandardCharsets.UTF_8);
+
+    }
+
+    /**
+     * 将文件转换为base64字符串,并拼接上图片标识的base64前缀,如 <code>data:image/png;base64,</code>
+     * @param file 待加密字节
+     * @return 加密后的字符
+     */
+    public static String base64EncodeWithPrefix(File file) {
+        String encode = base64Encode(file);
+        if (encode == null) {
+            return null;
+        }
+        encode = "data:" + FileUtils.getContentType(file) + ";base64," + encode;
+        return encode;
+    }
+
+    /**
+     * base64解码文件
+     *
+     * @param text     待解密字符串
+     * @param filePath 文件路径
+     * @return 加密后的字符
+     */
+    public static File base64DecodeFile(String text,String filePath) {
+
+        if (text == null) {
+            return null;
+        }
+
+        String suffix = "";
+        if (text.startsWith("data:")) {
+            int base64Position = text.indexOf("base64");
+            String contentType = text.substring(5, base64Position - 1);
+            suffix = FileType.getSuffixByMimeType(contentType);
+            text = text.substring(base64Position + 7);
+        }
+        File path = new File(filePath);
+        File file ;
+        if (path.isDirectory()) {
+            if (!path.exists()) {
+                path.mkdirs();
+            }
+            file = new File(filePath + File.separator + System.currentTimeMillis() + "." +  suffix);
+        }else {
+            file = path;
+        }
+        try(FileOutputStream fos = new FileOutputStream(file)) {
+            byte[] decode = Base64.getDecoder().decode(text);
+            for (int i = 0; i < decode.length; i++) {
+                if (decode[i] < 0) {
+                    decode[i] +=256;
+                }
+
+            }
+           /* RenderedImage image = ImageIO.read(new ByteArrayInputStream(decode));;
+            ImageIO.write(image,suffix,file);*/
+            fos.write(decode);
+
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return file;
+    }
+    /**
+     * @param text 待解密字符串
+     * @return 加密后的字符
+     */
+    public static File base64DecodeFile(String text) {
+
+        return base64DecodeFile(text,Systems.USER_DIR);
+
+    }
+
+
     /**
      * @param source 需要加密的文本（明文密码）
      * @param salt   作料、盐值
