@@ -43,6 +43,8 @@ public class SnowFlakeIdWorker {
     private long datacenterId;
     private long sequence;
 
+    public static final SnowFlakeIdWorker INSTANCE = new SnowFlakeIdWorker(10,10,100);
+
     /**
      * @param workerId 工作机器ID(0~31)
      * @param datacenterId 数据中心ID(0~31)
@@ -150,6 +152,10 @@ public class SnowFlakeIdWorker {
                 (datacenterId << datacenterIdShift) |
                 (workerId << workerIdShift) |
                 sequence;
+    }
+
+    public String nextStringId(){
+        return nextId() + "";
     }
 
     /**
