@@ -30,10 +30,13 @@ public class FileType {
     private FileType(){}
     static{
         getAllFileType(); //初始化文件类型信息
-        InputStream is = FileType.class.getResourceAsStream("/filetype.properties");
         mimeTypeMap = new Properties();
         try {
-            mimeTypeMap.load(is);
+        InputStream is = FileType.class.getResourceAsStream("/filetype.properties");
+        mimeTypeMap.load(is);
+            Properties properties = new Properties();
+            properties.load(FileType.class.getResourceAsStream("/mimetype.properties"));
+            mimeTypeMap.putAll(properties);
         } catch (IOException e) {
 
         }
@@ -183,6 +186,9 @@ public class FileType {
      * @return
      */
     public static String getSuffixByMimeType(String mimeType){
+        return mimeTypeMap.getProperty(mimeType, "");
+    }
+    public static String getMimeTypeBySuffix(String mimeType){
         return mimeTypeMap.getProperty(mimeType, "");
     }
 
