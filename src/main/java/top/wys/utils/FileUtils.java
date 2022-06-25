@@ -271,53 +271,6 @@ public class FileUtils {
         return dir.delete();
     }
 
-    public static void main(String args[]) {
-        String fName = " D:\\slient\\a\\2016070500000001.zip ";
-
-        File tempFile = new File(fName.trim());
-        String fileName = tempFile.getName();
-        System.out.println("fileName = " + fileName);
-
-
-		/*String filePath = "D:/slient/a/b/g.xml";
-		String filePath1  = "D:/slient/a/b/g.jpg";
-		String filePath2  = "D:/test.jpg";
-		File file = new File(filePath);
-		File file1 = new File(filePath1);
-		File file2 = new File(filePath2);
-		try {
-//			System.out.println("file.exists()? " + file.exists());
-			boolean created = createFile(file);
-//
-			writeFile(filePath,"11");
-//
-//			System.out.println(created?"File created":"File exists, not created.");
-//			System.out.println("file.exists()? " + file.exists());
-
-
-			nioTransferCopyFile(file2,file1);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
-
-//		String sourceFilePath = "D:\\var\\image\\1";
-//        String zipFilePath = "D:\\var\\image";
-//        String fileName = "12700153file";
-//        boolean flag = fileToZip(sourceFilePath, zipFilePath, fileName);
-//        if(flag){
-//            System.out.println("文件打包成功!");
-//        }else{
-//            System.out.println("文件打包失败!");
-//        }
-
-//		String filePath = "D:\\slient\\a\\QLCXD20160629LYGJ00000000";
-//		deleteDir(new File(filePath));
-
-//		String dirPath = Constants.IMAGE_TRANS_FOLDER + "QLCXD20160707" + "/JPG";
-//
-//		FileUtils.deleteDir(new File(dirPath));
-    }
 
     /**
      * @param filePath 纯文本文件路径
@@ -820,7 +773,6 @@ public class FileUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("File content type is : " + contentType);
         return contentType;
     }
 
