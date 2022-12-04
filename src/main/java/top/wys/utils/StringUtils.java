@@ -1,9 +1,8 @@
 package top.wys.utils;
 
 import org.apache.commons.collections.CollectionUtils;
-import top.wys.utils.valid.Preconditions;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
-import javax.annotation.Nullable;
 import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
