@@ -1,0 +1,25 @@
+{
+    "code": "create_time",
+    "textCode": "创建时间",
+    "dimType": 0,
+    "fieldText": "create_time",
+    "type": 1,
+    "field": "create_time",
+    "tableid": "40286781754a16f901754aa3d2320018",
+    "aggType": "",
+    "fieldtype": "date",
+    "fieldFilter": [
+      {
+        "filterType": 1,
+        "fieldSubFilters": [
+          {
+            "field": "create_time",
+            "relation": "equals",
+            "value": "2020"
+          }
+        ],
+        "timePattern": "YEAR"
+      }
+    ],
+    "timePattern": "YEAR_QUARTERLY"
+  }
