@@ -1,6 +1,7 @@
 package top.wys.utils;
 
 import org.apache.commons.collections.CollectionUtils;
+import top.wys.utils.valid.Preconditions;
 
 import javax.annotation.Nullable;
 import java.io.UnsupportedEncodingException;
@@ -680,6 +681,70 @@ public class StringUtils {
         }
 
         return text;
+    }
+
+
+    /**
+     * 返回给定的模板字符串，每次出现的“%s”都替换为args中的相应参数值；或者，如果占位符和参数计数不匹配，则返回该字符串的尽力而为形式。在正常情况下不会引发异常。
+     *
+     *
+     * <p><b>注意:</b> 仅识别精确的两个字符占位符序列 {@code "%s"}
+     *
+     * @param template  一个包含0个或多个 {@code "%s"} 占位符的字符串. {@code null} 会被转换为字符串 {@code "null"}.
+     * @param args 要替换到消息模板中的参数. 指定的第一个参数将替换模板中第一次出现的 {@code "%s"} ,后面参数依次类推. 如果是 {@code null} 则会转换位字符串 {@code "null"};
+     *      非null的值将会通过 {@link Object#toString()} 转换为字符串.
+     * @since 1.4.1
+     */
+    public static String lenientFormat(
+            @Nullable String template, @Nullable Object @Nullable ... args) {
+        template = String.valueOf(template); // null -> "null"
+
+        if (args == null) {
+            args = new Object[] {"(Object[])null"};
+        } else {
+            for (int i = 0; i < args.length; i++) {
+                args[i] = lenientToString(args[i]);
+            }
+        }
+
+        // start substituting the arguments into the '%s' placeholders
+        StringBuilder builder = new StringBuilder(template.length() + 16 * args.length);
+        int templateStart = 0;
+        int i = 0;
+        while (i < args.length) {
+            int placeholderStart = template.indexOf("%s", templateStart);
+            if (placeholderStart == -1) {
+                break;
+            }
+            builder.append(template, templateStart, placeholderStart);
+            builder.append(args[i++]);
+            templateStart = placeholderStart + 2;
+        }
+        builder.append(template, templateStart, template.length());
+
+        // if we run out of placeholders, append the extra args in square braces
+        if (i < args.length) {
+            builder.append(" [");
+            builder.append(args[i++]);
+            while (i < args.length) {
+                builder.append(", ");
+                builder.append(args[i++]);
+            }
+            builder.append(']');
+        }
+
+        return builder.toString();
+    }
+
+    private static String lenientToString(@Nullable Object o) {
+        try {
+            return String.valueOf(o);
+        } catch (Exception e) {
+            // Default toString() behavior - see Object.toString()
+            String objectToString =
+                    o.getClass().getName() + '@' + Integer.toHexString(System.identityHashCode(o));
+            return "<" + objectToString + " threw " + e.getClass().getName() + ">";
+        }
     }
 
 }
