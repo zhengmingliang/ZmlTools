@@ -1,0 +1,18 @@
+version: '3'
+services:
+  oracle11:
+    image: jaspeen/oracle-11g
+    privileged: true
+    container_name: oracle11g
+    restart: on-failure
+    environment:
+      - ORACLE_BASE=/opt/oracle/app
+      - ORACLE_HOME=$ORACLE_BASE/product/11.2.0/dbhome_1
+      - ORACLE_SID=orcl
+      - PATH=$ORACLE_HOME/bin:$PATH
+      - LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH
+    volumes:
+      - ./install:/install
+      - ./dpdump11:/opt/oracle/dpdump
+    ports:
+      - 1521:1521

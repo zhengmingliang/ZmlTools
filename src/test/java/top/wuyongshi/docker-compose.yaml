@@ -1,0 +1,16 @@
+version: '3'
+services:
+  oracle:
+    environment:
+      - DB_SID=orcl
+      - DB_PDB=icell
+      - DB_MEMORY=4g
+    image: store/oracle/database-enterprise:12.2.0.1
+    restart: on-failure
+    container_name: oracle-east
+    volumes:
+      - OracleDBData:/ORCL
+    ports:
+      - 1521:5500
+volumes:
+  OracleDBData:
