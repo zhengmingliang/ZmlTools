@@ -74,6 +74,14 @@ public class Test {
     }
 
     @org.junit.Test
+    public void flakeId() {
+        for (int i = 0; i < 100; i++) {
+            System.out.println(SnowFlakeIdWorker.INSTANCE.nextStringId());
+        }
+
+    }
+
+    @org.junit.Test
     public void testGetCoinList() {
         String url = "https://transfer.swft.pro/api/v1/queryCoinList";
         Map<String, Object> param = Maps.newHashMap();

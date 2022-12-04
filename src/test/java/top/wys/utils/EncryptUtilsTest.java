@@ -1,7 +1,14 @@
 package top.wys.utils;
 
 import org.junit.Test;
+import sun.misc.BASE64Decoder;
+import top.wys.utils.convert.GenericConverter;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.KeyPair;
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -95,4 +102,16 @@ public class EncryptUtilsTest {
         System.out.println(des.decrypt(encrypt));
 
     }
+
+    @Test
+    public void base64Decode() {
+//        String base64 = FileUtils.readTxtFile(new File("D:\\data\\JetBrains\\IntelliJIdea\\2020.3.4\\config\\scratches\\1.txt"));
+        String base64 = EncryptUtils.base64EncodeWithPrefix(new File("C:\\Users\\zml\\Pictures\\icon\\excel\\p50.svg"));
+        System.out.println(base64);
+        File path = EncryptUtils.base64DecodeFile(base64);
+        System.out.println(path.toString());
+
+    }
+
+
 }
