@@ -897,6 +897,7 @@ public class FileUtils {
      * @description <p> 从URL中截取文件名称  <br>
      */
     public static String getFileNameFromUrl(String url){
+        String originUrl = url;
         String fileName = "";
         //如果URL结尾不是文件名，而是相关参数，则截取?前的内容
         if (url.contains("?")) {
@@ -906,8 +907,10 @@ public class FileUtils {
         //对URL进行解码处理
         try {
             fileName = URLDecoder.decode(url.substring(url.lastIndexOf('/') + 1), "utf-8");
-
-        } catch (UnsupportedEncodingException e) {
+            if(!fileName.contains(".")){
+                return HttpUtils.getFileName(originUrl);
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
         log.info("从URL中截取到的文件名：{}", fileName);
