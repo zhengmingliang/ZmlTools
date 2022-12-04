@@ -1,11 +1,6 @@
 package top.wys.utils.convert;
 
 import org.junit.Test;
-import org.springframework.core.convert.converter.Converter;
-
-import java.sql.Connection;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by 郑明亮 on 2021/12/4 1:25.
@@ -111,5 +106,7 @@ public class ConvertUtilsTest {
         System.out.println("ConvertUtils.toDate(\"202111122145\") = " + ConvertUtils.toDate("202111122145"));
         System.out.println("ConvertUtils.toDate(\"1638702321\") = " + ConvertUtils.toDate("1638702321"));
         System.out.println("ConvertUtils.toDate(\"1638702321200\") = " + ConvertUtils.toDate("1638702321200"));
+        System.out.println("ConvertUtils.toDate(\"2022-03-01T19:26:28+08:00\") = " + ConvertUtils.toDate("2022-03-01T19:26:28+08:00"));
+        System.out.println("ConvertUtils.toDate(\"2022-03-01T19:26:28\") = " + ConvertUtils.toDate("2022-03-01T19:26:28"));
     }
 }

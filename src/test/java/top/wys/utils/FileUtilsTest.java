@@ -5,20 +5,13 @@ import com.alibaba.fastjson.JSON;
 import com.google.common.base.Stopwatch;
 import com.google.common.io.Files;
 
+import okhttp3.Headers;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.junit.Test;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.RandomAccessFile;
+import java.io.*;
+import java.net.URLDecoder;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
@@ -109,6 +102,68 @@ public class FileUtilsTest {
 //        String nameWithoutExtension = Files.getNameWithoutExtension(filePath);
 //        System.out.println(nameWithoutExtension);
 //        Files.
+    }
+
+    @Test
+    public void getFileName() {
+//        String url = "https://download.123pan.cn/123-661/9e1ecd46/1661483-0/9e1ecd461c3b848af45ab41c528d9a95?v=3&t=1661858130&s=a257ebfc4ba685250dc9088740453ad7&i=dddeb0d4&filename=jdk-8u221-linux-x64.tar.gz";
+        String url = "https://eeee.thismiao.xyz/link/Ji6Ti98ZNPnQGlgV?sub=3&extend=1";
+        String fileNameFromUrl = FileUtils.getFileNameFromUrl(url);
+        System.out.println(fileNameFromUrl);
+
+
+    }
+
+    @Test
+    public void head() throws IOException {
+//        String url = "https://download.123pan.cn/123-661/9e1ecd46/1661483-0/9e1ecd461c3b848af45ab41c528d9a95?v=3&t=1661858130&s=a257ebfc4ba685250dc9088740453ad7&i=dddeb0d4&filename=jdk-8u221-linux-x64.tar.gz";
+        String url = "https://eeee.thismiao.xyz/link/Ji6Ti98ZNPnQGlgV?sub=3&extend=1";
+        Request headRequest = new Request.Builder()
+                .head()
+                .headers(Headers.of(HttpUtils.getDefaultHeaders()))
+                .url(url)
+                .build();
+        Response response = HttpUtils.getOkHttpClient().newCall(headRequest).execute();
+        System.out.println(response.headers());
+        System.out.println(getFileName(response));
+    }
+    /**
+     * 根据响应头或URL获取文件名
+     *
+     * @param response
+     * @return
+     */
+    private String getFileName(Response response) {
+        String charset = "UTF-8";
+        String uriPath = response.request().url().uri().getRawPath();
+        String name = uriPath.substring(uriPath.lastIndexOf("/") + 1);
+
+        String contentDisposition = response.header("Content-Disposition");
+        if (contentDisposition != null) {
+            int p1 = contentDisposition.indexOf("filename");
+            //有的Content-Disposition里面的filename后面是*=，是*=的文件名后面一般都带了编码名称，按它提供的编码进行解码可以避免文件名乱码
+            int p2 = contentDisposition.indexOf("*=", p1);
+            if (p2 >= 0) {
+                //有的Content-Disposition里面会在文件名后面带上文件名的字符编码
+                int p3 = contentDisposition.indexOf("''", p2);
+                if (p3 >= 0) {
+                    charset = contentDisposition.substring(p2 + 2, p3);
+                } else {
+                    p3 = p2;
+                }
+                name = contentDisposition.substring(p3 + 2);
+            } else {
+                p2 = contentDisposition.indexOf("=", p1);
+                if (p2 >= 0) {
+                    name = contentDisposition.substring(p2 + 1);
+                }
+            }
+        }
+        try {
+            name = URLDecoder.decode(name, charset);
+        } catch (UnsupportedEncodingException e) {
+        }
+        return name;
     }
 
     @Test

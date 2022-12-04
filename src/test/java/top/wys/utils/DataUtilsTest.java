@@ -1,8 +1,10 @@
 package top.wys.utils;
 
+import com.alibaba.fastjson.JSON;
 import org.intellij.lang.annotations.Language;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.*;
@@ -40,5 +42,29 @@ public class DataUtilsTest {
             System.out.println("isUrl: " + webUrl+","+webUrl2+"   "+value);
         });
 
+    }
+
+    @Test
+    public void getDateFromText() {
+        String text = "账单周期 Statement Cycle 2021/10/11-2021/11/10\n"
+                +        "信用额度(人民币) Credit Limit(RMB) 29,000\n"
+                +        "预借现金额度(人民币) Cash Advance Limit(RMB) 14,500\t\t到期还款日 Payment Due Date 2021年11月30日"
+                ;
+        String dateFromText = DataUtils.getDateFromText(text);
+        System.out.println(dateFromText);
+        List<String> datesFromText = DataUtils.getDatesFromText(text);
+        System.out.println(datesFromText);
+    }
+
+    @Test
+    public void getDateTimeFromText() {
+        String text = "账单周期 Statement Cycle 2021/10/11-2021/11/10\n"
+                +        "2021-01-10 12:00:12,2022/10/11 12:32,2012年10月12日 12:10:12\n"
+                +        "预借现金额度(人民币) Cash Advance Limit(RMB) 14,500\t\t到期还款日 Payment Due Date 2021年11月30日"
+                ;
+        String dateFromText = DataUtils.getDateTimeFromText(text);
+        System.out.println(dateFromText);
+        List<String> datesFromText = DataUtils.getDateTimesFromText(text);
+        System.out.println(datesFromText);
     }
 }
