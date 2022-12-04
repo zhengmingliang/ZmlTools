@@ -5,7 +5,7 @@
 
     <groupId>top.wuyongshi</groupId>
     <artifactId>ZmlTools</artifactId>
-    <version>1.4.0</version>
+    <version>1.4.1</version>
     <packaging>jar</packaging>
     <description>Common tool class encapsulation</description>
     <name>ZmlTools</name>
@@ -38,14 +38,15 @@
         <log4j2.version>2.17.2</log4j2.version>
         <jdk.version>1.8</jdk.version>
         <junit.version>4.13.1</junit.version>
-        <gson.version>2.9.0</gson.version>
-        <fastjson.version>2.0.7</fastjson.version>
+        <gson.version>2.10</gson.version>
+        <fastjson.version>1.2.83</fastjson.version>
+        <fastjson2.version>2.0.20</fastjson2.version>
         <okhttp3.version>4.9.3</okhttp3.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
     <!-- use guava to require jdk1.7 or older , visit here:
             https://github.com/google/guava/wiki/ReleaseHistory-->
         <guava.version>31.1-jre</guava.version>
-        <jsoup.version>1.15.1</jsoup.version>
+        <jsoup.version>1.15.3</jsoup.version>
         <javaee-api.version>7.0</javaee-api.version>
         <commons-csv.version>1.9.0</commons-csv.version>
         <lombok.version>1.18.16</lombok.version>
@@ -97,6 +98,12 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.alibaba.fastjson2/fastjson2 -->
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+            <version>${fastjson2.version}</version>
         </dependency>
 
         <dependency>
