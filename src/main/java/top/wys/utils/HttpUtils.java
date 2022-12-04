@@ -11,10 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-import java.net.SocketAddress;
-import java.net.SocketTimeoutException;
+import java.net.*;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
@@ -37,6 +34,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import top.wys.utils.convert.ConvertUtils;
 import top.wys.utils.entity.UploadInfo;
 import top.wys.utils.http.CookieJarImpl;
 import top.wys.utils.http.HttpCallBack;
@@ -673,9 +671,9 @@ public class HttpUtils {
 
                 //如果不传入文件名的话，则截取URL的“/”后的字符串为文件名
                 if (StringUtils.isEmpty(fileName_)) {
-                    String fileName = DataUtils.getFileNameFromHttp(response.headers());
+                    String fileName = getFileName(response);
                     if (fileName == null) {//如果从Head中获取文件名失败，则从URL中进行截取名
-                        fileName =  DataUtils.getFileNameFromUrl(url);
+                        fileName =  FileUtils.getFileNameFromUrl(url);
                     }
                     if (fileName == null) {
                         fileName = RandomUtils.getUUID();
@@ -684,18 +682,29 @@ public class HttpUtils {
                     file = new File(filePath);
                 } else if (!fileName_.contains(".")) {//如果文件名不含“.”，则说明不包含扩展名，则改为截取URL中的文件名
                     //如果从Head中获取文件名失败，则从URL中进行截取文件名
-                    filePath = basePath + DataUtils.getFileNameFromHttp(response.headers()) == null ? DataUtils.getFileNameFromUrl(url) : DataUtils.getFileNameFromHttp(response.headers());
+                    filePath = basePath + getFileName(response) == null ? FileUtils.getFileNameFromUrl(url) : FileUtils.getFileNameFromHttp(response.headers());
 
                     file = new File(filePath);
                 } else {
                     filePath += fileName_;
                     file = new File(filePath);
                 }
+                String contentLength = response.header("Content-Length");
+                long total = ConvertUtils.toLong(contentLength,-1L);
+
                 //如果文件夹不存在，则创建父级文件夹
 //						FileUtils.createFile(file);
-                try (FileOutputStream fos = new FileOutputStream(file)) {
 
-                    fos.write(response.body().bytes());
+                try (FileOutputStream fos = new FileOutputStream(file)) {
+                    ResponseBody body = response.body();
+                    InputStream inputStream = body.byteStream();
+                    byte[] buff = new byte[8 * 1024];
+                    int length = 0;
+                    while ((length = inputStream.read(buff)) > 0){
+                        fos.write(buff,0,length);
+                        httpCallBack.onProcess(length,total);
+                    }
+
                     fos.flush();
                 }
                 fileAbsolutePath = file.getAbsolutePath();
@@ -720,6 +729,66 @@ public class HttpUtils {
         ;
 
 
+    }
+
+    /**
+     * 获取文件名称
+     *
+     * @param url http链接地址
+     * @return {@link String}
+     */
+    public static String getFileName(String url) {
+        Request headRequest = new Request.Builder()
+                .head()
+                .headers(Headers.of(HttpUtils.getDefaultHeaders()))
+                .url(url)
+                .build();
+        try {
+            Response response = HttpUtils.getOkHttpClient().newCall(headRequest).execute();
+            return getFileName(response);
+        } catch (IOException e) {
+
+        }
+        return "";
+    }
+
+    /**
+     * 根据响应头或URL获取文件名
+     *
+     * @param response
+     * @return
+     */
+    public static String getFileName(Response response) {
+        String charset = "UTF-8";
+        String uriPath = response.request().url().uri().getRawPath();
+        String name = uriPath.substring(uriPath.lastIndexOf("/") + 1);
+
+        String contentDisposition = response.header("Content-Disposition");
+        if (contentDisposition != null) {
+            int p1 = contentDisposition.indexOf("filename");
+            //有的Content-Disposition里面的filename后面是*=，是*=的文件名后面一般都带了编码名称，按它提供的编码进行解码可以避免文件名乱码
+            int p2 = contentDisposition.indexOf("*=", p1);
+            if (p2 >= 0) {
+                //有的Content-Disposition里面会在文件名后面带上文件名的字符编码
+                int p3 = contentDisposition.indexOf("''", p2);
+                if (p3 >= 0) {
+                    charset = contentDisposition.substring(p2 + 2, p3);
+                } else {
+                    p3 = p2;
+                }
+                name = contentDisposition.substring(p3 + 2);
+            } else {
+                p2 = contentDisposition.indexOf("=", p1);
+                if (p2 >= 0) {
+                    name = contentDisposition.substring(p2 + 1);
+                }
+            }
+        }
+        try {
+            name = URLDecoder.decode(name, charset);
+        } catch (UnsupportedEncodingException e) {
+        }
+        return name;
     }
 
 
