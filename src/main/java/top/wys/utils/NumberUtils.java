@@ -398,6 +398,32 @@ public class NumberUtils {
     }
 
     /**
+     * 数字比较 {@code number1} 大于 {@code number2} 返回1，小于返回 -1 ，等于返回 0，其中任一对象为null则返回 -1
+     * @param number1
+     * @param number2
+     * @return
+     */
+    public static int compare(Number number1, Number number2) {
+        if(number1 == null || number2 == null){
+            return -1;
+        }
+
+        if (number1 instanceof Long) {
+            return Long.compare((long)number1, number2.longValue());
+        } else if (number1 instanceof Integer) {
+            return Integer.compare((int)number1, number2.intValue());
+        } else if (number1 instanceof Double) {
+            return Double.compare((double)number1, number2.doubleValue());
+        } else if (number1 instanceof Float) {
+            return Float.compare((float)number1, number2.floatValue());
+        } else if (number1 instanceof BigDecimal) {
+            return ((BigDecimal) number1).compareTo(ConvertUtils.toBigDecimal(number2) );
+        } else {
+            return compare(number1.toString(),number2.toString());
+        }
+    }
+
+    /**
      * 比较两个数绝对值的大小
      * @param number1
      * @param number2
