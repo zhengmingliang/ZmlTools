@@ -2,6 +2,7 @@ package top.wys.utils;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import top.wys.utils.collection.ArrayUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
@@ -32,6 +33,11 @@ public class StringUtils {
     private static final String CURRENT_PATH = ".";
 
     private static final char EXTENSION_SEPARATOR = '.';
+    /**
+     * The empty String {@code ""}.
+     * @since 1.4.2
+     */
+    public static final String EMPTY = "";
 
 
 
@@ -123,6 +129,305 @@ public class StringUtils {
         return !isEmpty(s);
     }
 
+    /**
+     * <p>Checks if a CharSequence is empty (""), null or whitespace only.</p>
+     *
+     * <p>Whitespace is defined by {@link Character#isWhitespace(char)}.</p>
+     *
+     * <pre>
+     * StringUtils.isBlank(null)      = true
+     * StringUtils.isBlank("")        = true
+     * StringUtils.isBlank(" ")       = true
+     * StringUtils.isBlank("bob")     = false
+     * StringUtils.isBlank("  bob  ") = false
+     * </pre>
+     *
+     * @param cs  the CharSequence to check, may be null
+     * @return {@code true} if the CharSequence is null, empty or whitespace only
+     * @since 2.0
+     * @since 3.0 Changed signature from isBlank(String) to isBlank(CharSequence)
+     */
+    public static boolean isBlank(final CharSequence cs) {
+        int strLen;
+        if (cs == null || (strLen = cs.length()) == 0) {
+            return true;
+        }
+        for (int i = 0; i < strLen; i++) {
+            if (!Character.isWhitespace(cs.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * <p>Checks if a CharSequence is not empty (""), not null and not whitespace only.</p>
+     *
+     * <p>Whitespace is defined by {@link Character#isWhitespace(char)}.</p>
+     *
+     * <pre>
+     * StringUtils.isNotBlank(null)      = false
+     * StringUtils.isNotBlank("")        = false
+     * StringUtils.isNotBlank(" ")       = false
+     * StringUtils.isNotBlank("bob")     = true
+     * StringUtils.isNotBlank("  bob  ") = true
+     * </pre>
+     *
+     * @param cs  the CharSequence to check, may be null
+     * @return {@code true} if the CharSequence is
+     *  not empty and not null and not whitespace only
+     * @since 2.0
+     * @since 3.0 Changed signature from isNotBlank(String) to isNotBlank(CharSequence)
+     */
+    public static boolean isNotBlank(final CharSequence cs) {
+        return !isBlank(cs);
+    }
+
+    /**
+     * <p>Checks if any of the CharSequences are empty ("") or null or whitespace only.</p>
+     *
+     * <p>Whitespace is defined by {@link Character#isWhitespace(char)}.</p>
+     *
+     * <pre>
+     * StringUtils.isAnyBlank((String) null)    = true
+     * StringUtils.isAnyBlank((String[]) null)  = false
+     * StringUtils.isAnyBlank(null, "foo")      = true
+     * StringUtils.isAnyBlank(null, null)       = true
+     * StringUtils.isAnyBlank("", "bar")        = true
+     * StringUtils.isAnyBlank("bob", "")        = true
+     * StringUtils.isAnyBlank("  bob  ", null)  = true
+     * StringUtils.isAnyBlank(" ", "bar")       = true
+     * StringUtils.isAnyBlank(new String[] {})  = false
+     * StringUtils.isAnyBlank(new String[]{""}) = true
+     * StringUtils.isAnyBlank("foo", "bar")     = false
+     * </pre>
+     *
+     * @param css  the CharSequences to check, may be null or empty
+     * @return {@code true} if any of the CharSequences are empty or null or whitespace only
+     * @since 3.2
+     */
+    public static boolean isAnyBlank(final CharSequence... css) {
+        if (ArrayUtils.isEmpty(css)) {
+            return false;
+        }
+        for (final CharSequence cs : css) {
+            if (isBlank(cs)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * <p>Checks if none of the CharSequences are empty (""), null or whitespace only.</p>
+     *
+     * <p>Whitespace is defined by {@link Character#isWhitespace(char)}.</p>
+     *
+     * <pre>
+     * StringUtils.isNoneBlank((String) null)    = false
+     * StringUtils.isNoneBlank((String[]) null)  = true
+     * StringUtils.isNoneBlank(null, "foo")      = false
+     * StringUtils.isNoneBlank(null, null)       = false
+     * StringUtils.isNoneBlank("", "bar")        = false
+     * StringUtils.isNoneBlank("bob", "")        = false
+     * StringUtils.isNoneBlank("  bob  ", null)  = false
+     * StringUtils.isNoneBlank(" ", "bar")       = false
+     * StringUtils.isNoneBlank(new String[] {})  = true
+     * StringUtils.isNoneBlank(new String[]{""}) = false
+     * StringUtils.isNoneBlank("foo", "bar")     = true
+     * </pre>
+     *
+     * @param css  the CharSequences to check, may be null or empty
+     * @return {@code true} if none of the CharSequences are empty or null or whitespace only
+     * @since 3.2
+     */
+    public static boolean isNoneBlank(final CharSequence... css) {
+        return !isAnyBlank(css);
+    }
+
+    /**
+     * <p>Checks if all of the CharSequences are empty (""), null or whitespace only.</p>
+     *
+     * <p>Whitespace is defined by {@link Character#isWhitespace(char)}.</p>
+     *
+     * <pre>
+     * StringUtils.isAllBlank(null)             = true
+     * StringUtils.isAllBlank(null, "foo")      = false
+     * StringUtils.isAllBlank(null, null)       = true
+     * StringUtils.isAllBlank("", "bar")        = false
+     * StringUtils.isAllBlank("bob", "")        = false
+     * StringUtils.isAllBlank("  bob  ", null)  = false
+     * StringUtils.isAllBlank(" ", "bar")       = false
+     * StringUtils.isAllBlank("foo", "bar")     = false
+     * StringUtils.isAllBlank(new String[] {})  = true
+     * </pre>
+     *
+     * @param css  the CharSequences to check, may be null or empty
+     * @return {@code true} if all of the CharSequences are empty or null or whitespace only
+     * @since 3.6
+     */
+    public static boolean isAllBlank(final CharSequence... css) {
+        if (ArrayUtils.isEmpty(css)) {
+            return true;
+        }
+        for (final CharSequence cs : css) {
+            if (isNotBlank(cs)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * <p>Checks if the CharSequence contains only lowercase characters.</p>
+     *
+     * <p>{@code null} will return {@code false}.
+     * An empty CharSequence (length()=0) will return {@code false}.</p>
+     *
+     * <pre>
+     * StringUtils.isAllLowerCase(null)   = false
+     * StringUtils.isAllLowerCase("")     = false
+     * StringUtils.isAllLowerCase("  ")   = false
+     * StringUtils.isAllLowerCase("abc")  = true
+     * StringUtils.isAllLowerCase("abC")  = false
+     * StringUtils.isAllLowerCase("ab c") = false
+     * StringUtils.isAllLowerCase("ab1c") = false
+     * StringUtils.isAllLowerCase("ab/c") = false
+     * </pre>
+     *
+     * @param cs  the CharSequence to check, may be null
+     * @return {@code true} if only contains lowercase characters, and is non-null
+     * @since 1.4.2
+     */
+    public static boolean isAllLowerCase(final CharSequence cs) {
+        if (cs == null || isEmpty(cs)) {
+            return false;
+        }
+        final int sz = cs.length();
+        for (int i = 0; i < sz; i++) {
+            if (!Character.isLowerCase(cs.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * <p>Checks if the CharSequence contains only uppercase characters.</p>
+     *
+     * <p>{@code null} will return {@code false}.
+     * An empty String (length()=0) will return {@code false}.</p>
+     *
+     * <pre>
+     * StringUtils.isAllUpperCase(null)   = false
+     * StringUtils.isAllUpperCase("")     = false
+     * StringUtils.isAllUpperCase("  ")   = false
+     * StringUtils.isAllUpperCase("ABC")  = true
+     * StringUtils.isAllUpperCase("aBC")  = false
+     * StringUtils.isAllUpperCase("A C")  = false
+     * StringUtils.isAllUpperCase("A1C")  = false
+     * StringUtils.isAllUpperCase("A/C")  = false
+     * </pre>
+     *
+     * @param cs the CharSequence to check, may be null
+     * @return {@code true} if only contains uppercase characters, and is non-null
+     * @since 2.5
+     * @since 3.0 Changed signature from isAllUpperCase(String) to isAllUpperCase(CharSequence)
+     */
+    public static boolean isAllUpperCase(final CharSequence cs) {
+        if (cs == null || isEmpty(cs)) {
+            return false;
+        }
+        final int sz = cs.length();
+        for (int i = 0; i < sz; i++) {
+            if (!Character.isUpperCase(cs.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * <p>Checks if the CharSequence contains mixed casing of both uppercase and lowercase characters.</p>
+     *
+     * <p>{@code null} will return {@code false}. An empty CharSequence ({@code length()=0}) will return
+     * {@code false}.</p>
+     *
+     * <pre>
+     * StringUtils.isMixedCase(null)    = false
+     * StringUtils.isMixedCase("")      = false
+     * StringUtils.isMixedCase("ABC")   = false
+     * StringUtils.isMixedCase("abc")   = false
+     * StringUtils.isMixedCase("aBc")   = true
+     * StringUtils.isMixedCase("A c")   = true
+     * StringUtils.isMixedCase("A1c")   = true
+     * StringUtils.isMixedCase("a/C")   = true
+     * StringUtils.isMixedCase("aC\t")  = true
+     * </pre>
+     *
+     * @param cs the CharSequence to check, may be null
+     * @return {@code true} if the CharSequence contains both uppercase and lowercase characters
+     * @since 1.4.2
+     */
+    public static boolean isMixedCase(final CharSequence cs) {
+        if (isEmpty(cs) || cs.length() == 1) {
+            return false;
+        }
+        boolean containsUppercase = false;
+        boolean containsLowercase = false;
+        final int sz = cs.length();
+        for (int i = 0; i < sz; i++) {
+            if (containsUppercase && containsLowercase) {
+                return true;
+            } else if (Character.isUpperCase(cs.charAt(i))) {
+                containsUppercase = true;
+            } else if (Character.isLowerCase(cs.charAt(i))) {
+                containsLowercase = true;
+            }
+        }
+        return containsUppercase && containsLowercase;
+    }
+
+    // Defaults
+    //-----------------------------------------------------------------------
+    /**
+     * <p>Returns either the passed in String,
+     * or if the String is {@code null}, an empty String ("").</p>
+     *
+     * <pre>
+     * StringUtils.defaultString(null)  = ""
+     * StringUtils.defaultString("")    = ""
+     * StringUtils.defaultString("bat") = "bat"
+     * </pre>
+     *
+     * @see String#valueOf(Object)
+     * @param str  the String to check, may be null
+     * @return the passed in String, or the empty String if it
+     *  was {@code null}
+     */
+    public static String defaultString(final String str) {
+        return defaultString(str, EMPTY);
+    }
+
+    /**
+     * <p>Returns either the passed in String, or if the String is
+     * {@code null}, the value of {@code defaultStr}.</p>
+     *
+     * <pre>
+     * StringUtils.defaultString(null, "NULL")  = "NULL"
+     * StringUtils.defaultString("", "NULL")    = ""
+     * StringUtils.defaultString("bat", "NULL") = "bat"
+     * </pre>
+     *
+     * @see String#valueOf(Object)
+     * @param str  the String to check, may be null
+     * @param defaultStr  the default String to return
+     *  if the input is {@code null}, may be null
+     * @return the passed in String, or the default if it was {@code null}
+     */
+    public static String defaultString(final String str, final String defaultStr) {
+        return str == null ? defaultStr : str;
+    }
     /**
      * 判断字符串是否为null或全为空格
      *
