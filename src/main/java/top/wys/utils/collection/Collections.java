@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 /**
  * <p> 集合工具类</p>
@@ -21,7 +22,13 @@ public class Collections {
         // generator
     }
 
-    public static  <T> void removeOne(Collection<T> collection, T data){
+    /**
+     * 从集合中移除一个对象
+     * @param collection 集合
+     * @param data 要移除的对象
+     * @param <T>
+     */
+    public static <T> void removeOne(Collection<T> collection, T data){
         if (collection == null || data == null) {
             return;
         }
@@ -34,6 +41,35 @@ public class Collections {
             }
         }
     }
+
+
+    /**
+     * 删除集合中一个元素
+     *
+     * @param collections 含有数据的集合
+     * @param predicate   要删除的集合中对象的条件（谓词）
+     * @since 1.4.2
+     */
+    public static <T> void removeOne(Collection<T> collections, Predicate<T> predicate){
+        if (collections == null) {
+            return;
+        }
+        Iterator<T> iterator = collections.iterator();
+        while (iterator.hasNext()) {
+            T next = iterator.next();
+            if (predicate.test(next)) {
+                iterator.remove();
+                break;
+            }
+        }
+    }
+
+    /**
+     * 从集合中移除所有的对象
+     * @param collection 集合
+     * @param data 要移除的所有的对象
+     * @param <T>
+     */
     public static  <T> void removeAll(Collection<T> collection,T data){
         if (collection == null || data == null) {
             return;
@@ -46,6 +82,27 @@ public class Collections {
             }
         }
     }
+
+    /**
+     * 删除集合中所有元素
+     *
+     * @param collections 含有数据的集合
+     * @param predicate   要删除的集合中对象的条件（谓词）
+     * @since 1.4.2
+     */
+    public static <T> void removeAll(Collection<T> collections, Predicate<T> predicate){
+        if (collections == null) {
+            return;
+        }
+        Iterator<T> iterator = collections.iterator();
+        while (iterator.hasNext()) {
+            T next = iterator.next();
+            if (predicate.test(next)) {
+                iterator.remove();
+            }
+        }
+    }
+
 
     /**
      * 判定是否为空集合
