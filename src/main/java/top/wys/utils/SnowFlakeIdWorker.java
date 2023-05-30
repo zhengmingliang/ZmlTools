@@ -6,6 +6,10 @@
 
 package top.wys.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import top.wys.utils.convert.ConvertUtils;
+
 /**
  * <ol>
  *     Twitter的Snowflake 算法<br>
@@ -33,6 +37,8 @@ package top.wys.utils;
  */
 public class SnowFlakeIdWorker {
 
+    private static final Logger log = LoggerFactory.getLogger(SnowFlakeIdWorker.class);
+
     /**
      * 工作机器ID(0~31)
      */
@@ -43,7 +49,18 @@ public class SnowFlakeIdWorker {
     private long datacenterId;
     private long sequence;
 
-    public static final SnowFlakeIdWorker INSTANCE = new SnowFlakeIdWorker(10,10,100);
+    public static final SnowFlakeIdWorker INSTANCE;
+    static {
+        Integer workId = 1;
+        try {
+            String localHostIP = DataUtils.getLocalHostIP();
+            int lastIndex = localHostIP.lastIndexOf(".");
+            workId = ConvertUtils.toInteger(localHostIP.substring(lastIndex + 1), 1) % 32;
+        } catch (Exception e) {
+            log.warn("自动计算工作机器id出现错误，将使用默认值1",e);
+        }
+        INSTANCE = new SnowFlakeIdWorker(workId,10,100);
+    }
 
     /**
      * @param workerId 工作机器ID(0~31)
