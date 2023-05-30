@@ -65,6 +65,7 @@ import top.wys.utils.math.Numbers;
 public class DataUtils {
 
     private static final Logger log = LoggerFactory.getLogger(DataUtils.class);
+    private static final String LOCAL_IP = "127.0.0.1";;
 
     private DataUtils() {
         /* 不能被实例化 */
@@ -265,32 +266,44 @@ public class DataUtils {
 
 
     /**
-     * 获取【电脑】本机所有IP
+     * 获取本机所有IP
      */
-    public static String getLocalHostIP() {
+    public static List<String> getLocalHostIPs() {
         List<String> res = new ArrayList<String>();
         Enumeration<?> netInterfaces;
         String ipAddr = "";
         try {
             netInterfaces = NetworkInterface.getNetworkInterfaces();
-            InetAddress ip = null;
+            InetAddress inetAddress = null;
             while (netInterfaces.hasMoreElements()) {
                 NetworkInterface ni = (NetworkInterface) netInterfaces
                         .nextElement();
                 Enumeration<?> nii = ni.getInetAddresses();
                 while (nii.hasMoreElements()) {
-                    ip = (InetAddress) nii.nextElement();
-                    if (ip.getHostAddress().indexOf(':') == -1) {
-                        res.add(ip.getHostAddress());
-                         log.info("本机的ip=" + ip.getHostAddress());
-                        ipAddr = ip.getHostAddress();
+                    inetAddress = (InetAddress) nii.nextElement();
+                    String ip = inetAddress.getHostAddress();
+                    if (ip.indexOf(':') == -1 && !LOCAL_IP.equals(ip)) {
+                        res.add(ip);
+                        log.debug("本机的ip=" + ip);
                     }
                 }
             }
         } catch (SocketException e) {
             e.printStackTrace();
         }
-        return ipAddr;
+        return res;
+    }
+
+    /**
+     * 获取本机本机IP
+     */
+    public static String getLocalHostIP() {
+        List<String> localHostIPs = getLocalHostIPs();
+        if(localHostIPs != null && !localHostIPs.isEmpty()){
+            return localHostIPs.get(localHostIPs.size() - 1);
+        }
+
+        return LOCAL_IP;
     }
 
 
