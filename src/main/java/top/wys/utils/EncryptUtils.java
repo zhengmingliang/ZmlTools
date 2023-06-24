@@ -908,7 +908,7 @@ public class EncryptUtils {
     }
 
 
-static class RSA{
+public static class RSA{
     private static Charset charset = DEFAULT_CHARSET;
 
      public static KeyPair buildKeyPair() throws NoSuchAlgorithmException {
