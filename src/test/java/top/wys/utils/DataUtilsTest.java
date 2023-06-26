@@ -1,13 +1,15 @@
 package top.wys.utils;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import lombok.Builder;
 import org.intellij.lang.annotations.Language;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.Assert.*;
 /*
  * Created by 郑明亮 on 2020/9/19 14:34.
  */
@@ -66,5 +68,29 @@ public class DataUtilsTest {
         System.out.println(dateFromText);
         List<String> datesFromText = DataUtils.getDateTimesFromText(text);
         System.out.println(datesFromText);
+    }
+
+    @Test
+    public void getNullPropertyNames() {
+        Person person = Person.builder()
+                .name("张三")
+                .age(15)
+                .address("")
+                .friends(new ArrayList<>(2))
+                .build();
+        String[] nullPropertyNames = DataUtils.getNullPropertyNames(person);
+        Assert.isTrue(((JSONArray)JSON.toJSON(nullPropertyNames)).containsAll(Arrays.asList("sex")));
+        String[] emptyPropertyNames = DataUtils.getEmptyPropertyNames(person);
+        Assert.isTrue(((JSONArray)JSON.toJSON(emptyPropertyNames)).containsAll(Arrays.asList("sex","address","friends")));
+    }
+
+//    @Data
+    @Builder
+    static class Person{
+        private String name;
+        String sex;
+        int age;
+        private String address;
+        List<Person> friends;
     }
 }

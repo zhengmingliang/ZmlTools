@@ -4,56 +4,26 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
-
+import okhttp3.Headers;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Modifier;
-import java.net.HttpURLConnection;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.net.UnknownHostException;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import top.wys.utils.entity.Patterns;
+import top.wys.utils.math.Numbers;
 
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-
-import okhttp3.Headers;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import top.wys.utils.entity.Patterns;
-import top.wys.utils.math.Numbers;
+import java.io.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
+import java.net.*;
+import java.text.DecimalFormat;
+import java.util.Objects;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 数据类型转换、格式校验、简易信息的获取，如系统时间
@@ -1322,25 +1292,50 @@ public class DataUtils {
     }
 
     /**
-     * 获取对象中空值的属性名
-     * @param source
+     * 获取对象中null值的属性名
+     * @param object
      * @return
      */
-    public static String[] getNullPropertyNames(Object source) {
-        Field[] fields = ReflectionUtils.getAllFields(source);
-        List<String> list = new ArrayList<>();
+    public static String[] getNullPropertyNames(Object object) {
+        return getNullPropertyNames(object,false);
+    }
+
+    /**
+     * 获取对象中空值（null、空字符串、空集合）的属性名
+     * @param object
+     * @return
+     */
+    public static String[] getEmptyPropertyNames(Object object) {
+        return getNullPropertyNames(object,true);
+    }
+    /**
+     * 获取对象中null值的属性名
+     * @param object 对象
+     * @param ignoreEmpty 是否要忽略空对象（空字符串和空集合）
+     * @return
+     */
+    private static String[] getNullPropertyNames(Object object, boolean ignoreEmpty) {
+        Field[] fields = ReflectionUtils.getAllFields(object);
+        List<String> emptyNames = new ArrayList<>();
         for (Field field : fields) {
             ReflectionUtils.makeAccessible(field);
             try {
-                Object value = field.get(source);
+                Object value = field.get(object);
+                String fieldName = field.getName();
                 if (value == null) {
-                    list.add(field.getName());
+                    emptyNames.add(fieldName);
+                } else if(ignoreEmpty){
+                    if(value instanceof String && "".equals(value)){
+                        emptyNames.add(fieldName);
+                    } else if(value instanceof Collection && ((Collection<?>) value).isEmpty()){
+                        emptyNames.add(fieldName);
+                    }
                 }
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
         }
-        return list.toArray(new String[0]);
+        return emptyNames.toArray(new String[0]);
     }
 
     /**
