@@ -45,7 +45,7 @@
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
     <!-- use guava to require jdk1.7 or older , visit here:
             https://github.com/google/guava/wiki/ReleaseHistory-->
-        <guava.version>31.1.0-jre</guava.version>
+        <guava.version>32.0.0-jre</guava.version>
         <jsoup.version>1.16.1</jsoup.version>
         <javaee-api.version>7.0</javaee-api.version>
         <commons-csv.version>1.9.0</commons-csv.version>
