@@ -1,18 +1,13 @@
 package top.wys.utils;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import top.wys.utils.collection.ArrayUtils;
+import top.wys.utils.collection.Collections;
 
 import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -894,7 +889,7 @@ public class StringUtils {
      * @return the delimited {@code String}
      */
     public static String collectionToDelimitedString(Collection<?> coll, String delim, String prefix, String suffix) {
-        if (CollectionUtils.isEmpty(coll)) {
+        if (Collections.isEmpty(coll)) {
             return "";
         }
         StringBuilder sb = new StringBuilder();
