@@ -1,26 +1,19 @@
 package top.wys.utils.collection;
 
-import org.apache.commons.collections.ArrayStack;
-import org.apache.commons.collections.KeyValue;
-import org.apache.commons.collections.map.UnmodifiableMap;
-import org.apache.commons.collections.map.UnmodifiableSortedMap;
 import top.wys.utils.valid.Preconditions;
 
 import javax.annotation.Nullable;
 import java.io.PrintStream;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.Collections;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public class Maps {
-    public static final Map EMPTY_MAP = UnmodifiableMap.decorate(new HashMap(1));
-    /**
-     * An empty unmodifiable sorted map.
-     * This is not provided in the JDK.
-     */
-    public static final SortedMap EMPTY_SORTED_MAP = UnmodifiableSortedMap.decorate(new TreeMap());
+    public static final Map EMPTY_MAP = Collections.emptyMap();
+
     /**
      * String used to indent the verbose and debug Map prints.
      */
@@ -1234,7 +1227,7 @@ public class Maps {
      * of various possible styles.
      * <p>
      * If the first entry in the object array implements {@link java.util.Map.Entry}
-     * or {@link KeyValue} then the key and value are added from that object.
+     * then the key and value are added from that object.
      * If the first entry in the object array is an object array itself, then
      * it is assumed that index 0 in the sub-array is the key and index 1 is the value.
      * Otherwise, the array is treated as keys and values in alternate indices.
@@ -1283,11 +1276,6 @@ public class Maps {
             for (int i = 0; i < array.length; i++) {
                 Map.Entry entry = (Map.Entry) array[i];
                 map.put(entry.getKey(), entry.getValue());
-            }
-        } else if (obj instanceof KeyValue) {
-            for (int i = 0; i < array.length; i++) {
-                KeyValue keyval = (KeyValue) array[i];
-                map.put(keyval.getKey(), keyval.getValue());
             }
         } else if (obj instanceof Object[]) {
             for (int i = 0; i < array.length; i++) {
