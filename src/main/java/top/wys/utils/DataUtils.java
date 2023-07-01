@@ -2,6 +2,8 @@ package top.wys.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.parser.ParserConfig;
+import com.alibaba.fastjson.util.TypeUtils;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import okhttp3.Headers;
@@ -282,23 +284,23 @@ public class DataUtils {
      * @author 郑明亮
      * @return 公网ip
      */
-	public static String getWebIpAddress1(){
-		String ip = "公网ip获取失败";
-		try {
-		    Map<String,String> headers = Maps.newHashMap();
-		    headers.put("Connection","keep-alive");
-		    headers.put("Host","city.ip138.com");
-		    headers.put("User-Agent","Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36");
+    public static String getWebIpAddress1(){
+        String ip = "公网ip获取失败";
+        try {
+            Map<String,String> headers = Maps.newHashMap();
+            headers.put("Connection","keep-alive");
+            headers.put("Host","city.ip138.com");
+            headers.put("User-Agent","Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36");
             Connection connection = Jsoup.connect("http://city.ip138.com/ip2city.asp").headers(headers).timeout(Integer.MAX_VALUE);
             String html = connection.get().select("center").html();
-			 ip = html.substring(html.indexOf('[')+1,html.indexOf(']'));
-			log.info("公网ip：{}",html);
-		} catch (IOException e) {
-			e.printStackTrace();
-			log.error("获取公网ip失败", e);
-		}
-		return ip;
-	}
+            ip = html.substring(html.indexOf('[')+1,html.indexOf(']'));
+            log.info("公网ip：{}",html);
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.error("获取公网ip失败", e);
+        }
+        return ip;
+    }
 
     /**
      * @author 郑明亮
@@ -307,8 +309,8 @@ public class DataUtils {
      * @return 公网ip
      */
     public static String getWebIpAddress2(){
-		String ip = "公网ip获取失败";
-		try {
+        String ip = "公网ip获取失败";
+        try {
             URL url = new URL("http://city.ip138.com/ip2city.asp");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestProperty("User-Agent","Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36");
@@ -319,119 +321,121 @@ public class DataUtils {
             String str = new String(IOUtils.isToBytes(inputStream),"gb2312").trim();
             ip = str.substring(str.indexOf('[')+1, str.lastIndexOf(']'));
 
-		} catch (IOException e) {
-			e.printStackTrace();
-			log.error("获取公网ip失败", e);
-		}
-		return ip;
-	}
-	/**
-	 * @return  获取本机mac
-	 */
-	public static String getLocalMac() {
-		return getLocalMac(getLocalHostIP());
-	}
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.error("获取公网ip失败", e);
+        }
+        return ip;
+    }
 
-	/**
-	 * 根据本地ip地址获取 该网卡的物理地址
-	 * @param host
-	 * @return 获取本机mac
-	 */
-	public static String getLocalMac(String host) {
-		StringBuilder sb = new StringBuilder();
-		try {
-			//获取网卡，获取地址
-			byte[] mac = NetworkInterface.getByInetAddress(InetAddress.getByName(host)).getHardwareAddress();
-			log.info("mac数组长度：{}",mac.length);
-			for(int i=0; i<mac.length; i++) {
-				if(i!=0) {
-					sb.append("-");
-				}
-				//字节转换为整数
-				int temp = mac[i]&0xff;
-				String str = Integer.toHexString(temp);
-				if(str.length()==1) {
-					sb.append("0"+str);
-				}else {
-					sb.append(str);
-				}
-			}
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (SocketException e) {
-			e.printStackTrace();
-		}
-		String addr = sb.toString().toUpperCase();
-		log.debug("本机MAC地址:"+addr);
-		return addr;
-	}
+    /**
+     * @return  获取本机mac
+     */
+    public static String getLocalMac() {
+        return getLocalMac(getLocalHostIP());
+    }
 
-	/**
-	 *
-	 * @return 获取所有的物理地址
-	 */
-	public static Set<String> getAllMacAddress() {
-		Set<String> set = new TreeSet<>();
-		try {
-			Enumeration<NetworkInterface> el = NetworkInterface.getNetworkInterfaces();
-			while (el.hasMoreElements()) {
-				byte[] mac = el.nextElement().getHardwareAddress();
-				if (mac == null){
-					continue;
-				}
-				StringBuilder macString = new StringBuilder("");
-				for (byte b : mac) {
+    /**
+     * 根据本地ip地址获取 该网卡的物理地址
+     * @param host
+     * @return 获取本机mac
+     */
+    public static String getLocalMac(String host) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            //获取网卡，获取地址
+            byte[] mac = NetworkInterface.getByInetAddress(InetAddress.getByName(host)).getHardwareAddress();
+            log.info("mac数组长度：{}",mac.length);
+            for(int i=0; i<mac.length; i++) {
+                if(i!=0) {
+                    sb.append("-");
+                }
+                //字节转换为整数
+                int temp = mac[i]&0xff;
+                String str = Integer.toHexString(temp);
+                if(str.length()==1) {
+                    sb.append("0"+str);
+                }else {
+                    sb.append(str);
+                }
+            }
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+        String addr = sb.toString().toUpperCase();
+        log.debug("本机MAC地址:"+addr);
+        return addr;
+    }
 
-					//convert to hex string.
-					String hex = Integer.toHexString(0xff & b).toUpperCase();
-					if(hex.length() == 1){
-						hex  = "0" + hex;
-					}
-					macString.append(hex);
-					macString.append("-");
-				}
-				macString.deleteCharAt(macString.length() - 1);
-				set.add(macString.toString());
-			}
+    /**
+     *
+     * @return 获取所有的物理地址
+     */
+    public static Set<String> getAllMacAddress() {
+        Set<String> set = new TreeSet<>();
+        try {
+            Enumeration<NetworkInterface> el = NetworkInterface.getNetworkInterfaces();
+            while (el.hasMoreElements()) {
+                byte[] mac = el.nextElement().getHardwareAddress();
+                if (mac == null){
+                    continue;
+                }
+                StringBuilder macString = new StringBuilder("");
+                for (byte b : mac) {
 
-			if(set.size() == 0){
-				log.info("Sorry, can't find your MAC Address.");
-			}else{
-				log.info("Your MAC Address is{} " , set);
-			}
-		}catch (Exception exception) {
-			exception.printStackTrace();
-		}
-		return set;
-	}
-	/**
-	 * getLocalIpAddress:[获得手机的ip地址].
-	 *
-	 * @author 郑明亮 （应该联网权限）
-	 * @return 获得手机的ip地址
-	 */
-	public static String getLocalIpAddress() {
-		try {
-			for (Enumeration<NetworkInterface> en = NetworkInterface
-					.getNetworkInterfaces(); en.hasMoreElements();) {
-				NetworkInterface intf = en.nextElement();
-				for (Enumeration<InetAddress> enumIpAddr = intf
-						.getInetAddresses(); enumIpAddr.hasMoreElements();) {
-					InetAddress inetAddress = enumIpAddr.nextElement();
-					if (!inetAddress.isLoopbackAddress()) {
-						return inetAddress.getHostAddress().toString();
-					}
-				}
-			}
-		} catch (SocketException ex) {
-		    ex.printStackTrace();
-		}
-		return null;
-	}
+                    //convert to hex string.
+                    String hex = Integer.toHexString(0xff & b).toUpperCase();
+                    if(hex.length() == 1){
+                        hex  = "0" + hex;
+                    }
+                    macString.append(hex);
+                    macString.append("-");
+                }
+                macString.deleteCharAt(macString.length() - 1);
+                set.add(macString.toString());
+            }
+
+            if(set.size() == 0){
+                log.info("Sorry, can't find your MAC Address.");
+            }else{
+                log.info("Your MAC Address is{} " , set);
+            }
+        }catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return set;
+    }
+
+    /**
+     * getLocalIpAddress:[获得手机的ip地址].
+     *
+     * @author 郑明亮 （应该联网权限）
+     * @return 获得手机的ip地址
+     */
+    public static String getLocalIpAddress() {
+        try {
+            for (Enumeration<NetworkInterface> en = NetworkInterface
+                    .getNetworkInterfaces(); en.hasMoreElements();) {
+                NetworkInterface intf = en.nextElement();
+                for (Enumeration<InetAddress> enumIpAddr = intf
+                        .getInetAddresses(); enumIpAddr.hasMoreElements();) {
+                    InetAddress inetAddress = enumIpAddr.nextElement();
+                    if (!inetAddress.isLoopbackAddress()) {
+                        return inetAddress.getHostAddress().toString();
+                    }
+                }
+            }
+        } catch (SocketException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
     private static String getIpInfoBySina(String ip){
-	    String address = "";
-	    String url = "http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=";
+        String address = "";
+        String url = "http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=";
         try {
             String json = HttpUtils.get(url + ip);
             if(StringUtils.isNotEmpty(json)){
@@ -1088,9 +1092,9 @@ public class DataUtils {
     }
 
     /**
-     * TODO 当类型不一致时，会导致设值失败
+     *
      * <ul>
-     * <li> map转换成bean</li>
+     * <li> map转换成bean,成员变量为</li>
      * </ul>
      * @param map map集合
      * @param t 要转换的类型
@@ -1102,20 +1106,13 @@ public class DataUtils {
             return null;
         }
 
-        T obj = null;
         try {
-            obj = t.newInstance();
-
-            org.apache.commons.beanutils.BeanUtils.populate(obj, map);
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            return TypeUtils.cast(map, t, ParserConfig.getGlobalInstance());
+        } catch (Exception e) {
+            log.warn("mapToBean转换过程中出现异常",e);
         }
 
-        return obj;
+        return null;
     }
 
     /**
