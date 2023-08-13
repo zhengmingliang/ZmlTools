@@ -12,6 +12,11 @@ import static java.util.Arrays.deepEquals;
 public class ArrayUtils {
 
     /**
+     * An empty immutable {@code String} array.
+     */
+    public static final String[] EMPTY_STRING_ARRAY = new String[0];
+
+    /**
      * 数组是否为空
      * @param arr 数组
      * @return
