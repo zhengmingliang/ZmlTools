@@ -29,6 +29,10 @@ public class StringUtils {
 
     private static final char EXTENSION_SEPARATOR = '.';
     /**
+     * 字符未找到时，返回的下标值
+     */
+    public static final int INDEX_NOT_FOUND = -1;
+    /**
      * The empty String {@code ""}.
      * @since 1.4.2
      */
@@ -441,14 +445,18 @@ public class StringUtils {
      * @return {@code true}: 相等{@code false}: 不相等
      */
     public static boolean equals(CharSequence a, CharSequence b) {
-        if (a == b) return true;
+        if (a == b) {
+            return true;
+        }
         int length;
         if (a != null && b != null && (length = a.length()) == b.length()) {
             if (a instanceof String && b instanceof String) {
                 return a.equals(b);
             } else {
                 for (int i = 0; i < length; i++) {
-                    if (a.charAt(i) != b.charAt(i)) return false;
+                    if (a.charAt(i) != b.charAt(i)) {
+                        return false;
+                    }
                 }
                 return true;
             }
@@ -495,7 +503,9 @@ public class StringUtils {
      * @return 首字母大写字符串
      */
     public static String upperFirstLetter(String s) {
-        if (isEmpty(s) || !Character.isLowerCase(s.charAt(0))) return s;
+        if (isEmpty(s) || !Character.isLowerCase(s.charAt(0))) {
+            return s;
+        }
         return String.valueOf((char) (s.charAt(0) - 32)) + s.substring(1);
     }
 
@@ -506,7 +516,9 @@ public class StringUtils {
      * @return 首字母小写字符串
      */
     public static String lowerFirstLetter(String s) {
-        if (isEmpty(s) || !Character.isUpperCase(s.charAt(0))) return s;
+        if (isEmpty(s) || !Character.isUpperCase(s.charAt(0))) {
+            return s;
+        }
         return String.valueOf((char) (s.charAt(0) + 32)) + s.substring(1);
     }
 
@@ -518,7 +530,9 @@ public class StringUtils {
      */
     public static String reverse(String s) {
         int len = length(s);
-        if (len <= 1) return s;
+        if (len <= 1) {
+            return s;
+        }
         int mid = len >> 1;
         char[] chars = s.toCharArray();
         char c;
@@ -537,7 +551,9 @@ public class StringUtils {
      * @return 半角字符串
      */
     public static String toDBC(String s) {
-        if (isEmpty(s)) return s;
+        if (isEmpty(s)) {
+            return s;
+        }
         char[] chars = s.toCharArray();
         for (int i = 0, len = chars.length; i < len; i++) {
             if (chars[i] == 12288) {
@@ -586,7 +602,7 @@ public class StringUtils {
             return noPointString;
         } else {
             Integer amount;
-            if (amountString.indexOf(".") != -1) {
+            if (amountString.indexOf(".") != INDEX_NOT_FOUND) {
                 String pointNum = amountString.substring(amountString.indexOf("."));
                 amount = Integer.parseInt(amountString.replace(pointNum, ""));
                 if (pointNum.length() > 2) {
@@ -676,7 +692,7 @@ public class StringUtils {
             return text;
         }
         int index = text.indexOf(searchChar);
-        if(index == -1){
+        if(index == INDEX_NOT_FOUND){
             return text;
         }
         char[] chars = text.toCharArray();
@@ -717,7 +733,7 @@ public class StringUtils {
         // strip the first "core" directory while keeping the "file:" prefix.
         int prefixIndex = pathToUse.indexOf(":");
         String prefix = "";
-        if (prefixIndex != -1) {
+        if (prefixIndex != INDEX_NOT_FOUND) {
             prefix = pathToUse.substring(0, prefixIndex + 1);
             if (prefix.contains("/")) {
                 prefix = "";
@@ -789,7 +805,7 @@ public class StringUtils {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < inString.length(); i++) {
             char c = inString.charAt(i);
-            if (charsToDelete.indexOf(c) == -1) {
+            if (charsToDelete.indexOf(c) == INDEX_NOT_FOUND) {
                 sb.append(c);
             }
         }
@@ -867,7 +883,7 @@ public class StringUtils {
         else {
             int pos = 0;
             int delPos;
-            while ((delPos = str.indexOf(delimiter, pos)) != -1) {
+            while ((delPos = str.indexOf(delimiter, pos)) != INDEX_NOT_FOUND) {
                 result.add(deleteAny(str.substring(pos, delPos), charsToDelete));
                 pos = delPos + delimiter.length();
             }
@@ -909,7 +925,7 @@ public class StringUtils {
      * @param coll the {@code Collection} to convert
      * @param delim the delimiter to use (typically a ",")
      * @return the delimited {@code String}
-     */        
+     */
     public static String collectionToDelimitedString(Collection<?> coll, String delim) {
         return collectionToDelimitedString(coll, delim, "", "");
     }
@@ -1012,7 +1028,7 @@ public class StringUtils {
         int i = 0;
         while (i < args.length) {
             int placeholderStart = template.indexOf("%s", templateStart);
-            if (placeholderStart == -1) {
+            if (placeholderStart == INDEX_NOT_FOUND) {
                 break;
             }
             builder.append(template, templateStart, placeholderStart);
@@ -1044,6 +1060,519 @@ public class StringUtils {
                     o.getClass().getName() + '@' + Integer.toHexString(System.identityHashCode(o));
             return "<" + objectToString + " threw " + e.getClass().getName() + ">";
         }
+    }
+
+
+
+    // Substring
+    //-----------------------------------------------------------------------
+    /**
+     * <p>Gets a substring from the specified String avoiding exceptions.</p>
+     *
+     * <p>A negative start position can be used to start {@code n}
+     * characters from the end of the String.</p>
+     *
+     * <p>A {@code null} String will return {@code null}.
+     * An empty ("") String will return "".</p>
+     *
+     * <pre>
+     * StringUtils.substring(null, *)   = null
+     * StringUtils.substring("", *)     = ""
+     * StringUtils.substring("abc", 0)  = "abc"
+     * StringUtils.substring("abc", 2)  = "c"
+     * StringUtils.substring("abc", 4)  = ""
+     * StringUtils.substring("abc", -2) = "bc"
+     * StringUtils.substring("abc", -4) = "abc"
+     * </pre>
+     *
+     * @param str  the String to get the substring from, may be null
+     * @param start  the position to start from, negative means
+     *  count back from the end of the String by this many characters
+     * @return substring from start position, {@code null} if null String input
+     */
+    public static String substring(final String str, int start) {
+        if (str == null) {
+            return null;
+        }
+
+        // handle negatives, which means last n characters
+        if (start < 0) {
+            start = str.length() + start; // remember start is negative
+        }
+
+        if (start < 0) {
+            start = 0;
+        }
+        if (start > str.length()) {
+            return EMPTY;
+        }
+
+        return str.substring(start);
+    }
+
+    /**
+     * <p>Gets a substring from the specified String avoiding exceptions.</p>
+     *
+     * <p>A negative start position can be used to start/end {@code n}
+     * characters from the end of the String.</p>
+     *
+     * <p>The returned substring starts with the character in the {@code start}
+     * position and ends before the {@code end} position. All position counting is
+     * zero-based -- i.e., to start at the beginning of the string use
+     * {@code start = 0}. Negative start and end positions can be used to
+     * specify offsets relative to the end of the String.</p>
+     *
+     * <p>If {@code start} is not strictly to the left of {@code end}, ""
+     * is returned.</p>
+     *
+     * <pre>
+     * StringUtils.substring(null, *, *)    = null
+     * StringUtils.substring("", * ,  *)    = "";
+     * StringUtils.substring("abc", 0, 2)   = "ab"
+     * StringUtils.substring("abc", 2, 0)   = ""
+     * StringUtils.substring("abc", 2, 4)   = "c"
+     * StringUtils.substring("abc", 4, 6)   = ""
+     * StringUtils.substring("abc", 2, 2)   = ""
+     * StringUtils.substring("abc", -2, -1) = "b"
+     * StringUtils.substring("abc", -4, 2)  = "ab"
+     * </pre>
+     *
+     * @param str  the String to get the substring from, may be null
+     * @param start  the position to start from, negative means
+     *  count back from the end of the String by this many characters
+     * @param end  the position to end at (exclusive), negative means
+     *  count back from the end of the String by this many characters
+     * @return substring from start position to end position,
+     *  {@code null} if null String input
+     */
+    public static String substring(final String str, int start, int end) {
+        if (str == null) {
+            return null;
+        }
+
+        // handle negatives
+        if (end < 0) {
+            end = str.length() + end; // remember end is negative
+        }
+        if (start < 0) {
+            start = str.length() + start; // remember start is negative
+        }
+
+        // check length next
+        if (end > str.length()) {
+            end = str.length();
+        }
+
+        // if start is greater than end, return ""
+        if (start > end) {
+            return EMPTY;
+        }
+
+        if (start < 0) {
+            start = 0;
+        }
+        if (end < 0) {
+            end = 0;
+        }
+
+        return str.substring(start, end);
+    }
+
+    // SubStringAfter/SubStringBefore
+    //-----------------------------------------------------------------------
+    /**
+     * <p>Gets the substring before the first occurrence of a separator.
+     * The separator is not returned.</p>
+     *
+     * <p>A {@code null} string input will return {@code null}.
+     * An empty ("") string input will return the empty string.
+     * A {@code null} separator will return the input string.</p>
+     *
+     * <p>If nothing is found, the string input is returned.</p>
+     *
+     * <pre>
+     * StringUtils.substringBefore(null, *)      = null
+     * StringUtils.substringBefore("", *)        = ""
+     * StringUtils.substringBefore("abc", "a")   = ""
+     * StringUtils.substringBefore("abcba", "b") = "a"
+     * StringUtils.substringBefore("abc", "c")   = "ab"
+     * StringUtils.substringBefore("abc", "d")   = "abc"
+     * StringUtils.substringBefore("abc", "")    = ""
+     * StringUtils.substringBefore("abc", null)  = "abc"
+     * </pre>
+     *
+     * @param str  the String to get a substring from, may be null
+     * @param separator  the String to search for, may be null
+     * @return the substring before the first occurrence of the separator,
+     *  {@code null} if null String input
+     * @since 2.0
+     */
+    public static String substringBefore(final String str, final String separator) {
+        if (isEmpty(str) || separator == null) {
+            return str;
+        }
+        if (separator.isEmpty()) {
+            return EMPTY;
+        }
+        final int pos = str.indexOf(separator);
+        if (pos == INDEX_NOT_FOUND) {
+            return str;
+        }
+        return str.substring(0, pos);
+    }
+
+    /**
+     * <p>Gets the substring after the first occurrence of a separator.
+     * The separator is not returned.</p>
+     *
+     * <p>A {@code null} string input will return {@code null}.
+     * An empty ("") string input will return the empty string.
+     * A {@code null} separator will return the empty string if the
+     * input string is not {@code null}.</p>
+     *
+     * <p>If nothing is found, the empty string is returned.</p>
+     *
+     * <pre>
+     * StringUtils.substringAfter(null, *)      = null
+     * StringUtils.substringAfter("", *)        = ""
+     * StringUtils.substringAfter(*, null)      = ""
+     * StringUtils.substringAfter("abc", "a")   = "bc"
+     * StringUtils.substringAfter("abcba", "b") = "cba"
+     * StringUtils.substringAfter("abc", "c")   = ""
+     * StringUtils.substringAfter("abc", "d")   = ""
+     * StringUtils.substringAfter("abc", "")    = "abc"
+     * </pre>
+     *
+     * @param str  the String to get a substring from, may be null
+     * @param separator  the String to search for, may be null
+     * @return the substring after the first occurrence of the separator,
+     *  {@code null} if null String input
+     * @since 2.0
+     */
+    public static String substringAfter(final String str, final String separator) {
+        if (isEmpty(str)) {
+            return str;
+        }
+        if (separator == null) {
+            return EMPTY;
+        }
+        final int pos = str.indexOf(separator);
+        if (pos == INDEX_NOT_FOUND) {
+            return EMPTY;
+        }
+        return str.substring(pos + separator.length());
+    }
+
+    /**
+     * <p>Gets the substring before the last occurrence of a separator.
+     * The separator is not returned.</p>
+     *
+     * <p>A {@code null} string input will return {@code null}.
+     * An empty ("") string input will return the empty string.
+     * An empty or {@code null} separator will return the input string.</p>
+     *
+     * <p>If nothing is found, the string input is returned.</p>
+     *
+     * <pre>
+     * StringUtils.substringBeforeLast(null, *)      = null
+     * StringUtils.substringBeforeLast("", *)        = ""
+     * StringUtils.substringBeforeLast("abcba", "b") = "abc"
+     * StringUtils.substringBeforeLast("abc", "c")   = "ab"
+     * StringUtils.substringBeforeLast("a", "a")     = ""
+     * StringUtils.substringBeforeLast("a", "z")     = "a"
+     * StringUtils.substringBeforeLast("a", null)    = "a"
+     * StringUtils.substringBeforeLast("a", "")      = "a"
+     * </pre>
+     *
+     * @param str  the String to get a substring from, may be null
+     * @param separator  the String to search for, may be null
+     * @return the substring before the last occurrence of the separator,
+     *  {@code null} if null String input
+     * @since 2.0
+     */
+    public static String substringBeforeLast(final String str, final String separator) {
+        if (isEmpty(str) || isEmpty(separator)) {
+            return str;
+        }
+        final int pos = str.lastIndexOf(separator);
+        if (pos == INDEX_NOT_FOUND) {
+            return str;
+        }
+        return str.substring(0, pos);
+    }
+
+    /**
+     * <p>Gets the substring after the last occurrence of a separator.
+     * The separator is not returned.</p>
+     *
+     * <p>A {@code null} string input will return {@code null}.
+     * An empty ("") string input will return the empty string.
+     * An empty or {@code null} separator will return the empty string if
+     * the input string is not {@code null}.</p>
+     *
+     * <p>If nothing is found, the empty string is returned.</p>
+     *
+     * <pre>
+     * StringUtils.substringAfterLast(null, *)      = null
+     * StringUtils.substringAfterLast("", *)        = ""
+     * StringUtils.substringAfterLast(*, "")        = ""
+     * StringUtils.substringAfterLast(*, null)      = ""
+     * StringUtils.substringAfterLast("abc", "a")   = "bc"
+     * StringUtils.substringAfterLast("abcba", "b") = "a"
+     * StringUtils.substringAfterLast("abc", "c")   = ""
+     * StringUtils.substringAfterLast("a", "a")     = ""
+     * StringUtils.substringAfterLast("a", "z")     = ""
+     * </pre>
+     *
+     * @param str  the String to get a substring from, may be null
+     * @param separator  the String to search for, may be null
+     * @return the substring after the last occurrence of the separator,
+     *  {@code null} if null String input
+     * @since 2.0
+     */
+    public static String substringAfterLast(final String str, final String separator) {
+        if (isEmpty(str)) {
+            return str;
+        }
+        if (isEmpty(separator)) {
+            return EMPTY;
+        }
+        final int pos = str.lastIndexOf(separator);
+        if (pos == INDEX_NOT_FOUND || pos == str.length() - separator.length()) {
+            return EMPTY;
+        }
+        return str.substring(pos + separator.length());
+    }
+
+    // Substring between
+    //-----------------------------------------------------------------------
+    /**
+     * <p>Gets the String that is nested in between two instances of the
+     * same String.</p>
+     *
+     * <p>A {@code null} input String returns {@code null}.
+     * A {@code null} tag returns {@code null}.</p>
+     *
+     * <pre>
+     * StringUtils.substringBetween(null, *)            = null
+     * StringUtils.substringBetween("", "")             = ""
+     * StringUtils.substringBetween("", "tag")          = null
+     * StringUtils.substringBetween("tagabctag", null)  = null
+     * StringUtils.substringBetween("tagabctag", "")    = ""
+     * StringUtils.substringBetween("tagabctag", "tag") = "abc"
+     * </pre>
+     *
+     * @param str  the String containing the substring, may be null
+     * @param tag  the String before and after the substring, may be null
+     * @return the substring, {@code null} if no match
+     * @since 2.0
+     */
+    public static String substringBetween(final String str, final String tag) {
+        return substringBetween(str, tag, tag);
+    }
+
+    /**
+     * <p>Gets the String that is nested in between two Strings.
+     * Only the first match is returned.</p>
+     *
+     * <p>A {@code null} input String returns {@code null}.
+     * A {@code null} open/close returns {@code null} (no match).
+     * An empty ("") open and close returns an empty string.</p>
+     *
+     * <pre>
+     * StringUtils.substringBetween("wx[b]yz", "[", "]") = "b"
+     * StringUtils.substringBetween(null, *, *)          = null
+     * StringUtils.substringBetween(*, null, *)          = null
+     * StringUtils.substringBetween(*, *, null)          = null
+     * StringUtils.substringBetween("", "", "")          = ""
+     * StringUtils.substringBetween("", "", "]")         = null
+     * StringUtils.substringBetween("", "[", "]")        = null
+     * StringUtils.substringBetween("yabcz", "", "")     = ""
+     * StringUtils.substringBetween("yabcz", "y", "z")   = "abc"
+     * StringUtils.substringBetween("yabczyabcz", "y", "z")   = "abc"
+     * </pre>
+     *
+     * @param str  the String containing the substring, may be null
+     * @param open  the String before the substring, may be null
+     * @param close  the String after the substring, may be null
+     * @return the substring, {@code null} if no match
+     * @since 2.0
+     */
+    public static String substringBetween(final String str, final String open, final String close) {
+        if (str == null || open == null || close == null) {
+            return null;
+        }
+        final int start = str.indexOf(open);
+        if (start != INDEX_NOT_FOUND) {
+            final int end = str.indexOf(close, start + open.length());
+            if (end != INDEX_NOT_FOUND) {
+                return str.substring(start + open.length(), end);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * <p>Searches a String for substrings delimited by a start and end tag,
+     * returning all matching substrings in an array.</p>
+     *
+     * <p>A {@code null} input String returns {@code null}.
+     * A {@code null} open/close returns {@code null} (no match).
+     * An empty ("") open/close returns {@code null} (no match).</p>
+     *
+     * <pre>
+     * StringUtils.substringsBetween("[a][b][c]", "[", "]") = ["a","b","c"]
+     * StringUtils.substringsBetween(null, *, *)            = null
+     * StringUtils.substringsBetween(*, null, *)            = null
+     * StringUtils.substringsBetween(*, *, null)            = null
+     * StringUtils.substringsBetween("", "[", "]")          = []
+     * </pre>
+     *
+     * @param str  the String containing the substrings, null returns null, empty returns empty
+     * @param open  the String identifying the start of the substring, empty returns null
+     * @param close  the String identifying the end of the substring, empty returns null
+     * @return a String Array of substrings, or {@code null} if no match
+     * @since 2.3
+     */
+    public static String[] substringsBetween(final String str, final String open, final String close) {
+        if (str == null || isEmpty(open) || isEmpty(close)) {
+            return null;
+        }
+        final int strLen = str.length();
+        if (strLen == 0) {
+            return ArrayUtils.EMPTY_STRING_ARRAY;
+        }
+        final int closeLen = close.length();
+        final int openLen = open.length();
+        final List<String> list = new ArrayList<>();
+        int pos = 0;
+        while (pos < strLen - closeLen) {
+            int start = str.indexOf(open, pos);
+            if (start < 0) {
+                break;
+            }
+            start += openLen;
+            final int end = str.indexOf(close, start);
+            if (end < 0) {
+                break;
+            }
+            list.add(str.substring(start, end));
+            pos = end + closeLen;
+        }
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.toArray(new String [list.size()]);
+    }
+
+
+    // Left/Right/Mid
+    //-----------------------------------------------------------------------
+    /**
+     * <p>Gets the leftmost {@code len} characters of a String.</p>
+     *
+     * <p>If {@code len} characters are not available, or the
+     * String is {@code null}, the String will be returned without
+     * an exception. An empty String is returned if len is negative.</p>
+     *
+     * <pre>
+     * StringUtils.left(null, *)    = null
+     * StringUtils.left(*, -ve)     = ""
+     * StringUtils.left("", *)      = ""
+     * StringUtils.left("abc", 0)   = ""
+     * StringUtils.left("abc", 2)   = "ab"
+     * StringUtils.left("abc", 4)   = "abc"
+     * </pre>
+     *
+     * @param str  the String to get the leftmost characters from, may be null
+     * @param len  the length of the required String
+     * @return the leftmost characters, {@code null} if null String input
+     */
+    public static String left(final String str, final int len) {
+        if (str == null) {
+            return null;
+        }
+        if (len < 0) {
+            return EMPTY;
+        }
+        if (str.length() <= len) {
+            return str;
+        }
+        return str.substring(0, len);
+    }
+
+    /**
+     * <p>Gets the rightmost {@code len} characters of a String.</p>
+     *
+     * <p>If {@code len} characters are not available, or the String
+     * is {@code null}, the String will be returned without an
+     * an exception. An empty String is returned if len is negative.</p>
+     *
+     * <pre>
+     * StringUtils.right(null, *)    = null
+     * StringUtils.right(*, -ve)     = ""
+     * StringUtils.right("", *)      = ""
+     * StringUtils.right("abc", 0)   = ""
+     * StringUtils.right("abc", 2)   = "bc"
+     * StringUtils.right("abc", 4)   = "abc"
+     * </pre>
+     *
+     * @param str  the String to get the rightmost characters from, may be null
+     * @param len  the length of the required String
+     * @return the rightmost characters, {@code null} if null String input
+     */
+    public static String right(final String str, final int len) {
+        if (str == null) {
+            return null;
+        }
+        if (len < 0) {
+            return EMPTY;
+        }
+        if (str.length() <= len) {
+            return str;
+        }
+        return str.substring(str.length() - len);
+    }
+
+    /**
+     * <p>Gets {@code len} characters from the middle of a String.</p>
+     *
+     * <p>If {@code len} characters are not available, the remainder
+     * of the String will be returned without an exception. If the
+     * String is {@code null}, {@code null} will be returned.
+     * An empty String is returned if len is negative or exceeds the
+     * length of {@code str}.</p>
+     *
+     * <pre>
+     * StringUtils.mid(null, *, *)    = null
+     * StringUtils.mid(*, *, -ve)     = ""
+     * StringUtils.mid("", 0, *)      = ""
+     * StringUtils.mid("abc", 0, 2)   = "ab"
+     * StringUtils.mid("abc", 0, 4)   = "abc"
+     * StringUtils.mid("abc", 2, 4)   = "c"
+     * StringUtils.mid("abc", 4, 2)   = ""
+     * StringUtils.mid("abc", -2, 2)  = "ab"
+     * </pre>
+     *
+     * @param str  the String to get the characters from, may be null
+     * @param pos  the position to start from, negative treated as zero
+     * @param len  the length of the required String
+     * @return the middle characters, {@code null} if null String input
+     */
+    public static String mid(final String str, int pos, final int len) {
+        if (str == null) {
+            return null;
+        }
+        if (len < 0 || pos > str.length()) {
+            return EMPTY;
+        }
+        if (pos < 0) {
+            pos = 0;
+        }
+        if (str.length() <= pos + len) {
+            return str.substring(pos);
+        }
+        return str.substring(pos, pos + len);
     }
 
 }
