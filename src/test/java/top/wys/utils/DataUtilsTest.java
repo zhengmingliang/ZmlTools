@@ -2,14 +2,13 @@ package top.wys.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import lombok.Builder;
+import lombok.Data;
 import org.intellij.lang.annotations.Language;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 /*
  * Created by 郑明亮 on 2020/9/19 14:34.
  */
@@ -84,9 +83,56 @@ public class DataUtilsTest {
         Assert.isTrue(((JSONArray)JSON.toJSON(emptyPropertyNames)).containsAll(Arrays.asList("sex","address","friends")));
     }
 
-//    @Data
+    @Test
+    public void mapToBean() {
+        Map<String,Object> params = new HashMap<>();
+        params.put("name","张三");
+        params.put("age",21);
+        params.put("sex",1);
+        params.put("friends",Arrays.asList(new JSONObject().fluentPut("name","李四").fluentPut("age",20).put("sex",true)));
+
+        Person person = DataUtils.mapToBean(params, Person.class);
+//        Person person2 = mapToBean(params, Person.class);
+        System.out.println(JSON.toJSONString(person));
+//        System.out.println(JSON.toJSONString(person2));
+    }
+
+
+   /* public static <T> T mapToBean(Map<String, Object> map, Class<T> t){
+        if (map == null){
+            return null;
+        }
+
+        T obj = null;
+        try {
+            obj = t.newInstance();
+
+            org.apache.commons.beanutils.BeanUtils.populate(obj, map);
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        return obj;
+    }*/
+
+    @Data
     @Builder
-    static class Person{
+    public static class Person{
+        public Person() {
+        }
+
+        public Person(String name, String sex, int age, String address, List<Person> friends) {
+            this.name = name;
+            this.sex = sex;
+            this.age = age;
+            this.address = address;
+            this.friends = friends;
+        }
+
         private String name;
         String sex;
         int age;
