@@ -91,4 +91,31 @@ public class ArrayUtils {
             eq = e1.equals(e2);
         return eq;
     }
+
+    /**
+     * 获取数组中的第一个元素
+     * @param array
+     * @since 1.4.3
+     * @return
+     * @param <T>
+     */
+    public static <T>  T getFirst(T [] array){
+        return getFirst(array,null);
+    }
+
+
+    /**
+     * 获取数组中的第一个元素
+     * @param array 数组
+     * @param defaultValue 数组为空时返回的默认值
+     * @since 1.4.3
+     * @return
+     * @param <T>
+     */
+    public static <T>  T getFirst(T [] array,T defaultValue){
+        if (array == null || array.length == 0) {
+            return defaultValue;
+        }
+        return array[0];
+    }
 }

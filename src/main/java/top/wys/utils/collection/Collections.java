@@ -145,4 +145,32 @@ public class Collections {
 
 
 
+    /**
+     * 获取集合第一个元素
+     * @param collection 集合
+     * @since 1.4.3
+     * @return
+     * @param <T>
+     */
+    public static <T> T getFirst(Collection<T> collection){
+       return getFirst(collection,null);
+    }
+
+    /**
+     * 获取集合第一个元素
+     * @param collection 集合
+     * @param defaultValue 当{@code collection} 为空时，则返回该默认值
+     * @since 1.4.3
+     * @return
+     * @param <T>
+     */
+    public static <T> T getFirst(Collection<T> collection,T defaultValue){
+        if (isEmpty(collection)) {
+            return defaultValue;
+        }
+        return collection.stream().findFirst().get();
+    }
+
+
+
 }

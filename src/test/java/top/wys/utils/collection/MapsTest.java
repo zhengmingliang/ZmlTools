@@ -1,15 +1,14 @@
 package top.wys.utils.collection;
 
 import com.alibaba.fastjson2.JSONObject;
-import junit.framework.TestCase;
 import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.Test;
 
-import java.io.PrintStream;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-public class MapsTest extends TestCase {
+public class MapsTest  {
    static JSONObject jsonObject = null;
 
     @Before
@@ -24,12 +23,29 @@ public class MapsTest extends TestCase {
     }
 
 
+    @Test
     public void testVerbosePrint() {
         Maps.verbosePrint(System.out,"fastjson",jsonObject);
     }
 
+    @Test
     public void testDebugPrint() {
         Maps.debugPrint(System.out,"fastjson",jsonObject);
+    }
+
+    @Test
+    public void number() {
+        Map<String,Object> map = new HashMap<>();
+        map.put("num1","3213.22");
+        map.put("num2","3,213.22");
+        map.put("num3","3200");
+        map.put("num4","-32a13.22");
+        map.put("num5",".22");
+        System.out.println("num1：" + Maps.getLong(map, "num1"));
+        System.out.println("num：2" + Maps.getDouble(map, "num2"));
+        System.out.println("num3：" + Maps.getDouble(map, "num3"));
+        System.out.println("num4：" + Maps.getInteger(map, "num4"));
+        System.out.println("num5：" + Maps.getDouble(map, "num5"));
     }
 
     public void testLogInfo() {

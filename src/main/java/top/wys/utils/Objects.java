@@ -510,6 +510,9 @@ public class Objects {
                 } catch (ParseException e) {
                     // failure means null is returned
                 }
+            } else if (object instanceof Collection) {
+                Object first = Collections.getFirst((Collection)object);
+                return getNumber(first);
             }
         }
         return null;
