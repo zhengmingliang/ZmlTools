@@ -3,17 +3,36 @@ package top.wys.utils;
 
 import com.google.common.collect.Lists;
 
-import javax.annotation.Nullable;
+import org.apache.logging.log4j.core.util.Throwables;
+
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.lang.reflect.*;
+import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Member;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
+
+import javax.annotation.Nullable;
+
+import top.wys.utils.collection.ArrayUtils;
+import top.wys.utils.jdk.UnsafeUtils;
+import top.wys.utils.reflect.FieldAccessor;
+import top.wys.utils.valid.Preconditions;
 
 
 /**
@@ -30,12 +49,20 @@ public class ReflectionUtils {
 	 * Cache for {@link Class#getDeclaredFields()}, allowing for fast iteration.
 	 */
 	private static final Map<Class<?>, Field[]> declaredFieldsCache = new ConcurrentHashMap<>(256);
+	/**
+	 * 根据字段名缓存Field
+	 */
+	private static final Map<String, Field> declaredFieldCache = new ConcurrentHashMap<>(256);
 
 	/**
 	 * Cache for {@link Class#getDeclaredMethods()} plus equivalent default methods
 	 * from Java 8 based interfaces, allowing for fast iteration.
 	 */
 	private static final Map<Class<?>, Method[]> declaredMethodsCache = new ConcurrentHashMap<>(256);
+	/**
+	 * 根据方法名缓存 Method
+	 */
+	private static final Map<String, Method> declaredMethodCache = new ConcurrentHashMap<>(256);
 
 
 	private ReflectionUtils() {
@@ -113,6 +140,50 @@ public class ReflectionUtils {
 		return fieldsArray;
 	}
 
+	public static Field getField(Class<?> cls, String fieldName) {
+		String key = cls.getName() + "." + fieldName;
+		Field cache = declaredFieldCache.get(key);
+		if(cache != null){
+			return cache;
+		}
+		Field field = getFieldNullable(cls, fieldName);
+		if (field == null) {
+			String msg = String.format("class %s doesn't have field %s", cls, fieldName);
+			throw new IllegalArgumentException(msg);
+		}
+		declaredFieldCache.put(key,field);
+		return field;
+	}
+
+	public static Field getFieldNullable(Class<?> cls, String fieldName) {
+		Class<?> clazz = cls;
+		do {
+			Field[] fields = clazz.getDeclaredFields();
+			for (Field field : fields) {
+				if (field.getName().equals(fieldName)) {
+					return field;
+				}
+			}
+			clazz = clazz.getSuperclass();
+		} while (clazz != null);
+		return null;
+	}
+
+	public static List<Field> getFields(Class<?> cls, boolean searchParent) {
+		Preconditions.checkNotNull(cls);
+		List<Field> fields = new ArrayList<>();
+		if (searchParent) {
+			Class<?> clazz = cls;
+			do {
+				Collections.addAll(fields, clazz.getDeclaredFields());
+				clazz = clazz.getSuperclass();
+			} while (clazz != null);
+		} else {
+			Collections.addAll(fields, cls.getDeclaredFields());
+		}
+		return fields;
+	}
+
 	/**
 	 * @author 郑明亮
 	 * @time 2017年1月9日 下午7:36:21
@@ -155,9 +226,18 @@ public class ReflectionUtils {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static <T> Object methodInvoke(T t, String methodName,
-			Class... paramters) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+			Class<?>... paramters) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+		return methodInvoke(t,methodName,null,paramters);
+
+	}
+
+	public static <T> Object methodInvoke(T t, String methodName,Object[] params,
+										  Class<?>... paramters) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		Class clz = t.getClass();
-		Method method = clz.getMethod(methodName);
+		Method method = clz.getMethod(methodName,paramters);
+		if (params != null) {
+			return method.invoke(t,params);
+		}
 		return method.invoke(t);
 
 	}
@@ -258,6 +338,32 @@ public class ReflectionUtils {
 		}
 	}
 
+
+	/**
+	 * 使构造方法可以被访问
+	 * @param constructor
+	 */
+	public static void makeAccessible(Constructor constructor){
+		if (!isAccessible(constructor) && !constructor.isAccessible()) {
+			constructor.setAccessible(true);
+		}
+	}
+
+
+	/**
+	 * 判断该成员 {@link Member} 是否public 并且所在类也是public的
+	 *
+	 * @param <T> 要测试其可访问性的对象的类型
+	 * @param member 要检查公共可访问性的成员(不能是{@code null})。
+	 * @return 返回{@code true} 如果 {@code member} 是 public 的并且是在一个public 类中.
+	 * @throws NullPointerException if {@code member} is {@code null}.
+	 */
+	public static <T extends AccessibleObject & Member> boolean isAccessible(final T member) {
+		Objects.requireNonNull(member, "No member provided");
+		return Modifier.isPublic(member.getModifiers()) && Modifier.isPublic(member.getDeclaringClass().getModifiers());
+	}
+
+
 	/**
 	 * 使给定的字段可访问，如果需要，显式地将其设置为可访问。setAccessible（true）方法仅在实际需要时调用，
 	 * 以避免与JVM SecurityManager（如果处于活动状态）发生不必要的冲突
@@ -306,6 +412,24 @@ public class ReflectionUtils {
 
 	public static Method[] getDeclaredMethods(Class<?> clazz) {
 		return getDeclaredMethods(clazz, true);
+	}
+
+	public static Method getDeclaredMethod(Class<?> clazz,String methodName,Class<?>... parameterTypes) throws NoSuchMethodException {
+		String parameterTypeKey = "";
+		if (ArrayUtils.isNotEmpty(parameterTypes)) {
+			for (Class<?> parameterType : parameterTypes) {
+				parameterTypeKey += parameterType.getSimpleName()+",";
+			}
+			parameterTypeKey = "(" + parameterTypeKey.substring(0,parameterTypeKey.length() - 1) + ")";
+		}
+		String key = clazz.getName() + methodName + parameterTypeKey;
+		Method method = declaredMethodCache.get(key);
+		if(method != null){
+		   return method;
+		}
+		method = clazz.getMethod(methodName);
+		declaredMethodCache.put(key,method);
+		return method;
 	}
 
 	private static Method[] getDeclaredMethods(Class<?> clazz, boolean defensive) {
@@ -394,4 +518,74 @@ public class ReflectionUtils {
 	}
 
 	private static final PropertyDescriptor[] emptyProperty = {};
+
+	public static <T> T instantiate(final Class<T> clazz) {
+		Objects.requireNonNull(clazz, "No class provided");
+		final Constructor<T> constructor = getDefaultConstructor(clazz);
+		try {
+			return constructor.newInstance();
+		} catch (final LinkageError | InstantiationException e) {
+			// LOG4J2-1051
+			// On platforms like Google App Engine and Android, some JRE classes are not supported: JMX, JNDI, etc.
+			throw new IllegalArgumentException(e);
+		} catch (final IllegalAccessException e) {
+			throw new IllegalStateException(e);
+		} catch (final InvocationTargetException e) {
+			Throwables.rethrow(e.getCause());
+			throw new InternalError("Unreachable");
+		}
+	}
+
+	/**
+	 * 获取默认的无参构造方法.
+	 *
+	 * @param clazz 要为其查找构造函数的类
+	 * @param <T>   构造函数创建的类型
+	 * @return 给定类的默认构造函数
+	 * @throws IllegalStateException 给定类的默认构造函数如果找不到则抛出该异常
+	 */
+	public static <T> Constructor<T> getDefaultConstructor(final Class<T> clazz) {
+		Objects.requireNonNull(clazz, "No class provided");
+		try {
+			final Constructor<T> constructor = clazz.getDeclaredConstructor();
+			makeAccessible(constructor);
+			return constructor;
+		} catch (final NoSuchMethodException ignored) {
+			try {
+				final Constructor<T> constructor = clazz.getConstructor();
+				makeAccessible(constructor);
+				return constructor;
+			} catch (final NoSuchMethodException e) {
+				throw new IllegalStateException("没有默认的无参构造方法",e);
+			}
+		}
+	}
+
+
+	public static Object getObjectFieldValue(Object obj, String fieldName) {
+		Class<?> cls = obj.getClass();
+		Preconditions.checkArgument(!cls.isPrimitive());
+		while (cls != Object.class) {
+			try {
+				Field field = cls.getDeclaredField(fieldName);
+				long fieldOffset = UnsafeUtils.objectFieldOffset(field);
+				return UnsafeUtils.getObject(obj, fieldOffset);
+				// CHECKSTYLE.OFF:EmptyCatchBlock
+			} catch (NoSuchFieldException ignored) {
+			}
+			// CHECKSTYLE.ON:EmptyCatchBlock
+			cls = cls.getSuperclass();
+		}
+		return null;
+	}
+
+	public static List<Object> getFieldValues(Collection<Field> fields, Object o) {
+		List<Object> results = new ArrayList<>(fields.size());
+		for (Field field : fields) {
+			// UNSAFE.objectFieldOffset(field)无法处理基本数据类型字段.
+			Object fieldValue = FieldAccessor.createAccessor(field).get(o);
+			results.add(fieldValue);
+		}
+		return results;
+	}
 }
