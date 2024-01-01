@@ -6,27 +6,13 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import top.wys.utils.convert.ConvertUtils;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.URLDecoder;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
-import java.nio.file.CopyOption;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.nio.file.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -67,6 +53,22 @@ public class FileUtils {
      * 默认读写文件编码
      */
     private static String DEFAULT_ENCODING  = "UTF-8";;
+
+
+    /**
+     * 1KB 占用的长度
+     */
+    public static final Long KB = 1024L;
+    /**
+     * 1MB 占用的长度
+     */
+    public static final Long MB = 1024 * KB;
+
+    /**
+     *  GB 占用的长度
+     */
+    public static final Long GB = 1024 * MB;
+
 
     /**
      * Enhancement of java.io.File#createNewFile()
@@ -923,5 +925,59 @@ public class FileUtils {
         }
         File file = new File(path);
         return file.getName();
+    }
+
+    /**
+     * 将字符串形式的大小转换为长整型的大小值。根据字符串中的单位（如GB、MB、KB），将其转换为相应的大小值并返回。如果字符串为空，则返回0。
+     * @param size
+     * @since 1.4.4
+     * @return
+     */
+    public static long getSize(String size) {
+        if (StringUtils.isEmpty(size)) {
+            return 0L;
+        }
+        long sizeNumber ;
+        if (size.contains("GB") || size.contains("gb") || size.contains("G") || size.contains("g")) {
+            Double tmp = ConvertUtils.toDouble(size, 0.0);
+            sizeNumber = (long) (tmp * GB);
+        } else if (size.contains("MB") || size.contains("mb") || size.contains("M") || size.contains("m")){
+            Double tmp = ConvertUtils.toDouble(size, 0.0);
+            sizeNumber = (long) (tmp * MB);
+        } else if (size.contains("KB") || size.contains("kb") || size.contains("K") || size.contains("k")){
+            Double tmp = ConvertUtils.toDouble(size, 0.0);
+            sizeNumber = (long) (tmp * KB);
+        } else {
+            sizeNumber = ConvertUtils.toLong(size, 0L);
+        }
+
+        return sizeNumber;
+    }
+
+
+    /**
+     * @param byteSize
+     * @return 文件大小
+     * @author 郑明亮
+     * @description <p>将文件的大小传入（单位byte），返回转换成KB、MB、GB单位的文件大小（带单位）<br>
+     * @since 1.4.4
+     */
+    public static String getSize(long byteSize) {
+        if (byteSize < 1024) {
+            return byteSize + "B";
+        }
+        double kb = byteSize / 1024.0;
+        if (kb < 1024) {
+            return NumberUtils.getRoundNum(kb, 1) + "KB";
+        } else {
+            double mb = kb / 1024.0;
+            if (mb < 1024) {
+                return NumberUtils.getRoundNum(mb) + "MB";
+            } else {
+                double gb = mb / 1024.0;
+                return NumberUtils.getRoundNum(gb) + "GB";
+            }
+
+        }
     }
 }
