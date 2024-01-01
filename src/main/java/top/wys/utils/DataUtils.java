@@ -21,7 +21,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.net.*;
-import java.text.DecimalFormat;
 import java.util.Objects;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -745,16 +744,7 @@ public class DataUtils {
      * @description <p>四舍五入<br>
      */
     public static String getRoundNum(double num, Integer pointNum) {
-        StringBuilder point = new StringBuilder();
-        DecimalFormat format = new DecimalFormat("#." + "00");
-        if (StringUtils.isEmpty(point)) {
-            for (int i = 0; i < pointNum; i++) {
-                point.append("0") ;
-            }
-            format = new DecimalFormat("#." + point);
-        }
-
-        return format.format(num);
+        return NumberUtils.getRoundNum(num, pointNum);
     }
 
 
