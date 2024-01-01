@@ -1,44 +1,23 @@
 package top.wys.utils;
 
 import com.google.common.collect.Maps;
-
+import okhttp3.Callback;
+import okhttp3.*;
+import okhttp3.FormBody.Builder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.*;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
-import javax.net.ssl.X509TrustManager;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.ConnectionPool;
-import okhttp3.Cookie;
-import okhttp3.CookieJar;
-import okhttp3.Dispatcher;
-import okhttp3.FormBody.Builder;
-import okhttp3.Headers;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
 import top.wys.utils.convert.ConvertUtils;
 import top.wys.utils.entity.UploadInfo;
 import top.wys.utils.http.CookieJarImpl;
 import top.wys.utils.http.HttpCallBack;
 import top.wys.utils.http.SSLSocketClient;
+
+import java.io.*;
+import java.net.*;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -443,11 +422,11 @@ public class HttpUtils {
 
             if (e instanceof SocketTimeoutException && serverLoadTimes <= MAX_SERVER_LOAD_TIMES) {
                 serverLoadTimes++;
-                log.error("网络连接超时{}次",serverLoadTimes);
+                log.warn("网络连接超时{}次",serverLoadTimes);
                 httpReLoad(url, client, request, fileName,dir);
             } else {
                 e.printStackTrace();
-                log.error("连接超时{}次",MAX_SERVER_LOAD_TIMES, e);
+                log.warn("连接超时{}次",MAX_SERVER_LOAD_TIMES, e);
             }
         }
         System.out.println(fileAbsolutePath);
@@ -471,11 +450,11 @@ public class HttpUtils {
 
             if (e instanceof SocketTimeoutException && serverLoadTimes <= MAX_SERVER_LOAD_TIMES) {
                 serverLoadTimes++;
-                log.error("网络连接超时" + serverLoadTimes + "次");
+                log.warn("网络连接超时" + serverLoadTimes + "次");
                 httpReLoad(url, client, request, fileName);
             } else {
                 e.printStackTrace();
-                log.error("连接超时" + MAX_SERVER_LOAD_TIMES + "次", e);
+                log.warn("连接超时" + MAX_SERVER_LOAD_TIMES + "次", e);
             }
         }
         System.out.println(fileAbsolutePath);
@@ -628,11 +607,11 @@ public class HttpUtils {
 
                 if (SocketTimeoutException.class.equals(e) && serverLoadTimes <= MAX_SERVER_LOAD_TIMES) {
                     serverLoadTimes++;
-                    log.error("网络连接超时" + serverLoadTimes + "次");
+                    log.warn("网络连接超时" + serverLoadTimes + "次");
                     client.newCall(call.request()).enqueue(this);
                 } else {
                     e.printStackTrace();
-                    log.error("连接超时" + MAX_SERVER_LOAD_TIMES + "次", e);
+                    log.warn("连接超时" + MAX_SERVER_LOAD_TIMES + "次", e);
                 }
 
             }
@@ -716,11 +695,11 @@ public class HttpUtils {
 
                 if (SocketTimeoutException.class.equals(e) && serverLoadTimes <= MAX_SERVER_LOAD_TIMES) {
                     serverLoadTimes++;
-                    log.error("网络连接超时" + serverLoadTimes + "次");
+                    log.warn("网络连接超时" + serverLoadTimes + "次");
                     client.newCall(call.request()).enqueue(this);
                 } else {
                     e.printStackTrace();
-                    log.error("连接超时" + MAX_SERVER_LOAD_TIMES + "次", e);
+                    log.warn("连接超时" + MAX_SERVER_LOAD_TIMES + "次", e);
                 }
                 httpCallBack.onFailure(call,e);
 
