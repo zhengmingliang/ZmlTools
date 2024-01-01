@@ -6,7 +6,6 @@ package top.wys.utils;/**
  * @author 郑明亮   @email 1072307340@qq.com
  * @version 1.0
  * @time 2017/11/26 20:57
- * TODO
  */
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,12 +71,16 @@ public final class PropertiesUtil {
         if (!loadOnce || properties == null) {
             properties = new Properties();
             try (InputStream resourceAsStream = PropertiesUtil.class.getResourceAsStream("/" + fileName)){
+                if (resourceAsStream == null) {
+                    log.warn("未在classpath中找到{}文件", fileName);
+                    return false;
+                }
                 properties.load(resourceAsStream);
                 flag = true;
                 propertiesMap.put(fileName, properties);
                 propertySize = propertiesMap.keySet().size();
             } catch (IOException e) {
-                log.error("从classpath下未找到执行配置文件，开始通过绝对路径寻找配置文件", e);
+                log.warn("从classpath下未找到执行配置文件，开始通过绝对路径寻找配置文件", e);
                 flag = loadFromPath(fileName);
             }
         } else {//仅加载一次，并且properties不为空
@@ -117,7 +120,7 @@ public final class PropertiesUtil {
                 flag = true;
                 propertySize = propertiesMap.size();
             } catch (IOException e) {
-                log.error("通过绝对路径未找到配置文件", e);
+                log.warn("通过绝对路径未找到配置文件", e);
             }
         } else {//首次加载
             flag = true;
