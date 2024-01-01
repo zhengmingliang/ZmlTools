@@ -532,7 +532,7 @@ public class NumberUtils {
     public static String amount2rmb(String amount) throws IllegalArgumentException {
 
 
-        // 如果有带逗号的分隔符则去掉分隔符。否则返回原值   
+        // 如果有带逗号的分隔符则去掉分隔符。否则返回原值
         amount = amount.contains(",") ? amount.replace(",", "") : amount;
         //判断是否输入小数点，如果没有输入小数点，则进行格式化
         amount = amount.contains(".") ? amount : (amount + ".00");
@@ -540,7 +540,7 @@ public class NumberUtils {
         // String temp = amount.substring(amount.indexOf(".")+1, amount.length())
         // amount = temp.length() == 1?amount+"0":amount;
 
-        // 验证金额正确性   
+        // 验证金额正确性
         if (amount.equals("0.00")) {
             throw new IllegalArgumentException("金额不能为零.");
         }
@@ -550,44 +550,44 @@ public class NumberUtils {
         }
 
         String integer = matcher.group(1); // 整数部分
-        String fraction = matcher.group(2); // 小数部分   
+        String fraction = matcher.group(2); // 小数部分
 
         String result = "";
         if (!integer.equals("0")) {
-            result += integer2rmb(integer) + UNITS[0]; // 整数部分   
+            result += integer2rmb(integer) + UNITS[0]; // 整数部分
         }
         if (fraction.equals("00")) {
-            result += UNITS[3]; // 添加[整]   
+            result += UNITS[3]; // 添加[整]
         } else if (fraction.startsWith("0") && integer.equals("0")) {
-            result += fraction2rmb(fraction).substring(1); // 去掉分前面的[零]   
+            result += fraction2rmb(fraction).substring(1); // 去掉分前面的[零]
         } else {
-            result += fraction2rmb(fraction); // 小数部分   
+            result += fraction2rmb(fraction); // 小数部分
         }
 
         return result;
     }
 
-    // 将金额小数部分转换为中文大写   
+    // 将金额小数部分转换为中文大写
     private static String fraction2rmb(String fraction) {
-        char jiao = fraction.charAt(0); // 角   
+        char jiao = fraction.charAt(0); // 角
         char fen = fraction.charAt(1); // 分
         return (RMB_NUMS[jiao - '0'] + (jiao > '0' ? UNITS[1] : ""))
                 + (fen > '0' ? RMB_NUMS[fen - '0'] + UNITS[2] : "");
     }
 
-    // 将金额整数部分转换为中文大写   
+    // 将金额整数部分转换为中文大写
     private static String integer2rmb(String integer) {
         StringBuilder buffer = new StringBuilder();
-        // 从个位数开始转换   
+        // 从个位数开始转换
         int i, j;
         for (i = integer.length() - 1, j = 0; i >= 0; i--, j++) {
             char n = integer.charAt(i);
             if (n == '0') {
-                // 当n是0且n的右边一位不是0时，插入[零]   
+                // 当n是0且n的右边一位不是0时，插入[零]
                 if (i < integer.length() - 1 && integer.charAt(i + 1) != '0') {
                     buffer.append(RMB_NUMS[0]);
                 }
-                // 插入[万]或者[亿]   
+                // 插入[万]或者[亿]
                 if (j % 4 == 0) {
                     if (i > 0 && integer.charAt(i - 1) != '0'
                             || i > 1 && integer.charAt(i - 2) != '0'
@@ -597,10 +597,10 @@ public class NumberUtils {
                 }
             } else {
                 if (j % 4 == 0) {
-                    buffer.append(U2[j / 4]);     // 插入[万]或者[亿]   
+                    buffer.append(U2[j / 4]);     // 插入[万]或者[亿]
                 }
-                buffer.append(U1[j % 4]);         // 插入[拾]、[佰]或[仟]   
-                buffer.append(RMB_NUMS[n - '0']); // 插入数字   
+                buffer.append(U1[j % 4]);         // 插入[拾]、[佰]或[仟]
+                buffer.append(RMB_NUMS[n - '0']); // 插入数字
             }
         }
         return buffer.reverse().toString();
@@ -622,5 +622,35 @@ public class NumberUtils {
         return num;
     }
 
+    /**
+     * @param num      要进行四舍五入的数字
+     * @param pointNum 要保留几位小数
+     * @return
+     * @author 郑明亮
+     * @time 2017年4月3日12:06:45
+     * @description <p>四舍五入<br>
+     */
+    public static String getRoundNum(double num, Integer pointNum) {
+        StringBuilder point = new StringBuilder();
+        DecimalFormat format = new DecimalFormat("#." + "00");
+        if (StringUtils.isEmpty(point)) {
+            for (int i = 0; i < pointNum; i++) {
+                point.append("0") ;
+            }
+            format = new DecimalFormat("#." + point);
+        }
+
+        return format.format(num);
+    }
+
+    /**
+     * 四舍五入，默认保留两位小数
+     *
+     * @param num 数字
+     * @return 处理后的数字
+     */
+    public static String getRoundNum(double num) {
+        return getRoundNum(num, 2);
+    }
 
 }
