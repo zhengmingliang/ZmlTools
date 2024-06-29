@@ -14,8 +14,11 @@ import top.wys.utils.http.SSLSocketClient;
 
 import java.io.*;
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.StringJoiner;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
@@ -145,26 +148,51 @@ public class HttpUtils {
         return client.newCall(request).execute();
     }
 
+    public static String encodeValue(Object value) {
+        try {
+            return URLEncoder.encode(value.toString(), StandardCharsets.UTF_8.name());
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException("Encoding failed", e); // 或者根据实际情况处理异常
+        }
+    }
+
     /**
      * 获取get请求的url拼接参数
      * @param params get请求的key-value集合
      * @return url拼接参数，eg: name=zhangsan&amp;age=11&amp;sex=male
      */
-    public static String getRequestParamString(Map<String,Object> params){
-        if(params == null || params.size() == 0){
+    public static String getRequestParamString(Map<String, Object> params) {
+        if (params == null || params.isEmpty()) {
             return "";
         }
-        StringBuilder urlParam = new StringBuilder();
+
+        StringJoiner urlParamJoiner = new StringJoiner("&");
+
         for (Map.Entry<String, Object> entry : params.entrySet()) {
-            Object value = entry.getValue();
-            if(value == null){
+            if (entry.getValue() == null) {
                 continue;
             }
-            urlParam.append(entry.getKey()).append("=").append(value).append("&");
-        }
-         urlParam = urlParam.deleteCharAt(urlParam.length() - 1);
 
-        return urlParam.toString();
+            String encodedKey = encodeValue(entry.getKey());
+
+            if (entry.getValue().getClass().isArray()) {
+                Object[] array = (Object[]) entry.getValue();
+                for (Object element : array) {
+                    if (element != null) {
+                        urlParamJoiner.add(encodedKey + "=" + encodeValue(element));
+                    }
+                }
+            } else if (entry.getValue() instanceof List) {
+                List<?> list = (List<?>) entry.getValue();
+                list.stream()
+                        .filter(Objects::nonNull)
+                        .forEach(element -> urlParamJoiner.add(encodedKey + "=" + encodeValue(element)));
+            } else {
+                urlParamJoiner.add(encodedKey + "=" + encodeValue(entry.getValue()));
+            }
+        }
+
+        return urlParamJoiner.toString();
     }
 
     private static Proxy proxy;
@@ -866,7 +894,7 @@ public class HttpUtils {
     }
 
     public static Response getResponseFromRequestBody(String url, Object object, Map<String, String> header,String contentType) throws IOException{
-        return  getResponseFromRequestBody(url, GsonTools.createJsonString(object), header,null);
+        return  getResponseFromRequestBody(url, GsonTools.createJsonString(object), header,contentType);
     }
 
     public static Response getResponseFromRequestBody(String url, String content, Map<String, String> header,String contentType) throws IOException {
