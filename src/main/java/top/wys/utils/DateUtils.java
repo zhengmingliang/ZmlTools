@@ -36,7 +36,7 @@ public class DateUtils {
 	/**
 	 * 1天
 	 */
-	public static final long ONE_DAY = 24 * ONE_HOUR;
+	public static final long ONE_DAY = 24L * ONE_HOUR;
 	/**
 	 * 1个月（按30天算）
 	 */
@@ -67,7 +67,7 @@ public class DateUtils {
 
 	/**
 	 * 将当前日期转换为int类型返回;
-	 * 
+	 *
 	 * @param pattern 日期格式如yyyyMMdd
 	 * @return 返回数字，如20170201
 	 */
@@ -110,7 +110,7 @@ public class DateUtils {
 
 	/**
 	 * 当前时间转换成特定形式Date
-	 * 
+	 *
 	 * @param datePattern 日期格式
 	 * @return getNowDateStrByPattern
 	 */
@@ -122,7 +122,7 @@ public class DateUtils {
 
 	/**
 	 * 获取当前年
-	 * 
+	 *
 	 * @return getCurrentYear
 	 */
 	public static Integer getCurrentYear() {
@@ -132,7 +132,7 @@ public class DateUtils {
 
 	/**
 	 * 获取当前天，当月的当天
-	 * 
+	 *
 	 * @return getCurrentDay
 	 */
 	public static Integer getCurrentDay(Date date) {
@@ -143,7 +143,7 @@ public class DateUtils {
 
 	/**
 	 * 获取当前小时,24时制
-	 * 
+	 *
 	 * @return Date
 	 */
 	public static Integer getCurrentHour(Date date) {
@@ -154,7 +154,7 @@ public class DateUtils {
 
 	/**
 	 * 得到下一个日期
-	 * 
+	 *
 	 * @param date 日期
 	 * @param step 日期位移，位移单位为天
 	 * @return 位移后的Date日期
@@ -185,7 +185,7 @@ public class DateUtils {
 
 	/**
 	 * 根据日期和格式得到Date形式日期
-	 * 
+	 *
 	 * @param date 日期
 	 * @param pattern 日期格式
 	 * @return Date
@@ -201,7 +201,7 @@ public class DateUtils {
 		}
 		return d;
 	}
-	
+
 	/**
 	 * @author 郑明亮
 	 * @email zhengmingliang911@gmail.com
@@ -238,8 +238,8 @@ public class DateUtils {
 		localFormater.setTimeZone(TimeZone.getDefault());
 		return localFormater.format(gpsUTCDate.getTime());
 	}
-	
-	
+
+
 	/**
 	 * @author 郑明亮
 	 * @email zhengmingliang911@gmail.com
@@ -274,7 +274,7 @@ public class DateUtils {
 
 	/**
 	 * 根据日期和格式得到String形式日期
-	 * 
+	 *
 	 * @param date 日期
 	 * @param pattern 日期格式
 	 * @return 得到指定String形式日期
@@ -305,7 +305,7 @@ public class DateUtils {
 
 	/**
 	 * 根据给定的字符串日期，和形式，转化成Date
-	 * 
+	 *
 	 * @param date 日期
 	 * @param pattern 日期格式
 	 * @return
@@ -323,7 +323,7 @@ public class DateUtils {
 
 	/**
 	 * 计算两个日期相差多少天
-	 * 
+	 *
 	 * @param startday 开始日期
 	 * @param endday 结束日期
 	 * @return getTimeGapsInDays
@@ -465,7 +465,7 @@ public class DateUtils {
 
 	/**
 	 * 获得其他月份的日期
-	 * 
+	 *
 	 * @param date
 	 *            当前日期
 	 * @param month
@@ -481,7 +481,7 @@ public class DateUtils {
 
 	/**
 	 * 根据给出的日期获取本年的第一天的日期
-	 * 
+	 *
 	 * @param date
 	 * @return getBeginOfYear
 	 */
@@ -495,7 +495,7 @@ public class DateUtils {
 
 	/**
 	 * 根据给出的日期获取本年的最后一天的日期
-	 * 
+	 *
 	 * @param date 日期
 	 * @return getEndOfYear
 	 */
@@ -509,7 +509,7 @@ public class DateUtils {
 
 	/**
 	 * 获取上个月的第一天日期
-	 * 
+	 *
 	 * @param date 日期
 	 * @return getFirstDayOfLastMonth
 	 */
@@ -523,7 +523,7 @@ public class DateUtils {
 
 	/**
 	 * 获取上个月的最后一天日期
-	 * 
+	 *
 	 * @param date 日期
 	 * @return getLastDayOfLastMonth
 	 */
@@ -537,7 +537,7 @@ public class DateUtils {
 
 	/**
 	 * 生成日期格式为： yyyy-MM-dd HH:mm:ss
-	 * 
+	 *
 	 * @return getNowDateTime
 	 */
 	public static String getNowDateTime() {
