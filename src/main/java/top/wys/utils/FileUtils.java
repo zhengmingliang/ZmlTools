@@ -1,5 +1,6 @@
 package top.wys.utils;
 
+import com.sun.istack.internal.Nullable;
 import okhttp3.Headers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -28,14 +29,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import static top.wys.utils.StringUtils.collectionToDelimitedString;
 import static top.wys.utils.StringUtils.delimitedListToStringArray;
 
 
@@ -46,6 +48,8 @@ public class FileUtils {
 
 
     private static final String FOLDER_SEPARATOR = "/";
+
+    private static final char FOLDER_SEPARATOR_CHAR = '/';
 
     private static final String WINDOWS_FOLDER_SEPARATOR = "\\";
 
@@ -808,29 +812,38 @@ public class FileUtils {
 
 
     /**
-     * 通过抑制像 "../" 和 "." 这样的序列来规范化路径
+     * 通过抑制像 "../" 、"path/.." 和 "." 这样的序列来规范化路径
      * <p>结果便于路径比较。对于其他用途，请注意 Windows 分隔符 ("\") 被简单的斜杠替换
      *
+     * <p><strong>NOTE</strong> 不应该依赖 {@code cleanPath} 去解决安全问题 . 应使用其他机制来预防路径遍历问题。
      * @param path 原始路径
      * @return 规范化后的路径
      */
     public static String cleanPath(String path) {
-        if (path == null) {
-            return null;
+        if (!StringUtils.hasLength(path)) {
+            return path;
         }
-        String pathToUse = StringUtils.replace(path, WINDOWS_FOLDER_SEPARATOR, FOLDER_SEPARATOR);
+
+        String normalizedPath = StringUtils.replace(path, WINDOWS_FOLDER_SEPARATOR, FOLDER_SEPARATOR);
+        String pathToUse = normalizedPath;
+
+        // Shortcut if there is no work to do
+        if (pathToUse.indexOf('.') == -1) {
+            return pathToUse;
+        }
 
         // Strip prefix from path to analyze, to not treat it as part of the
         // first path element. This is necessary to correctly parse paths like
         // "file:core/../core/io/Resource.class", where the ".." should just
         // strip the first "core" directory while keeping the "file:" prefix.
-        int prefixIndex = pathToUse.indexOf(":");
+        int prefixIndex = pathToUse.indexOf(':');
         String prefix = "";
         if (prefixIndex != -1) {
             prefix = pathToUse.substring(0, prefixIndex + 1);
-            if (prefix.contains("/")) {
+            if (prefix.contains(FOLDER_SEPARATOR)) {
                 prefix = "";
-            } else {
+            }
+            else {
                 pathToUse = pathToUse.substring(prefixIndex + 1);
             }
         }
@@ -840,33 +853,47 @@ public class FileUtils {
         }
 
         String[] pathArray = delimitedListToStringArray(pathToUse, FOLDER_SEPARATOR);
-        List<String> pathElements = new LinkedList<String>();
+        // we never require more elements than pathArray and in the common case the same number
+        Deque<String> pathElements = new ArrayDeque<>(pathArray.length);
         int tops = 0;
 
         for (int i = pathArray.length - 1; i >= 0; i--) {
             String element = pathArray[i];
             if (CURRENT_PATH.equals(element)) {
                 // Points to current directory - drop it.
-            } else if (TOP_PATH.equals(element)) {
+            }
+            else if (TOP_PATH.equals(element)) {
                 // Registering top path found.
                 tops++;
-            } else {
+            }
+            else {
                 if (tops > 0) {
                     // Merging path element with element corresponding to top path.
                     tops--;
-                } else {
+                }
+                else {
                     // Normal path element found.
-                    pathElements.add(0, element);
+                    pathElements.addFirst(element);
                 }
             }
         }
 
+        // All path elements stayed the same - shortcut
+        if (pathArray.length == pathElements.size()) {
+            return normalizedPath;
+        }
         // Remaining top paths need to be retained.
         for (int i = 0; i < tops; i++) {
-            pathElements.add(0, TOP_PATH);
+            pathElements.addFirst(TOP_PATH);
+        }
+        // If nothing else left, at least explicitly point to current path.
+        if (pathElements.size() == 1 && pathElements.getLast().isEmpty() && !prefix.endsWith(FOLDER_SEPARATOR)) {
+            pathElements.addFirst(CURRENT_PATH);
         }
 
-        return prefix + StringUtils.collectionToDelimitedString(pathElements, FOLDER_SEPARATOR);
+        final String joined = collectionToDelimitedString(pathElements, FOLDER_SEPARATOR);
+        // avoid string concatenation with empty prefix
+        return prefix.isEmpty() ? joined : prefix + joined;
     }
 
     /**
@@ -1032,4 +1059,93 @@ public class FileUtils {
 
         return files;
     }
+
+    /**
+     * Extract the filename from the given Java resource path,
+     * e.g. {@code "mypath/myfile.txt" &rarr; "myfile.txt"}.
+     * @param path the file path (may be {@code null})
+     * @return the extracted filename, or {@code null} if none
+     */
+    @Nullable
+    public static String getFilename(@Nullable String path) {
+        if (path == null) {
+            return null;
+        }
+
+        int separatorIndex = path.lastIndexOf(FOLDER_SEPARATOR_CHAR);
+        return (separatorIndex != -1 ? path.substring(separatorIndex + 1) : path);
+    }
+
+    /**
+     * Extract the filename extension from the given Java resource path,
+     * e.g. "mypath/myfile.txt" &rarr; "txt".
+     * @param path the file path (may be {@code null})
+     * @return the extracted filename extension, or {@code null} if none
+     */
+    @Nullable
+    public static String getFilenameExtension(@Nullable String path) {
+        if (path == null) {
+            return null;
+        }
+
+        int extIndex = path.lastIndexOf(EXTENSION_SEPARATOR);
+        if (extIndex == -1) {
+            return null;
+        }
+
+        int folderIndex = path.lastIndexOf(FOLDER_SEPARATOR_CHAR);
+        if (folderIndex > extIndex) {
+            return null;
+        }
+
+        return path.substring(extIndex + 1);
+    }
+
+    /**
+     * Strip the filename extension from the given Java resource path,
+     * e.g. "mypath/myfile.txt" &rarr; "mypath/myfile".
+     * @param path the file path
+     * @return the path with stripped filename extension
+     */
+    public static String stripFilenameExtension(String path) {
+        int extIndex = path.lastIndexOf(EXTENSION_SEPARATOR);
+        if (extIndex == -1) {
+            return path;
+        }
+
+        int folderIndex = path.lastIndexOf(FOLDER_SEPARATOR_CHAR);
+        if (folderIndex > extIndex) {
+            return path;
+        }
+
+        return path.substring(0, extIndex);
+    }
+
+    /**
+     * Apply the given relative path to the given Java resource path,
+     * assuming standard Java folder separation (i.e. "/" separators).
+     * @param path the path to start from (usually a full file path)
+     * @param relativePath the relative path to apply
+     * (relative to the full file path above)
+     * @return the full file path that results from applying the relative path
+     */
+    public static String applyRelativePath(String path, String relativePath) {
+        int separatorIndex = path.lastIndexOf(FOLDER_SEPARATOR_CHAR);
+        if (separatorIndex != -1) {
+            String newPath = path.substring(0, separatorIndex);
+            if (!relativePath.startsWith(FOLDER_SEPARATOR)) {
+                newPath += FOLDER_SEPARATOR_CHAR;
+            }
+            return newPath + relativePath;
+        }
+        else {
+            return relativePath;
+        }
+    }
+
+
+
+
+
+
 }
