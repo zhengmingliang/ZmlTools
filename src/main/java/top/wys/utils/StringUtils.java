@@ -28,6 +28,11 @@ public class StringUtils {
     private static final String CURRENT_PATH = ".";
 
     private static final char EXTENSION_SEPARATOR = '.';
+
+    /**
+     * 字符被截断后缀拼接内容
+     */
+    private static final String TRUNCATION_SUFFIX = " (truncated)...";
     /**
      * 字符未找到时，返回的下标值
      */
@@ -1613,5 +1618,204 @@ public class StringUtils {
         return new String(buffer);
     }
 
+    /**
+     * Split a {@code String} at the first occurrence of the delimiter.
+     * Does not include the delimiter in the result.
+     * @param toSplit the string to split (potentially {@code null} or empty)
+     * @param delimiter to split the string up with (potentially {@code null} or empty)
+     * @return a two element array with index 0 being before the delimiter, and
+     * index 1 being after the delimiter (neither element includes the delimiter);
+     * or {@code null} if the delimiter wasn't found in the given input {@code String}
+     */
+    @Nullable
+    public static String[] split(@Nullable String toSplit, @Nullable String delimiter) {
+        if (!hasLength(toSplit) || !hasLength(delimiter)) {
+            return null;
+        }
+        int offset = toSplit.indexOf(delimiter);
+        if (offset < 0) {
+            return null;
+        }
+
+        String beforeDelimiter = toSplit.substring(0, offset);
+        String afterDelimiter = toSplit.substring(offset + delimiter.length());
+        return new String[] {beforeDelimiter, afterDelimiter};
+    }
+
+    /**
+     * Truncate the supplied {@link CharSequence}.
+     * <p>If the length of the {@code CharSequence} is greater than the threshold,
+     * this method returns a {@linkplain CharSequence#subSequence(int, int)
+     * subsequence} of the {@code CharSequence} (up to the threshold) appended
+     * with the suffix {@code " (truncated)..."}. Otherwise, this method returns
+     * {@code charSequence.toString()}.
+     * @param charSequence the {@code CharSequence} to truncate
+     * @param threshold the maximum length after which to truncate; must be a
+     * positive number
+     * @return a truncated string, or a string representation of the original
+     * {@code CharSequence} if its length does not exceed the threshold
+     * @since 5.3.27
+     */
+    public static String truncate(CharSequence charSequence, int threshold) {
+        Assert.isTrue(threshold > 0,
+                () -> "Truncation threshold must be a positive number: " + threshold);
+        if (charSequence.length() > threshold) {
+            return charSequence.subSequence(0, threshold) + TRUNCATION_SUFFIX;
+        }
+        return charSequence.toString();
+    }
+
+
+    /**
+     * Trim leading and trailing whitespace from the given {@code String}.
+     * @param str the {@code String} to check
+     * @return the trimmed {@code String}
+     * @see java.lang.Character#isWhitespace
+     */
+    public static String trimWhitespace(String str) {
+        if (!hasLength(str)) {
+            return str;
+        }
+
+        int beginIndex = 0;
+        int endIndex = str.length() - 1;
+
+        while (beginIndex <= endIndex && Character.isWhitespace(str.charAt(beginIndex))) {
+            beginIndex++;
+        }
+
+        while (endIndex > beginIndex && Character.isWhitespace(str.charAt(endIndex))) {
+            endIndex--;
+        }
+
+        return str.substring(beginIndex, endIndex + 1);
+    }
+
+    /**
+     * Trim <em>all</em> whitespace from the given {@code CharSequence}:
+     * leading, trailing, and in between characters.
+     * @param str the {@code CharSequence} to check
+     * @return the trimmed {@code CharSequence}
+     * @since 5.3.22
+     * @see #trimAllWhitespace(String)
+     * @see java.lang.Character#isWhitespace
+     */
+    public static CharSequence trimAllWhitespace(CharSequence str) {
+        if (!hasLength(str)) {
+            return str;
+        }
+
+        int len = str.length();
+        StringBuilder sb = new StringBuilder(str.length());
+        for (int i = 0; i < len; i++) {
+            char c = str.charAt(i);
+            if (!Character.isWhitespace(c)) {
+                sb.append(c);
+            }
+        }
+        return sb;
+    }
+
+    /**
+     * Trim <em>all</em> whitespace from the given {@code String}:
+     * leading, trailing, and in between characters.
+     * @param str the {@code String} to check
+     * @return the trimmed {@code String}
+     * @see #trimAllWhitespace(CharSequence)
+     * @see java.lang.Character#isWhitespace
+     */
+    public static String trimAllWhitespace(String str) {
+        if (!hasLength(str)) {
+            return str;
+        }
+
+        return trimAllWhitespace((CharSequence) str).toString();
+    }
+
+    /**
+     * Trim all occurrences of the supplied trailing character from the given {@code String}.
+     * @param str the {@code String} to check
+     * @param suffixCharacter the trailing character to be trimmed
+     * @return the trimmed {@code String}
+     */
+    public static String trimSuffixCharacter(String str, char suffixCharacter) {
+        if (!hasLength(str)) {
+            return str;
+        }
+
+        int endIdx = str.length() - 1;
+        while (endIdx >= 0 && suffixCharacter == str.charAt(endIdx)) {
+            endIdx--;
+        }
+        return str.substring(0, endIdx + 1);
+    }
+
+    /**
+     * Trim all occurrences of the supplied leading character from the given {@code String}.
+     * @param str the {@code String} to check
+     * @param prefixCharacter the leading character to be trimmed
+     * @return the trimmed {@code String}
+     */
+    public static String trimPrefixCharacter(String str, char prefixCharacter) {
+        if (!hasLength(str)) {
+            return str;
+        }
+
+        int beginIdx = 0;
+        while (beginIdx < str.length() && prefixCharacter == str.charAt(beginIdx)) {
+            beginIdx++;
+        }
+        return str.substring(beginIdx);
+    }
+    /**
+     * 将给的字符的前后字符都去掉 {@code String}.
+     * @param str the {@code String} to check
+     * @param character the  character to be trimmed
+     * @see StringUtils#cleanValue(String, String, String)
+     * @return the trimmed {@code String}
+     */
+    public static String trimCharacter(String str, char character) {
+        if (!hasLength(str)) {
+            return str;
+        }
+
+        int beginIdx = 0;
+        while (beginIdx < str.length() && character == str.charAt(beginIdx)) {
+            beginIdx++;
+        }
+        str = str.substring(beginIdx);
+        int endIdx = str.length() - 1;
+
+        while (endIdx >= 0 && character == str.charAt(endIdx)) {
+            endIdx--;
+        }
+        return str.substring(0, endIdx + 1);
+
+    }
+
+
+    /**
+     * Test if the given {@code String} starts with the specified prefix,
+     * ignoring upper/lower case.
+     * @param str the {@code String} to check
+     * @param prefix the prefix to look for
+     * @see java.lang.String#startsWith
+     */
+    public static boolean startsWithIgnoreCase(@Nullable String str, @Nullable String prefix) {
+        return (str != null && prefix != null && str.length() >= prefix.length() &&
+                str.regionMatches(true, 0, prefix, 0, prefix.length()));
+    }
+
+    /**
+     * Test if the given {@code String} ends with the specified suffix,
+     * ignoring upper/lower case.
+     * @param str the {@code String} to check
+     * @param suffix the suffix to look for
+     * @see java.lang.String#endsWith
+     */
+    public static boolean endsWithIgnoreCase(@Nullable String str, @Nullable String suffix) {
+        return (str != null && suffix != null && str.length() >= suffix.length() &&
+                str.regionMatches(true, str.length() - suffix.length(), suffix, 0, suffix.length()));
+    }
 
 }
