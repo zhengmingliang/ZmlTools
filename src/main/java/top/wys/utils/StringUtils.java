@@ -34,10 +34,10 @@ public class StringUtils {
     public static final int INDEX_NOT_FOUND = -1;
     /**
      * The empty String {@code ""}.
+     *
      * @since 1.4.2
      */
     public static final String EMPTY = "";
-
 
 
     private StringUtils() {
@@ -141,7 +141,7 @@ public class StringUtils {
      * StringUtils.isBlank("  bob  ") = false
      * </pre>
      *
-     * @param cs  the CharSequence to check, may be null
+     * @param cs the CharSequence to check, may be null
      * @return {@code true} if the CharSequence is null, empty or whitespace only
      * @since 2.0
      * @since 3.0 Changed signature from isBlank(String) to isBlank(CharSequence)
@@ -172,9 +172,9 @@ public class StringUtils {
      * StringUtils.isNotBlank("  bob  ") = true
      * </pre>
      *
-     * @param cs  the CharSequence to check, may be null
+     * @param cs the CharSequence to check, may be null
      * @return {@code true} if the CharSequence is
-     *  not empty and not null and not whitespace only
+     * not empty and not null and not whitespace only
      * @since 2.0
      * @since 3.0 Changed signature from isNotBlank(String) to isNotBlank(CharSequence)
      */
@@ -201,7 +201,7 @@ public class StringUtils {
      * StringUtils.isAnyBlank("foo", "bar")     = false
      * </pre>
      *
-     * @param css  the CharSequences to check, may be null or empty
+     * @param css the CharSequences to check, may be null or empty
      * @return {@code true} if any of the CharSequences are empty or null or whitespace only
      * @since 3.2
      */
@@ -236,7 +236,7 @@ public class StringUtils {
      * StringUtils.isNoneBlank("foo", "bar")     = true
      * </pre>
      *
-     * @param css  the CharSequences to check, may be null or empty
+     * @param css the CharSequences to check, may be null or empty
      * @return {@code true} if none of the CharSequences are empty or null or whitespace only
      * @since 3.2
      */
@@ -261,7 +261,7 @@ public class StringUtils {
      * StringUtils.isAllBlank(new String[] {})  = true
      * </pre>
      *
-     * @param css  the CharSequences to check, may be null or empty
+     * @param css the CharSequences to check, may be null or empty
      * @return {@code true} if all of the CharSequences are empty or null or whitespace only
      * @since 3.6
      */
@@ -294,7 +294,7 @@ public class StringUtils {
      * StringUtils.isAllLowerCase("ab/c") = false
      * </pre>
      *
-     * @param cs  the CharSequence to check, may be null
+     * @param cs the CharSequence to check, may be null
      * @return {@code true} if only contains lowercase characters, and is non-null
      * @since 1.4.2
      */
@@ -389,6 +389,7 @@ public class StringUtils {
 
     // Defaults
     //-----------------------------------------------------------------------
+
     /**
      * <p>Returns either the passed in String,
      * or if the String is {@code null}, an empty String ("").</p>
@@ -399,10 +400,10 @@ public class StringUtils {
      * StringUtils.defaultString("bat") = "bat"
      * </pre>
      *
-     * @see String#valueOf(Object)
-     * @param str  the String to check, may be null
+     * @param str the String to check, may be null
      * @return the passed in String, or the empty String if it
-     *  was {@code null}
+     * was {@code null}
+     * @see String#valueOf(Object)
      */
     public static String defaultString(final String str) {
         return defaultString(str, EMPTY);
@@ -418,15 +419,16 @@ public class StringUtils {
      * StringUtils.defaultString("bat", "NULL") = "bat"
      * </pre>
      *
-     * @see String#valueOf(Object)
-     * @param str  the String to check, may be null
-     * @param defaultStr  the default String to return
-     *  if the input is {@code null}, may be null
+     * @param str        the String to check, may be null
+     * @param defaultStr the default String to return
+     *                   if the input is {@code null}, may be null
      * @return the passed in String, or the default if it was {@code null}
+     * @see String#valueOf(Object)
      */
     public static String defaultString(final String str, final String defaultStr) {
         return str == null ? defaultStr : str;
     }
+
     /**
      * 判断字符串是否为null或全为空格
      *
@@ -574,7 +576,9 @@ public class StringUtils {
      * @return 全角字符串
      */
     public static String toSBC(String s) {
-        if (isEmpty(s)) return s;
+        if (isEmpty(s)) {
+            return s;
+        }
         char[] chars = s.toCharArray();
         for (int i = 0, len = chars.length; i < len; i++) {
             if (chars[i] == ' ') {
@@ -654,7 +658,8 @@ public class StringUtils {
     /**
      * Replace all occurrences of a substring within a string with
      * another string.
-     * @param inString {@code String} to examine
+     *
+     * @param inString   {@code String} to examine
      * @param oldPattern {@code String} to replace
      * @param newPattern {@code String} to insert
      * @return a {@code String} with the replacements
@@ -681,8 +686,9 @@ public class StringUtils {
 
     /**
      * 用另一个字符串替换字符串中所有出现的子字符串.
-     * @param text {@code String} 要进行替换字符的文本
-     * @param searchChar {@code char} 要查找去替换的字符
+     *
+     * @param text        {@code String} 要进行替换字符的文本
+     * @param searchChar  {@code char} 要查找去替换的字符
      * @param replacement {@code String}  要替换为的字符串
      * @return a {@code String} 返回替换为新字符的字符串
      * @since 1.3.3
@@ -692,20 +698,20 @@ public class StringUtils {
             return text;
         }
         int index = text.indexOf(searchChar);
-        if(index == INDEX_NOT_FOUND){
+        if (index == INDEX_NOT_FOUND) {
             return text;
         }
         char[] chars = text.toCharArray();
         int length = text.length();
-        if(replacement.length() > 1){
+        if (replacement.length() > 1) {
             length += 10;
         }
         StringBuilder builder = new StringBuilder(length);
-        builder.append(text.substring(0,index)).append(replacement);
-        for (int i = index+1; i < chars.length; i++) {
-            if(chars[i] == searchChar){
+        builder.append(text.substring(0, index)).append(replacement);
+        for (int i = index + 1; i < chars.length; i++) {
+            if (chars[i] == searchChar) {
                 builder.append(replacement);
-            }else {
+            } else {
                 builder.append(chars[i]);
             }
         }
@@ -718,6 +724,7 @@ public class StringUtils {
      * inner simple dots.
      * <p>The result is convenient for path comparison. For other uses,
      * notice that Windows separators ("\") are replaced by simple slashes.
+     *
      * @param path the original path
      * @return the normalized path
      */
@@ -737,8 +744,7 @@ public class StringUtils {
             prefix = pathToUse.substring(0, prefixIndex + 1);
             if (prefix.contains("/")) {
                 prefix = "";
-            }
-            else {
+            } else {
                 pathToUse = pathToUse.substring(prefixIndex + 1);
             }
         }
@@ -755,17 +761,14 @@ public class StringUtils {
             String element = pathArray[i];
             if (CURRENT_PATH.equals(element)) {
                 // Points to current directory - drop it.
-            }
-            else if (TOP_PATH.equals(element)) {
+            } else if (TOP_PATH.equals(element)) {
                 // Registering top path found.
                 tops++;
-            }
-            else {
+            } else {
                 if (tops > 0) {
                     // Merging path element with element corresponding to top path.
                     tops--;
-                }
-                else {
+                } else {
                     // Normal path element found.
                     pathElements.add(0, element);
                 }
@@ -782,6 +785,7 @@ public class StringUtils {
 
     /**
      * Compare two paths after normalization of them.
+     *
      * @param path1 first path for comparison
      * @param path2 second path for comparison
      * @return whether the two paths are equivalent after normalization
@@ -793,9 +797,10 @@ public class StringUtils {
 
     /**
      * Delete any character in a given {@code String}.
-     * @param inString the original {@code String}
+     *
+     * @param inString      the original {@code String}
      * @param charsToDelete a set of characters to delete.
-     * E.g. "az\n" will delete 'a's, 'z's and new lines.
+     *                      E.g. "az\n" will delete 'a's, 'z's and new lines.
      * @return the resulting {@code String}
      */
     public static String deleteAny(String inString, String charsToDelete) {
@@ -814,6 +819,7 @@ public class StringUtils {
 
     /**
      * Turn given source {@code String} array into sorted array.
+     *
      * @param array the source array
      * @return the sorted array (never {@code null})
      */
@@ -828,6 +834,7 @@ public class StringUtils {
     /**
      * Copy the given {@code Collection} into a {@code String} array.
      * <p>The {@code Collection} must contain {@code String} elements only.
+     *
      * @param collection the {@code Collection} to copy
      * @return the {@code String} array ({@code null} if the supplied
      * {@code Collection} was {@code null})
@@ -845,9 +852,10 @@ public class StringUtils {
      * <p>A single {@code delimiter} may consist of more than one character,
      * but it will still be considered as a single delimiter string, rather
      * than as bunch of potential delimiter characters, in contrast to
-     * @param str the input {@code String}
+     *
+     * @param str       the input {@code String}
      * @param delimiter the delimiter between elements (this is a single delimiter,
-     * rather than a bunch individual delimiter characters)
+     *                  rather than a bunch individual delimiter characters)
      * @return an array of the tokens in the list
      */
     public static String[] delimitedListToStringArray(String str, String delimiter) {
@@ -860,11 +868,12 @@ public class StringUtils {
      * <p>A single {@code delimiter} may consist of more than one character,
      * but it will still be considered as a single delimiter string, rather
      * than as bunch of potential delimiter characters, in contrast to
-     * @param str the input {@code String}
-     * @param delimiter the delimiter between elements (this is a single delimiter,
-     * rather than a bunch individual delimiter characters)
+     *
+     * @param str           the input {@code String}
+     * @param delimiter     the delimiter between elements (this is a single delimiter,
+     *                      rather than a bunch individual delimiter characters)
      * @param charsToDelete a set of characters to delete; useful for deleting unwanted
-     * line breaks: e.g. "\r\n\f" will delete all new lines and line feeds in a {@code String}
+     *                      line breaks: e.g. "\r\n\f" will delete all new lines and line feeds in a {@code String}
      * @return an array of the tokens in the list
      */
     public static String[] delimitedListToStringArray(String str, String delimiter, String charsToDelete) {
@@ -872,15 +881,14 @@ public class StringUtils {
             return new String[0];
         }
         if (delimiter == null) {
-            return new String[] {str};
+            return new String[]{str};
         }
         List<String> result = new ArrayList<String>();
         if ("".equals(delimiter)) {
             for (int i = 0; i < str.length(); i++) {
                 result.add(deleteAny(str.substring(i, i + 1), charsToDelete));
             }
-        }
-        else {
+        } else {
             int pos = 0;
             int delPos;
             while ((delPos = str.indexOf(delimiter, pos)) != INDEX_NOT_FOUND) {
@@ -898,8 +906,9 @@ public class StringUtils {
     /**
      * 将 {@link Collection} 转换为有范围的{@code String} (e.g. CSV).
      * <p>对于{@code toString()} 的实现很有用.
-     * @param coll 要转换的 {@code Collection}
-     * @param delim 分隔符 (一般用 ",")
+     *
+     * @param coll   要转换的 {@code Collection}
+     * @param delim  分隔符 (一般用 ",")
      * @param prefix 每个元素的前缀 {@code String}
      * @param suffix 每个元素的后缀 {@code String}
      * @return the delimited {@code String}
@@ -922,7 +931,8 @@ public class StringUtils {
     /**
      * 将 {@link Collection} 转换为有范围的{@code String} (e.g. CSV).
      * <p>Useful for {@code toString()} implementations.
-     * @param coll the {@code Collection} to convert
+     *
+     * @param coll  the {@code Collection} to convert
      * @param delim the delimiter to use (typically a ",")
      * @return the delimited {@code String}
      */
@@ -935,6 +945,7 @@ public class StringUtils {
      * <p>More specifically, this method returns {@code true} if the
      * {@code String} is not {@code null}, its length is greater than 0,
      * and it contains at least one non-whitespace character.
+     *
      * @param str the {@code String} to check (may be {@code null})
      * @return {@code true} if the {@code String} is not {@code null}, its
      * length is greater than 0, and it does not contain whitespace only
@@ -961,7 +972,7 @@ public class StringUtils {
      * @return {@link String}
      */
     public static String cleanValue(String text) {
-        if(text == null){
+        if (text == null) {
             return null;
         }
 
@@ -969,7 +980,7 @@ public class StringUtils {
             text = text.substring(1);
         }
         if (text.endsWith("\"")) {
-            text = text.substring(0,text.length()- 1);
+            text = text.substring(0, text.length() - 1);
         }
 
         return text;
@@ -983,8 +994,8 @@ public class StringUtils {
      * @param suffix 后缀，将把该后缀从{@param text}文本中移除掉
      * @return {@link String}
      */
-    public static String cleanValue(String text,String prefix,String suffix) {
-        if(text == null){
+    public static String cleanValue(String text, String prefix, String suffix) {
+        if (text == null) {
             return null;
         }
 
@@ -992,7 +1003,7 @@ public class StringUtils {
             text = text.substring(prefix.length());
         }
         if (text.endsWith(suffix)) {
-            text = text.substring(0,text.length()- suffix.length());
+            text = text.substring(0, text.length() - suffix.length());
         }
 
         return text;
@@ -1005,9 +1016,10 @@ public class StringUtils {
      *
      * <p><b>注意:</b> 仅识别精确的两个字符占位符序列 {@code "%s"}
      *
-     * @param template  一个包含0个或多个 {@code "%s"} 占位符的字符串. {@code null} 会被转换为字符串 {@code "null"}.
-     * @param args 要替换到消息模板中的参数. 指定的第一个参数将替换模板中第一次出现的 {@code "%s"} ,后面参数依次类推. 如果是 {@code null} 则会转换位字符串 {@code "null"};
-     *      非null的值将会通过 {@link Object#toString()} 转换为字符串.
+     * @param template 一个包含0个或多个 {@code "%s"} 占位符的字符串. {@code null} 会被转换为字符串 {@code "null"}.
+     * @param args     要替换到消息模板中的参数. 指定的第一个参数将替换模板中第一次出现的 {@code "%s"} ,后面参数依次类推. 如果是 {@code null} 则会转换位字符串 {@code
+     * "null"};
+     *                 非null的值将会通过 {@link Object#toString()} 转换为字符串.
      * @since 1.4.1
      */
     public static String lenientFormat(
@@ -1015,7 +1027,7 @@ public class StringUtils {
         template = String.valueOf(template); // null -> "null"
 
         if (args == null) {
-            args = new Object[] {"(Object[])null"};
+            args = new Object[]{"(Object[])null"};
         } else {
             for (int i = 0; i < args.length; i++) {
                 args[i] = lenientToString(args[i]);
@@ -1063,9 +1075,9 @@ public class StringUtils {
     }
 
 
-
     // Substring
     //-----------------------------------------------------------------------
+
     /**
      * <p>Gets a substring from the specified String avoiding exceptions.</p>
      *
@@ -1085,9 +1097,9 @@ public class StringUtils {
      * StringUtils.substring("abc", -4) = "abc"
      * </pre>
      *
-     * @param str  the String to get the substring from, may be null
-     * @param start  the position to start from, negative means
-     *  count back from the end of the String by this many characters
+     * @param str   the String to get the substring from, may be null
+     * @param start the position to start from, negative means
+     *              count back from the end of the String by this many characters
      * @return substring from start position, {@code null} if null String input
      */
     public static String substring(final String str, int start) {
@@ -1137,13 +1149,13 @@ public class StringUtils {
      * StringUtils.substring("abc", -4, 2)  = "ab"
      * </pre>
      *
-     * @param str  the String to get the substring from, may be null
-     * @param start  the position to start from, negative means
-     *  count back from the end of the String by this many characters
-     * @param end  the position to end at (exclusive), negative means
-     *  count back from the end of the String by this many characters
+     * @param str   the String to get the substring from, may be null
+     * @param start the position to start from, negative means
+     *              count back from the end of the String by this many characters
+     * @param end   the position to end at (exclusive), negative means
+     *              count back from the end of the String by this many characters
      * @return substring from start position to end position,
-     *  {@code null} if null String input
+     * {@code null} if null String input
      */
     public static String substring(final String str, int start, int end) {
         if (str == null) {
@@ -1180,6 +1192,7 @@ public class StringUtils {
 
     // SubStringAfter/SubStringBefore
     //-----------------------------------------------------------------------
+
     /**
      * <p>Gets the substring before the first occurrence of a separator.
      * The separator is not returned.</p>
@@ -1201,10 +1214,10 @@ public class StringUtils {
      * StringUtils.substringBefore("abc", null)  = "abc"
      * </pre>
      *
-     * @param str  the String to get a substring from, may be null
-     * @param separator  the String to search for, may be null
+     * @param str       the String to get a substring from, may be null
+     * @param separator the String to search for, may be null
      * @return the substring before the first occurrence of the separator,
-     *  {@code null} if null String input
+     * {@code null} if null String input
      * @since 2.0
      */
     public static String substringBefore(final String str, final String separator) {
@@ -1243,10 +1256,10 @@ public class StringUtils {
      * StringUtils.substringAfter("abc", "")    = "abc"
      * </pre>
      *
-     * @param str  the String to get a substring from, may be null
-     * @param separator  the String to search for, may be null
+     * @param str       the String to get a substring from, may be null
+     * @param separator the String to search for, may be null
      * @return the substring after the first occurrence of the separator,
-     *  {@code null} if null String input
+     * {@code null} if null String input
      * @since 2.0
      */
     public static String substringAfter(final String str, final String separator) {
@@ -1284,10 +1297,10 @@ public class StringUtils {
      * StringUtils.substringBeforeLast("a", "")      = "a"
      * </pre>
      *
-     * @param str  the String to get a substring from, may be null
-     * @param separator  the String to search for, may be null
+     * @param str       the String to get a substring from, may be null
+     * @param separator the String to search for, may be null
      * @return the substring before the last occurrence of the separator,
-     *  {@code null} if null String input
+     * {@code null} if null String input
      * @since 2.0
      */
     public static String substringBeforeLast(final String str, final String separator) {
@@ -1324,10 +1337,10 @@ public class StringUtils {
      * StringUtils.substringAfterLast("a", "z")     = ""
      * </pre>
      *
-     * @param str  the String to get a substring from, may be null
-     * @param separator  the String to search for, may be null
+     * @param str       the String to get a substring from, may be null
+     * @param separator the String to search for, may be null
      * @return the substring after the last occurrence of the separator,
-     *  {@code null} if null String input
+     * {@code null} if null String input
      * @since 2.0
      */
     public static String substringAfterLast(final String str, final String separator) {
@@ -1346,6 +1359,7 @@ public class StringUtils {
 
     // Substring between
     //-----------------------------------------------------------------------
+
     /**
      * <p>Gets the String that is nested in between two instances of the
      * same String.</p>
@@ -1362,8 +1376,8 @@ public class StringUtils {
      * StringUtils.substringBetween("tagabctag", "tag") = "abc"
      * </pre>
      *
-     * @param str  the String containing the substring, may be null
-     * @param tag  the String before and after the substring, may be null
+     * @param str the String containing the substring, may be null
+     * @param tag the String before and after the substring, may be null
      * @return the substring, {@code null} if no match
      * @since 2.0
      */
@@ -1392,9 +1406,9 @@ public class StringUtils {
      * StringUtils.substringBetween("yabczyabcz", "y", "z")   = "abc"
      * </pre>
      *
-     * @param str  the String containing the substring, may be null
+     * @param str   the String containing the substring, may be null
      * @param open  the String before the substring, may be null
-     * @param close  the String after the substring, may be null
+     * @param close the String after the substring, may be null
      * @return the substring, {@code null} if no match
      * @since 2.0
      */
@@ -1428,9 +1442,9 @@ public class StringUtils {
      * StringUtils.substringsBetween("", "[", "]")          = []
      * </pre>
      *
-     * @param str  the String containing the substrings, null returns null, empty returns empty
+     * @param str   the String containing the substrings, null returns null, empty returns empty
      * @param open  the String identifying the start of the substring, empty returns null
-     * @param close  the String identifying the end of the substring, empty returns null
+     * @param close the String identifying the end of the substring, empty returns null
      * @return a String Array of substrings, or {@code null} if no match
      * @since 2.3
      */
@@ -1462,12 +1476,13 @@ public class StringUtils {
         if (list.isEmpty()) {
             return null;
         }
-        return list.toArray(new String [list.size()]);
+        return list.toArray(new String[list.size()]);
     }
 
 
     // Left/Right/Mid
     //-----------------------------------------------------------------------
+
     /**
      * <p>Gets the leftmost {@code len} characters of a String.</p>
      *
@@ -1484,8 +1499,8 @@ public class StringUtils {
      * StringUtils.left("abc", 4)   = "abc"
      * </pre>
      *
-     * @param str  the String to get the leftmost characters from, may be null
-     * @param len  the length of the required String
+     * @param str the String to get the leftmost characters from, may be null
+     * @param len the length of the required String
      * @return the leftmost characters, {@code null} if null String input
      */
     public static String left(final String str, final int len) {
@@ -1517,8 +1532,8 @@ public class StringUtils {
      * StringUtils.right("abc", 4)   = "abc"
      * </pre>
      *
-     * @param str  the String to get the rightmost characters from, may be null
-     * @param len  the length of the required String
+     * @param str the String to get the rightmost characters from, may be null
+     * @param len the length of the required String
      * @return the rightmost characters, {@code null} if null String input
      */
     public static String right(final String str, final int len) {
@@ -1554,9 +1569,9 @@ public class StringUtils {
      * StringUtils.mid("abc", -2, 2)  = "ab"
      * </pre>
      *
-     * @param str  the String to get the characters from, may be null
-     * @param pos  the position to start from, negative treated as zero
-     * @param len  the length of the required String
+     * @param str the String to get the characters from, may be null
+     * @param pos the position to start from, negative treated as zero
+     * @param len the length of the required String
      * @return the middle characters, {@code null} if null String input
      */
     public static String mid(final String str, int pos, final int len) {
@@ -1574,5 +1589,29 @@ public class StringUtils {
         }
         return str.substring(pos, pos + len);
     }
+
+    public static String repeat(String string, int times) {
+        StringBuilder buf = new StringBuilder(string.length() * times);
+        for (int i = 0; i < times; i++) {
+            buf.append(string);
+        }
+        return buf.toString();
+    }
+
+    public static String repeat(String string, int times, String deliminator) {
+        StringBuilder buf = new StringBuilder((string.length() * times) + (deliminator.length() * (times - 1)))
+                .append(string);
+        for (int i = 1; i < times; i++) {
+            buf.append(deliminator).append(string);
+        }
+        return buf.toString();
+    }
+
+    public static String repeat(char character, int times) {
+        char[] buffer = new char[times];
+        Arrays.fill(buffer, character);
+        return new String(buffer);
+    }
+
 
 }
