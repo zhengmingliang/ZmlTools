@@ -1,7 +1,11 @@
 package top.wys.utils;
 
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Optional;
+import java.util.function.Supplier;
 
 public class Print {
 
@@ -22,7 +26,7 @@ public class Print {
 
     颜色1：
 
-    30  白色
+    30  黑色
 
     31  红色
 
@@ -46,16 +50,142 @@ public class Print {
 
     90-97  比颜色1更鲜艳一些，我也不太清楚为什么又两种
     * */
+
+    public static String wrapNormal(Object object) {
+        return wrapGreen(object);
+    }
+
+    public static String wrapWarning(Object object) {
+        return wrapYellow(object);
+    }
+    public static String wrapError(Object object) {
+        return wrapRed(object);
+    }
+
+
+    /**
+     * 黑色
+     * @param object
+     * @return
+     */
+    public static String wrapBlack(Object object) {
+        object = getObject(object);
+        return "\033[30;1m" + object + "\033[0m";
+    }
+
+    /**
+     * 红色
+     * @param object
+     * @return
+     */
+    public static String wrapRed(Object object) {
+        object = getObject(object);
+        return "\033[31;1m" + object + "\033[0m";
+    }
+
+    /**
+     * 绿色
+     * @param object
+     * @return
+     */
+    public static String wrapGreen(Object object) {
+        object = getObject(object);
+        return "\033[32;1m" + object + "\033[0m";
+    }
+
+    /**
+     * 黄色
+     * @param object
+     * @return
+     */
+    public static String wrapYellow(Object object) {
+        object = getObject(object);
+        return "\033[33;1m" + object + "\033[0m";
+    }
+
+    /**
+     * 蓝色
+     * @param object
+     * @return
+     */
+    public static String wrapBlue(Object object) {
+        object = getObject(object);
+        return "\033[34;1m" + object + "\033[0m";
+    }
+
+    /**
+     * 紫色
+     * @param object
+     * @return
+     */
+    public static String wrapPurple(Object object) {
+        object = getObject(object);
+        return "\033[35;1m" + object + "\033[0m";
+    }
+
+
+    /**
+     * 浅蓝
+     * @param object
+     * @return
+     */
+    public static String wrapLightBlue(Object object) {
+        object = getObject(object);
+        return "\033[36;1m" + object + "\033[0m";
+    }
+
+
+    /**
+     * 灰色
+     * @param object
+     * @return
+     */
+    public static String wrapGrey(Object object) {
+        object = getObject(object);
+        return "\033[37;1m" + object + "\033[0m";
+    }
+
+
+    @Nullable
+    private static Object getObject(Object object) {
+        if (object != null) {
+            if (object instanceof Supplier) {
+                object = ((Supplier<?>) object).get();
+            } else if (object instanceof Throwable) {
+                object = ((Throwable) object).getMessage();
+            } else if (object instanceof Optional) {
+                object = ((Optional<?>) object).isPresent() ? ((Optional<?>) object).get() : "null";
+            }
+        }
+        return object;
+    }
+
     public static void normal(Object object) {
-        String print = "\033[32;1m" + object + "\033[0m";
+        String print = wrapNormal(object);
         System.out.println(print);
         log.info(print);
     }
 
     public static void warning(Object object) {
-        String print = "\033[31;1m" + object + "\033[0m";
+        String print = wrapWarning(object);
+        System.out.println(print);
+        log.warn(print);
+    }
+    public static void error(Object object) {
+        String print = wrapError(object);
         System.out.println(print);
         log.warn(print);
     }
 
+    public static void main(String[] args) {
+        Print.warning("111111111");
+        Print.normal("111111111");
+        Print.error("111111111");
+
+        System.out.println(wrapBlack("111111111"));
+        System.out.println(wrapBlue("111111111"));
+        System.out.println(wrapPurple("111111111"));
+        System.out.println(wrapLightBlue("111111111"));
+        System.out.println(wrapGrey("111111111"));
+    }
 }
