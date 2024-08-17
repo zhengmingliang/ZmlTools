@@ -8,11 +8,26 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import top.wys.utils.convert.ConvertUtils;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
-import java.nio.file.*;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -52,7 +67,7 @@ public class FileUtils {
     /**
      * 默认读写文件编码
      */
-    private static String DEFAULT_ENCODING  = "UTF-8";;
+    private static String DEFAULT_ENCODING = "UTF-8";
 
 
     /**
@@ -65,7 +80,7 @@ public class FileUtils {
     public static final Long MB = 1024 * KB;
 
     /**
-     *  GB 占用的长度
+     * GB 占用的长度
      */
     public static final Long GB = 1024 * MB;
 
@@ -75,7 +90,8 @@ public class FileUtils {
      * Create the given file. If the parent directory  don't exists, we will create them all.
      *
      * @param file the file to be created
-     * @return true if the named file does not exist and was successfully created; false if the named file already exists
+     * @return true if the named file does not exist and was successfully created; false if the named file already
+     * exists
      * @throws IOException
      * @see File#createNewFile
      */
@@ -285,8 +301,8 @@ public class FileUtils {
 
     /**
      * @param filePath 纯文本文件路径
-     * @since 1.1.2
      * @return
+     * @since 1.1.2
      */
     public static String readTxtFile(String filePath) {
         return readTxtFile(new File(filePath), DEFAULT_ENCODING);
@@ -294,8 +310,8 @@ public class FileUtils {
 
     /**
      * @param file 纯文本文件路径
-     * @since 1.1.2
      * @return
+     * @since 1.1.2
      */
     public static String readTxtFile(File file) {
         return readTxtFile(file, DEFAULT_ENCODING);
@@ -327,7 +343,7 @@ public class FileUtils {
             StringBuilder sb = new StringBuilder();
             if (file.isFile() && file.exists()) { // 判断文件是否存在
                 fis = new FileInputStream(file);
-                read = new InputStreamReader(fis, encoding);// 考虑到编码格式
+                read = new InputStreamReader(fis, encoding); // 考虑到编码格式
                 bufferedReader = new BufferedReader(read, DEFAULT_LARGE_BUFFER_SIEZE);
                 String lineTxt = null;
                 while ((lineTxt = bufferedReader.readLine()) != null) {
@@ -352,7 +368,8 @@ public class FileUtils {
 
         try (BufferedInputStream fis = new BufferedInputStream(new FileInputStream(file));
              // 用5M的缓冲读取文本文件
-             BufferedReader reader = new BufferedReader(new InputStreamReader(fis, encoding), DEFAULT_LARGE_BUFFER_SIEZE);) {
+             BufferedReader reader = new BufferedReader(new InputStreamReader(fis, encoding),
+                     DEFAULT_LARGE_BUFFER_SIEZE);) {
             String line = reader.readLine();
             callback.getFirstLine(line);
             int lineCount = 0;
@@ -382,9 +399,10 @@ public class FileUtils {
 
     public static void readLargeFileByLine(File file, String encoding, Callback callback) {
 
-        try(FileInputStream fis = new FileInputStream(file);
-            // 用5M的缓冲读取文本文件
-            BufferedReader reader = new BufferedReader(new InputStreamReader(fis, encoding), DEFAULT_LARGE_BUFFER_SIEZE)) {
+        try (FileInputStream fis = new FileInputStream(file);
+             // 用5M的缓冲读取文本文件
+             BufferedReader reader = new BufferedReader(new InputStreamReader(fis, encoding),
+                     DEFAULT_LARGE_BUFFER_SIEZE)) {
 
             String line = reader.readLine();
             callback.getFirstLine(line);
@@ -484,8 +502,9 @@ public class FileUtils {
             while ((len = bis.read(bytes)) != -1) {
                 if (bos == null) {
                     suffixCount++;
-                    String targetFileName = String.format("%s%s%s_%s%s", targetFolderFile.getAbsolutePath(), File.separator,
-                            fileName, suffixCount, suffixName);
+                    String targetFileName =
+                            String.format("%s%s%s_%s%s", targetFolderFile.getAbsolutePath(), File.separator,
+                                    fileName, suffixCount, suffixName);
                     bos = new BufferedOutputStream(new FileOutputStream(new File(targetFileName)));
                 }
                 bos.write(bytes, 0, len);
@@ -519,7 +538,8 @@ public class FileUtils {
      * @param encoding       源文件编码
      * @param targetFolder   拆分的文件存储路径
      * @param maxLine        每个拆分的文件最多多少行
-     * @description 该方法在拆分大文件（几个G）时最多需要消耗1G多的内存，可使用 top.wys.utils.FileUtils#cutFileByNIO(java.lang.String, java.lang.String, java.lang.String, long)方法拆分大文件
+     * @description 该方法在拆分大文件（几个G）时最多需要消耗1G多的内存，可使用 top.wys.utils.FileUtils#cutFileByNIO(java.lang.String, java.lang
+     * .String, java.lang.String, long)方法拆分大文件
      * @see FileUtils#cutFileByLine(String, String, String, long)
      */
     @Deprecated
@@ -545,7 +565,9 @@ public class FileUtils {
             String suffixName = fullName.substring(beginIndex, fullName.length());
 
             fis = new FileInputStream(sourceFile);
-            reader = new BufferedReader(new InputStreamReader(fis, encoding), DEFAULT_LARGE_BUFFER_SIEZE);// 用5M的缓冲读取文本文件
+            // 用5M的缓冲读取文本文件
+            reader = new BufferedReader(new InputStreamReader(fis, encoding), DEFAULT_LARGE_BUFFER_SIEZE);
+
             String line = "";
             writer = null;
             int lineCount = 0;
@@ -557,8 +579,9 @@ public class FileUtils {
                     // 文件后缀数量累计
                     suffixCount++;
                     // 拆分的新文件名称
-                    String targetFileName = String.format("%s%s%s_%s%s", targetFolderFile.getAbsolutePath(), File.separator,
-                            fileName, suffixCount, suffixName);
+                    String targetFileName =
+                            String.format("%s%s%s_%s%s", targetFolderFile.getAbsolutePath(), File.separator,
+                                    fileName, suffixCount, suffixName);
                     writer = new BufferedWriter(new FileWriter(new File(targetFileName)), DEFAULT_LARGE_BUFFER_SIEZE);
                 }
                 writer.write(line + "\r\n");
@@ -629,13 +652,15 @@ public class FileUtils {
                                 // 文件后缀数量累计
                                 suffixCount[0]++;
                                 // 拆分的新文件名称
-                                targetFileName[0] = String.format("%s%s%s_%s%s", targetFolderFile.getAbsolutePath(), File.separator,
-                                        fileName, suffixCount[0], suffixName);
+                                targetFileName[0] =
+                                        String.format("%s%s%s_%s%s", targetFolderFile.getAbsolutePath(), File.separator,
+                                                fileName, suffixCount[0], suffixName);
                                 File file = new File(targetFileName[0]);
                                 if (!file.exists()) {
                                     file.createNewFile();
                                 }
-                                writer[0] = Files.newBufferedWriter(Paths.get(targetFileName[0]), Charset.forName(encoding));
+                                writer[0] = Files.newBufferedWriter(Paths.get(targetFileName[0]),
+                                        Charset.forName(encoding));
 
                             }
                             //写入缓冲区
@@ -685,7 +710,7 @@ public class FileUtils {
             return getFileSize(f);
         }
         if (f.exists()) {
-            File flist[] = f.listFiles();
+            File[] flist = f.listFiles();
             for (int i = 0; flist != null && i < flist.length; i++) {
                 if (flist[i].isDirectory()) {
                     size = size + getFileSizes(flist[i]);
@@ -728,8 +753,8 @@ public class FileUtils {
      * FileUtil.rename(file, "aaa.jpg", false) xx/xx.png =》xx/aaa.jpg
      * </pre>
      *
-     * @param file 被修改的文件
-     * @param newName 新的文件名，包括扩展名
+     * @param file       被修改的文件
+     * @param newName    新的文件名，包括扩展名
      * @param isOverride 是否覆盖目标文件
      * @return 目标文件
      * @since 1.1.2
@@ -737,21 +762,23 @@ public class FileUtils {
     public static File rename(File file, String newName, boolean isOverride) {
 
         final Path path = file.toPath();
-        final CopyOption[] options = isOverride ? new CopyOption[] { StandardCopyOption.REPLACE_EXISTING } : new CopyOption[] {};
+        final CopyOption[] options =
+                isOverride ? new CopyOption[]{StandardCopyOption.REPLACE_EXISTING} : new CopyOption[]{};
         try {
             return Files.move(path, path.resolveSibling(newName), options).toFile();
         } catch (IOException e) {
-            log.error("rename异常",e);
+            log.error("rename异常", e);
         }
         return null;
     }
 
     /**
      * 获取文件Content-Type(Mime-Type)
+     *
      * @param filePath
      * @return
      */
-    public static String getContentType(String filePath){
+    public static String getContentType(String filePath) {
         String contentType = "application/octet-stream";
         Path path = Paths.get(filePath);
         try {
@@ -765,10 +792,11 @@ public class FileUtils {
 
     /**
      * 获取文件Content-Type(Mime-Type)
+     *
      * @param file
      * @return
      */
-    public static String getContentType(File file){
+    public static String getContentType(File file) {
         String contentType = "application/octet-stream";
         try {
             contentType = Files.probeContentType(file.toPath());
@@ -782,6 +810,7 @@ public class FileUtils {
     /**
      * 通过抑制像 "../" 和 "." 这样的序列来规范化路径
      * <p>结果便于路径比较。对于其他用途，请注意 Windows 分隔符 ("\") 被简单的斜杠替换
+     *
      * @param path 原始路径
      * @return 规范化后的路径
      */
@@ -801,8 +830,7 @@ public class FileUtils {
             prefix = pathToUse.substring(0, prefixIndex + 1);
             if (prefix.contains("/")) {
                 prefix = "";
-            }
-            else {
+            } else {
                 pathToUse = pathToUse.substring(prefixIndex + 1);
             }
         }
@@ -819,17 +847,14 @@ public class FileUtils {
             String element = pathArray[i];
             if (CURRENT_PATH.equals(element)) {
                 // Points to current directory - drop it.
-            }
-            else if (TOP_PATH.equals(element)) {
+            } else if (TOP_PATH.equals(element)) {
                 // Registering top path found.
                 tops++;
-            }
-            else {
+            } else {
                 if (tops > 0) {
                     // Merging path element with element corresponding to top path.
                     tops--;
-                }
-                else {
+                } else {
                     // Normal path element found.
                     pathElements.add(0, element);
                 }
@@ -876,8 +901,8 @@ public class FileUtils {
      * @time 2017年3月19日 下午4:35:13
      * @description <p>从网络请求中获取请求到的文件名称   <br>
      */
-    public static String getFileNameFromHttp(Headers head){
-        log.info("Header中的值:{}" , head);
+    public static String getFileNameFromHttp(Headers head) {
+        log.info("Header中的值:{}", head);
         String fileName = null;
         String disposition = head.get("Content-Disposition");
         if (StringUtils.isNotEmpty(disposition)) {
@@ -898,7 +923,7 @@ public class FileUtils {
      * @time 2017年3月19日 下午4:41:50
      * @description <p> 从URL中截取文件名称  <br>
      */
-    public static String getFileNameFromUrl(String url){
+    public static String getFileNameFromUrl(String url) {
         String originUrl = url;
         String fileName = "";
         //如果URL结尾不是文件名，而是相关参数，则截取?前的内容
@@ -909,7 +934,7 @@ public class FileUtils {
         //对URL进行解码处理
         try {
             fileName = URLDecoder.decode(url.substring(url.lastIndexOf('/') + 1), "utf-8");
-            if(!fileName.contains(".")){
+            if (!fileName.contains(".")) {
                 return HttpUtils.getFileName(originUrl);
             }
         } catch (Exception e) {
@@ -919,7 +944,7 @@ public class FileUtils {
         return fileName;
     }
 
-    public static String getFileNameFromPath(String path){
+    public static String getFileNameFromPath(String path) {
         if (path.startsWith("http")) {
             return getFileNameFromUrl(path);
         }
@@ -929,22 +954,23 @@ public class FileUtils {
 
     /**
      * 将字符串形式的大小转换为长整型的大小值。根据字符串中的单位（如GB、MB、KB），将其转换为相应的大小值并返回。如果字符串为空，则返回0。
+     *
      * @param size
-     * @since 1.4.4
      * @return
+     * @since 1.4.4
      */
     public static long getSize(String size) {
         if (StringUtils.isEmpty(size)) {
             return 0L;
         }
-        long sizeNumber ;
+        long sizeNumber;
         if (size.contains("GB") || size.contains("gb") || size.contains("G") || size.contains("g")) {
             Double tmp = ConvertUtils.toDouble(size, 0.0);
             sizeNumber = (long) (tmp * GB);
-        } else if (size.contains("MB") || size.contains("mb") || size.contains("M") || size.contains("m")){
+        } else if (size.contains("MB") || size.contains("mb") || size.contains("M") || size.contains("m")) {
             Double tmp = ConvertUtils.toDouble(size, 0.0);
             sizeNumber = (long) (tmp * MB);
-        } else if (size.contains("KB") || size.contains("kb") || size.contains("K") || size.contains("k")){
+        } else if (size.contains("KB") || size.contains("kb") || size.contains("K") || size.contains("k")) {
             Double tmp = ConvertUtils.toDouble(size, 0.0);
             sizeNumber = (long) (tmp * KB);
         } else {
@@ -979,5 +1005,31 @@ public class FileUtils {
             }
 
         }
+    }
+
+    public static File[] listFiles(String dirPath) {
+        return listFiles(new File(dirPath));
+    }
+
+    public static File[] listFiles(File dirPath) {
+        return listFiles(dirPath, true);
+    }
+
+    public static File[] listFiles(File dirPath, boolean onlyFile) {
+        if (!dirPath.exists()) {
+            return new File[0];
+        }
+        if (dirPath.isFile()) {
+            return new File[]{dirPath};
+        }
+        File[] files = dirPath.listFiles(file -> {
+            if (onlyFile) {
+                return file.isFile();
+            } else {
+                return true;
+            }
+        });
+
+        return files;
     }
 }
