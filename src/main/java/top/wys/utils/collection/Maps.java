@@ -26,6 +26,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public class Maps {
+
+    /**
+     * Default load factor for {@link HashMap}/{@link LinkedHashMap} variants.
+     */
+    static final float DEFAULT_LOAD_FACTOR = 0.75f;
+
     public static final Map EMPTY_MAP = Collections.emptyMap();
 
     /**
@@ -84,7 +90,7 @@ public class Maps {
      * @throws IllegalArgumentException if {@code expectedSize} is negative
      */
     public static <K, V> HashMap<K, V> newHashMapWithExpectedSize(int expectedSize) {
-        return new HashMap<>(capacity(expectedSize));
+        return new HashMap<>(capacity(expectedSize), DEFAULT_LOAD_FACTOR);
     }
 
 
@@ -1345,6 +1351,12 @@ public class Maps {
         return !Maps.isEmpty(map);
     }
 
+
+    /**
+     * 计算实际容量
+     * @param expectedSize
+     * @return
+     */
     static int capacity(int expectedSize) {
         Assert.isTrue(expectedSize < 0, "expectedSize cannot be negative but was: " + expectedSize);
         if (expectedSize < 3) {
@@ -1352,7 +1364,7 @@ public class Maps {
         }
         if (expectedSize < Ints.MAX_POWER_OF_TWO) {
             // 期待的容量大小除以扩容因子，就可得到最终的容量大小
-            return (int) Math.ceil(expectedSize / 0.75);
+            return (int) Math.ceil(expectedSize / DEFAULT_LOAD_FACTOR);
         }
         return Integer.MAX_VALUE; // any large value
     }
