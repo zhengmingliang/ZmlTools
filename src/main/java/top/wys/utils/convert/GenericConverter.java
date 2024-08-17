@@ -6,6 +6,8 @@
 
 package top.wys.utils.convert;
 
+import com.google.common.collect.Lists;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -36,7 +38,7 @@ public interface GenericConverter<I, O> extends Function<I, O> {
     default List<O> convert(final List<I> input) {
         List<O> output = null;
         if (input != null) {
-            output = new ArrayList<O>(input.size());
+            output = Lists.newArrayListWithExpectedSize(input.size());
             for (I data : input) {
                 output.add(apply(data));
             }
