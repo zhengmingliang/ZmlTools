@@ -10,6 +10,7 @@ import top.wys.utils.collection.Collections;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * <ol>
@@ -33,6 +34,19 @@ public abstract class Assert {
         public static void isTrue(boolean expression, String message) {
             if (!expression) {
                 throw new IllegalArgumentException(message);
+            }
+        }
+        /**
+         * Assert a boolean expression, throwing {@code IllegalArgumentException}
+         * if the test result is {@code false}.
+         * <pre class="code">Assert.isTrue(i &gt; 0, "The value must be greater than zero");</pre>
+         * @param expression a boolean expression
+         * @param messageSupplier the exception message to use if the assertion fails
+         * @throws IllegalArgumentException if expression is {@code false}
+         */
+        public static void isTrue(boolean expression, Supplier<String> messageSupplier) {
+            if (!expression) {
+                throw new IllegalArgumentException(messageSupplier.get());
             }
         }
 
