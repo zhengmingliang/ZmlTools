@@ -8,6 +8,7 @@ import top.wys.utils.collection.Collections;
 import top.wys.utils.convert.ConvertUtils;
 
 import javax.annotation.Nullable;
+
 import java.lang.reflect.Array;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -187,12 +188,13 @@ public class Objects {
      * @see java.util.Objects#equals(Object, Object)
      */
     public static boolean deepEquals(Object a, Object b) {
-        if (a == b)
+        if (a == b) {
             return true;
-        else if (a == null || b == null)
+        } else if (a == null || b == null) {
             return false;
-        else
+        } else {
             return ArrayUtils.deepEquals0(a, b);
+        }
     }
 
     /**
@@ -309,8 +311,9 @@ public class Objects {
      * @throws NullPointerException if {@code obj} is {@code null}
      */
     public static <T> T requireNonNull(T obj) {
-        if (obj == null)
+        if (obj == null) {
             throw new NullPointerException();
+        }
         return obj;
     }
 
@@ -334,8 +337,9 @@ public class Objects {
      * @throws NullPointerException if {@code obj} is {@code null}
      */
     public static <T> T requireNonNull(T obj, String message) {
-        if (obj == null)
+        if (obj == null) {
             throw new NullPointerException(message);
+        }
         return obj;
     }
 
@@ -430,9 +434,10 @@ public class Objects {
      * @since 1.8
      */
     public static <T> T requireNonNull(T obj, Supplier<String> messageSupplier) {
-        if (obj == null)
+        if (obj == null) {
             throw new NullPointerException(messageSupplier == null ?
                     null : messageSupplier.get());
+        }
         return obj;
     }
 
@@ -446,7 +451,7 @@ public class Objects {
      * <p>
      * The String is obtained via <code>toString</code>.
      *
-     * @param object  the object to convert
+     * @param object the object to convert
      * @return the value of object as a String, <code>null</code> if null object input
      */
     public static String getString(final Object object) {
@@ -466,7 +471,7 @@ public class Objects {
      * <code>false</code> and non-zero returns <code>true</code>.
      * Otherwise, <code>null</code> is returned.
      *
-     * @param object  the object to convert
+     * @param object the object to convert
      * @return the value of object as a Boolean, <code>null</code> if null object input
      */
     public static Boolean getBoolean(final Object object) {
@@ -511,7 +516,7 @@ public class Objects {
                     // failure means null is returned
                 }
             } else if (object instanceof Collection) {
-                Object first = Collections.getFirst((Collection)object);
+                Object first = Collections.getFirst((Collection) object);
                 return getNumber(first);
             }
         }
@@ -632,7 +637,7 @@ public class Objects {
      * If the value returned from the specified map is not a Map then
      * <code>null</code> is returned.
      *
-     * @param object  the object to convert
+     * @param object the object to convert
      * @return the value of object as a Map, <code>null</code> if null object input
      */
     public static Map getMap(final Object object) {
@@ -649,7 +654,7 @@ public class Objects {
      * converting null into the
      * given default value.
      *
-     * @param object          the key of the value to convert
+     * @param object       the key of the value to convert
      * @param defaultValue what to return if the value is null
      * @return the value of the object, or defaultValue if the original value
      * is null or the object is null
@@ -665,7 +670,7 @@ public class Objects {
      * converting the object into
      * a string, using the default value if the value conversion fails.
      *
-     * @param object          the key of the value to convert
+     * @param object       the key of the value to convert
      * @param defaultValue what to return if the value is null or if the
      *                     conversion fails
      * @return the value of object as a string, or defaultValue if the
@@ -684,7 +689,7 @@ public class Objects {
      * converting the object into
      * a boolean, using the default value if the value conversion fails.
      *
-     * @param object          the key of the value to convert
+     * @param object       the key of the value to convert
      * @param defaultValue what to return if the value is null or if the
      *                     conversion fails
      * @return the value of object as a boolean, or defaultValue if the
@@ -722,7 +727,7 @@ public class Objects {
      * converting the object into
      * a byte, using the default value if the value conversion fails.
      *
-     * @param object          the key of the value to convert
+     * @param object       the key of the value to convert
      * @param defaultValue what to return if the value is null or if the
      *                     conversion fails
      * @return the value of object as a number, or defaultValue if the
@@ -779,7 +784,7 @@ public class Objects {
      * converting the object into
      * a long, using the default value if the value conversion fails.
      *
-     * @param object          the object of the value to convert
+     * @param object       the object of the value to convert
      * @param defaultValue what to return if the value is null or if the
      *                     conversion fails
      * @return the value of object as a number, or defaultValue if the
@@ -798,7 +803,7 @@ public class Objects {
      * converting the object into
      * a float, using the default value if the value conversion fails.
      *
-     * @param object          the object of the value to convert
+     * @param object       the object of the value to convert
      * @param defaultValue what to return if the value is null or if the
      *                     conversion fails
      * @return the value of object as a number, or defaultValue if the
@@ -817,7 +822,7 @@ public class Objects {
      * converting the object into
      * a double, using the default value if the value conversion fails.
      *
-     * @param object          the object of the value to convert
+     * @param object       the object of the value to convert
      * @param defaultValue what to return if the value is null or if the
      *                     conversion fails
      * @return the value of object as a number, or defaultValue if the
@@ -836,7 +841,7 @@ public class Objects {
      * converting the object into
      * a map, using the default value if the value conversion fails.
      *
-     * @param object          the object of the value to convert
+     * @param object       the object of the value to convert
      * @param defaultValue what to return if the value is null or if the
      *                     conversion fails
      * @return the value of object as a number, or defaultValue if the
@@ -865,7 +870,7 @@ public class Objects {
      * <code>false</code> and non-zero returns <code>true</code>.
      * Otherwise, <code>false</code> is returned.
      *
-     * @param object  the object to convert
+     * @param object the object to convert
      * @return the value of object as a Boolean, <code>false</code> if null object input
      */
     public static boolean getBooleanValue(final Object object) {
@@ -881,7 +886,7 @@ public class Objects {
      * <p>
      * The byte is obtained from the results of {@link #getNumber(Object)}.
      *
-     * @param object  the object to convert
+     * @param object the object to convert
      * @return the value of object as a byte, <code>0</code> if null object input
      */
     public static byte getByteValue(final Object object) {
@@ -897,7 +902,7 @@ public class Objects {
      * <p>
      * The short is obtained from the results of {@link #getNumber(Object)}.
      *
-     * @param object  the object to convert
+     * @param object the object to convert
      * @return the value of object as a short, <code>0</code> if null object input
      */
     public static short getShortValue(final Object object) {
@@ -913,7 +918,7 @@ public class Objects {
      * <p>
      * The int is obtained from the results of {@link #getNumber(Object)}.
      *
-     * @param object  the object to convert
+     * @param object the object to convert
      * @return the value of object as an int, <code>0</code> if null object input
      */
     public static int getIntValue(final Object object) {
@@ -929,7 +934,7 @@ public class Objects {
      * <p>
      * The long is obtained from the results of {@link #getNumber(Object)}.
      *
-     * @param object  the object to convert
+     * @param object the object to convert
      * @return the value of object as a long, <code>0L</code> if null object input
      */
     public static long getLongValue(final Object object) {
@@ -945,7 +950,7 @@ public class Objects {
      * <p>
      * The float is obtained from the results of {@link #getNumber(Object)}.
      *
-     * @param object  the object to convert
+     * @param object the object to convert
      * @return the value of object as a float, <code>0.0F</code> if null object input
      */
     public static float getFloatValue(final Object object) {
@@ -961,7 +966,7 @@ public class Objects {
      * <p>
      * The double is obtained from the results of {@link #getNumber(Object)}.
      *
-     * @param object  the object to convert
+     * @param object the object to convert
      * @return the value of object as a double, <code>0.0</code> if null object input
      */
     public static double getDoubleValue(final Object object) {
@@ -986,7 +991,7 @@ public class Objects {
      * <code>false</code> and non-zero returns <code>true</code>.
      * Otherwise, <code>defaultValue</code> is returned.
      *
-     * @param object          the object to convert
+     * @param object       the object to convert
      * @param defaultValue return if the value is null or if the
      *                     conversion fails
      * @return the value of object as a Boolean, <code>defaultValue</code> if null object input
@@ -1005,7 +1010,7 @@ public class Objects {
      * <p>
      * The byte is obtained from the results of {@link #getNumber(Object)}.
      *
-     * @param object          the object to convert
+     * @param object       the object to convert
      * @param defaultValue return if the value is null or if the
      *                     conversion fails
      * @return the value of object as a byte, <code>defaultValue</code> if null object input
@@ -1024,7 +1029,7 @@ public class Objects {
      * <p>
      * The short is obtained from the results of {@link #getNumber(Object)}.
      *
-     * @param object          the object to convert
+     * @param object       the object to convert
      * @param defaultValue return if the value is null or if the
      *                     conversion fails
      * @return the value of object as a short, <code>defaultValue</code> if null object input
@@ -1043,7 +1048,7 @@ public class Objects {
      * <p>
      * The int is obtained from the results of {@link #getNumber(Object)}.
      *
-     * @param object          the object to convert
+     * @param object       the object to convert
      * @param defaultValue return if the value is null or if the
      *                     conversion fails
      * @return the value of object as an int, <code>defaultValue</code> if null object input
@@ -1062,7 +1067,7 @@ public class Objects {
      * <p>
      * The long is obtained from the results of {@link #getNumber(Object)}.
      *
-     * @param object          the object to convert
+     * @param object       the object to convert
      * @param defaultValue return if the value is null or if the
      *                     conversion fails
      * @return the value of object as a long, <code>defaultValue</code> if null object input
@@ -1081,7 +1086,7 @@ public class Objects {
      * <p>
      * The float is obtained from the results of {@link #getNumber(Object)}.
      *
-     * @param object          the object to convert
+     * @param object       the object to convert
      * @param defaultValue return if the value is null or if the
      *                     conversion fails
      * @return the value of object as a float, <code>defaultValue</code> if null object input
