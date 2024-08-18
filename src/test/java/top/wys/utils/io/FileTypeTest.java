@@ -23,7 +23,8 @@ public class FileTypeTest extends TestCase {
         String url = "https://mimetype.io/all-types/";
         String result = HttpUtils.get(url);
         Document document = Jsoup.parse(result);
-        Elements main = document.select("#gatsby-focus-wrapper > main > div.all-types__Container-ct8q6r-0.bYvOUx > div > div.right");
+        Elements main = document.select(
+                "#gatsby-focus-wrapper > main > div.all-types__Container-ct8q6r-0.bYvOUx > div > div.right");
         Elements mimeTypes = main.select(".mimetype");
         List dataList = new ArrayList();
         for (Element mimeType : mimeTypes) {
@@ -32,12 +33,12 @@ public class FileTypeTest extends TestCase {
             List<String> extensionList = extensions.stream().map(ext -> ext.text()).collect(Collectors.toList());
             String description = mimeType.select(".description").text();
             Map<String, Object> data = new HashMap<>();
-            data.put("mimeType",title);
-            data.put("extensions",extensionList);
-            data.put("description",description);
+            data.put("mimeType", title);
+            data.put("extensions", extensionList);
+            data.put("description", description);
             dataList.add(data);
         }
-        System.out.println(JSON.toJSONString(dataList,true));
+        System.out.println(JSON.toJSONString(dataList, true));
         System.out.println(dataList.size());
     }
 }

@@ -18,7 +18,7 @@ import java.math.BigDecimal;
  * @date 2021/5/30 7:46
  * @email mpro@vip.qq.com
  */
-public  class BalanceEventHandler implements EventHandler<Number>{
+public class BalanceEventHandler implements EventHandler<Number> {
 
     private BigDecimal balance;
 
@@ -28,7 +28,7 @@ public  class BalanceEventHandler implements EventHandler<Number>{
 
     @Override
     public void notice(Number message) {
-        balance = balance.subtract(new BigDecimal(message+""));
-        System.out.printf(",还有余额%s元\r\n",new BigDecimal(""+balance).toPlainString());
+        balance = balance.subtract(new BigDecimal(message + ""));
+        System.out.printf(",还有余额%s元\r\n", new BigDecimal("" + balance).toPlainString());
     }
 }

@@ -4,7 +4,6 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import top.wys.utils.StringUtils;
 
-
 import static top.wys.utils.StringUtils.lenientFormat;
 
 /**
@@ -136,13 +135,16 @@ public final class Preconditions {
      * @param errorMessageTemplate a template for the exception message should the check fail. The
      *                             message is formed by replacing each {@code %s} placeholder in the template with an
      *                             argument. These are matched by position - the first {@code %s} gets {@code
-     *                             errorMessageArgs[0]}, etc. Unmatched arguments will be appended to the formatted message in
+     *                             errorMessageArgs[0]}, etc. Unmatched arguments will be appended to the formatted
+     *                             message in
      *                             square braces. Unmatched placeholders will be left as-is.
      * @param errorMessageArgs     the arguments to be substituted into the message template. Arguments
      *                             are converted to strings using {@link String#valueOf(Object)}.
      * @throws IllegalArgumentException if {@code expression} is false
      */
-    public static void checkArgument(boolean expression, @Nullable String errorMessageTemplate, @Nullable Object @Nullable ... errorMessageArgs) {
+    public static void checkArgument(boolean expression,
+                                     @Nullable String errorMessageTemplate,
+                                     @Nullable Object @Nullable... errorMessageArgs) {
         if (!expression) {
             throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, errorMessageArgs));
         }
@@ -402,7 +404,10 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, @Nullable Object p1, @Nullable Object p2) {
+    public static void checkArgument(boolean b,
+                                     @Nullable String errorMessageTemplate,
+                                     @Nullable Object p1,
+                                     @Nullable Object p2) {
         if (!b) {
             throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1, p2));
         }
@@ -415,7 +420,11 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, @Nullable Object p1, @Nullable Object p2, @Nullable Object p3) {
+    public static void checkArgument(boolean b,
+                                     @Nullable String errorMessageTemplate,
+                                     @Nullable Object p1,
+                                     @Nullable Object p2,
+                                     @Nullable Object p3) {
         if (!b) {
             throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1, p2, p3));
         }
@@ -428,7 +437,12 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static void checkArgument(boolean b, @Nullable String errorMessageTemplate, @Nullable Object p1, @Nullable Object p2, @Nullable Object p3, @Nullable Object p4) {
+    public static void checkArgument(boolean b,
+                                     @Nullable String errorMessageTemplate,
+                                     @Nullable Object p1,
+                                     @Nullable Object p2,
+                                     @Nullable Object p3,
+                                     @Nullable Object p4) {
         if (!b) {
             throw new IllegalArgumentException(lenientFormat(errorMessageTemplate, p1, p2, p3, p4));
         }
@@ -472,14 +486,17 @@ public final class Preconditions {
      * @param errorMessageTemplate a template for the exception message should the check fail. The
      *                             message is formed by replacing each {@code %s} placeholder in the template with an
      *                             argument. These are matched by position - the first {@code %s} gets {@code
-     *                             errorMessageArgs[0]}, etc. Unmatched arguments will be appended to the formatted message in
+     *                             errorMessageArgs[0]}, etc. Unmatched arguments will be appended to the formatted
+     *                             message in
      *                             square braces. Unmatched placeholders will be left as-is.
      * @param errorMessageArgs     the arguments to be substituted into the message template. Arguments
      *                             are converted to strings using {@link String#valueOf(Object)}.
      * @throws IllegalStateException if {@code expression} is false
      * @see Verify#verify Verify.verify()
      */
-    public static void checkState(boolean expression, @Nullable String errorMessageTemplate, @Nullable Object @Nullable ... errorMessageArgs) {
+    public static void checkState(boolean expression,
+                                  @Nullable String errorMessageTemplate,
+                                  @Nullable Object @Nullable... errorMessageArgs) {
         if (!expression) {
             throw new IllegalStateException(lenientFormat(errorMessageTemplate, errorMessageArgs));
         }
@@ -759,7 +776,10 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static void checkState(boolean b, @Nullable String errorMessageTemplate, @Nullable Object p1, @Nullable Object p2) {
+    public static void checkState(boolean b,
+                                  @Nullable String errorMessageTemplate,
+                                  @Nullable Object p1,
+                                  @Nullable Object p2) {
         if (!b) {
             throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1, p2));
         }
@@ -773,7 +793,11 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static void checkState(boolean b, @Nullable String errorMessageTemplate, @Nullable Object p1, @Nullable Object p2, @Nullable Object p3) {
+    public static void checkState(boolean b,
+                                  @Nullable String errorMessageTemplate,
+                                  @Nullable Object p1,
+                                  @Nullable Object p2,
+                                  @Nullable Object p3) {
         if (!b) {
             throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1, p2, p3));
         }
@@ -787,7 +811,12 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static void checkState(boolean b, @Nullable String errorMessageTemplate, @Nullable Object p1, @Nullable Object p2, @Nullable Object p3, @Nullable Object p4) {
+    public static void checkState(boolean b,
+                                  @Nullable String errorMessageTemplate,
+                                  @Nullable Object p1,
+                                  @Nullable Object p2,
+                                  @Nullable Object p3,
+                                  @Nullable Object p4) {
         if (!b) {
             throw new IllegalStateException(lenientFormat(errorMessageTemplate, p1, p2, p3, p4));
         }
@@ -832,7 +861,8 @@ public final class Preconditions {
      * @param errorMessageTemplate a template for the exception message should the check fail. The
      *                             message is formed by replacing each {@code %s} placeholder in the template with an
      *                             argument. These are matched by position - the first {@code %s} gets {@code
-     *                             errorMessageArgs[0]}, etc. Unmatched arguments will be appended to the formatted message in
+     *                             errorMessageArgs[0]}, etc. Unmatched arguments will be appended to the formatted
+     *                             message in
      *                             square braces. Unmatched placeholders will be left as-is.
      * @param errorMessageArgs     the arguments to be substituted into the message template. Arguments
      *                             are converted to strings using {@link String#valueOf(Object)}.
@@ -840,7 +870,9 @@ public final class Preconditions {
      * @throws NullPointerException if {@code reference} is null
      * @see Verify#verifyNotNull Verify.verifyNotNull()
      */
-    public static <T extends @NonNull Object> T checkNotNull(T reference, @Nullable String errorMessageTemplate, @Nullable Object @Nullable ... errorMessageArgs) {
+    public static <T extends @NonNull Object> T checkNotNull(T reference,
+                                                             @Nullable String errorMessageTemplate,
+                                                             @Nullable Object @Nullable... errorMessageArgs) {
         if (reference == null) {
             throw new NullPointerException(lenientFormat(errorMessageTemplate, errorMessageArgs));
         }
@@ -896,7 +928,9 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static <T extends @NonNull Object> T checkNotNull(T obj, @Nullable String errorMessageTemplate, @Nullable Object p1) {
+    public static <T extends @NonNull Object> T checkNotNull(T obj,
+                                                             @Nullable String errorMessageTemplate,
+                                                             @Nullable Object p1) {
         if (obj == null) {
             throw new NullPointerException(lenientFormat(errorMessageTemplate, p1));
         }
@@ -910,7 +944,10 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static <T extends @NonNull Object> T checkNotNull(T obj, @Nullable String errorMessageTemplate, char p1, char p2) {
+    public static <T extends @NonNull Object> T checkNotNull(T obj,
+                                                             @Nullable String errorMessageTemplate,
+                                                             char p1,
+                                                             char p2) {
         if (obj == null) {
             throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
         }
@@ -924,7 +961,10 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static <T extends @NonNull Object> T checkNotNull(T obj, @Nullable String errorMessageTemplate, char p1, int p2) {
+    public static <T extends @NonNull Object> T checkNotNull(T obj,
+                                                             @Nullable String errorMessageTemplate,
+                                                             char p1,
+                                                             int p2) {
         if (obj == null) {
             throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
         }
@@ -938,7 +978,10 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static <T extends @NonNull Object> T checkNotNull(T obj, @Nullable String errorMessageTemplate, char p1, long p2) {
+    public static <T extends @NonNull Object> T checkNotNull(T obj,
+                                                             @Nullable String errorMessageTemplate,
+                                                             char p1,
+                                                             long p2) {
         if (obj == null) {
             throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
         }
@@ -952,7 +995,10 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static <T extends @NonNull Object> T checkNotNull(T obj, @Nullable String errorMessageTemplate, char p1, @Nullable Object p2) {
+    public static <T extends @NonNull Object> T checkNotNull(T obj,
+                                                             @Nullable String errorMessageTemplate,
+                                                             char p1,
+                                                             @Nullable Object p2) {
         if (obj == null) {
             throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
         }
@@ -966,7 +1012,10 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static <T extends @NonNull Object> T checkNotNull(T obj, @Nullable String errorMessageTemplate, int p1, char p2) {
+    public static <T extends @NonNull Object> T checkNotNull(T obj,
+                                                             @Nullable String errorMessageTemplate,
+                                                             int p1,
+                                                             char p2) {
         if (obj == null) {
             throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
         }
@@ -980,7 +1029,10 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static <T extends @NonNull Object> T checkNotNull(T obj, @Nullable String errorMessageTemplate, int p1, int p2) {
+    public static <T extends @NonNull Object> T checkNotNull(T obj,
+                                                             @Nullable String errorMessageTemplate,
+                                                             int p1,
+                                                             int p2) {
         if (obj == null) {
             throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
         }
@@ -994,7 +1046,10 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static <T extends @NonNull Object> T checkNotNull(T obj, @Nullable String errorMessageTemplate, int p1, long p2) {
+    public static <T extends @NonNull Object> T checkNotNull(T obj,
+                                                             @Nullable String errorMessageTemplate,
+                                                             int p1,
+                                                             long p2) {
         if (obj == null) {
             throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
         }
@@ -1008,7 +1063,10 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static <T extends @NonNull Object> T checkNotNull(T obj, @Nullable String errorMessageTemplate, int p1, @Nullable Object p2) {
+    public static <T extends @NonNull Object> T checkNotNull(T obj,
+                                                             @Nullable String errorMessageTemplate,
+                                                             int p1,
+                                                             @Nullable Object p2) {
         if (obj == null) {
             throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
         }
@@ -1022,7 +1080,10 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static <T extends @NonNull Object> T checkNotNull(T obj, @Nullable String errorMessageTemplate, long p1, char p2) {
+    public static <T extends @NonNull Object> T checkNotNull(T obj,
+                                                             @Nullable String errorMessageTemplate,
+                                                             long p1,
+                                                             char p2) {
         if (obj == null) {
             throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
         }
@@ -1036,7 +1097,10 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static <T extends @NonNull Object> T checkNotNull(T obj, @Nullable String errorMessageTemplate, long p1, int p2) {
+    public static <T extends @NonNull Object> T checkNotNull(T obj,
+                                                             @Nullable String errorMessageTemplate,
+                                                             long p1,
+                                                             int p2) {
         if (obj == null) {
             throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
         }
@@ -1050,7 +1114,10 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static <T extends @NonNull Object> T checkNotNull(T obj, @Nullable String errorMessageTemplate, long p1, long p2) {
+    public static <T extends @NonNull Object> T checkNotNull(T obj,
+                                                             @Nullable String errorMessageTemplate,
+                                                             long p1,
+                                                             long p2) {
         if (obj == null) {
             throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
         }
@@ -1064,7 +1131,10 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static <T extends @NonNull Object> T checkNotNull(T obj, @Nullable String errorMessageTemplate, long p1, @Nullable Object p2) {
+    public static <T extends @NonNull Object> T checkNotNull(T obj,
+                                                             @Nullable String errorMessageTemplate,
+                                                             long p1,
+                                                             @Nullable Object p2) {
         if (obj == null) {
             throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
         }
@@ -1078,7 +1148,10 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static <T extends @NonNull Object> T checkNotNull(T obj, @Nullable String errorMessageTemplate, @Nullable Object p1, char p2) {
+    public static <T extends @NonNull Object> T checkNotNull(T obj,
+                                                             @Nullable String errorMessageTemplate,
+                                                             @Nullable Object p1,
+                                                             char p2) {
         if (obj == null) {
             throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
         }
@@ -1092,7 +1165,10 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static <T extends @NonNull Object> T checkNotNull(T obj, @Nullable String errorMessageTemplate, @Nullable Object p1, int p2) {
+    public static <T extends @NonNull Object> T checkNotNull(T obj,
+                                                             @Nullable String errorMessageTemplate,
+                                                             @Nullable Object p1,
+                                                             int p2) {
         if (obj == null) {
             throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
         }
@@ -1106,7 +1182,10 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static <T extends @NonNull Object> T checkNotNull(T obj, @Nullable String errorMessageTemplate, @Nullable Object p1, long p2) {
+    public static <T extends @NonNull Object> T checkNotNull(T obj,
+                                                             @Nullable String errorMessageTemplate,
+                                                             @Nullable Object p1,
+                                                             long p2) {
         if (obj == null) {
             throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
         }
@@ -1120,7 +1199,10 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static <T extends @NonNull Object> T checkNotNull(T obj, @Nullable String errorMessageTemplate, @Nullable Object p1, @Nullable Object p2) {
+    public static <T extends @NonNull Object> T checkNotNull(T obj,
+                                                             @Nullable String errorMessageTemplate,
+                                                             @Nullable Object p1,
+                                                             @Nullable Object p2) {
         if (obj == null) {
             throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2));
         }
@@ -1134,7 +1216,11 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static <T extends @NonNull Object> T checkNotNull(T obj, @Nullable String errorMessageTemplate, @Nullable Object p1, @Nullable Object p2, @Nullable Object p3) {
+    public static <T extends @NonNull Object> T checkNotNull(T obj,
+                                                             @Nullable String errorMessageTemplate,
+                                                             @Nullable Object p1,
+                                                             @Nullable Object p2,
+                                                             @Nullable Object p3) {
         if (obj == null) {
             throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2, p3));
         }
@@ -1148,7 +1234,12 @@ public final class Preconditions {
      *
      * @since 1.4.1
      */
-    public static <T extends @NonNull Object> T checkNotNull(T obj, @Nullable String errorMessageTemplate, @Nullable Object p1, @Nullable Object p2, @Nullable Object p3, @Nullable Object p4) {
+    public static <T extends @NonNull Object> T checkNotNull(T obj,
+                                                             @Nullable String errorMessageTemplate,
+                                                             @Nullable Object p1,
+                                                             @Nullable Object p2,
+                                                             @Nullable Object p3,
+                                                             @Nullable Object p4) {
         if (obj == null) {
             throw new NullPointerException(lenientFormat(errorMessageTemplate, p1, p2, p3, p4));
         }

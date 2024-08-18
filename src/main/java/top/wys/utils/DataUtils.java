@@ -16,13 +16,36 @@ import top.wys.utils.math.Numbers;
 
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import java.io.*;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
-import java.net.*;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.URL;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
-import java.util.*;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,7 +59,7 @@ import java.util.regex.Pattern;
 public class DataUtils {
 
     private static final Logger log = LoggerFactory.getLogger(DataUtils.class);
-    private static final String LOCAL_IP = "127.0.0.1";;
+    private static final String LOCAL_IP = "127.0.0.1";
 
     private DataUtils() {
         /* 不能被实例化 */
@@ -45,20 +68,21 @@ public class DataUtils {
 
     /**
      * 当source 和targets中的任意一个相等，则返回true，否则返回false
-     * @param source 源字符串
+     *
+     * @param source  源字符串
      * @param targets 要比较的字符串
      * @return true or false
      */
-    public static boolean orEquals(String source,String... targets){
+    public static boolean orEquals(String source, String... targets) {
         if (source == null) {
             return false;
         }
-        if (targets == null){
+        if (targets == null) {
             return false;
         }
 
         for (String target : targets) {
-            if (source.equals(target)){
+            if (source.equals(target)) {
                 return true;
             }
         }
@@ -67,20 +91,21 @@ public class DataUtils {
 
     /**
      * 当source 和targets中的任意一个相等，则返回true，否则返回false
-     * @param source 源对象
+     *
+     * @param source  源对象
      * @param targets 要比较的对象
      * @return true or false
      */
-    public static boolean orEquals(Object source,Object... targets){
+    public static boolean orEquals(Object source, Object... targets) {
         if (source == null) {
             return false;
         }
-        if (targets == null){
+        if (targets == null) {
             return false;
         }
 
         for (Object target : targets) {
-            if (source.equals(target)){
+            if (source.equals(target)) {
                 return true;
             }
         }
@@ -89,27 +114,30 @@ public class DataUtils {
 
     /**
      * 当source 和targets中的任意一个相等，则返回true，否则返回false
-     * @param source 源对象
+     *
+     * @param source  源对象
      * @param targets 要比较的对象
      * @return true or false
      */
-    public static boolean orEqualsIgnoreCase(String source,Object... targets){
+    public static boolean orEqualsIgnoreCase(String source, Object... targets) {
         if (source == null) {
             return false;
         }
-        if (targets == null){
+        if (targets == null) {
             return false;
         }
 
         for (Object target : targets) {
-            if (source.equalsIgnoreCase(target.toString())){
+            if (source.equalsIgnoreCase(target.toString())) {
                 return true;
             }
         }
         return false;
     }
+
     /**
      * 参数排序
+     *
      * @param map 参数
      * @return 计算的sign
      */
@@ -128,7 +156,7 @@ public class DataUtils {
         });
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < infoIds.size(); i++) {
-            Map.Entry<String, Object> map1 =  infoIds.get(i);
+            Map.Entry<String, Object> map1 = infoIds.get(i);
             // value是数组 不加入签名
             Matcher m = Patterns.ARRAY.matcher(map1.getKey());
             if (!m.matches()) {
@@ -157,20 +185,16 @@ public class DataUtils {
     }
 
 
-
     // 根据Unicode编码完美的判断中文汉字和符号
     private static boolean isChinese(char c) {
         Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
-        if (ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS
+        return ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS
                 || ub == Character.UnicodeBlock.CJK_COMPATIBILITY_IDEOGRAPHS
                 || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_A
                 || ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS_EXTENSION_B
                 || ub == Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION
                 || ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS
-                || ub == Character.UnicodeBlock.GENERAL_PUNCTUATION) {
-            return true;
-        }
-        return false;
+                || ub == Character.UnicodeBlock.GENERAL_PUNCTUATION;
     }
 
 
@@ -214,7 +238,7 @@ public class DataUtils {
     }
 
     /**
-     * @param base64 base64编码
+     * @param base64   base64编码
      * @param fileName
      * @return 得到转成图片的存储路径
      * @author 郑明亮
@@ -270,7 +294,7 @@ public class DataUtils {
      */
     public static String getLocalHostIP() {
         List<String> localHostIPs = getLocalHostIPs();
-        if(localHostIPs != null && !localHostIPs.isEmpty()){
+        if (localHostIPs != null && !localHostIPs.isEmpty()) {
             return localHostIPs.get(localHostIPs.size() - 1);
         }
 
@@ -280,20 +304,24 @@ public class DataUtils {
 
     /**
      * 通过jsoup方式解析公网ip
-     * @author 郑明亮
+     *
      * @return 公网ip
+     * @author 郑明亮
      */
-    public static String getWebIpAddress1(){
+    public static String getWebIpAddress1() {
         String ip = "公网ip获取失败";
         try {
-            Map<String,String> headers = Maps.newHashMap();
-            headers.put("Connection","keep-alive");
-            headers.put("Host","city.ip138.com");
-            headers.put("User-Agent","Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36");
-            Connection connection = Jsoup.connect("http://city.ip138.com/ip2city.asp").headers(headers).timeout(Integer.MAX_VALUE);
+            Map<String, String> headers = Maps.newHashMap();
+            headers.put("Connection", "keep-alive");
+            headers.put("Host", "city.ip138.com");
+            headers.put("User-Agent",
+                    "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 " +
+                            "Safari/537.36");
+            Connection connection =
+                    Jsoup.connect("http://city.ip138.com/ip2city.asp").headers(headers).timeout(Integer.MAX_VALUE);
             String html = connection.get().select("center").html();
-            ip = html.substring(html.indexOf('[')+1,html.indexOf(']'));
-            log.info("公网ip：{}",html);
+            ip = html.substring(html.indexOf('[') + 1, html.indexOf(']'));
+            log.info("公网ip：{}", html);
         } catch (IOException e) {
             e.printStackTrace();
             log.error("获取公网ip失败", e);
@@ -302,23 +330,25 @@ public class DataUtils {
     }
 
     /**
+     * @return 公网ip
      * @author 郑明亮
      * @time 2017年11月7日15:39:52
      * @description <p>获取公网ip<br>
-     * @return 公网ip
      */
-    public static String getWebIpAddress2(){
+    public static String getWebIpAddress2() {
         String ip = "公网ip获取失败";
         try {
             URL url = new URL("http://city.ip138.com/ip2city.asp");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty("User-Agent","Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36");
-            connection.setRequestProperty("Host","city.ip138.com");
-            connection.setRequestProperty("Connection","keep-alive");
+            connection.setRequestProperty("User-Agent",
+                    "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 " +
+                            "Safari/537.36");
+            connection.setRequestProperty("Host", "city.ip138.com");
+            connection.setRequestProperty("Connection", "keep-alive");
             connection.setReadTimeout(10000);
             InputStream inputStream = connection.getInputStream();
-            String str = new String(IOUtils.isToBytes(inputStream),"gb2312").trim();
-            ip = str.substring(str.indexOf('[')+1, str.lastIndexOf(']'));
+            String str = new String(IOUtils.isToBytes(inputStream), "gb2312").trim();
+            ip = str.substring(str.indexOf('[') + 1, str.lastIndexOf(']'));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -328,7 +358,7 @@ public class DataUtils {
     }
 
     /**
-     * @return  获取本机mac
+     * @return 获取本机mac
      */
     public static String getLocalMac() {
         return getLocalMac(getLocalHostIP());
@@ -336,6 +366,7 @@ public class DataUtils {
 
     /**
      * 根据本地ip地址获取 该网卡的物理地址
+     *
      * @param host
      * @return 获取本机mac
      */
@@ -344,17 +375,17 @@ public class DataUtils {
         try {
             //获取网卡，获取地址
             byte[] mac = NetworkInterface.getByInetAddress(InetAddress.getByName(host)).getHardwareAddress();
-            log.info("mac数组长度：{}",mac.length);
-            for(int i=0; i<mac.length; i++) {
-                if(i!=0) {
+            log.info("mac数组长度：{}", mac.length);
+            for (int i = 0; i < mac.length; i++) {
+                if (i != 0) {
                     sb.append("-");
                 }
                 //字节转换为整数
-                int temp = mac[i]&0xff;
+                int temp = mac[i] & 0xff;
                 String str = Integer.toHexString(temp);
-                if(str.length()==1) {
-                    sb.append("0"+str);
-                }else {
+                if (str.length() == 1) {
+                    sb.append("0" + str);
+                } else {
                     sb.append(str);
                 }
             }
@@ -364,12 +395,11 @@ public class DataUtils {
             e.printStackTrace();
         }
         String addr = sb.toString().toUpperCase();
-        log.debug("本机MAC地址:"+addr);
+        log.debug("本机MAC地址:" + addr);
         return addr;
     }
 
     /**
-     *
      * @return 获取所有的物理地址
      */
     public static Set<String> getAllMacAddress() {
@@ -378,16 +408,16 @@ public class DataUtils {
             Enumeration<NetworkInterface> el = NetworkInterface.getNetworkInterfaces();
             while (el.hasMoreElements()) {
                 byte[] mac = el.nextElement().getHardwareAddress();
-                if (mac == null){
+                if (mac == null) {
                     continue;
                 }
-                StringBuilder macString = new StringBuilder("");
+                StringBuilder macString = new StringBuilder();
                 for (byte b : mac) {
 
                     //convert to hex string.
                     String hex = Integer.toHexString(0xff & b).toUpperCase();
-                    if(hex.length() == 1){
-                        hex  = "0" + hex;
+                    if (hex.length() == 1) {
+                        hex = "0" + hex;
                     }
                     macString.append(hex);
                     macString.append("-");
@@ -396,12 +426,12 @@ public class DataUtils {
                 set.add(macString.toString());
             }
 
-            if(set.size() == 0){
+            if (set.size() == 0) {
                 log.info("Sorry, can't find your MAC Address.");
-            }else{
-                log.info("Your MAC Address is{} " , set);
+            } else {
+                log.info("Your MAC Address is{} ", set);
             }
-        }catch (Exception exception) {
+        } catch (Exception exception) {
             exception.printStackTrace();
         }
         return set;
@@ -410,19 +440,19 @@ public class DataUtils {
     /**
      * getLocalIpAddress:[获得手机的ip地址].
      *
-     * @author 郑明亮 （应该联网权限）
      * @return 获得手机的ip地址
+     * @author 郑明亮 （应该联网权限）
      */
     public static String getLocalIpAddress() {
         try {
             for (Enumeration<NetworkInterface> en = NetworkInterface
-                    .getNetworkInterfaces(); en.hasMoreElements();) {
+                    .getNetworkInterfaces(); en.hasMoreElements(); ) {
                 NetworkInterface intf = en.nextElement();
                 for (Enumeration<InetAddress> enumIpAddr = intf
-                        .getInetAddresses(); enumIpAddr.hasMoreElements();) {
+                        .getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
                     InetAddress inetAddress = enumIpAddr.nextElement();
                     if (!inetAddress.isLoopbackAddress()) {
-                        return inetAddress.getHostAddress().toString();
+                        return inetAddress.getHostAddress();
                     }
                 }
             }
@@ -432,20 +462,20 @@ public class DataUtils {
         return null;
     }
 
-    private static String getIpInfoBySina(String ip){
+    private static String getIpInfoBySina(String ip) {
         String address = "";
         String url = "http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=";
         try {
             String json = HttpUtils.get(url + ip);
-            if(StringUtils.isNotEmpty(json)){
+            if (StringUtils.isNotEmpty(json)) {
                 JSONObject jsonObject = JSON.parseObject(json);
                 String country = jsonObject.getString("country");
                 String province = jsonObject.getString("province");
                 String city = jsonObject.getString("city");
-                if (Objects.equals(city,province)) {
-                    address = country +" "+ province;
-                }else{
-                    address = country +" "+province +" "+ city;
+                if (Objects.equals(city, province)) {
+                    address = country + " " + province;
+                } else {
+                    address = country + " " + province + " " + city;
                 }
             }
         } catch (IOException e) {
@@ -454,20 +484,20 @@ public class DataUtils {
         return address;
     }
 
-    private static String getIpInfoByTaobao(String ip){
+    private static String getIpInfoByTaobao(String ip) {
         String address = "";
         String url = "http://ip.taobao.com/service/getIpInfo.php?ip=";
         try {
             String json = HttpUtils.get(url + ip);
-            if(StringUtils.isNotEmpty(json)){
+            if (StringUtils.isNotEmpty(json)) {
                 JSONObject jsonObject = JSON.parseObject(json);
                 String country = jsonObject.getString("country");
                 String province = jsonObject.getString("region");
                 String city = jsonObject.getString("city");
-                if (Objects.equals(city,province)) {
-                    address = country +" "+ province;
-                }else{
-                    address = country +" "+province +" "+ city;
+                if (Objects.equals(city, province)) {
+                    address = country + " " + province;
+                } else {
+                    address = country + " " + province + " " + city;
                 }
             }
         } catch (IOException e) {
@@ -476,33 +506,35 @@ public class DataUtils {
         return address;
     }
 
-    private static String getAddressFromIpByOthers(String ip){
+    private static String getAddressFromIpByOthers(String ip) {
         String address = "";
         address = getIpInfoByTaobao(ip);
-        if("".equals(address)){
+        if ("".equals(address)) {
             address = getIpInfoBySina(ip);
         }
         return address;
     }
+
     /**
      * 根据ip获取归属地
+     *
      * @param ips ip地址，多个ip可用逗号隔开
      * @return 归属地
      */
-    public static String getAddressFromIp(String ips){
+    public static String getAddressFromIp(String ips) {
         String address = "";
         if (StringUtils.isEmpty(ips)) {
             return address;
         }
-        if(ips.indexOf(',') != -1){
+        if (ips.indexOf(',') != -1) {
             StringBuilder sb = new StringBuilder();
             for (String ip : ips.split(",")) {
                 String info = getAddressFromIpByOthers(ip);
                 sb.append(info).append(",");
             }
-            sb.deleteCharAt(sb.length() -1);
+            sb.deleteCharAt(sb.length() - 1);
             address = sb.toString();
-        }else{
+        } else {
             address = getAddressFromIpByOthers(ips);
         }
         return address;
@@ -583,13 +615,14 @@ public class DataUtils {
      * @description <p>判断是否是身份证号    <br>
      */
     public static boolean isIdCardNumber(String idCardNum) {
-        return Patterns.PATTERN_IS_ID_CARD_NUMBER_15.matcher(idCardNum).matches() || Patterns.PATTERN_IS_ID_CARD_NUMBER_18.matcher(idCardNum).matches();
+        return Patterns.PATTERN_IS_ID_CARD_NUMBER_15.matcher(idCardNum)
+                .matches() || Patterns.PATTERN_IS_ID_CARD_NUMBER_18.matcher(idCardNum).matches();
     }
-
 
 
     /**
      * 判断是否为合法IP
+     *
      * @param ipAddress
      * @return
      */
@@ -599,7 +632,6 @@ public class DataUtils {
         Matcher matcher = pattern.matcher(ipAddress);
         return matcher.matches();
     }
-
 
 
     /**
@@ -644,12 +676,12 @@ public class DataUtils {
         }
 
         if (source == null) {
-           log.error("传入字符串为null");
+            log.error("传入字符串为null");
             source = "";
         } else {
             int length = source.length();
             if (length > start && length >= end) {
-                    source = source.substring(start, end);
+                source = source.substring(start, end);
             }
         }
         return source;
@@ -679,7 +711,7 @@ public class DataUtils {
      * @see FileUtils#getFileNameFromHttp(okhttp3.Headers)
      */
     @Deprecated
-    public static String getFileNameFromHttp(Headers head){
+    public static String getFileNameFromHttp(Headers head) {
         return FileUtils.getFileNameFromHttp(head);
 
     }
@@ -818,24 +850,26 @@ public class DataUtils {
 
     /**
      * 从文本中找到数字并返回
+     *
      * @param text
      * @return
      */
-    public static String getNumber(String text){
+    public static String getNumber(String text) {
         return Numbers.getNumber(text);
     }
 
     /**
      * 从文本中找到第一个数字（整数或浮点数）并返回
+     *
      * @param text
      * @return
      */
-    public static String getFirstNumber(String text){
+    public static String getFirstNumber(String text) {
         return Numbers.getFirstNumber(text);
     }
 
     /**
-     * @param text 文本
+     * @param text    文本
      * @param pattern 正则
      * @return 根据正则表达式获取文本中的指定内容
      * @author 郑明亮
@@ -857,18 +891,19 @@ public class DataUtils {
     /**
      * @param list 指定集合
      * @return 指定对象
-     * @throws IllegalAccessException 反射异常
-     * @throws IllegalArgumentException 反射异常
+     * @throws IllegalAccessException    反射异常
+     * @throws IllegalArgumentException  反射异常
      * @throws InvocationTargetException 反射异常
-     * @throws NoSuchMethodException 反射异常
-     * @throws SecurityException 反射异常
+     * @throws NoSuchMethodException     反射异常
+     * @throws SecurityException         反射异常
      * @author 郑明亮
      * @email zhengmingliang911@gmail.com
      * @time 2017年7月5日 下午9:19:51
      * @description <p> 将对象集合转换为List&lt;Mapt&lt;String, Object[]&gt;&gt; </p>
      * @version 1.0.0
      */
-    public static <T> List<Map<String, Object[]>> List2Array(List<T> list) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
+    public static <T> List<Map<String, Object[]>> List2Array(List<T> list)
+            throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
         T t = list.get(0);
         String[] fields = ReflectionUtils.getFieldsNames(t.getClass());
         Object[][] objects = new Object[fields.length][list.size()];
@@ -921,8 +956,7 @@ public class DataUtils {
         Throwable cause = e.getCause();
         if (cause != null) {
             return cause;
-        }
-        else {
+        } else {
             return e;
         }
     }
@@ -976,6 +1010,7 @@ public class DataUtils {
 
     /**
      * 将下划线转为驼峰字符串
+     *
      * @param param 带下划线的字符串
      * @return 驼峰字符串
      */
@@ -1065,7 +1100,8 @@ public class DataUtils {
      * @time 2017年10月17日14:09:03
      * @description <p>将Bean集合转换为map集合<br>
      */
-    public static List<Map<String, Object>> toListMap(List<? extends java.io.Serializable> list) throws  IllegalAccessException{
+    public static List<Map<String, Object>> toListMap(List<? extends java.io.Serializable> list)
+            throws IllegalAccessException {
         List<Map<String, Object>> listMaps = new ArrayList<>();
         Map map = null;
         for (int i = 0; i < list.size(); i++) {
@@ -1082,24 +1118,24 @@ public class DataUtils {
     }
 
     /**
-     *
      * <ul>
      * <li> map转换成bean,成员变量为</li>
      * </ul>
+     *
      * @param map map集合
-     * @param t 要转换的类型
+     * @param t   要转换的类型
      * @param <T> 泛型
      * @return 转换后的对象
      */
-    public static <T> T mapToBean(Map<String, Object> map, Class<T> t){
-        if (map == null){
+    public static <T> T mapToBean(Map<String, Object> map, Class<T> t) {
+        if (map == null) {
             return null;
         }
 
         try {
             return TypeUtils.cast(map, t, ParserConfig.getGlobalInstance());
         } catch (Exception e) {
-            log.warn("mapToBean转换过程中出现异常",e);
+            log.warn("mapToBean转换过程中出现异常", e);
         }
 
         return null;
@@ -1107,12 +1143,13 @@ public class DataUtils {
 
     /**
      * 把一个map转换为一个对象
-     * @param map map集合
+     *
+     * @param map       map集合
      * @param beanClass 要转换的类型
      * @return 转换后的对象
      */
-    public static Object mapToObject(Map<String, Object> map, Class<?> beanClass){
-        if (map == null){
+    public static Object mapToObject(Map<String, Object> map, Class<?> beanClass) {
+        if (map == null) {
             return null;
         }
 
@@ -1130,12 +1167,14 @@ public class DataUtils {
                 field.setAccessible(true);
                 Class type = field.getType();
                 Object value = map.get(field.getName());
-                if (value instanceof String) {//因为不能保证的到的值是否有空值，如果有则先过滤掉
+                if (value instanceof String) { //因为不能保证的到的值是否有空值，如果有则先过滤掉
                     value = Strings.emptyToNull(value + "");
                 }
-                if (value != null) {//防止强转空指针
-                    if (type.equals(Integer.class)) {//保证类型安全
-                        field.set(obj, Integer.valueOf((String) value));//属性时Integer类型，反射时不能用setInt来赋值，否则会报Can not set java.lang.Integer field ... to (int)的错误
+                if (value != null) { //防止强转空指针
+                    if (type.equals(Integer.class)) { //保证类型安全
+                        field.set(obj, Integer.valueOf(
+                                (String) value)); //属性时Integer类型，反射时不能用setInt来赋值，否则会报Can not set java.lang.Integer
+                        // field ... to (int)的错误
                     } else if (type.equals(Double.class)) {
                         field.setDouble(obj, Double.parseDouble(((String) value)));
                     } else if (type.equals(Long.class)) {
@@ -1166,8 +1205,8 @@ public class DataUtils {
      * @param t    要转换成的对象集合的类型
      * @return 转换后的对象
      */
-    public static List<?> mapsToObjects(List<Map<String, Object>> maps, Class<?> t){
-        if (maps ==null || maps.isEmpty()){
+    public static List<?> mapsToObjects(List<Map<String, Object>> maps, Class<?> t) {
+        if (maps == null || maps.isEmpty()) {
             return Collections.EMPTY_LIST;
         }
         List<Object> list = new ArrayList<Object>();
@@ -1180,13 +1219,14 @@ public class DataUtils {
 
     /**
      * 将map数组集合转换为对象集合
+     *
      * @param maps map数组
-     * @param t 要转换成的对象集合
-     * @param <T> 泛型
+     * @param t    要转换成的对象集合
+     * @param <T>  泛型
      * @return 转换结果
      */
     public static <T> List<T> mapsToBeans(List<Map<String, Object>> maps, Class<T> t) {
-        if (maps == null || maps.isEmpty()){
+        if (maps == null || maps.isEmpty()) {
             return Collections.emptyList();
         }
         List<T> list = new ArrayList<T>();
@@ -1199,19 +1239,20 @@ public class DataUtils {
 
     /**
      * 从jsonp中获取json字符串
-     * @param jsonp jsonp格式字符串
+     *
+     * @param jsonp    jsonp格式字符串
      * @param callback 回调方法名称
      * @return
      */
-    public static String getJsonFromJsonp(String jsonp,String callback){
-        int  offset = 1;
-        if(StringUtils.isNotEmpty(callback)){
+    public static String getJsonFromJsonp(String jsonp, String callback) {
+        int offset = 1;
+        if (StringUtils.isNotEmpty(callback)) {
             offset += callback.length();
         }
-        if(StringUtils.isEmpty(jsonp)){
+        if (StringUtils.isEmpty(jsonp)) {
             return "{}";
         }
-        String json = jsonp.substring(offset,jsonp.length() -2);
+        String json = jsonp.substring(offset, jsonp.length() - 2);
         return json;
     }
 
@@ -1230,30 +1271,32 @@ public class DataUtils {
             }
             response.getWriter().write(JSON.toJSONString(object));
         } catch (IOException e) {
-            log.error("Write the request data back to the client exception",e);
+            log.error("Write the request data back to the client exception", e);
         }
     }
 
     /**
      * 从request中获取一个已排序的Map集合
+     *
      * @param request
      * @return
      */
     public static Map<String, Object> getSortedRequestParam(HttpServletRequest request) {
-        Map<String,Object> params = Maps.newTreeMap();
+        Map<String, Object> params = Maps.newTreeMap();
         Map<String, String[]> parameterMap = request.getParameterMap();
         for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
             String key = entry.getKey();
             String[] value = entry.getValue();
-            params.put(key,value[0]);
+            params.put(key, value[0]);
         }
         return params;
     }
 
     private static final String UNKNOWN = "unknown";
+
     /**
-     *
      * 获取访问系统的IP地址
+     *
      * @param request
      * @return
      */
@@ -1280,24 +1323,28 @@ public class DataUtils {
 
     /**
      * 获取对象中null值的属性名
+     *
      * @param object
      * @return
      */
     public static String[] getNullPropertyNames(Object object) {
-        return getNullPropertyNames(object,false);
+        return getNullPropertyNames(object, false);
     }
 
     /**
      * 获取对象中空值（null、空字符串、空集合）的属性名
+     *
      * @param object
      * @return
      */
     public static String[] getEmptyPropertyNames(Object object) {
-        return getNullPropertyNames(object,true);
+        return getNullPropertyNames(object, true);
     }
+
     /**
      * 获取对象中null值的属性名
-     * @param object 对象
+     *
+     * @param object      对象
      * @param ignoreEmpty 是否要忽略空对象（空字符串和空集合）
      * @return
      */
@@ -1311,10 +1358,10 @@ public class DataUtils {
                 String fieldName = field.getName();
                 if (value == null) {
                     emptyNames.add(fieldName);
-                } else if(ignoreEmpty){
-                    if(value instanceof String && "".equals(value)){
+                } else if (ignoreEmpty) {
+                    if (value instanceof String && "".equals(value)) {
                         emptyNames.add(fieldName);
-                    } else if(value instanceof Collection && ((Collection<?>) value).isEmpty()){
+                    } else if (value instanceof Collection && ((Collection<?>) value).isEmpty()) {
                         emptyNames.add(fieldName);
                     }
                 }
@@ -1327,17 +1374,18 @@ public class DataUtils {
 
     /**
      * 获取文件名或任意字符串的后缀字符
-     * @param fileName 文件名或任意字符串
+     *
+     * @param fileName   文件名或任意字符串
      * @param splitRegex 分隔符（支持正则表达式）
      * @return
      */
-    public static String getSuffix(String fileName,String splitRegex) {
+    public static String getSuffix(String fileName, String splitRegex) {
         if (StringUtils.isEmpty(splitRegex)) {
             splitRegex = "\\.";
         }
         String[] split = fileName.split(splitRegex);
         String suffix = "";
-        if(split.length> 1){
+        if (split.length > 1) {
             suffix = split[split.length - 1];
         }
         return suffix;
@@ -1345,11 +1393,12 @@ public class DataUtils {
 
     /**
      * 获取文件名的后缀名，默认分隔符为“.”
+     *
      * @param fileName 文件名或任意字符串
      * @return
      */
     public static String getSuffix(String fileName) {
-        return getSuffix(fileName,"\\.");
+        return getSuffix(fileName, "\\.");
     }
 
 }

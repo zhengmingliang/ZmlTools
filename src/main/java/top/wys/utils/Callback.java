@@ -4,8 +4,8 @@ package top.wys.utils;
  */
 
 /**
- *  2019/11/12 15:57 <br>
- *
+ * 2019/11/12 15:57 <br>
+ * <p>
  * 文件读取回调
  *
  * @author 郑明亮
@@ -13,6 +13,7 @@ package top.wys.utils;
  */
 public interface Callback {
     void apply(String data);
+
     void getFirstLine(String firstLine);
 }
 

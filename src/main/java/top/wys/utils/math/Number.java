@@ -18,7 +18,8 @@ import java.math.RoundingMode;
 public class Number extends BigDecimal {
 
     public static final Number ZERO =
-            new Number(BigInteger.ZERO,0,1);
+            new Number(BigInteger.ZERO, 0, 1);
+
     public Number(BigInteger val) {
         super(val);
     }
@@ -40,13 +41,14 @@ public class Number extends BigDecimal {
     }
 
     public Number(BigInteger intVal, int scale, int prec) {
-        super(intVal,scale,new MathContext(prec));
+        super(intVal, scale, new MathContext(prec));
     }
 
     public Number(String val, int scale) {
         super(val);
         setScale(scale);
     }
+
     public Number(String val, MathContext mc) {
         super(val, mc);
     }
@@ -65,17 +67,17 @@ public class Number extends BigDecimal {
         return super.add(BigDecimal.ZERO);
     }
 
-    public static Number valueOf(BigDecimal bigDecimal){
+    public static Number valueOf(BigDecimal bigDecimal) {
         return new Number(bigDecimal.unscaledValue(), bigDecimal.scale(), bigDecimal.precision());
     }
 
-    public  String toScaleString(int scale){
+    public String toScaleString(int scale) {
         this.setScale(scale);
         return toPlainString();
     }
 
-    public  String toScaleString(int scale,RoundingMode roundingMode){
-        this.setScale(scale,roundingMode);
+    public String toScaleString(int scale, RoundingMode roundingMode) {
+        this.setScale(scale, roundingMode);
         return toPlainString();
     }
 }

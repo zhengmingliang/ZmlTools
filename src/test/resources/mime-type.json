@@ -1,215 +1,215 @@
 [
   {
-    "extensions":[
+    "extensions": [
       ".ez"
     ],
-    "description":"Published specification: \"Multimedia Applications Development with the Andrew Toolkit\", by Nathaniel S. Borenstein, Prentice Hall, 1990. Editors note: I looked him up, he works at Mimecast now. Reach out!",
-    "mimeType":"application/andrew-inset"
+    "description": "Published specification: \"Multimedia Applications Development with the Andrew Toolkit\", by Nathaniel S. Borenstein, Prentice Hall, 1990. Editors note: I looked him up, he works at Mimecast now. Reach out!",
+    "mimeType": "application/andrew-inset"
   },
   {
-    "extensions":[
+    "extensions": [
       ".aw"
     ],
-    "description":"",
-    "mimeType":"application/applixware"
+    "description": "",
+    "mimeType": "application/applixware"
   },
   {
-    "extensions":[
+    "extensions": [
       ".atom"
     ],
-    "description":"",
-    "mimeType":"application/atom+xml"
+    "description": "",
+    "mimeType": "application/atom+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".atomcat"
     ],
-    "description":"",
-    "mimeType":"application/atomcat+xml"
+    "description": "",
+    "mimeType": "application/atomcat+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".atomsvc"
     ],
-    "description":"",
-    "mimeType":"application/atomsvc+xml"
+    "description": "",
+    "mimeType": "application/atomsvc+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ccxml"
     ],
-    "description":"",
-    "mimeType":"application/ccxml+xml"
+    "description": "",
+    "mimeType": "application/ccxml+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cu"
     ],
-    "description":"",
-    "mimeType":"application/cu-seeme"
+    "description": "",
+    "mimeType": "application/cu-seeme"
   },
   {
-    "extensions":[
+    "extensions": [
       ".davmount"
     ],
-    "description":"",
-    "mimeType":"application/davmount+xml"
+    "description": "",
+    "mimeType": "application/davmount+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ecma"
     ],
-    "description":"",
-    "mimeType":"application/ecmascript"
+    "description": "",
+    "mimeType": "application/ecmascript"
   },
   {
-    "extensions":[
+    "extensions": [
       ".emma"
     ],
-    "description":"",
-    "mimeType":"application/emma+xml"
+    "description": "",
+    "mimeType": "application/emma+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".epub"
     ],
-    "description":"",
-    "mimeType":"application/epub+zip"
+    "description": "",
+    "mimeType": "application/epub+zip"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pfr"
     ],
-    "description":"",
-    "mimeType":"application/font-tdpfr"
+    "description": "",
+    "mimeType": "application/font-tdpfr"
   },
   {
-    "extensions":[
+    "extensions": [
       ".gz",
       ".tgz"
     ],
-    "description":"",
-    "mimeType":"application/gzip"
+    "description": "",
+    "mimeType": "application/gzip"
   },
   {
-    "extensions":[
+    "extensions": [
       ".stk"
     ],
-    "description":"",
-    "mimeType":"application/hyperstudio"
+    "description": "",
+    "mimeType": "application/hyperstudio"
   },
   {
-    "extensions":[
+    "extensions": [
       ".jar"
     ],
-    "description":"",
-    "mimeType":"application/java-archive"
+    "description": "",
+    "mimeType": "application/java-archive"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ser"
     ],
-    "description":"",
-    "mimeType":"application/java-serialized-object"
+    "description": "",
+    "mimeType": "application/java-serialized-object"
   },
   {
-    "extensions":[
+    "extensions": [
       ".class"
     ],
-    "description":"",
-    "mimeType":"application/java-vm"
+    "description": "",
+    "mimeType": "application/java-vm"
   },
   {
-    "extensions":[
+    "extensions": [
       ".json"
     ],
-    "description":"JSON (JavaScript Object Notation) is widely used by web applications, mobile apps, and other programs to communicate between different systems (such as between a client and server). While it is named after JavaScript, there are libraries for many other programming and scripting languages to let them use this format as well. The geospatial format GeoJSON is based on JSON, as is the remote-procedure-call protocol JSON-RPC and the JSON-LD linked-data format. The IBM standard of JSONx is an XML implementation of JSON. I-JSON is a restricted profile of JSON for Internet use. JSON Web Tokens, JSON Web Encryption, and JSON Web Signatures are JSON-based formats for security-related functions.",
-    "mimeType":"application/json"
+    "description": "JSON (JavaScript Object Notation) is widely used by web applications, mobile apps, and other programs to communicate between different systems (such as between a client and server). While it is named after JavaScript, there are libraries for many other programming and scripting languages to let them use this format as well. The geospatial format GeoJSON is based on JSON, as is the remote-procedure-call protocol JSON-RPC and the JSON-LD linked-data format. The IBM standard of JSONx is an XML implementation of JSON. I-JSON is a restricted profile of JSON for Internet use. JSON Web Tokens, JSON Web Encryption, and JSON Web Signatures are JSON-based formats for security-related functions.",
+    "mimeType": "application/json"
   },
   {
-    "extensions":[
+    "extensions": [
       ".lostxml"
     ],
-    "description":"",
-    "mimeType":"application/lost+xml"
+    "description": "",
+    "mimeType": "application/lost+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".hqx"
     ],
-    "description":"",
-    "mimeType":"application/mac-binhex40"
+    "description": "",
+    "mimeType": "application/mac-binhex40"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cpt"
     ],
-    "description":"",
-    "mimeType":"application/mac-compactpro"
+    "description": "",
+    "mimeType": "application/mac-compactpro"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mrc"
     ],
-    "description":"",
-    "mimeType":"application/marc"
+    "description": "",
+    "mimeType": "application/marc"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ma",
       ".mb",
       ".nb"
     ],
-    "description":"",
-    "mimeType":"application/mathematica"
+    "description": "",
+    "mimeType": "application/mathematica"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mathml",
       ".mml"
     ],
-    "description":"",
-    "mimeType":"application/mathml+xml"
+    "description": "",
+    "mimeType": "application/mathml+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mbox"
     ],
-    "description":"",
-    "mimeType":"application/mbox"
+    "description": "",
+    "mimeType": "application/mbox"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mscml"
     ],
-    "description":"",
-    "mimeType":"application/mediaservercontrol+xml"
+    "description": "",
+    "mimeType": "application/mediaservercontrol+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mp4s"
     ],
-    "description":"",
-    "mimeType":"application/mp4"
+    "description": "",
+    "mimeType": "application/mp4"
   },
   {
-    "extensions":[
+    "extensions": [
       ".doc",
       ".dot",
       ".wiz"
     ],
-    "description":"Microsoft Word is a popular word processor program which has existed in a number of versions for DOS, Windows, and the Macintosh. It is often distributed as part of the Microsoft Office suite. Various native file formats have been used, and some other non-Word-specific formats can also be opened and saved. Please note the more modern .docx file extension does not use this mime type.",
-    "mimeType":"application/msword"
+    "description": "Microsoft Word is a popular word processor program which has existed in a number of versions for DOS, Windows, and the Macintosh. It is often distributed as part of the Microsoft Office suite. Various native file formats have been used, and some other non-Word-specific formats can also be opened and saved. Please note the more modern .docx file extension does not use this mime type.",
+    "mimeType": "application/msword"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mxf"
     ],
-    "description":"",
-    "mimeType":"application/mxf"
+    "description": "",
+    "mimeType": "application/mxf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".a",
       ".bin",
       ".bpk",
@@ -229,1527 +229,1527 @@
       ".pkg",
       ".so"
     ],
-    "description":"This MIME type is used for binary files, it's usuall a fallback for unknown/generic MIMEs with no specific designation.",
-    "mimeType":"application/octet-stream"
+    "description": "This MIME type is used for binary files, it's usuall a fallback for unknown/generic MIMEs with no specific designation.",
+    "mimeType": "application/octet-stream"
   },
   {
-    "extensions":[
+    "extensions": [
       ".oda"
     ],
-    "description":"",
-    "mimeType":"application/oda"
+    "description": "",
+    "mimeType": "application/oda"
   },
   {
-    "extensions":[
+    "extensions": [
       ".opf"
     ],
-    "description":"",
-    "mimeType":"application/oebps-package+xml"
+    "description": "",
+    "mimeType": "application/oebps-package+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ogx"
     ],
-    "description":"",
-    "mimeType":"application/ogg"
+    "description": "",
+    "mimeType": "application/ogg"
   },
   {
-    "extensions":[
+    "extensions": [
       ".onepkg",
       ".onetmp",
       ".onetoc",
       ".onetoc2"
     ],
-    "description":"",
-    "mimeType":"application/onenote"
+    "description": "",
+    "mimeType": "application/onenote"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xer"
     ],
-    "description":"",
-    "mimeType":"application/patch-ops-error+xml"
+    "description": "",
+    "mimeType": "application/patch-ops-error+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pdf"
     ],
-    "description":"Portable Document Format (PDF) is a document file format originally from Adobe, based on PostScript. It has many subsets.",
-    "mimeType":"application/pdf"
+    "description": "Portable Document Format (PDF) is a document file format originally from Adobe, based on PostScript. It has many subsets.",
+    "mimeType": "application/pdf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pgp"
     ],
-    "description":"",
-    "mimeType":"application/pgp-encrypted"
+    "description": "",
+    "mimeType": "application/pgp-encrypted"
   },
   {
-    "extensions":[
+    "extensions": [
       ".asc",
       ".sig"
     ],
-    "description":"PGP (Pretty Good Privacy) is an encryption program, and its encryption format which eventually became the OpenPGP standard. Created by Phil Zimmerman in 1991, it got into some legal trouble early on because encryption of this grade was classified as a munition under U.S. law and restricted from export. These laws, while not completely repealed even now, have been considerably liberalized since, and now export of PGP and related software is only restricted when it's being exported to countries such as Iran that are under special sanction. Zimmerman's PGP company was eventually acquired by Network Associates (now McAfee), which eventually rebranded the original command-line-based PGP as \"McAfee E-Business Server\" and sold off all other PGP assets to some PGP developers who formed a new PGP company, which was eventually acquired by Symantec. Meanwhile, the specifications of the file format had been released as the OpenPGP spec and published as an RFC document, making it available for use in other products. GNU Privacy Guard (GnuPG, GPG) is a commonly-used encryption tool using PGP format, running on Linux systems. PGP uses a combination of several encryption techniques applied serially, including symmetric-key and public-key cryptography.",
-    "mimeType":"application/pgp-signature"
+    "description": "PGP (Pretty Good Privacy) is an encryption program, and its encryption format which eventually became the OpenPGP standard. Created by Phil Zimmerman in 1991, it got into some legal trouble early on because encryption of this grade was classified as a munition under U.S. law and restricted from export. These laws, while not completely repealed even now, have been considerably liberalized since, and now export of PGP and related software is only restricted when it's being exported to countries such as Iran that are under special sanction. Zimmerman's PGP company was eventually acquired by Network Associates (now McAfee), which eventually rebranded the original command-line-based PGP as \"McAfee E-Business Server\" and sold off all other PGP assets to some PGP developers who formed a new PGP company, which was eventually acquired by Symantec. Meanwhile, the specifications of the file format had been released as the OpenPGP spec and published as an RFC document, making it available for use in other products. GNU Privacy Guard (GnuPG, GPG) is a commonly-used encryption tool using PGP format, running on Linux systems. PGP uses a combination of several encryption techniques applied serially, including symmetric-key and public-key cryptography.",
+    "mimeType": "application/pgp-signature"
   },
   {
-    "extensions":[
+    "extensions": [
       ".prf"
     ],
-    "description":"",
-    "mimeType":"application/pics-rules"
+    "description": "",
+    "mimeType": "application/pics-rules"
   },
   {
-    "extensions":[
+    "extensions": [
       ".p10"
     ],
-    "description":"",
-    "mimeType":"application/pkcs10"
+    "description": "",
+    "mimeType": "application/pkcs10"
   },
   {
-    "extensions":[
+    "extensions": [
       ".p7c",
       ".p7m"
     ],
-    "description":"",
-    "mimeType":"application/pkcs7-mime"
+    "description": "",
+    "mimeType": "application/pkcs7-mime"
   },
   {
-    "extensions":[
+    "extensions": [
       ".p7s"
     ],
-    "description":"",
-    "mimeType":"application/pkcs7-signature"
+    "description": "",
+    "mimeType": "application/pkcs7-signature"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cer"
     ],
-    "description":"",
-    "mimeType":"application/pkix-cert"
+    "description": "",
+    "mimeType": "application/pkix-cert"
   },
   {
-    "extensions":[
+    "extensions": [
       ".crl"
     ],
-    "description":"",
-    "mimeType":"application/pkix-crl"
+    "description": "",
+    "mimeType": "application/pkix-crl"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pkipath"
     ],
-    "description":"",
-    "mimeType":"application/pkix-pkipath"
+    "description": "",
+    "mimeType": "application/pkix-pkipath"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pki"
     ],
-    "description":"",
-    "mimeType":"application/pkixcmp"
+    "description": "",
+    "mimeType": "application/pkixcmp"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pls"
     ],
-    "description":"",
-    "mimeType":"application/pls+xml"
+    "description": "",
+    "mimeType": "application/pls+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ai",
       ".eps",
       ".ps"
     ],
-    "description":"",
-    "mimeType":"application/postscript"
+    "description": "",
+    "mimeType": "application/postscript"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cww"
     ],
-    "description":"",
-    "mimeType":"application/prs.cww"
+    "description": "",
+    "mimeType": "application/prs.cww"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rdf"
     ],
-    "description":"",
-    "mimeType":"application/rdf+xml"
+    "description": "",
+    "mimeType": "application/rdf+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rif"
     ],
-    "description":"",
-    "mimeType":"application/reginfo+xml"
+    "description": "",
+    "mimeType": "application/reginfo+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rnc"
     ],
-    "description":"",
-    "mimeType":"application/relax-ng-compact-syntax"
+    "description": "",
+    "mimeType": "application/relax-ng-compact-syntax"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rl"
     ],
-    "description":"",
-    "mimeType":"application/resource-lists+xml"
+    "description": "",
+    "mimeType": "application/resource-lists+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rld"
     ],
-    "description":"",
-    "mimeType":"application/resource-lists-diff+xml"
+    "description": "",
+    "mimeType": "application/resource-lists-diff+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rs"
     ],
-    "description":"",
-    "mimeType":"application/rls-services+xml"
+    "description": "",
+    "mimeType": "application/rls-services+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rsd"
     ],
-    "description":"",
-    "mimeType":"application/rsd+xml"
+    "description": "",
+    "mimeType": "application/rsd+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rss"
     ],
-    "description":"",
-    "mimeType":"application/rss+xml"
+    "description": "",
+    "mimeType": "application/rss+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rtf"
     ],
-    "description":"",
-    "mimeType":"application/rtf"
+    "description": "",
+    "mimeType": "application/rtf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sbml"
     ],
-    "description":"",
-    "mimeType":"application/sbml+xml"
+    "description": "",
+    "mimeType": "application/sbml+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".scq"
     ],
-    "description":"",
-    "mimeType":"application/scvp-cv-request"
+    "description": "",
+    "mimeType": "application/scvp-cv-request"
   },
   {
-    "extensions":[
+    "extensions": [
       ".scs"
     ],
-    "description":"",
-    "mimeType":"application/scvp-cv-response"
+    "description": "",
+    "mimeType": "application/scvp-cv-response"
   },
   {
-    "extensions":[
+    "extensions": [
       ".spq"
     ],
-    "description":"",
-    "mimeType":"application/scvp-vp-request"
+    "description": "",
+    "mimeType": "application/scvp-vp-request"
   },
   {
-    "extensions":[
+    "extensions": [
       ".spp"
     ],
-    "description":"",
-    "mimeType":"application/scvp-vp-response"
+    "description": "",
+    "mimeType": "application/scvp-vp-response"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sdp"
     ],
-    "description":"",
-    "mimeType":"application/sdp"
+    "description": "",
+    "mimeType": "application/sdp"
   },
   {
-    "extensions":[
+    "extensions": [
       ".setpay"
     ],
-    "description":"",
-    "mimeType":"application/set-payment-initiation"
+    "description": "",
+    "mimeType": "application/set-payment-initiation"
   },
   {
-    "extensions":[
+    "extensions": [
       ".setreg"
     ],
-    "description":"",
-    "mimeType":"application/set-registration-initiation"
+    "description": "",
+    "mimeType": "application/set-registration-initiation"
   },
   {
-    "extensions":[
+    "extensions": [
       ".shf"
     ],
-    "description":"",
-    "mimeType":"application/shf+xml"
+    "description": "",
+    "mimeType": "application/shf+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".smi",
       ".smil"
     ],
-    "description":"",
-    "mimeType":"application/smil+xml"
+    "description": "",
+    "mimeType": "application/smil+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rq"
     ],
-    "description":"",
-    "mimeType":"application/sparql-query"
+    "description": "",
+    "mimeType": "application/sparql-query"
   },
   {
-    "extensions":[
+    "extensions": [
       ".srx"
     ],
-    "description":"",
-    "mimeType":"application/sparql-results+xml"
+    "description": "",
+    "mimeType": "application/sparql-results+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".gram"
     ],
-    "description":"",
-    "mimeType":"application/srgs"
+    "description": "",
+    "mimeType": "application/srgs"
   },
   {
-    "extensions":[
+    "extensions": [
       ".grxml"
     ],
-    "description":"",
-    "mimeType":"application/srgs+xml"
+    "description": "",
+    "mimeType": "application/srgs+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ssml"
     ],
-    "description":"",
-    "mimeType":"application/ssml+xml"
+    "description": "",
+    "mimeType": "application/ssml+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".plb"
     ],
-    "description":"",
-    "mimeType":"application/vnd.3gpp.pic-bw-large"
+    "description": "",
+    "mimeType": "application/vnd.3gpp.pic-bw-large"
   },
   {
-    "extensions":[
+    "extensions": [
       ".psb"
     ],
-    "description":"",
-    "mimeType":"application/vnd.3gpp.pic-bw-small"
+    "description": "",
+    "mimeType": "application/vnd.3gpp.pic-bw-small"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pvb"
     ],
-    "description":"",
-    "mimeType":"application/vnd.3gpp.pic-bw-var"
+    "description": "",
+    "mimeType": "application/vnd.3gpp.pic-bw-var"
   },
   {
-    "extensions":[
+    "extensions": [
       ".tcap"
     ],
-    "description":"",
-    "mimeType":"application/vnd.3gpp2.tcap"
+    "description": "",
+    "mimeType": "application/vnd.3gpp2.tcap"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pwn"
     ],
-    "description":"",
-    "mimeType":"application/vnd.3m.post-it-notes"
+    "description": "",
+    "mimeType": "application/vnd.3m.post-it-notes"
   },
   {
-    "extensions":[
+    "extensions": [
       ".aso"
     ],
-    "description":"",
-    "mimeType":"application/vnd.accpac.simply.aso"
+    "description": "",
+    "mimeType": "application/vnd.accpac.simply.aso"
   },
   {
-    "extensions":[
+    "extensions": [
       ".imp"
     ],
-    "description":"",
-    "mimeType":"application/vnd.accpac.simply.imp"
+    "description": "",
+    "mimeType": "application/vnd.accpac.simply.imp"
   },
   {
-    "extensions":[
+    "extensions": [
       ".acu"
     ],
-    "description":"",
-    "mimeType":"application/vnd.acucobol"
+    "description": "",
+    "mimeType": "application/vnd.acucobol"
   },
   {
-    "extensions":[
+    "extensions": [
       ".acutc",
       ".atc"
     ],
-    "description":"",
-    "mimeType":"application/vnd.acucorp"
+    "description": "",
+    "mimeType": "application/vnd.acucorp"
   },
   {
-    "extensions":[
+    "extensions": [
       ".air"
     ],
-    "description":"",
-    "mimeType":"application/vnd.adobe.air-application-installer-package+zip"
+    "description": "",
+    "mimeType": "application/vnd.adobe.air-application-installer-package+zip"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xdp"
     ],
-    "description":"",
-    "mimeType":"application/vnd.adobe.xdp+xml"
+    "description": "",
+    "mimeType": "application/vnd.adobe.xdp+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xfdf"
     ],
-    "description":"",
-    "mimeType":"application/vnd.adobe.xfdf"
+    "description": "",
+    "mimeType": "application/vnd.adobe.xfdf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".azf"
     ],
-    "description":"",
-    "mimeType":"application/vnd.airzip.filesecure.azf"
+    "description": "",
+    "mimeType": "application/vnd.airzip.filesecure.azf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".azs"
     ],
-    "description":"",
-    "mimeType":"application/vnd.airzip.filesecure.azs"
+    "description": "",
+    "mimeType": "application/vnd.airzip.filesecure.azs"
   },
   {
-    "extensions":[
+    "extensions": [
       ".azw"
     ],
-    "description":"",
-    "mimeType":"application/vnd.amazon.ebook"
+    "description": "",
+    "mimeType": "application/vnd.amazon.ebook"
   },
   {
-    "extensions":[
+    "extensions": [
       ".acc"
     ],
-    "description":"",
-    "mimeType":"application/vnd.americandynamics.acc"
+    "description": "",
+    "mimeType": "application/vnd.americandynamics.acc"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ami"
     ],
-    "description":"",
-    "mimeType":"application/vnd.amiga.ami"
+    "description": "",
+    "mimeType": "application/vnd.amiga.ami"
   },
   {
-    "extensions":[
+    "extensions": [
       ".apk"
     ],
-    "description":"APK is an archive format used for distributing Android apps. It is based on the Jar format (for Java), and like that format, is actually a ZIP archive with a different extension, and with specific files and directories within it. The executable part of the app is usually in either Dalvik Executable (for older Android versions prior to 5.0) or ART format (for newer versions). Metadata about the app is in a META-INF directory within the archive (similarly to Jar files), compiled code is in a lib directory, and resources in a res directory. There are also a few files at the root level including AndroidManifest.xml (which may be regular XML or, often, binary XML).",
-    "mimeType":"application/vnd.android.package-archive"
+    "description": "APK is an archive format used for distributing Android apps. It is based on the Jar format (for Java), and like that format, is actually a ZIP archive with a different extension, and with specific files and directories within it. The executable part of the app is usually in either Dalvik Executable (for older Android versions prior to 5.0) or ART format (for newer versions). Metadata about the app is in a META-INF directory within the archive (similarly to Jar files), compiled code is in a lib directory, and resources in a res directory. There are also a few files at the root level including AndroidManifest.xml (which may be regular XML or, often, binary XML).",
+    "mimeType": "application/vnd.android.package-archive"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cii"
     ],
-    "description":"",
-    "mimeType":"application/vnd.anser-web-certificate-issue-initiation"
+    "description": "",
+    "mimeType": "application/vnd.anser-web-certificate-issue-initiation"
   },
   {
-    "extensions":[
+    "extensions": [
       ".fti"
     ],
-    "description":"",
-    "mimeType":"application/vnd.anser-web-funds-transfer-initiation"
+    "description": "",
+    "mimeType": "application/vnd.anser-web-funds-transfer-initiation"
   },
   {
-    "extensions":[
+    "extensions": [
       ".atx"
     ],
-    "description":"",
-    "mimeType":"application/vnd.antix.game-component"
+    "description": "",
+    "mimeType": "application/vnd.antix.game-component"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mpkg"
     ],
-    "description":"",
-    "mimeType":"application/vnd.apple.installer+xml"
+    "description": "",
+    "mimeType": "application/vnd.apple.installer+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".swi"
     ],
-    "description":"",
-    "mimeType":"application/vnd.arastra.swi"
+    "description": "",
+    "mimeType": "application/vnd.arastra.swi"
   },
   {
-    "extensions":[
+    "extensions": [
       ".aep"
     ],
-    "description":"",
-    "mimeType":"application/vnd.audiograph"
+    "description": "",
+    "mimeType": "application/vnd.audiograph"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mpm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.blueice.multipass"
+    "description": "",
+    "mimeType": "application/vnd.blueice.multipass"
   },
   {
-    "extensions":[
+    "extensions": [
       ".bmi"
     ],
-    "description":"",
-    "mimeType":"application/vnd.bmi"
+    "description": "",
+    "mimeType": "application/vnd.bmi"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rep"
     ],
-    "description":"",
-    "mimeType":"application/vnd.businessobjects"
+    "description": "",
+    "mimeType": "application/vnd.businessobjects"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cdxml"
     ],
-    "description":"",
-    "mimeType":"application/vnd.chemdraw+xml"
+    "description": "",
+    "mimeType": "application/vnd.chemdraw+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mmd"
     ],
-    "description":"",
-    "mimeType":"application/vnd.chipnuts.karaoke-mmd"
+    "description": "",
+    "mimeType": "application/vnd.chipnuts.karaoke-mmd"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cdy"
     ],
-    "description":"",
-    "mimeType":"application/vnd.cinderella"
+    "description": "",
+    "mimeType": "application/vnd.cinderella"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cla"
     ],
-    "description":"",
-    "mimeType":"application/vnd.claymore"
+    "description": "",
+    "mimeType": "application/vnd.claymore"
   },
   {
-    "extensions":[
+    "extensions": [
       ".c4d",
       ".c4f",
       ".c4g",
       ".c4p",
       ".c4u"
     ],
-    "description":"",
-    "mimeType":"application/vnd.clonk.c4group"
+    "description": "",
+    "mimeType": "application/vnd.clonk.c4group"
   },
   {
-    "extensions":[
+    "extensions": [
       ".csp"
     ],
-    "description":"",
-    "mimeType":"application/vnd.commonspace"
+    "description": "",
+    "mimeType": "application/vnd.commonspace"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cdbcmsg"
     ],
-    "description":"",
-    "mimeType":"application/vnd.contact.cmsg"
+    "description": "",
+    "mimeType": "application/vnd.contact.cmsg"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cmc"
     ],
-    "description":"",
-    "mimeType":"application/vnd.cosmocaller"
+    "description": "",
+    "mimeType": "application/vnd.cosmocaller"
   },
   {
-    "extensions":[
+    "extensions": [
       ".clkx"
     ],
-    "description":"",
-    "mimeType":"application/vnd.crick.clicker"
+    "description": "",
+    "mimeType": "application/vnd.crick.clicker"
   },
   {
-    "extensions":[
+    "extensions": [
       ".clkk"
     ],
-    "description":"",
-    "mimeType":"application/vnd.crick.clicker.keyboard"
+    "description": "",
+    "mimeType": "application/vnd.crick.clicker.keyboard"
   },
   {
-    "extensions":[
+    "extensions": [
       ".clkp"
     ],
-    "description":"",
-    "mimeType":"application/vnd.crick.clicker.palette"
+    "description": "",
+    "mimeType": "application/vnd.crick.clicker.palette"
   },
   {
-    "extensions":[
+    "extensions": [
       ".clkt"
     ],
-    "description":"",
-    "mimeType":"application/vnd.crick.clicker.template"
+    "description": "",
+    "mimeType": "application/vnd.crick.clicker.template"
   },
   {
-    "extensions":[
+    "extensions": [
       ".clkw"
     ],
-    "description":"",
-    "mimeType":"application/vnd.crick.clicker.wordbank"
+    "description": "",
+    "mimeType": "application/vnd.crick.clicker.wordbank"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wbs"
     ],
-    "description":"",
-    "mimeType":"application/vnd.criticaltools.wbs+xml"
+    "description": "",
+    "mimeType": "application/vnd.criticaltools.wbs+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pml"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ctc-posml"
+    "description": "",
+    "mimeType": "application/vnd.ctc-posml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ppd"
     ],
-    "description":"",
-    "mimeType":"application/vnd.cups-ppd"
+    "description": "",
+    "mimeType": "application/vnd.cups-ppd"
   },
   {
-    "extensions":[
+    "extensions": [
       ".car"
     ],
-    "description":"",
-    "mimeType":"application/vnd.curl.car"
+    "description": "",
+    "mimeType": "application/vnd.curl.car"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pcurl"
     ],
-    "description":"",
-    "mimeType":"application/vnd.curl.pcurl"
+    "description": "",
+    "mimeType": "application/vnd.curl.pcurl"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rdz"
     ],
-    "description":"",
-    "mimeType":"application/vnd.data-vision.rdz"
+    "description": "",
+    "mimeType": "application/vnd.data-vision.rdz"
   },
   {
-    "extensions":[
+    "extensions": [
       ".deb",
       ".udeb"
     ],
-    "description":"deb (Debian package) is a file format used for software distribution in the Debian Linux platform. It is actually an AR archive, with content that includes some tar files. The \"udeb\" files are in the same basic format as \"deb\", but are considered \"micro deb\", used for smaller packages with only the most essential files.",
-    "mimeType":"application/vnd.debian.binary-package"
+    "description": "deb (Debian package) is a file format used for software distribution in the Debian Linux platform. It is actually an AR archive, with content that includes some tar files. The \"udeb\" files are in the same basic format as \"deb\", but are considered \"micro deb\", used for smaller packages with only the most essential files.",
+    "mimeType": "application/vnd.debian.binary-package"
   },
   {
-    "extensions":[
+    "extensions": [
       ".fe_launch"
     ],
-    "description":"",
-    "mimeType":"application/vnd.denovo.fcselayout-link"
+    "description": "",
+    "mimeType": "application/vnd.denovo.fcselayout-link"
   },
   {
-    "extensions":[
+    "extensions": [
       ".dna"
     ],
-    "description":"",
-    "mimeType":"application/vnd.dna"
+    "description": "",
+    "mimeType": "application/vnd.dna"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mlp"
     ],
-    "description":"",
-    "mimeType":"application/vnd.dolby.mlp"
+    "description": "",
+    "mimeType": "application/vnd.dolby.mlp"
   },
   {
-    "extensions":[
+    "extensions": [
       ".dpg"
     ],
-    "description":"",
-    "mimeType":"application/vnd.dpgraph"
+    "description": "",
+    "mimeType": "application/vnd.dpgraph"
   },
   {
-    "extensions":[
+    "extensions": [
       ".dfac"
     ],
-    "description":"",
-    "mimeType":"application/vnd.dreamfactory"
+    "description": "",
+    "mimeType": "application/vnd.dreamfactory"
   },
   {
-    "extensions":[
+    "extensions": [
       ".geo"
     ],
-    "description":"",
-    "mimeType":"application/vnd.dynageo"
+    "description": "",
+    "mimeType": "application/vnd.dynageo"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mag"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ecowin.chart"
+    "description": "",
+    "mimeType": "application/vnd.ecowin.chart"
   },
   {
-    "extensions":[
+    "extensions": [
       ".nml"
     ],
-    "description":"",
-    "mimeType":"application/vnd.enliven"
+    "description": "",
+    "mimeType": "application/vnd.enliven"
   },
   {
-    "extensions":[
+    "extensions": [
       ".esf"
     ],
-    "description":"",
-    "mimeType":"application/vnd.epson.esf"
+    "description": "",
+    "mimeType": "application/vnd.epson.esf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".msf"
     ],
-    "description":"",
-    "mimeType":"application/vnd.epson.msf"
+    "description": "",
+    "mimeType": "application/vnd.epson.msf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".qam"
     ],
-    "description":"",
-    "mimeType":"application/vnd.epson.quickanime"
+    "description": "",
+    "mimeType": "application/vnd.epson.quickanime"
   },
   {
-    "extensions":[
+    "extensions": [
       ".slt"
     ],
-    "description":"",
-    "mimeType":"application/vnd.epson.salt"
+    "description": "",
+    "mimeType": "application/vnd.epson.salt"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ssf"
     ],
-    "description":"",
-    "mimeType":"application/vnd.epson.ssf"
+    "description": "",
+    "mimeType": "application/vnd.epson.ssf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".es3",
       ".et3"
     ],
-    "description":"",
-    "mimeType":"application/vnd.eszigno3+xml"
+    "description": "",
+    "mimeType": "application/vnd.eszigno3+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ez2"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ezpix-album"
+    "description": "",
+    "mimeType": "application/vnd.ezpix-album"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ez3"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ezpix-package"
+    "description": "",
+    "mimeType": "application/vnd.ezpix-package"
   },
   {
-    "extensions":[
+    "extensions": [
       ".fdf"
     ],
-    "description":"",
-    "mimeType":"application/vnd.fdf"
+    "description": "",
+    "mimeType": "application/vnd.fdf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mseed"
     ],
-    "description":"",
-    "mimeType":"application/vnd.fdsn.mseed"
+    "description": "",
+    "mimeType": "application/vnd.fdsn.mseed"
   },
   {
-    "extensions":[
+    "extensions": [
       ".dataless",
       ".seed"
     ],
-    "description":"",
-    "mimeType":"application/vnd.fdsn.seed"
+    "description": "",
+    "mimeType": "application/vnd.fdsn.seed"
   },
   {
-    "extensions":[
+    "extensions": [
       ".gph"
     ],
-    "description":"",
-    "mimeType":"application/vnd.flographit"
+    "description": "",
+    "mimeType": "application/vnd.flographit"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ftc"
     ],
-    "description":"",
-    "mimeType":"application/vnd.fluxtime.clip"
+    "description": "",
+    "mimeType": "application/vnd.fluxtime.clip"
   },
   {
-    "extensions":[
+    "extensions": [
       ".book",
       ".fm",
       ".frame",
       ".maker"
     ],
-    "description":"",
-    "mimeType":"application/vnd.framemaker"
+    "description": "",
+    "mimeType": "application/vnd.framemaker"
   },
   {
-    "extensions":[
+    "extensions": [
       ".fnc"
     ],
-    "description":"",
-    "mimeType":"application/vnd.frogans.fnc"
+    "description": "",
+    "mimeType": "application/vnd.frogans.fnc"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ltf"
     ],
-    "description":"",
-    "mimeType":"application/vnd.frogans.ltf"
+    "description": "",
+    "mimeType": "application/vnd.frogans.ltf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".fsc"
     ],
-    "description":"",
-    "mimeType":"application/vnd.fsc.weblaunch"
+    "description": "",
+    "mimeType": "application/vnd.fsc.weblaunch"
   },
   {
-    "extensions":[
+    "extensions": [
       ".oas"
     ],
-    "description":"",
-    "mimeType":"application/vnd.fujitsu.oasys"
+    "description": "",
+    "mimeType": "application/vnd.fujitsu.oasys"
   },
   {
-    "extensions":[
+    "extensions": [
       ".oa2"
     ],
-    "description":"",
-    "mimeType":"application/vnd.fujitsu.oasys2"
+    "description": "",
+    "mimeType": "application/vnd.fujitsu.oasys2"
   },
   {
-    "extensions":[
+    "extensions": [
       ".oa3"
     ],
-    "description":"",
-    "mimeType":"application/vnd.fujitsu.oasys3"
+    "description": "",
+    "mimeType": "application/vnd.fujitsu.oasys3"
   },
   {
-    "extensions":[
+    "extensions": [
       ".fg5"
     ],
-    "description":"",
-    "mimeType":"application/vnd.fujitsu.oasysgp"
+    "description": "",
+    "mimeType": "application/vnd.fujitsu.oasysgp"
   },
   {
-    "extensions":[
+    "extensions": [
       ".bh2"
     ],
-    "description":"",
-    "mimeType":"application/vnd.fujitsu.oasysprs"
+    "description": "",
+    "mimeType": "application/vnd.fujitsu.oasysprs"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ddd"
     ],
-    "description":"",
-    "mimeType":"application/vnd.fujixerox.ddd"
+    "description": "",
+    "mimeType": "application/vnd.fujixerox.ddd"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xdw"
     ],
-    "description":"",
-    "mimeType":"application/vnd.fujixerox.docuworks"
+    "description": "",
+    "mimeType": "application/vnd.fujixerox.docuworks"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xbd"
     ],
-    "description":"",
-    "mimeType":"application/vnd.fujixerox.docuworks.binder"
+    "description": "",
+    "mimeType": "application/vnd.fujixerox.docuworks.binder"
   },
   {
-    "extensions":[
+    "extensions": [
       ".fzs"
     ],
-    "description":"",
-    "mimeType":"application/vnd.fuzzysheet"
+    "description": "",
+    "mimeType": "application/vnd.fuzzysheet"
   },
   {
-    "extensions":[
+    "extensions": [
       ".txd"
     ],
-    "description":"",
-    "mimeType":"application/vnd.genomatix.tuxedo"
+    "description": "",
+    "mimeType": "application/vnd.genomatix.tuxedo"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ggb"
     ],
-    "description":"",
-    "mimeType":"application/vnd.geogebra.file"
+    "description": "",
+    "mimeType": "application/vnd.geogebra.file"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ggt"
     ],
-    "description":"",
-    "mimeType":"application/vnd.geogebra.tool"
+    "description": "",
+    "mimeType": "application/vnd.geogebra.tool"
   },
   {
-    "extensions":[
+    "extensions": [
       ".gex",
       ".gre"
     ],
-    "description":"",
-    "mimeType":"application/vnd.geometry-explorer"
+    "description": "",
+    "mimeType": "application/vnd.geometry-explorer"
   },
   {
-    "extensions":[
+    "extensions": [
       ".gmx"
     ],
-    "description":"",
-    "mimeType":"application/vnd.gmx"
+    "description": "",
+    "mimeType": "application/vnd.gmx"
   },
   {
-    "extensions":[
+    "extensions": [
       ".kml"
     ],
-    "description":"",
-    "mimeType":"application/vnd.google-earth.kml+xml"
+    "description": "",
+    "mimeType": "application/vnd.google-earth.kml+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".kmz"
     ],
-    "description":"",
-    "mimeType":"application/vnd.google-earth.kmz"
+    "description": "",
+    "mimeType": "application/vnd.google-earth.kmz"
   },
   {
-    "extensions":[
+    "extensions": [
       ".gqf",
       ".gqs"
     ],
-    "description":"",
-    "mimeType":"application/vnd.grafeq"
+    "description": "",
+    "mimeType": "application/vnd.grafeq"
   },
   {
-    "extensions":[
+    "extensions": [
       ".gac"
     ],
-    "description":"",
-    "mimeType":"application/vnd.groove-account"
+    "description": "",
+    "mimeType": "application/vnd.groove-account"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ghf"
     ],
-    "description":"",
-    "mimeType":"application/vnd.groove-help"
+    "description": "",
+    "mimeType": "application/vnd.groove-help"
   },
   {
-    "extensions":[
+    "extensions": [
       ".gim"
     ],
-    "description":"",
-    "mimeType":"application/vnd.groove-identity-message"
+    "description": "",
+    "mimeType": "application/vnd.groove-identity-message"
   },
   {
-    "extensions":[
+    "extensions": [
       ".grv"
     ],
-    "description":"",
-    "mimeType":"application/vnd.groove-injector"
+    "description": "",
+    "mimeType": "application/vnd.groove-injector"
   },
   {
-    "extensions":[
+    "extensions": [
       ".gtm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.groove-tool-message"
+    "description": "",
+    "mimeType": "application/vnd.groove-tool-message"
   },
   {
-    "extensions":[
+    "extensions": [
       ".tpl"
     ],
-    "description":"",
-    "mimeType":"application/vnd.groove-tool-template"
+    "description": "",
+    "mimeType": "application/vnd.groove-tool-template"
   },
   {
-    "extensions":[
+    "extensions": [
       ".vcg"
     ],
-    "description":"",
-    "mimeType":"application/vnd.groove-vcard"
+    "description": "",
+    "mimeType": "application/vnd.groove-vcard"
   },
   {
-    "extensions":[
+    "extensions": [
       ".zmm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.handheld-entertainment+xml"
+    "description": "",
+    "mimeType": "application/vnd.handheld-entertainment+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".hbci"
     ],
-    "description":"",
-    "mimeType":"application/vnd.hbci"
+    "description": "",
+    "mimeType": "application/vnd.hbci"
   },
   {
-    "extensions":[
+    "extensions": [
       ".les"
     ],
-    "description":"",
-    "mimeType":"application/vnd.hhe.lesson-player"
+    "description": "",
+    "mimeType": "application/vnd.hhe.lesson-player"
   },
   {
-    "extensions":[
+    "extensions": [
       ".hpgl"
     ],
-    "description":"",
-    "mimeType":"application/vnd.hp-hpgl"
+    "description": "",
+    "mimeType": "application/vnd.hp-hpgl"
   },
   {
-    "extensions":[
+    "extensions": [
       ".hpid"
     ],
-    "description":"",
-    "mimeType":"application/vnd.hp-hpid"
+    "description": "",
+    "mimeType": "application/vnd.hp-hpid"
   },
   {
-    "extensions":[
+    "extensions": [
       ".hps"
     ],
-    "description":"",
-    "mimeType":"application/vnd.hp-hps"
+    "description": "",
+    "mimeType": "application/vnd.hp-hps"
   },
   {
-    "extensions":[
+    "extensions": [
       ".jlt"
     ],
-    "description":"",
-    "mimeType":"application/vnd.hp-jlyt"
+    "description": "",
+    "mimeType": "application/vnd.hp-jlyt"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pcl"
     ],
-    "description":"",
-    "mimeType":"application/vnd.hp-pcl"
+    "description": "",
+    "mimeType": "application/vnd.hp-pcl"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pclxl"
     ],
-    "description":"",
-    "mimeType":"application/vnd.hp-pclxl"
+    "description": "",
+    "mimeType": "application/vnd.hp-pclxl"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sfd-hdstx"
     ],
-    "description":"",
-    "mimeType":"application/vnd.hydrostatix.sof-data"
+    "description": "",
+    "mimeType": "application/vnd.hydrostatix.sof-data"
   },
   {
-    "extensions":[
+    "extensions": [
       ".x3d"
     ],
-    "description":"",
-    "mimeType":"application/vnd.hzn-3d-crossword"
+    "description": "",
+    "mimeType": "application/vnd.hzn-3d-crossword"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mpy"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ibm.minipay"
+    "description": "",
+    "mimeType": "application/vnd.ibm.minipay"
   },
   {
-    "extensions":[
+    "extensions": [
       ".afp",
       ".list3820",
       ".listafp"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ibm.modcap"
+    "description": "",
+    "mimeType": "application/vnd.ibm.modcap"
   },
   {
-    "extensions":[
+    "extensions": [
       ".irm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ibm.rights-management"
+    "description": "",
+    "mimeType": "application/vnd.ibm.rights-management"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sc"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ibm.secure-container"
+    "description": "",
+    "mimeType": "application/vnd.ibm.secure-container"
   },
   {
-    "extensions":[
+    "extensions": [
       ".icc",
       ".icm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.iccprofile"
+    "description": "",
+    "mimeType": "application/vnd.iccprofile"
   },
   {
-    "extensions":[
+    "extensions": [
       ".igl"
     ],
-    "description":"",
-    "mimeType":"application/vnd.igloader"
+    "description": "",
+    "mimeType": "application/vnd.igloader"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ivp"
     ],
-    "description":"",
-    "mimeType":"application/vnd.immervision-ivp"
+    "description": "",
+    "mimeType": "application/vnd.immervision-ivp"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ivu"
     ],
-    "description":"",
-    "mimeType":"application/vnd.immervision-ivu"
+    "description": "",
+    "mimeType": "application/vnd.immervision-ivu"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xpw",
       ".xpx"
     ],
-    "description":"",
-    "mimeType":"application/vnd.intercon.formnet"
+    "description": "",
+    "mimeType": "application/vnd.intercon.formnet"
   },
   {
-    "extensions":[
+    "extensions": [
       ".qbo"
     ],
-    "description":"",
-    "mimeType":"application/vnd.intu.qbo"
+    "description": "",
+    "mimeType": "application/vnd.intu.qbo"
   },
   {
-    "extensions":[
+    "extensions": [
       ".qfx"
     ],
-    "description":"",
-    "mimeType":"application/vnd.intu.qfx"
+    "description": "",
+    "mimeType": "application/vnd.intu.qfx"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rcprofile"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ipunplugged.rcprofile"
+    "description": "",
+    "mimeType": "application/vnd.ipunplugged.rcprofile"
   },
   {
-    "extensions":[
+    "extensions": [
       ".irp"
     ],
-    "description":"",
-    "mimeType":"application/vnd.irepository.package+xml"
+    "description": "",
+    "mimeType": "application/vnd.irepository.package+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xpr"
     ],
-    "description":"",
-    "mimeType":"application/vnd.is-xpr"
+    "description": "",
+    "mimeType": "application/vnd.is-xpr"
   },
   {
-    "extensions":[
+    "extensions": [
       ".jam"
     ],
-    "description":"",
-    "mimeType":"application/vnd.jam"
+    "description": "",
+    "mimeType": "application/vnd.jam"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rms"
     ],
-    "description":"",
-    "mimeType":"application/vnd.jcp.javame.midlet-rms"
+    "description": "",
+    "mimeType": "application/vnd.jcp.javame.midlet-rms"
   },
   {
-    "extensions":[
+    "extensions": [
       ".jisp"
     ],
-    "description":"",
-    "mimeType":"application/vnd.jisp"
+    "description": "",
+    "mimeType": "application/vnd.jisp"
   },
   {
-    "extensions":[
+    "extensions": [
       ".joda"
     ],
-    "description":"",
-    "mimeType":"application/vnd.joost.joda-archive"
+    "description": "",
+    "mimeType": "application/vnd.joost.joda-archive"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ktr",
       ".ktz"
     ],
-    "description":"",
-    "mimeType":"application/vnd.kahootz"
+    "description": "",
+    "mimeType": "application/vnd.kahootz"
   },
   {
-    "extensions":[
+    "extensions": [
       ".karbon"
     ],
-    "description":"",
-    "mimeType":"application/vnd.kde.karbon"
+    "description": "",
+    "mimeType": "application/vnd.kde.karbon"
   },
   {
-    "extensions":[
+    "extensions": [
       ".chrt"
     ],
-    "description":"",
-    "mimeType":"application/vnd.kde.kchart"
+    "description": "",
+    "mimeType": "application/vnd.kde.kchart"
   },
   {
-    "extensions":[
+    "extensions": [
       ".kfo"
     ],
-    "description":"",
-    "mimeType":"application/vnd.kde.kformula"
+    "description": "",
+    "mimeType": "application/vnd.kde.kformula"
   },
   {
-    "extensions":[
+    "extensions": [
       ".flw"
     ],
-    "description":"",
-    "mimeType":"application/vnd.kde.kivio"
+    "description": "",
+    "mimeType": "application/vnd.kde.kivio"
   },
   {
-    "extensions":[
+    "extensions": [
       ".kon"
     ],
-    "description":"",
-    "mimeType":"application/vnd.kde.kontour"
+    "description": "",
+    "mimeType": "application/vnd.kde.kontour"
   },
   {
-    "extensions":[
+    "extensions": [
       ".kpr",
       ".kpt"
     ],
-    "description":"",
-    "mimeType":"application/vnd.kde.kpresenter"
+    "description": "",
+    "mimeType": "application/vnd.kde.kpresenter"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ksp"
     ],
-    "description":"",
-    "mimeType":"application/vnd.kde.kspread"
+    "description": "",
+    "mimeType": "application/vnd.kde.kspread"
   },
   {
-    "extensions":[
+    "extensions": [
       ".kwd",
       ".kwt"
     ],
-    "description":"",
-    "mimeType":"application/vnd.kde.kword"
+    "description": "",
+    "mimeType": "application/vnd.kde.kword"
   },
   {
-    "extensions":[
+    "extensions": [
       ".htke"
     ],
-    "description":"",
-    "mimeType":"application/vnd.kenameaapp"
+    "description": "",
+    "mimeType": "application/vnd.kenameaapp"
   },
   {
-    "extensions":[
+    "extensions": [
       ".kia"
     ],
-    "description":"",
-    "mimeType":"application/vnd.kidspiration"
+    "description": "",
+    "mimeType": "application/vnd.kidspiration"
   },
   {
-    "extensions":[
+    "extensions": [
       ".kne",
       ".knp"
     ],
-    "description":"",
-    "mimeType":"application/vnd.kinar"
+    "description": "",
+    "mimeType": "application/vnd.kinar"
   },
   {
-    "extensions":[
+    "extensions": [
       ".skd",
       ".skm",
       ".skp",
       ".skt"
     ],
-    "description":"",
-    "mimeType":"application/vnd.koan"
+    "description": "",
+    "mimeType": "application/vnd.koan"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sse"
     ],
-    "description":"",
-    "mimeType":"application/vnd.kodak-descriptor"
+    "description": "",
+    "mimeType": "application/vnd.kodak-descriptor"
   },
   {
-    "extensions":[
+    "extensions": [
       ".lbd"
     ],
-    "description":"",
-    "mimeType":"application/vnd.llamagraphics.life-balance.desktop"
+    "description": "",
+    "mimeType": "application/vnd.llamagraphics.life-balance.desktop"
   },
   {
-    "extensions":[
+    "extensions": [
       ".lbe"
     ],
-    "description":"",
-    "mimeType":"application/vnd.llamagraphics.life-balance.exchange+xml"
+    "description": "",
+    "mimeType": "application/vnd.llamagraphics.life-balance.exchange+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".123"
     ],
-    "description":"",
-    "mimeType":"application/vnd.lotus-1-2-3"
+    "description": "",
+    "mimeType": "application/vnd.lotus-1-2-3"
   },
   {
-    "extensions":[
+    "extensions": [
       ".apr"
     ],
-    "description":"",
-    "mimeType":"application/vnd.lotus-approach"
+    "description": "",
+    "mimeType": "application/vnd.lotus-approach"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pre"
     ],
-    "description":"",
-    "mimeType":"application/vnd.lotus-freelance"
+    "description": "",
+    "mimeType": "application/vnd.lotus-freelance"
   },
   {
-    "extensions":[
+    "extensions": [
       ".nsf"
     ],
-    "description":"",
-    "mimeType":"application/vnd.lotus-notes"
+    "description": "",
+    "mimeType": "application/vnd.lotus-notes"
   },
   {
-    "extensions":[
+    "extensions": [
       ".org"
     ],
-    "description":"",
-    "mimeType":"application/vnd.lotus-organizer"
+    "description": "",
+    "mimeType": "application/vnd.lotus-organizer"
   },
   {
-    "extensions":[
+    "extensions": [
       ".scm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.lotus-screencam"
+    "description": "",
+    "mimeType": "application/vnd.lotus-screencam"
   },
   {
-    "extensions":[
+    "extensions": [
       ".lwp"
     ],
-    "description":"",
-    "mimeType":"application/vnd.lotus-wordpro"
+    "description": "",
+    "mimeType": "application/vnd.lotus-wordpro"
   },
   {
-    "extensions":[
+    "extensions": [
       ".portpkg"
     ],
-    "description":"",
-    "mimeType":"application/vnd.macports.portpkg"
+    "description": "",
+    "mimeType": "application/vnd.macports.portpkg"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mcd"
     ],
-    "description":"",
-    "mimeType":"application/vnd.mcd"
+    "description": "",
+    "mimeType": "application/vnd.mcd"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mc1"
     ],
-    "description":"",
-    "mimeType":"application/vnd.medcalcdata"
+    "description": "",
+    "mimeType": "application/vnd.medcalcdata"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cdkey"
     ],
-    "description":"",
-    "mimeType":"application/vnd.mediastation.cdkey"
+    "description": "",
+    "mimeType": "application/vnd.mediastation.cdkey"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mwf"
     ],
-    "description":"",
-    "mimeType":"application/vnd.mfer"
+    "description": "",
+    "mimeType": "application/vnd.mfer"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mfm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.mfmp"
+    "description": "",
+    "mimeType": "application/vnd.mfmp"
   },
   {
-    "extensions":[
+    "extensions": [
       ".flo"
     ],
-    "description":"",
-    "mimeType":"application/vnd.micrografx.flo"
+    "description": "",
+    "mimeType": "application/vnd.micrografx.flo"
   },
   {
-    "extensions":[
+    "extensions": [
       ".igx"
     ],
-    "description":"",
-    "mimeType":"application/vnd.micrografx.igx"
+    "description": "",
+    "mimeType": "application/vnd.micrografx.igx"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mif"
     ],
-    "description":"",
-    "mimeType":"application/vnd.mif"
+    "description": "",
+    "mimeType": "application/vnd.mif"
   },
   {
-    "extensions":[
+    "extensions": [
       ".daf"
     ],
-    "description":"",
-    "mimeType":"application/vnd.mobius.daf"
+    "description": "",
+    "mimeType": "application/vnd.mobius.daf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".dis"
     ],
-    "description":"",
-    "mimeType":"application/vnd.mobius.dis"
+    "description": "",
+    "mimeType": "application/vnd.mobius.dis"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mbk"
     ],
-    "description":"",
-    "mimeType":"application/vnd.mobius.mbk"
+    "description": "",
+    "mimeType": "application/vnd.mobius.mbk"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mqy"
     ],
-    "description":"",
-    "mimeType":"application/vnd.mobius.mqy"
+    "description": "",
+    "mimeType": "application/vnd.mobius.mqy"
   },
   {
-    "extensions":[
+    "extensions": [
       ".msl"
     ],
-    "description":"",
-    "mimeType":"application/vnd.mobius.msl"
+    "description": "",
+    "mimeType": "application/vnd.mobius.msl"
   },
   {
-    "extensions":[
+    "extensions": [
       ".plc"
     ],
-    "description":"",
-    "mimeType":"application/vnd.mobius.plc"
+    "description": "",
+    "mimeType": "application/vnd.mobius.plc"
   },
   {
-    "extensions":[
+    "extensions": [
       ".txf"
     ],
-    "description":"",
-    "mimeType":"application/vnd.mobius.txf"
+    "description": "",
+    "mimeType": "application/vnd.mobius.txf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mpn"
     ],
-    "description":"",
-    "mimeType":"application/vnd.mophun.application"
+    "description": "",
+    "mimeType": "application/vnd.mophun.application"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mpc"
     ],
-    "description":"",
-    "mimeType":"application/vnd.mophun.certificate"
+    "description": "",
+    "mimeType": "application/vnd.mophun.certificate"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xul"
     ],
-    "description":"",
-    "mimeType":"application/vnd.mozilla.xul+xml"
+    "description": "",
+    "mimeType": "application/vnd.mozilla.xul+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cil"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-artgalry"
+    "description": "",
+    "mimeType": "application/vnd.ms-artgalry"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cab"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-cab-compressed"
+    "description": "",
+    "mimeType": "application/vnd.ms-cab-compressed"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xla",
       ".xlb",
       ".xlc",
@@ -1758,546 +1758,546 @@
       ".xlt",
       ".xlw"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-excel"
+    "description": "",
+    "mimeType": "application/vnd.ms-excel"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xlam"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-excel.addin.macroenabled.12"
+    "description": "",
+    "mimeType": "application/vnd.ms-excel.addin.macroenabled.12"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xlsb"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-excel.sheet.binary.macroenabled.12"
+    "description": "",
+    "mimeType": "application/vnd.ms-excel.sheet.binary.macroenabled.12"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xlsm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-excel.sheet.macroenabled.12"
+    "description": "",
+    "mimeType": "application/vnd.ms-excel.sheet.macroenabled.12"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xltm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-excel.template.macroenabled.12"
+    "description": "",
+    "mimeType": "application/vnd.ms-excel.template.macroenabled.12"
   },
   {
-    "extensions":[
+    "extensions": [
       ".eot"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-fontobject"
+    "description": "",
+    "mimeType": "application/vnd.ms-fontobject"
   },
   {
-    "extensions":[
+    "extensions": [
       ".chm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-htmlhelp"
+    "description": "",
+    "mimeType": "application/vnd.ms-htmlhelp"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ims"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-ims"
+    "description": "",
+    "mimeType": "application/vnd.ms-ims"
   },
   {
-    "extensions":[
+    "extensions": [
       ".lrm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-lrm"
+    "description": "",
+    "mimeType": "application/vnd.ms-lrm"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cat"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-pki.seccat"
+    "description": "",
+    "mimeType": "application/vnd.ms-pki.seccat"
   },
   {
-    "extensions":[
+    "extensions": [
       ".stl"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-pki.stl"
+    "description": "",
+    "mimeType": "application/vnd.ms-pki.stl"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pot",
       ".ppa",
       ".pps",
       ".ppt",
       ".pwz"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-powerpoint"
+    "description": "",
+    "mimeType": "application/vnd.ms-powerpoint"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ppam"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-powerpoint.addin.macroenabled.12"
+    "description": "",
+    "mimeType": "application/vnd.ms-powerpoint.addin.macroenabled.12"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pptm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-powerpoint.presentation.macroenabled.12"
+    "description": "",
+    "mimeType": "application/vnd.ms-powerpoint.presentation.macroenabled.12"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sldm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-powerpoint.slide.macroenabled.12"
+    "description": "",
+    "mimeType": "application/vnd.ms-powerpoint.slide.macroenabled.12"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ppsm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-powerpoint.slideshow.macroenabled.12"
+    "description": "",
+    "mimeType": "application/vnd.ms-powerpoint.slideshow.macroenabled.12"
   },
   {
-    "extensions":[
+    "extensions": [
       ".potm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-powerpoint.template.macroenabled.12"
+    "description": "",
+    "mimeType": "application/vnd.ms-powerpoint.template.macroenabled.12"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mpp",
       ".mpt"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-project"
+    "description": "",
+    "mimeType": "application/vnd.ms-project"
   },
   {
-    "extensions":[
+    "extensions": [
       ".docm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-word.document.macroenabled.12"
+    "description": "",
+    "mimeType": "application/vnd.ms-word.document.macroenabled.12"
   },
   {
-    "extensions":[
+    "extensions": [
       ".dotm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-word.template.macroenabled.12"
+    "description": "",
+    "mimeType": "application/vnd.ms-word.template.macroenabled.12"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wcm",
       ".wdb",
       ".wks",
       ".wps"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-works"
+    "description": "",
+    "mimeType": "application/vnd.ms-works"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wpl"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-wpl"
+    "description": "",
+    "mimeType": "application/vnd.ms-wpl"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xps"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ms-xpsdocument"
+    "description": "",
+    "mimeType": "application/vnd.ms-xpsdocument"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mseq"
     ],
-    "description":"",
-    "mimeType":"application/vnd.mseq"
+    "description": "",
+    "mimeType": "application/vnd.mseq"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mus"
     ],
-    "description":"",
-    "mimeType":"application/vnd.musician"
+    "description": "",
+    "mimeType": "application/vnd.musician"
   },
   {
-    "extensions":[
+    "extensions": [
       ".msty"
     ],
-    "description":"",
-    "mimeType":"application/vnd.muvee.style"
+    "description": "",
+    "mimeType": "application/vnd.muvee.style"
   },
   {
-    "extensions":[
+    "extensions": [
       ".nlu"
     ],
-    "description":"",
-    "mimeType":"application/vnd.neurolanguage.nlu"
+    "description": "",
+    "mimeType": "application/vnd.neurolanguage.nlu"
   },
   {
-    "extensions":[
+    "extensions": [
       ".nnd"
     ],
-    "description":"",
-    "mimeType":"application/vnd.noblenet-directory"
+    "description": "",
+    "mimeType": "application/vnd.noblenet-directory"
   },
   {
-    "extensions":[
+    "extensions": [
       ".nns"
     ],
-    "description":"",
-    "mimeType":"application/vnd.noblenet-sealer"
+    "description": "",
+    "mimeType": "application/vnd.noblenet-sealer"
   },
   {
-    "extensions":[
+    "extensions": [
       ".nnw"
     ],
-    "description":"",
-    "mimeType":"application/vnd.noblenet-web"
+    "description": "",
+    "mimeType": "application/vnd.noblenet-web"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ngdat"
     ],
-    "description":"",
-    "mimeType":"application/vnd.nokia.n-gage.data"
+    "description": "",
+    "mimeType": "application/vnd.nokia.n-gage.data"
   },
   {
-    "extensions":[
+    "extensions": [
       ".n-gage"
     ],
-    "description":"",
-    "mimeType":"application/vnd.nokia.n-gage.symbian.install"
+    "description": "",
+    "mimeType": "application/vnd.nokia.n-gage.symbian.install"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rpst"
     ],
-    "description":"",
-    "mimeType":"application/vnd.nokia.radio-preset"
+    "description": "",
+    "mimeType": "application/vnd.nokia.radio-preset"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rpss"
     ],
-    "description":"",
-    "mimeType":"application/vnd.nokia.radio-presets"
+    "description": "",
+    "mimeType": "application/vnd.nokia.radio-presets"
   },
   {
-    "extensions":[
+    "extensions": [
       ".edm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.novadigm.edm"
+    "description": "",
+    "mimeType": "application/vnd.novadigm.edm"
   },
   {
-    "extensions":[
+    "extensions": [
       ".edx"
     ],
-    "description":"",
-    "mimeType":"application/vnd.novadigm.edx"
+    "description": "",
+    "mimeType": "application/vnd.novadigm.edx"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ext"
     ],
-    "description":"",
-    "mimeType":"application/vnd.novadigm.ext"
+    "description": "",
+    "mimeType": "application/vnd.novadigm.ext"
   },
   {
-    "extensions":[
+    "extensions": [
       ".odc"
     ],
-    "description":"",
-    "mimeType":"application/vnd.oasis.opendocument.chart"
+    "description": "",
+    "mimeType": "application/vnd.oasis.opendocument.chart"
   },
   {
-    "extensions":[
+    "extensions": [
       ".otc"
     ],
-    "description":"",
-    "mimeType":"application/vnd.oasis.opendocument.chart-template"
+    "description": "",
+    "mimeType": "application/vnd.oasis.opendocument.chart-template"
   },
   {
-    "extensions":[
+    "extensions": [
       ".odb"
     ],
-    "description":"",
-    "mimeType":"application/vnd.oasis.opendocument.database"
+    "description": "",
+    "mimeType": "application/vnd.oasis.opendocument.database"
   },
   {
-    "extensions":[
+    "extensions": [
       ".odf"
     ],
-    "description":"",
-    "mimeType":"application/vnd.oasis.opendocument.formula"
+    "description": "",
+    "mimeType": "application/vnd.oasis.opendocument.formula"
   },
   {
-    "extensions":[
+    "extensions": [
       ".odft"
     ],
-    "description":"",
-    "mimeType":"application/vnd.oasis.opendocument.formula-template"
+    "description": "",
+    "mimeType": "application/vnd.oasis.opendocument.formula-template"
   },
   {
-    "extensions":[
+    "extensions": [
       ".odg"
     ],
-    "description":"",
-    "mimeType":"application/vnd.oasis.opendocument.graphics"
+    "description": "",
+    "mimeType": "application/vnd.oasis.opendocument.graphics"
   },
   {
-    "extensions":[
+    "extensions": [
       ".otg"
     ],
-    "description":"",
-    "mimeType":"application/vnd.oasis.opendocument.graphics-template"
+    "description": "",
+    "mimeType": "application/vnd.oasis.opendocument.graphics-template"
   },
   {
-    "extensions":[
+    "extensions": [
       ".odi"
     ],
-    "description":"",
-    "mimeType":"application/vnd.oasis.opendocument.image"
+    "description": "",
+    "mimeType": "application/vnd.oasis.opendocument.image"
   },
   {
-    "extensions":[
+    "extensions": [
       ".oti"
     ],
-    "description":"",
-    "mimeType":"application/vnd.oasis.opendocument.image-template"
+    "description": "",
+    "mimeType": "application/vnd.oasis.opendocument.image-template"
   },
   {
-    "extensions":[
+    "extensions": [
       ".odp"
     ],
-    "description":"",
-    "mimeType":"application/vnd.oasis.opendocument.presentation"
+    "description": "",
+    "mimeType": "application/vnd.oasis.opendocument.presentation"
   },
   {
-    "extensions":[
+    "extensions": [
       ".otp"
     ],
-    "description":"",
-    "mimeType":"application/vnd.oasis.opendocument.presentation-template"
+    "description": "",
+    "mimeType": "application/vnd.oasis.opendocument.presentation-template"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ods"
     ],
-    "description":"",
-    "mimeType":"application/vnd.oasis.opendocument.spreadsheet"
+    "description": "",
+    "mimeType": "application/vnd.oasis.opendocument.spreadsheet"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ots"
     ],
-    "description":"",
-    "mimeType":"application/vnd.oasis.opendocument.spreadsheet-template"
+    "description": "",
+    "mimeType": "application/vnd.oasis.opendocument.spreadsheet-template"
   },
   {
-    "extensions":[
+    "extensions": [
       ".odt"
     ],
-    "description":"",
-    "mimeType":"application/vnd.oasis.opendocument.text"
+    "description": "",
+    "mimeType": "application/vnd.oasis.opendocument.text"
   },
   {
-    "extensions":[
+    "extensions": [
       ".otm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.oasis.opendocument.text-master"
+    "description": "",
+    "mimeType": "application/vnd.oasis.opendocument.text-master"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ott"
     ],
-    "description":"",
-    "mimeType":"application/vnd.oasis.opendocument.text-template"
+    "description": "",
+    "mimeType": "application/vnd.oasis.opendocument.text-template"
   },
   {
-    "extensions":[
+    "extensions": [
       ".oth"
     ],
-    "description":"",
-    "mimeType":"application/vnd.oasis.opendocument.text-web"
+    "description": "",
+    "mimeType": "application/vnd.oasis.opendocument.text-web"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xo"
     ],
-    "description":"",
-    "mimeType":"application/vnd.olpc-sugar"
+    "description": "",
+    "mimeType": "application/vnd.olpc-sugar"
   },
   {
-    "extensions":[
+    "extensions": [
       ".dd2"
     ],
-    "description":"",
-    "mimeType":"application/vnd.oma.dd2+xml"
+    "description": "",
+    "mimeType": "application/vnd.oma.dd2+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".oxt"
     ],
-    "description":"",
-    "mimeType":"application/vnd.openofficeorg.extension"
+    "description": "",
+    "mimeType": "application/vnd.openofficeorg.extension"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pptx"
     ],
-    "description":"",
-    "mimeType":"application/vnd.openxmlformats-officedocument.presentationml.presentation"
+    "description": "",
+    "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sldx"
     ],
-    "description":"",
-    "mimeType":"application/vnd.openxmlformats-officedocument.presentationml.slide"
+    "description": "",
+    "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.slide"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ppsx"
     ],
-    "description":"",
-    "mimeType":"application/vnd.openxmlformats-officedocument.presentationml.slideshow"
+    "description": "",
+    "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.slideshow"
   },
   {
-    "extensions":[
+    "extensions": [
       ".potx"
     ],
-    "description":"",
-    "mimeType":"application/vnd.openxmlformats-officedocument.presentationml.template"
+    "description": "",
+    "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.template"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xlsx"
     ],
-    "description":"",
-    "mimeType":"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    "description": "",
+    "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xltx"
     ],
-    "description":"",
-    "mimeType":"application/vnd.openxmlformats-officedocument.spreadsheetml.template"
+    "description": "",
+    "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.template"
   },
   {
-    "extensions":[
+    "extensions": [
       ".docx"
     ],
-    "description":"",
-    "mimeType":"application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    "description": "",
+    "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
   },
   {
-    "extensions":[
+    "extensions": [
       ".dotx"
     ],
-    "description":"",
-    "mimeType":"application/vnd.openxmlformats-officedocument.wordprocessingml.template"
+    "description": "",
+    "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.template"
   },
   {
-    "extensions":[
+    "extensions": [
       ".dp"
     ],
-    "description":"",
-    "mimeType":"application/vnd.osgi.dp"
+    "description": "",
+    "mimeType": "application/vnd.osgi.dp"
   },
   {
-    "extensions":[
+    "extensions": [
       ".oprc",
       ".pdb",
       ".pqa"
     ],
-    "description":"",
-    "mimeType":"application/vnd.palm"
+    "description": "",
+    "mimeType": "application/vnd.palm"
   },
   {
-    "extensions":[
+    "extensions": [
       ".str"
     ],
-    "description":"",
-    "mimeType":"application/vnd.pg.format"
+    "description": "",
+    "mimeType": "application/vnd.pg.format"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ei6"
     ],
-    "description":"",
-    "mimeType":"application/vnd.pg.osasli"
+    "description": "",
+    "mimeType": "application/vnd.pg.osasli"
   },
   {
-    "extensions":[
+    "extensions": [
       ".efif"
     ],
-    "description":"",
-    "mimeType":"application/vnd.picsel"
+    "description": "",
+    "mimeType": "application/vnd.picsel"
   },
   {
-    "extensions":[
+    "extensions": [
       ".plf"
     ],
-    "description":"",
-    "mimeType":"application/vnd.pocketlearn"
+    "description": "",
+    "mimeType": "application/vnd.pocketlearn"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pbd"
     ],
-    "description":"",
-    "mimeType":"application/vnd.powerbuilder6"
+    "description": "",
+    "mimeType": "application/vnd.powerbuilder6"
   },
   {
-    "extensions":[
+    "extensions": [
       ".box"
     ],
-    "description":"",
-    "mimeType":"application/vnd.previewsystems.box"
+    "description": "",
+    "mimeType": "application/vnd.previewsystems.box"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mgz"
     ],
-    "description":"",
-    "mimeType":"application/vnd.proteus.magazine"
+    "description": "",
+    "mimeType": "application/vnd.proteus.magazine"
   },
   {
-    "extensions":[
+    "extensions": [
       ".qps"
     ],
-    "description":"",
-    "mimeType":"application/vnd.publishare-delta-tree"
+    "description": "",
+    "mimeType": "application/vnd.publishare-delta-tree"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ptid"
     ],
-    "description":"",
-    "mimeType":"application/vnd.pvi.ptid1"
+    "description": "",
+    "mimeType": "application/vnd.pvi.ptid1"
   },
   {
-    "extensions":[
+    "extensions": [
       ".qwd",
       ".qwt",
       ".qxb",
@@ -2305,146 +2305,146 @@
       ".qxl",
       ".qxt"
     ],
-    "description":"",
-    "mimeType":"application/vnd.quark.quarkxpress"
+    "description": "",
+    "mimeType": "application/vnd.quark.quarkxpress"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mxl"
     ],
-    "description":"",
-    "mimeType":"application/vnd.recordare.musicxml"
+    "description": "",
+    "mimeType": "application/vnd.recordare.musicxml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".musicxml"
     ],
-    "description":"",
-    "mimeType":"application/vnd.recordare.musicxml+xml"
+    "description": "",
+    "mimeType": "application/vnd.recordare.musicxml+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cod"
     ],
-    "description":"",
-    "mimeType":"application/vnd.rim.cod"
+    "description": "",
+    "mimeType": "application/vnd.rim.cod"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.rn-realmedia"
+    "description": "",
+    "mimeType": "application/vnd.rn-realmedia"
   },
   {
-    "extensions":[
+    "extensions": [
       ".link66"
     ],
-    "description":"",
-    "mimeType":"application/vnd.route66.link66+xml"
+    "description": "",
+    "mimeType": "application/vnd.route66.link66+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".see"
     ],
-    "description":"",
-    "mimeType":"application/vnd.seemail"
+    "description": "",
+    "mimeType": "application/vnd.seemail"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sema"
     ],
-    "description":"",
-    "mimeType":"application/vnd.sema"
+    "description": "",
+    "mimeType": "application/vnd.sema"
   },
   {
-    "extensions":[
+    "extensions": [
       ".semd"
     ],
-    "description":"",
-    "mimeType":"application/vnd.semd"
+    "description": "",
+    "mimeType": "application/vnd.semd"
   },
   {
-    "extensions":[
+    "extensions": [
       ".semf"
     ],
-    "description":"",
-    "mimeType":"application/vnd.semf"
+    "description": "",
+    "mimeType": "application/vnd.semf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ifm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.shana.informed.formdata"
+    "description": "",
+    "mimeType": "application/vnd.shana.informed.formdata"
   },
   {
-    "extensions":[
+    "extensions": [
       ".itp"
     ],
-    "description":"",
-    "mimeType":"application/vnd.shana.informed.formtemplate"
+    "description": "",
+    "mimeType": "application/vnd.shana.informed.formtemplate"
   },
   {
-    "extensions":[
+    "extensions": [
       ".iif"
     ],
-    "description":"",
-    "mimeType":"application/vnd.shana.informed.interchange"
+    "description": "",
+    "mimeType": "application/vnd.shana.informed.interchange"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ipk"
     ],
-    "description":"",
-    "mimeType":"application/vnd.shana.informed.package"
+    "description": "",
+    "mimeType": "application/vnd.shana.informed.package"
   },
   {
-    "extensions":[
+    "extensions": [
       ".twd",
       ".twds"
     ],
-    "description":"",
-    "mimeType":"application/vnd.simtech-mindmapper"
+    "description": "",
+    "mimeType": "application/vnd.simtech-mindmapper"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mmf"
     ],
-    "description":"",
-    "mimeType":"application/vnd.smaf"
+    "description": "",
+    "mimeType": "application/vnd.smaf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".teacher"
     ],
-    "description":"",
-    "mimeType":"application/vnd.smart.teacher"
+    "description": "",
+    "mimeType": "application/vnd.smart.teacher"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sdkd",
       ".sdkm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.solent.sdkm+xml"
+    "description": "",
+    "mimeType": "application/vnd.solent.sdkm+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".dxp"
     ],
-    "description":"",
-    "mimeType":"application/vnd.spotfire.dxp"
+    "description": "",
+    "mimeType": "application/vnd.spotfire.dxp"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sfs"
     ],
-    "description":"",
-    "mimeType":"application/vnd.spotfire.sfs"
+    "description": "",
+    "mimeType": "application/vnd.spotfire.sfs"
   },
   {
-    "extensions":[
+    "extensions": [
       ".db",
       ".sqlite",
       ".sqlite3",
@@ -2453,563 +2453,563 @@
       ".db-shm",
       ".sqlite-shm"
     ],
-    "description":"SQLite is a self-contained, serverless, zero-configuration, transactional SQL database engine. The code for SQLite is in the public domain and is thus free for use for any purpose, commercial or private.",
-    "mimeType":"application/vnd.sqlite3"
+    "description": "SQLite is a self-contained, serverless, zero-configuration, transactional SQL database engine. The code for SQLite is in the public domain and is thus free for use for any purpose, commercial or private.",
+    "mimeType": "application/vnd.sqlite3"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sdc"
     ],
-    "description":"",
-    "mimeType":"application/vnd.stardivision.calc"
+    "description": "",
+    "mimeType": "application/vnd.stardivision.calc"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sda"
     ],
-    "description":"",
-    "mimeType":"application/vnd.stardivision.draw"
+    "description": "",
+    "mimeType": "application/vnd.stardivision.draw"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sdd"
     ],
-    "description":"",
-    "mimeType":"application/vnd.stardivision.impress"
+    "description": "",
+    "mimeType": "application/vnd.stardivision.impress"
   },
   {
-    "extensions":[
+    "extensions": [
       ".smf"
     ],
-    "description":"",
-    "mimeType":"application/vnd.stardivision.math"
+    "description": "",
+    "mimeType": "application/vnd.stardivision.math"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sdw",
       ".vor"
     ],
-    "description":"",
-    "mimeType":"application/vnd.stardivision.writer"
+    "description": "",
+    "mimeType": "application/vnd.stardivision.writer"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sgl"
     ],
-    "description":"",
-    "mimeType":"application/vnd.stardivision.writer-global"
+    "description": "",
+    "mimeType": "application/vnd.stardivision.writer-global"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sxc"
     ],
-    "description":"",
-    "mimeType":"application/vnd.sun.xml.calc"
+    "description": "",
+    "mimeType": "application/vnd.sun.xml.calc"
   },
   {
-    "extensions":[
+    "extensions": [
       ".stc"
     ],
-    "description":"",
-    "mimeType":"application/vnd.sun.xml.calc.template"
+    "description": "",
+    "mimeType": "application/vnd.sun.xml.calc.template"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sxd"
     ],
-    "description":"",
-    "mimeType":"application/vnd.sun.xml.draw"
+    "description": "",
+    "mimeType": "application/vnd.sun.xml.draw"
   },
   {
-    "extensions":[
+    "extensions": [
       ".std"
     ],
-    "description":"",
-    "mimeType":"application/vnd.sun.xml.draw.template"
+    "description": "",
+    "mimeType": "application/vnd.sun.xml.draw.template"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sxi"
     ],
-    "description":"",
-    "mimeType":"application/vnd.sun.xml.impress"
+    "description": "",
+    "mimeType": "application/vnd.sun.xml.impress"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sti"
     ],
-    "description":"",
-    "mimeType":"application/vnd.sun.xml.impress.template"
+    "description": "",
+    "mimeType": "application/vnd.sun.xml.impress.template"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sxm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.sun.xml.math"
+    "description": "",
+    "mimeType": "application/vnd.sun.xml.math"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sxw"
     ],
-    "description":"",
-    "mimeType":"application/vnd.sun.xml.writer"
+    "description": "",
+    "mimeType": "application/vnd.sun.xml.writer"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sxg"
     ],
-    "description":"",
-    "mimeType":"application/vnd.sun.xml.writer.global"
+    "description": "",
+    "mimeType": "application/vnd.sun.xml.writer.global"
   },
   {
-    "extensions":[
+    "extensions": [
       ".stw"
     ],
-    "description":"",
-    "mimeType":"application/vnd.sun.xml.writer.template"
+    "description": "",
+    "mimeType": "application/vnd.sun.xml.writer.template"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sus",
       ".susp"
     ],
-    "description":"",
-    "mimeType":"application/vnd.sus-calendar"
+    "description": "",
+    "mimeType": "application/vnd.sus-calendar"
   },
   {
-    "extensions":[
+    "extensions": [
       ".svd"
     ],
-    "description":"",
-    "mimeType":"application/vnd.svd"
+    "description": "",
+    "mimeType": "application/vnd.svd"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sis",
       ".sisx"
     ],
-    "description":"",
-    "mimeType":"application/vnd.symbian.install"
+    "description": "",
+    "mimeType": "application/vnd.symbian.install"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xsm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.syncml+xml"
+    "description": "",
+    "mimeType": "application/vnd.syncml+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".bdm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.syncml.dm+wbxml"
+    "description": "",
+    "mimeType": "application/vnd.syncml.dm+wbxml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xdm"
     ],
-    "description":"",
-    "mimeType":"application/vnd.syncml.dm+xml"
+    "description": "",
+    "mimeType": "application/vnd.syncml.dm+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".tao"
     ],
-    "description":"",
-    "mimeType":"application/vnd.tao.intent-module-archive"
+    "description": "",
+    "mimeType": "application/vnd.tao.intent-module-archive"
   },
   {
-    "extensions":[
+    "extensions": [
       ".tmo"
     ],
-    "description":"",
-    "mimeType":"application/vnd.tmobile-livetv"
+    "description": "",
+    "mimeType": "application/vnd.tmobile-livetv"
   },
   {
-    "extensions":[
+    "extensions": [
       ".tpt"
     ],
-    "description":"",
-    "mimeType":"application/vnd.trid.tpt"
+    "description": "",
+    "mimeType": "application/vnd.trid.tpt"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mxs"
     ],
-    "description":"",
-    "mimeType":"application/vnd.triscape.mxs"
+    "description": "",
+    "mimeType": "application/vnd.triscape.mxs"
   },
   {
-    "extensions":[
+    "extensions": [
       ".tra"
     ],
-    "description":"",
-    "mimeType":"application/vnd.trueapp"
+    "description": "",
+    "mimeType": "application/vnd.trueapp"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ufd",
       ".ufdl"
     ],
-    "description":"",
-    "mimeType":"application/vnd.ufdl"
+    "description": "",
+    "mimeType": "application/vnd.ufdl"
   },
   {
-    "extensions":[
+    "extensions": [
       ".utz"
     ],
-    "description":"",
-    "mimeType":"application/vnd.uiq.theme"
+    "description": "",
+    "mimeType": "application/vnd.uiq.theme"
   },
   {
-    "extensions":[
+    "extensions": [
       ".umj"
     ],
-    "description":"",
-    "mimeType":"application/vnd.umajin"
+    "description": "",
+    "mimeType": "application/vnd.umajin"
   },
   {
-    "extensions":[
+    "extensions": [
       ".unityweb"
     ],
-    "description":"",
-    "mimeType":"application/vnd.unity"
+    "description": "",
+    "mimeType": "application/vnd.unity"
   },
   {
-    "extensions":[
+    "extensions": [
       ".uoml"
     ],
-    "description":"",
-    "mimeType":"application/vnd.uoml+xml"
+    "description": "",
+    "mimeType": "application/vnd.uoml+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".vcx"
     ],
-    "description":"",
-    "mimeType":"application/vnd.vcx"
+    "description": "",
+    "mimeType": "application/vnd.vcx"
   },
   {
-    "extensions":[
+    "extensions": [
       ".vsd",
       ".vss",
       ".vst",
       ".vsw"
     ],
-    "description":"",
-    "mimeType":"application/vnd.visio"
+    "description": "",
+    "mimeType": "application/vnd.visio"
   },
   {
-    "extensions":[
+    "extensions": [
       ".vis"
     ],
-    "description":"",
-    "mimeType":"application/vnd.visionary"
+    "description": "",
+    "mimeType": "application/vnd.visionary"
   },
   {
-    "extensions":[
+    "extensions": [
       ".vsf"
     ],
-    "description":"",
-    "mimeType":"application/vnd.vsf"
+    "description": "",
+    "mimeType": "application/vnd.vsf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sic"
     ],
-    "description":"",
-    "mimeType":"application/vnd.wap.sic"
+    "description": "",
+    "mimeType": "application/vnd.wap.sic"
   },
   {
-    "extensions":[
+    "extensions": [
       ".slc"
     ],
-    "description":"",
-    "mimeType":"application/vnd.wap.slc"
+    "description": "",
+    "mimeType": "application/vnd.wap.slc"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wbxml"
     ],
-    "description":"",
-    "mimeType":"application/vnd.wap.wbxml"
+    "description": "",
+    "mimeType": "application/vnd.wap.wbxml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wmlc"
     ],
-    "description":"",
-    "mimeType":"application/vnd.wap.wmlc"
+    "description": "",
+    "mimeType": "application/vnd.wap.wmlc"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wmlsc"
     ],
-    "description":"",
-    "mimeType":"application/vnd.wap.wmlscriptc"
+    "description": "",
+    "mimeType": "application/vnd.wap.wmlscriptc"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wtb"
     ],
-    "description":"",
-    "mimeType":"application/vnd.webturbo"
+    "description": "",
+    "mimeType": "application/vnd.webturbo"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wpd"
     ],
-    "description":"",
-    "mimeType":"application/vnd.wordperfect"
+    "description": "",
+    "mimeType": "application/vnd.wordperfect"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wqd"
     ],
-    "description":"",
-    "mimeType":"application/vnd.wqd"
+    "description": "",
+    "mimeType": "application/vnd.wqd"
   },
   {
-    "extensions":[
+    "extensions": [
       ".stf"
     ],
-    "description":"",
-    "mimeType":"application/vnd.wt.stf"
+    "description": "",
+    "mimeType": "application/vnd.wt.stf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xar"
     ],
-    "description":"",
-    "mimeType":"application/vnd.xara"
+    "description": "",
+    "mimeType": "application/vnd.xara"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xfdl"
     ],
-    "description":"",
-    "mimeType":"application/vnd.xfdl"
+    "description": "",
+    "mimeType": "application/vnd.xfdl"
   },
   {
-    "extensions":[
+    "extensions": [
       ".hvd"
     ],
-    "description":"",
-    "mimeType":"application/vnd.yamaha.hv-dic"
+    "description": "",
+    "mimeType": "application/vnd.yamaha.hv-dic"
   },
   {
-    "extensions":[
+    "extensions": [
       ".hvs"
     ],
-    "description":"",
-    "mimeType":"application/vnd.yamaha.hv-script"
+    "description": "",
+    "mimeType": "application/vnd.yamaha.hv-script"
   },
   {
-    "extensions":[
+    "extensions": [
       ".hvp"
     ],
-    "description":"",
-    "mimeType":"application/vnd.yamaha.hv-voice"
+    "description": "",
+    "mimeType": "application/vnd.yamaha.hv-voice"
   },
   {
-    "extensions":[
+    "extensions": [
       ".osf"
     ],
-    "description":"",
-    "mimeType":"application/vnd.yamaha.openscoreformat"
+    "description": "",
+    "mimeType": "application/vnd.yamaha.openscoreformat"
   },
   {
-    "extensions":[
+    "extensions": [
       ".osfpvg"
     ],
-    "description":"",
-    "mimeType":"application/vnd.yamaha.openscoreformat.osfpvg+xml"
+    "description": "",
+    "mimeType": "application/vnd.yamaha.openscoreformat.osfpvg+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".saf"
     ],
-    "description":"",
-    "mimeType":"application/vnd.yamaha.smaf-audio"
+    "description": "",
+    "mimeType": "application/vnd.yamaha.smaf-audio"
   },
   {
-    "extensions":[
+    "extensions": [
       ".spf"
     ],
-    "description":"",
-    "mimeType":"application/vnd.yamaha.smaf-phrase"
+    "description": "",
+    "mimeType": "application/vnd.yamaha.smaf-phrase"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cmp"
     ],
-    "description":"",
-    "mimeType":"application/vnd.yellowriver-custom-menu"
+    "description": "",
+    "mimeType": "application/vnd.yellowriver-custom-menu"
   },
   {
-    "extensions":[
+    "extensions": [
       ".zir",
       ".zirz"
     ],
-    "description":"",
-    "mimeType":"application/vnd.zul"
+    "description": "",
+    "mimeType": "application/vnd.zul"
   },
   {
-    "extensions":[
+    "extensions": [
       ".zaz"
     ],
-    "description":"",
-    "mimeType":"application/vnd.zzazz.deck+xml"
+    "description": "",
+    "mimeType": "application/vnd.zzazz.deck+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".vxml"
     ],
-    "description":"",
-    "mimeType":"application/voicexml+xml"
+    "description": "",
+    "mimeType": "application/voicexml+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".hlp"
     ],
-    "description":"",
-    "mimeType":"application/winhlp"
+    "description": "",
+    "mimeType": "application/winhlp"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wsdl"
     ],
-    "description":"",
-    "mimeType":"application/wsdl+xml"
+    "description": "",
+    "mimeType": "application/wsdl+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wspolicy"
     ],
-    "description":"",
-    "mimeType":"application/wspolicy+xml"
+    "description": "",
+    "mimeType": "application/wspolicy+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".7z"
     ],
-    "description":"7-zip archive",
-    "mimeType":"application/x-7z-compressed"
+    "description": "7-zip archive",
+    "mimeType": "application/x-7z-compressed"
   },
   {
-    "extensions":[
+    "extensions": [
       ".abw"
     ],
-    "description":"",
-    "mimeType":"application/x-abiword"
+    "description": "",
+    "mimeType": "application/x-abiword"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ace"
     ],
-    "description":"",
-    "mimeType":"application/x-ace-compressed"
+    "description": "",
+    "mimeType": "application/x-ace-compressed"
   },
   {
-    "extensions":[
+    "extensions": [
       ".aab",
       ".u32",
       ".vox",
       ".x32"
     ],
-    "description":"",
-    "mimeType":"application/x-authorware-bin"
+    "description": "",
+    "mimeType": "application/x-authorware-bin"
   },
   {
-    "extensions":[
+    "extensions": [
       ".aam"
     ],
-    "description":"",
-    "mimeType":"application/x-authorware-map"
+    "description": "",
+    "mimeType": "application/x-authorware-map"
   },
   {
-    "extensions":[
+    "extensions": [
       ".aas"
     ],
-    "description":"",
-    "mimeType":"application/x-authorware-seg"
+    "description": "",
+    "mimeType": "application/x-authorware-seg"
   },
   {
-    "extensions":[
+    "extensions": [
       ".bcpio"
     ],
-    "description":"",
-    "mimeType":"application/x-bcpio"
+    "description": "",
+    "mimeType": "application/x-bcpio"
   },
   {
-    "extensions":[
+    "extensions": [
       ".torrent"
     ],
-    "description":"",
-    "mimeType":"application/x-bittorrent"
+    "description": "",
+    "mimeType": "application/x-bittorrent"
   },
   {
-    "extensions":[
+    "extensions": [
       ".bz"
     ],
-    "description":"",
-    "mimeType":"application/x-bzip"
+    "description": "",
+    "mimeType": "application/x-bzip"
   },
   {
-    "extensions":[
+    "extensions": [
       ".boz",
       ".bz2"
     ],
-    "description":"",
-    "mimeType":"application/x-bzip2"
+    "description": "",
+    "mimeType": "application/x-bzip2"
   },
   {
-    "extensions":[
+    "extensions": [
       ".vcd"
     ],
-    "description":"",
-    "mimeType":"application/x-cdlink"
+    "description": "",
+    "mimeType": "application/x-cdlink"
   },
   {
-    "extensions":[
+    "extensions": [
       ".chat"
     ],
-    "description":"",
-    "mimeType":"application/x-chat"
+    "description": "",
+    "mimeType": "application/x-chat"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pgn"
     ],
-    "description":"",
-    "mimeType":"application/x-chess-pgn"
+    "description": "",
+    "mimeType": "application/x-chess-pgn"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cpio"
     ],
-    "description":"",
-    "mimeType":"application/x-cpio"
+    "description": "",
+    "mimeType": "application/x-cpio"
   },
   {
-    "extensions":[
+    "extensions": [
       ".csh"
     ],
-    "description":"",
-    "mimeType":"application/x-csh"
+    "description": "",
+    "mimeType": "application/x-csh"
   },
   {
-    "extensions":[
+    "extensions": [
       ".deb",
       ".udeb"
     ],
-    "description":"",
-    "mimeType":"application/x-debian-package"
+    "description": "",
+    "mimeType": "application/x-debian-package"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cct",
       ".cst",
       ".cxt",
@@ -3020,607 +3020,607 @@
       ".swa",
       ".w3d"
     ],
-    "description":"",
-    "mimeType":"application/x-director"
+    "description": "",
+    "mimeType": "application/x-director"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wad"
     ],
-    "description":"",
-    "mimeType":"application/x-doom"
+    "description": "",
+    "mimeType": "application/x-doom"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ncx"
     ],
-    "description":"",
-    "mimeType":"application/x-dtbncx+xml"
+    "description": "",
+    "mimeType": "application/x-dtbncx+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".dtb"
     ],
-    "description":"",
-    "mimeType":"application/x-dtbook+xml"
+    "description": "",
+    "mimeType": "application/x-dtbook+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".res"
     ],
-    "description":"",
-    "mimeType":"application/x-dtbresource+xml"
+    "description": "",
+    "mimeType": "application/x-dtbresource+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".dvi"
     ],
-    "description":"",
-    "mimeType":"application/x-dvi"
+    "description": "",
+    "mimeType": "application/x-dvi"
   },
   {
-    "extensions":[
+    "extensions": [
       ".bdf"
     ],
-    "description":"",
-    "mimeType":"application/x-font-bdf"
+    "description": "",
+    "mimeType": "application/x-font-bdf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".gsf"
     ],
-    "description":"",
-    "mimeType":"application/x-font-ghostscript"
+    "description": "",
+    "mimeType": "application/x-font-ghostscript"
   },
   {
-    "extensions":[
+    "extensions": [
       ".psf"
     ],
-    "description":"",
-    "mimeType":"application/x-font-linux-psf"
+    "description": "",
+    "mimeType": "application/x-font-linux-psf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".otf"
     ],
-    "description":"",
-    "mimeType":"application/x-font-otf"
+    "description": "",
+    "mimeType": "application/x-font-otf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pcf"
     ],
-    "description":"",
-    "mimeType":"application/x-font-pcf"
+    "description": "",
+    "mimeType": "application/x-font-pcf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".snf"
     ],
-    "description":"",
-    "mimeType":"application/x-font-snf"
+    "description": "",
+    "mimeType": "application/x-font-snf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ttc",
       ".ttf"
     ],
-    "description":"",
-    "mimeType":"application/x-font-ttf"
+    "description": "",
+    "mimeType": "application/x-font-ttf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".afm",
       ".pfa",
       ".pfb",
       ".pfm"
     ],
-    "description":"",
-    "mimeType":"application/x-font-type1"
+    "description": "",
+    "mimeType": "application/x-font-type1"
   },
   {
-    "extensions":[
+    "extensions": [
       ".spl"
     ],
-    "description":"",
-    "mimeType":"application/x-futuresplash"
+    "description": "",
+    "mimeType": "application/x-futuresplash"
   },
   {
-    "extensions":[
+    "extensions": [
       ".gnumeric"
     ],
-    "description":"",
-    "mimeType":"application/x-gnumeric"
+    "description": "",
+    "mimeType": "application/x-gnumeric"
   },
   {
-    "extensions":[
+    "extensions": [
       ".gtar"
     ],
-    "description":"",
-    "mimeType":"application/x-gtar"
+    "description": "",
+    "mimeType": "application/x-gtar"
   },
   {
-    "extensions":[
+    "extensions": [
       ".gz",
       ".tgz"
     ],
-    "description":"",
-    "mimeType":"application/x-gzip"
+    "description": "",
+    "mimeType": "application/x-gzip"
   },
   {
-    "extensions":[
+    "extensions": [
       ".hdf"
     ],
-    "description":"",
-    "mimeType":"application/x-hdf"
+    "description": "",
+    "mimeType": "application/x-hdf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".jnlp"
     ],
-    "description":"",
-    "mimeType":"application/x-java-jnlp-file"
+    "description": "",
+    "mimeType": "application/x-java-jnlp-file"
   },
   {
-    "extensions":[
+    "extensions": [
       ".kil"
     ],
-    "description":"",
-    "mimeType":"application/x-killustrator"
+    "description": "",
+    "mimeType": "application/x-killustrator"
   },
   {
-    "extensions":[
+    "extensions": [
       ".latex"
     ],
-    "description":"",
-    "mimeType":"application/x-latex"
+    "description": "",
+    "mimeType": "application/x-latex"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mobi",
       ".prc"
     ],
-    "description":"",
-    "mimeType":"application/x-mobipocket-ebook"
+    "description": "",
+    "mimeType": "application/x-mobipocket-ebook"
   },
   {
-    "extensions":[
+    "extensions": [
       ".application"
     ],
-    "description":"",
-    "mimeType":"application/x-ms-application"
+    "description": "",
+    "mimeType": "application/x-ms-application"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wmd"
     ],
-    "description":"",
-    "mimeType":"application/x-ms-wmd"
+    "description": "",
+    "mimeType": "application/x-ms-wmd"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wmz"
     ],
-    "description":"",
-    "mimeType":"application/x-ms-wmz"
+    "description": "",
+    "mimeType": "application/x-ms-wmz"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xbap"
     ],
-    "description":"",
-    "mimeType":"application/x-ms-xbap"
+    "description": "",
+    "mimeType": "application/x-ms-xbap"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mdb"
     ],
-    "description":"",
-    "mimeType":"application/x-msaccess"
+    "description": "",
+    "mimeType": "application/x-msaccess"
   },
   {
-    "extensions":[
+    "extensions": [
       ".obd"
     ],
-    "description":"",
-    "mimeType":"application/x-msbinder"
+    "description": "",
+    "mimeType": "application/x-msbinder"
   },
   {
-    "extensions":[
+    "extensions": [
       ".crd"
     ],
-    "description":"",
-    "mimeType":"application/x-mscardfile"
+    "description": "",
+    "mimeType": "application/x-mscardfile"
   },
   {
-    "extensions":[
+    "extensions": [
       ".clp"
     ],
-    "description":"",
-    "mimeType":"application/x-msclip"
+    "description": "",
+    "mimeType": "application/x-msclip"
   },
   {
-    "extensions":[
+    "extensions": [
       ".bat",
       ".com",
       ".dll",
       ".exe",
       ".msi"
     ],
-    "description":"",
-    "mimeType":"application/x-msdownload"
+    "description": "",
+    "mimeType": "application/x-msdownload"
   },
   {
-    "extensions":[
+    "extensions": [
       ".m13",
       ".m14",
       ".mvb"
     ],
-    "description":"",
-    "mimeType":"application/x-msmediaview"
+    "description": "",
+    "mimeType": "application/x-msmediaview"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wmf"
     ],
-    "description":"",
-    "mimeType":"application/x-msmetafile"
+    "description": "",
+    "mimeType": "application/x-msmetafile"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mny"
     ],
-    "description":"",
-    "mimeType":"application/x-msmoney"
+    "description": "",
+    "mimeType": "application/x-msmoney"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pub"
     ],
-    "description":"",
-    "mimeType":"application/x-mspublisher"
+    "description": "",
+    "mimeType": "application/x-mspublisher"
   },
   {
-    "extensions":[
+    "extensions": [
       ".scd"
     ],
-    "description":"",
-    "mimeType":"application/x-msschedule"
+    "description": "",
+    "mimeType": "application/x-msschedule"
   },
   {
-    "extensions":[
+    "extensions": [
       ".trm"
     ],
-    "description":"",
-    "mimeType":"application/x-msterminal"
+    "description": "",
+    "mimeType": "application/x-msterminal"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wri"
     ],
-    "description":"",
-    "mimeType":"application/x-mswrite"
+    "description": "",
+    "mimeType": "application/x-mswrite"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cdf",
       ".nc"
     ],
-    "description":"",
-    "mimeType":"application/x-netcdf"
+    "description": "",
+    "mimeType": "application/x-netcdf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pm",
       ".pl"
     ],
-    "description":"",
-    "mimeType":"application/x-perl"
+    "description": "",
+    "mimeType": "application/x-perl"
   },
   {
-    "extensions":[
+    "extensions": [
       ".p12",
       ".pfx"
     ],
-    "description":"",
-    "mimeType":"application/x-pkcs12"
+    "description": "",
+    "mimeType": "application/x-pkcs12"
   },
   {
-    "extensions":[
+    "extensions": [
       ".p7b",
       ".spc"
     ],
-    "description":"",
-    "mimeType":"application/x-pkcs7-certificates"
+    "description": "",
+    "mimeType": "application/x-pkcs7-certificates"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pyc",
       ".pyo"
     ],
-    "description":"",
-    "mimeType":"application/x-python-code"
+    "description": "",
+    "mimeType": "application/x-python-code"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rpa"
     ],
-    "description":"",
-    "mimeType":"application/x-redhat-package-manager"
+    "description": "",
+    "mimeType": "application/x-redhat-package-manager"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rpm"
     ],
-    "description":"",
-    "mimeType":"application/x-rpm"
+    "description": "",
+    "mimeType": "application/x-rpm"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sh"
     ],
-    "description":"",
-    "mimeType":"application/x-sh"
+    "description": "",
+    "mimeType": "application/x-sh"
   },
   {
-    "extensions":[
+    "extensions": [
       ".shar"
     ],
-    "description":"",
-    "mimeType":"application/x-shar"
+    "description": "",
+    "mimeType": "application/x-shar"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sh"
     ],
-    "description":"Why even drag this in?",
-    "mimeType":"application/x-shellscript"
+    "description": "Why even drag this in?",
+    "mimeType": "application/x-shellscript"
   },
   {
-    "extensions":[
+    "extensions": [
       ".swf"
     ],
-    "description":"",
-    "mimeType":"application/x-shockwave-flash"
+    "description": "",
+    "mimeType": "application/x-shockwave-flash"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xap"
     ],
-    "description":"",
-    "mimeType":"application/x-silverlight-app"
+    "description": "",
+    "mimeType": "application/x-silverlight-app"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sit"
     ],
-    "description":"",
-    "mimeType":"application/x-stuffit"
+    "description": "",
+    "mimeType": "application/x-stuffit"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sitx"
     ],
-    "description":"",
-    "mimeType":"application/x-stuffitx"
+    "description": "",
+    "mimeType": "application/x-stuffitx"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sv4cpio"
     ],
-    "description":"",
-    "mimeType":"application/x-sv4cpio"
+    "description": "",
+    "mimeType": "application/x-sv4cpio"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sv4crc"
     ],
-    "description":"",
-    "mimeType":"application/x-sv4crc"
+    "description": "",
+    "mimeType": "application/x-sv4crc"
   },
   {
-    "extensions":[
+    "extensions": [
       ".tar"
     ],
-    "description":"",
-    "mimeType":"application/x-tar"
+    "description": "",
+    "mimeType": "application/x-tar"
   },
   {
-    "extensions":[
+    "extensions": [
       ".tcl"
     ],
-    "description":"",
-    "mimeType":"application/x-tcl"
+    "description": "",
+    "mimeType": "application/x-tcl"
   },
   {
-    "extensions":[
+    "extensions": [
       ".tex"
     ],
-    "description":"",
-    "mimeType":"application/x-tex"
+    "description": "",
+    "mimeType": "application/x-tex"
   },
   {
-    "extensions":[
+    "extensions": [
       ".tfm"
     ],
-    "description":"",
-    "mimeType":"application/x-tex-tfm"
+    "description": "",
+    "mimeType": "application/x-tex-tfm"
   },
   {
-    "extensions":[
+    "extensions": [
       ".texi",
       ".texinfo"
     ],
-    "description":"",
-    "mimeType":"application/x-texinfo"
+    "description": "",
+    "mimeType": "application/x-texinfo"
   },
   {
-    "extensions":[],
-    "description":"Why even drag this in?",
-    "mimeType":"application/x-trash"
+    "extensions": [],
+    "description": "Why even drag this in?",
+    "mimeType": "application/x-trash"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ustar"
     ],
-    "description":"",
-    "mimeType":"application/x-ustar"
+    "description": "",
+    "mimeType": "application/x-ustar"
   },
   {
-    "extensions":[
+    "extensions": [
       ".src"
     ],
-    "description":"",
-    "mimeType":"application/x-wais-source"
+    "description": "",
+    "mimeType": "application/x-wais-source"
   },
   {
-    "extensions":[
+    "extensions": [
       ".crt",
       ".der"
     ],
-    "description":"",
-    "mimeType":"application/x-x509-ca-cert"
+    "description": "",
+    "mimeType": "application/x-x509-ca-cert"
   },
   {
-    "extensions":[
+    "extensions": [
       ".fig"
     ],
-    "description":"",
-    "mimeType":"application/x-xfig"
+    "description": "",
+    "mimeType": "application/x-xfig"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xpi"
     ],
-    "description":"",
-    "mimeType":"application/x-xpinstall"
+    "description": "",
+    "mimeType": "application/x-xpinstall"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xenc"
     ],
-    "description":"",
-    "mimeType":"application/xenc+xml"
+    "description": "",
+    "mimeType": "application/xenc+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xht",
       ".xhtml"
     ],
-    "description":"",
-    "mimeType":"application/xhtml+xml"
+    "description": "",
+    "mimeType": "application/xhtml+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xml",
       ".xpdl",
       ".xsl"
     ],
-    "description":"",
-    "mimeType":"application/xml"
+    "description": "",
+    "mimeType": "application/xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".dtd"
     ],
-    "description":"",
-    "mimeType":"application/xml-dtd"
+    "description": "",
+    "mimeType": "application/xml-dtd"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xop"
     ],
-    "description":"",
-    "mimeType":"application/xop+xml"
+    "description": "",
+    "mimeType": "application/xop+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xslt"
     ],
-    "description":"",
-    "mimeType":"application/xslt+xml"
+    "description": "",
+    "mimeType": "application/xslt+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xspf"
     ],
-    "description":"",
-    "mimeType":"application/xspf+xml"
+    "description": "",
+    "mimeType": "application/xspf+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mxml",
       ".xhvml",
       ".xvm",
       ".xvml"
     ],
-    "description":"",
-    "mimeType":"application/xv+xml"
+    "description": "",
+    "mimeType": "application/xv+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".zip"
     ],
-    "description":"ZIP is one of the most popular file compression formats. It was created in 1989 as the native format of the PKZIP program, which was introduced by Phil Katz in the wake of a lawsuit (which he lost) against him by the makers of the then-popular ARC program (and file format) for copyright and trademark infringement in an earlier program PKARC which had been file-compatible with ARC. This resulted in Katz creating a new file format, which rapidly overtook ARC in popularity (to a large extent because of BBS sysops, then the primary users of such compression, resenting the lawsuit). Many programs have been released for a variety of operating systems to compress and decompress ZIP files, and native support for the format is built into several popular operating systems.",
-    "mimeType":"application/zip"
+    "description": "ZIP is one of the most popular file compression formats. It was created in 1989 as the native format of the PKZIP program, which was introduced by Phil Katz in the wake of a lawsuit (which he lost) against him by the makers of the then-popular ARC program (and file format) for copyright and trademark infringement in an earlier program PKARC which had been file-compatible with ARC. This resulted in Katz creating a new file format, which rapidly overtook ARC in popularity (to a large extent because of BBS sysops, then the primary users of such compression, resenting the lawsuit). Many programs have been released for a variety of operating systems to compress and decompress ZIP files, and native support for the format is built into several popular operating systems.",
+    "mimeType": "application/zip"
   },
   {
-    "extensions":[
+    "extensions": [
       ".3gp"
     ],
-    "description":"",
-    "mimeType":"audio/3gpp"
+    "description": "",
+    "mimeType": "audio/3gpp"
   },
   {
-    "extensions":[
+    "extensions": [
       ".3g2"
     ],
-    "description":"",
-    "mimeType":"audio/3gpp2"
+    "description": "",
+    "mimeType": "audio/3gpp2"
   },
   {
-    "extensions":[
+    "extensions": [
       ".adp"
     ],
-    "description":"",
-    "mimeType":"audio/adpcm"
+    "description": "",
+    "mimeType": "audio/adpcm"
   },
   {
-    "extensions":[
+    "extensions": [
       ".aiff",
       ".aif",
       ".aff"
     ],
-    "description":"AIFF (Audio Interchange File Format) files store uncompressed signed audio samples inside an IFF container. There's also a compressed variant, called AIFC with the same mimetype. AIFF chunks provide native metadata. In addition, although it is not in the specification, an ID3 chunk is often used to include ID3V2 metadata.",
-    "mimeType":"audio/aiff"
+    "description": "AIFF (Audio Interchange File Format) files store uncompressed signed audio samples inside an IFF container. There's also a compressed variant, called AIFC with the same mimetype. AIFF chunks provide native metadata. In addition, although it is not in the specification, an ID3 chunk is often used to include ID3V2 metadata.",
+    "mimeType": "audio/aiff"
   },
   {
-    "extensions":[
+    "extensions": [
       ".au",
       ".snd"
     ],
-    "description":"",
-    "mimeType":"audio/basic"
+    "description": "",
+    "mimeType": "audio/basic"
   },
   {
-    "extensions":[
+    "extensions": [
       ".kar",
       ".mid",
       ".midi",
       ".rmi"
     ],
-    "description":"",
-    "mimeType":"audio/midi"
+    "description": "",
+    "mimeType": "audio/midi"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mp4a"
     ],
-    "description":"MP4 usually refers to the multimedia file format defined in Part 14 (and to a lesser extent Part 1) of the MPEG-4 standard. \"MP4\" could also mean the entire MPEG-4 standard, or some other subset of MPEG-4. MPEG-4 Part 14 is an application of Part 12. The recommended extension for it is \".mp4\", though \".m4a\" is often used for audio-only files. It is standardized by ISO/IEC 14496-14.",
-    "mimeType":"audio/mp4"
+    "description": "MP4 usually refers to the multimedia file format defined in Part 14 (and to a lesser extent Part 1) of the MPEG-4 standard. \"MP4\" could also mean the entire MPEG-4 standard, or some other subset of MPEG-4. MPEG-4 Part 14 is an application of Part 12. The recommended extension for it is \".mp4\", though \".m4a\" is often used for audio-only files. It is standardized by ISO/IEC 14496-14.",
+    "mimeType": "audio/mp4"
   },
   {
-    "extensions":[
+    "extensions": [
       ".m2a",
       ".m3a",
       ".mp2",
@@ -3628,268 +3628,268 @@
       ".mp3",
       ".mpga"
     ],
-    "description":"MP3 is the name commonly given to the audio formats specified by MPEG-1 Layer III and MPEG-2 Layer III, standardized as ISO/IEC 11172-3:1993, with some additions in ISO/IEC 13818-3:1995. It uses lossy compressed data. MP3 is based in part on work by the Fraunhofer Institute, which held patents in the format. Other companies may also have held patents encumbering its implementation. One of the relevant patents was U.S. Patent 5,812,672, which expired in September 2015; many other related patents in various countries expired earlier. The final expiration of all relevant patents took until 2017, however, due to some \"submarine patents\" which were kept in the application process for years, extending their expiration dates. A modified version of DCT compression (Discrete cosine transform) is used, a lossy compression method also used in JPEG images. ID3 tags are often used to provide metadata in MP3 files, though they aren't part of the MP3 specification.",
-    "mimeType":"audio/mpeg"
+    "description": "MP3 is the name commonly given to the audio formats specified by MPEG-1 Layer III and MPEG-2 Layer III, standardized as ISO/IEC 11172-3:1993, with some additions in ISO/IEC 13818-3:1995. It uses lossy compressed data. MP3 is based in part on work by the Fraunhofer Institute, which held patents in the format. Other companies may also have held patents encumbering its implementation. One of the relevant patents was U.S. Patent 5,812,672, which expired in September 2015; many other related patents in various countries expired earlier. The final expiration of all relevant patents took until 2017, however, due to some \"submarine patents\" which were kept in the application process for years, extending their expiration dates. A modified version of DCT compression (Discrete cosine transform) is used, a lossy compression method also used in JPEG images. ID3 tags are often used to provide metadata in MP3 files, though they aren't part of the MP3 specification.",
+    "mimeType": "audio/mpeg"
   },
   {
-    "extensions":[
+    "extensions": [
       ".oga",
       ".ogg",
       ".spx"
     ],
-    "description":"",
-    "mimeType":"audio/ogg"
+    "description": "",
+    "mimeType": "audio/ogg"
   },
   {
-    "extensions":[
+    "extensions": [
       ".opus"
     ],
-    "description":"Opus audio",
-    "mimeType":"audio/opus"
+    "description": "Opus audio",
+    "mimeType": "audio/opus"
   },
   {
-    "extensions":[
+    "extensions": [
       ".eol"
     ],
-    "description":"",
-    "mimeType":"audio/vnd.digital-winds"
+    "description": "",
+    "mimeType": "audio/vnd.digital-winds"
   },
   {
-    "extensions":[
+    "extensions": [
       ".dts"
     ],
-    "description":"",
-    "mimeType":"audio/vnd.dts"
+    "description": "",
+    "mimeType": "audio/vnd.dts"
   },
   {
-    "extensions":[
+    "extensions": [
       ".dtshd"
     ],
-    "description":"",
-    "mimeType":"audio/vnd.dts.hd"
+    "description": "",
+    "mimeType": "audio/vnd.dts.hd"
   },
   {
-    "extensions":[
+    "extensions": [
       ".lvp"
     ],
-    "description":"",
-    "mimeType":"audio/vnd.lucent.voice"
+    "description": "",
+    "mimeType": "audio/vnd.lucent.voice"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pya"
     ],
-    "description":"",
-    "mimeType":"audio/vnd.ms-playready.media.pya"
+    "description": "",
+    "mimeType": "audio/vnd.ms-playready.media.pya"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ecelp4800"
     ],
-    "description":"",
-    "mimeType":"audio/vnd.nuera.ecelp4800"
+    "description": "",
+    "mimeType": "audio/vnd.nuera.ecelp4800"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ecelp7470"
     ],
-    "description":"",
-    "mimeType":"audio/vnd.nuera.ecelp7470"
+    "description": "",
+    "mimeType": "audio/vnd.nuera.ecelp7470"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ecelp9600"
     ],
-    "description":"",
-    "mimeType":"audio/vnd.nuera.ecelp9600"
+    "description": "",
+    "mimeType": "audio/vnd.nuera.ecelp9600"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wav"
     ],
-    "description":"",
-    "mimeType":"audio/wav"
+    "description": "",
+    "mimeType": "audio/wav"
   },
   {
-    "extensions":[
+    "extensions": [
       ".weba"
     ],
-    "description":"WEBM audio",
-    "mimeType":"audio/webm"
+    "description": "WEBM audio",
+    "mimeType": "audio/webm"
   },
   {
-    "extensions":[
+    "extensions": [
       ".aac"
     ],
-    "description":"",
-    "mimeType":"audio/x-aac"
+    "description": "",
+    "mimeType": "audio/x-aac"
   },
   {
-    "extensions":[
+    "extensions": [
       ".aif",
       ".aifc",
       ".aiff"
     ],
-    "description":"",
-    "mimeType":"audio/x-aiff"
+    "description": "",
+    "mimeType": "audio/x-aiff"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mka"
     ],
-    "description":"Matroska Audio files consist of a Matroska container containing one or more audio files compressed with one of the supported codecs. As well as the compressed audio, a Matroska Audio file might also contain embedded lyrics or transcriptions, in the form of SRT subtitles. In addition, Matroska Audio files can be separated into tracks or chapters - it is possible, for example, to contain a whole album or audiobook in a single file while retaining clear separation between tracks.",
-    "mimeType":"audio/x-matroska"
+    "description": "Matroska Audio files consist of a Matroska container containing one or more audio files compressed with one of the supported codecs. As well as the compressed audio, a Matroska Audio file might also contain embedded lyrics or transcriptions, in the form of SRT subtitles. In addition, Matroska Audio files can be separated into tracks or chapters - it is possible, for example, to contain a whole album or audiobook in a single file while retaining clear separation between tracks.",
+    "mimeType": "audio/x-matroska"
   },
   {
-    "extensions":[
+    "extensions": [
       ".m3u"
     ],
-    "description":"",
-    "mimeType":"audio/x-mpegurl"
+    "description": "",
+    "mimeType": "audio/x-mpegurl"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wax"
     ],
-    "description":"",
-    "mimeType":"audio/x-ms-wax"
+    "description": "",
+    "mimeType": "audio/x-ms-wax"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wma"
     ],
-    "description":"",
-    "mimeType":"audio/x-ms-wma"
+    "description": "",
+    "mimeType": "audio/x-ms-wma"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ra",
       ".ram"
     ],
-    "description":"",
-    "mimeType":"audio/x-pn-realaudio"
+    "description": "",
+    "mimeType": "audio/x-pn-realaudio"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rmp"
     ],
-    "description":"",
-    "mimeType":"audio/x-pn-realaudio-plugin"
+    "description": "",
+    "mimeType": "audio/x-pn-realaudio-plugin"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cdx"
     ],
-    "description":"",
-    "mimeType":"chemical/x-cdx"
+    "description": "",
+    "mimeType": "chemical/x-cdx"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cif"
     ],
-    "description":"",
-    "mimeType":"chemical/x-cif"
+    "description": "",
+    "mimeType": "chemical/x-cif"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cmdf"
     ],
-    "description":"",
-    "mimeType":"chemical/x-cmdf"
+    "description": "",
+    "mimeType": "chemical/x-cmdf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cml"
     ],
-    "description":"",
-    "mimeType":"chemical/x-cml"
+    "description": "",
+    "mimeType": "chemical/x-cml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".csml"
     ],
-    "description":"",
-    "mimeType":"chemical/x-csml"
+    "description": "",
+    "mimeType": "chemical/x-csml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xyz"
     ],
-    "description":"",
-    "mimeType":"chemical/x-xyz"
+    "description": "",
+    "mimeType": "chemical/x-xyz"
   },
   {
-    "extensions":[
+    "extensions": [
       ".otf"
     ],
-    "description":"",
-    "mimeType":"font/otf"
+    "description": "",
+    "mimeType": "font/otf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".woff"
     ],
-    "description":"Web Open Font Format (WOFF)",
-    "mimeType":"font/woff"
+    "description": "Web Open Font Format (WOFF)",
+    "mimeType": "font/woff"
   },
   {
-    "extensions":[
+    "extensions": [
       ".woff2"
     ],
-    "description":"Web Open Font Format (WOFF)",
-    "mimeType":"font/woff2"
+    "description": "Web Open Font Format (WOFF)",
+    "mimeType": "font/woff2"
   },
   {
-    "extensions":[
+    "extensions": [
       ".gcode"
     ],
-    "description":"GCODE files are created by slicing programs, such as Simplify3D and Slic3r, that translate CAD drawings into G-Code, which a 3D printer can read. There's no official mimetype assigned as far as the author is aware, however these are the ones commonly reported.",
-    "mimeType":"gcode"
+    "description": "GCODE files are created by slicing programs, such as Simplify3D and Slic3r, that translate CAD drawings into G-Code, which a 3D printer can read. There's no official mimetype assigned as far as the author is aware, however these are the ones commonly reported.",
+    "mimeType": "gcode"
   },
   {
-    "extensions":[
+    "extensions": [
       ".bmp"
     ],
-    "description":"",
-    "mimeType":"image/bmp"
+    "description": "",
+    "mimeType": "image/bmp"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cgm"
     ],
-    "description":"",
-    "mimeType":"image/cgm"
+    "description": "",
+    "mimeType": "image/cgm"
   },
   {
-    "extensions":[
+    "extensions": [
       ".g3"
     ],
-    "description":"",
-    "mimeType":"image/g3fax"
+    "description": "",
+    "mimeType": "image/g3fax"
   },
   {
-    "extensions":[
+    "extensions": [
       ".gif"
     ],
-    "description":"Graphics Interchange Format (GIF) was introduced by the CompuServe online service in 1987, intended to provide a consistent and compact format for graphics to be downloaded on that service. Since the specifications were openly released, the format gained wide use in graphics software and on online services and bulletin board systems (BBSs), not just CompuServe; later it became a major Web graphic format. GIF's ability to have animation (unlike most still graphic formats) has caused it to gain some Internet notoriety and use in conjunction with \"memes\".",
-    "mimeType":"image/gif"
+    "description": "Graphics Interchange Format (GIF) was introduced by the CompuServe online service in 1987, intended to provide a consistent and compact format for graphics to be downloaded on that service. Since the specifications were openly released, the format gained wide use in graphics software and on online services and bulletin board systems (BBSs), not just CompuServe; later it became a major Web graphic format. GIF's ability to have animation (unlike most still graphic formats) has caused it to gain some Internet notoriety and use in conjunction with \"memes\".",
+    "mimeType": "image/gif"
   },
   {
-    "extensions":[
+    "extensions": [
       ".heif, .heic"
     ],
-    "description":"The MIME subtype name may be 'heic' only if the file conforms to the requirements of the 'heic', 'heix', 'heim', or 'heis' brand, and contains at least one of those brands as a compatible brand. The MIME subtype name may be 'heif' only if the file conforms to the requirements of the 'mif1' brand, and contains that brand as a compatible brand. HEIF (High Efficiency Image File Format) is the lossy image and animation format defined by MPEG-H Part 12 (ISO/IEC 23008-12). It is closely related to the HEVC video format, so in that way it is similar to BPG. It uses boxes/atoms format as a container format, so in that way it is similar to JPEG 2000.",
-    "mimeType":"image/heic"
+    "description": "The MIME subtype name may be 'heic' only if the file conforms to the requirements of the 'heic', 'heix', 'heim', or 'heis' brand, and contains at least one of those brands as a compatible brand. The MIME subtype name may be 'heif' only if the file conforms to the requirements of the 'mif1' brand, and contains that brand as a compatible brand. HEIF (High Efficiency Image File Format) is the lossy image and animation format defined by MPEG-H Part 12 (ISO/IEC 23008-12). It is closely related to the HEVC video format, so in that way it is similar to BPG. It uses boxes/atoms format as a container format, so in that way it is similar to JPEG 2000.",
+    "mimeType": "image/heic"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ief"
     ],
-    "description":"",
-    "mimeType":"image/ief"
+    "description": "",
+    "mimeType": "image/ief"
   },
   {
-    "extensions":[
+    "extensions": [
       ".jpe",
       ".jpeg",
       ".jpg",
@@ -3898,11 +3898,11 @@
       ".jfif-tbnl",
       ".jif"
     ],
-    "description":"JPEG is a popular raster image format well-suited to photographic images. It usually uses lossy DCT compression. It is named after the Joint Photographic Experts Group, the organization which developed the format. It is sometimes called JPEG1, JPEG-1, or JPEG 1992 to help disambiguate it.",
-    "mimeType":"image/jpeg"
+    "description": "JPEG is a popular raster image format well-suited to photographic images. It usually uses lossy DCT compression. It is named after the Joint Photographic Experts Group, the organization which developed the format. It is sometimes called JPEG1, JPEG-1, or JPEG 1992 to help disambiguate it.",
+    "mimeType": "image/jpeg"
   },
   {
-    "extensions":[
+    "extensions": [
       ".jpe",
       ".jpeg",
       ".jpg",
@@ -3912,491 +3912,491 @@
       ".jfif-tbnl",
       ".jif"
     ],
-    "description":"PJPEG files refer to images wherein the Progressive JPEG format (hence JPEG) is used for bitmap images.",
-    "mimeType":"image/pjpeg"
+    "description": "PJPEG files refer to images wherein the Progressive JPEG format (hence JPEG) is used for bitmap images.",
+    "mimeType": "image/pjpeg"
   },
   {
-    "extensions":[
+    "extensions": [
       ".png"
     ],
-    "description":"Portable Network Graphics (PNG) was devised starting in a discussion on newsgroup comp.graphics in 1995, with the first version of its specification released in 1996. The motivation for its creation was to create a free and unencumbered image format in the wake of the patent issue with GIF.",
-    "mimeType":"image/png"
+    "description": "Portable Network Graphics (PNG) was devised starting in a discussion on newsgroup comp.graphics in 1995, with the first version of its specification released in 1996. The motivation for its creation was to create a free and unencumbered image format in the wake of the patent issue with GIF.",
+    "mimeType": "image/png"
   },
   {
-    "extensions":[
+    "extensions": [
       ".btif"
     ],
-    "description":"",
-    "mimeType":"image/prs.btif"
+    "description": "",
+    "mimeType": "image/prs.btif"
   },
   {
-    "extensions":[
+    "extensions": [
       ".svg",
       ".svgz"
     ],
-    "description":"",
-    "mimeType":"image/svg+xml"
+    "description": "",
+    "mimeType": "image/svg+xml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".tif",
       ".tiff"
     ],
-    "description":"TIFF, formerly known as Tag(ged) Image File Format, is an image format capable of storing multiple high quality images in a single file. A TIFF image may be uncompressed or use a compression scheme internally. Two of the most widely used compression schemes in TIFF files are lossless, including LZW and, for bitonal images CCITT Group 4, as used for facsimile transmission [fax]. JPEG baseline DCT-based lossy compression is also used.",
-    "mimeType":"image/tiff"
+    "description": "TIFF, formerly known as Tag(ged) Image File Format, is an image format capable of storing multiple high quality images in a single file. A TIFF image may be uncompressed or use a compression scheme internally. Two of the most widely used compression schemes in TIFF files are lossless, including LZW and, for bitonal images CCITT Group 4, as used for facsimile transmission [fax]. JPEG baseline DCT-based lossy compression is also used.",
+    "mimeType": "image/tiff"
   },
   {
-    "extensions":[
+    "extensions": [
       ".psd"
     ],
-    "description":"",
-    "mimeType":"image/vnd.adobe.photoshop"
+    "description": "",
+    "mimeType": "image/vnd.adobe.photoshop"
   },
   {
-    "extensions":[
+    "extensions": [
       ".djv",
       ".djvu"
     ],
-    "description":"",
-    "mimeType":"image/vnd.djvu"
+    "description": "",
+    "mimeType": "image/vnd.djvu"
   },
   {
-    "extensions":[
+    "extensions": [
       ".dwg"
     ],
-    "description":"",
-    "mimeType":"image/vnd.dwg"
+    "description": "",
+    "mimeType": "image/vnd.dwg"
   },
   {
-    "extensions":[
+    "extensions": [
       ".dxf"
     ],
-    "description":"",
-    "mimeType":"image/vnd.dxf"
+    "description": "",
+    "mimeType": "image/vnd.dxf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".fbs"
     ],
-    "description":"",
-    "mimeType":"image/vnd.fastbidsheet"
+    "description": "",
+    "mimeType": "image/vnd.fastbidsheet"
   },
   {
-    "extensions":[
+    "extensions": [
       ".fpx"
     ],
-    "description":"",
-    "mimeType":"image/vnd.fpx"
+    "description": "",
+    "mimeType": "image/vnd.fpx"
   },
   {
-    "extensions":[
+    "extensions": [
       ".fst"
     ],
-    "description":"",
-    "mimeType":"image/vnd.fst"
+    "description": "",
+    "mimeType": "image/vnd.fst"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mmr"
     ],
-    "description":"",
-    "mimeType":"image/vnd.fujixerox.edmics-mmr"
+    "description": "",
+    "mimeType": "image/vnd.fujixerox.edmics-mmr"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rlc"
     ],
-    "description":"",
-    "mimeType":"image/vnd.fujixerox.edmics-rlc"
+    "description": "",
+    "mimeType": "image/vnd.fujixerox.edmics-rlc"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mdi"
     ],
-    "description":"",
-    "mimeType":"image/vnd.ms-modi"
+    "description": "",
+    "mimeType": "image/vnd.ms-modi"
   },
   {
-    "extensions":[
+    "extensions": [
       ".npx"
     ],
-    "description":"",
-    "mimeType":"image/vnd.net-fpx"
+    "description": "",
+    "mimeType": "image/vnd.net-fpx"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wbmp"
     ],
-    "description":"",
-    "mimeType":"image/vnd.wap.wbmp"
+    "description": "",
+    "mimeType": "image/vnd.wap.wbmp"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xif"
     ],
-    "description":"",
-    "mimeType":"image/vnd.xiff"
+    "description": "",
+    "mimeType": "image/vnd.xiff"
   },
   {
-    "extensions":[
+    "extensions": [
       ".webp"
     ],
-    "description":"WEBP image",
-    "mimeType":"image/webp"
+    "description": "WEBP image",
+    "mimeType": "image/webp"
   },
   {
-    "extensions":[
+    "extensions": [
       ".dng"
     ],
-    "description":"DNG (Digital Negative) is a digital camera raw image format developed by Adobe and released in 2004. Adobe also released a free DNG converter at this time which is continually being updated with compatible RAW file types. DNG is an extension of TIFF 6.0 and is compatible with TIFF/EP. Adobe intends for DNG to become an archival file type, creating an open standard for RAW files.",
-    "mimeType":"image/x-adobe-dng"
+    "description": "DNG (Digital Negative) is a digital camera raw image format developed by Adobe and released in 2004. Adobe also released a free DNG converter at this time which is continually being updated with compatible RAW file types. DNG is an extension of TIFF 6.0 and is compatible with TIFF/EP. Adobe intends for DNG to become an archival file type, creating an open standard for RAW files.",
+    "mimeType": "image/x-adobe-dng"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cr2"
     ],
-    "description":"Canon RAW 2 (CR2) is a raw image format used by Canon cameras. It replaced CRW, starting with the 20D, 350D/Digital Rebel Xt and 1D. It was replaced by Canon RAW 3.",
-    "mimeType":"image/x-canon-cr2"
+    "description": "Canon RAW 2 (CR2) is a raw image format used by Canon cameras. It replaced CRW, starting with the 20D, 350D/Digital Rebel Xt and 1D. It was replaced by Canon RAW 3.",
+    "mimeType": "image/x-canon-cr2"
   },
   {
-    "extensions":[
+    "extensions": [
       ".crw"
     ],
-    "description":"The Camera Image File Format, sometimes called the Canon RAW (CRW) format, was used by some early Canon digital cameras. It was replaced by the CR2 format starting with the EOS 20D in 2004. The .crw extension is sometimes used by CHDK, but this is a different file format.",
-    "mimeType":"image/x-canon-crw"
+    "description": "The Camera Image File Format, sometimes called the Canon RAW (CRW) format, was used by some early Canon digital cameras. It was replaced by the CR2 format starting with the EOS 20D in 2004. The .crw extension is sometimes used by CHDK, but this is a different file format.",
+    "mimeType": "image/x-canon-crw"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ras"
     ],
-    "description":"",
-    "mimeType":"image/x-cmu-raster"
+    "description": "",
+    "mimeType": "image/x-cmu-raster"
   },
   {
-    "extensions":[
+    "extensions": [
       ".cmx"
     ],
-    "description":"",
-    "mimeType":"image/x-cmx"
+    "description": "",
+    "mimeType": "image/x-cmx"
   },
   {
-    "extensions":[
+    "extensions": [
       ".erf"
     ],
-    "description":"ERF files are generated by the Epson R-D1 and R-D1s digital rangefinder cameras.",
-    "mimeType":"image/x-epson-erf"
+    "description": "ERF files are generated by the Epson R-D1 and R-D1s digital rangefinder cameras.",
+    "mimeType": "image/x-epson-erf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".fh",
       ".fh4",
       ".fh5",
       ".fh7",
       ".fhc"
     ],
-    "description":"",
-    "mimeType":"image/x-freehand"
+    "description": "",
+    "mimeType": "image/x-freehand"
   },
   {
-    "extensions":[
+    "extensions": [
       ".raf"
     ],
-    "description":"RAF, or Fujifilm RAW, is a raw image format used by some Fujifilm digital cameras.",
-    "mimeType":"image/x-fuji-raf"
+    "description": "RAF, or Fujifilm RAW, is a raw image format used by some Fujifilm digital cameras.",
+    "mimeType": "image/x-fuji-raf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ico"
     ],
-    "description":"",
-    "mimeType":"image/x-icon"
+    "description": "",
+    "mimeType": "image/x-icon"
   },
   {
-    "extensions":[
+    "extensions": [
       ".dcr"
     ],
-    "description":"This is another proprietary format, used by old Kodak DCS digital cameras. It is based on TIFF. The full-resolution image is in one of the sub-IFDs of the first IFD. A possible way to identify it is that it uses Compression code 65000 in an IFD or sub-IFD.",
-    "mimeType":"image/x-kodak-dcr"
+    "description": "This is another proprietary format, used by old Kodak DCS digital cameras. It is based on TIFF. The full-resolution image is in one of the sub-IFDs of the first IFD. A possible way to identify it is that it uses Compression code 65000 in an IFD or sub-IFD.",
+    "mimeType": "image/x-kodak-dcr"
   },
   {
-    "extensions":[
+    "extensions": [
       ".k25"
     ],
-    "description":"K25 format was used by model DC25. High resolution pictures are 140,352 bytes long and Standard resolution is 77,888.",
-    "mimeType":"image/x-kodak-k25"
+    "description": "K25 format was used by model DC25. High resolution pictures are 140,352 bytes long and Standard resolution is 77,888.",
+    "mimeType": "image/x-kodak-k25"
   },
   {
-    "extensions":[
+    "extensions": [
       ".kdc"
     ],
-    "description":"Kodak KDC mime and extension can be present for two formats with little in common. See further reading for more information.",
-    "mimeType":"image/x-kodak-kdc"
+    "description": "Kodak KDC mime and extension can be present for two formats with little in common. See further reading for more information.",
+    "mimeType": "image/x-kodak-kdc"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mrw"
     ],
-    "description":"MRW (Minolta RAW) is a raw image format used by Minolta (later Konica-Minolta) cameras. After the Sony purchase, Sony branded SLR use a different format: ARW.",
-    "mimeType":"image/x-minolta-mrw"
+    "description": "MRW (Minolta RAW) is a raw image format used by Minolta (later Konica-Minolta) cameras. After the Sony purchase, Sony branded SLR use a different format: ARW.",
+    "mimeType": "image/x-minolta-mrw"
   },
   {
-    "extensions":[
+    "extensions": [
       ".nef"
     ],
-    "description":"Nikon Electronic Format is Nikon's RAW digital image format for DSLR cameras. It is a close relative to TIFF, and has a standard TIFF header. NEF files are usually big-endian, with the exception of files from the Coolpix 5700, which were little-endian. Data can be either 12- or 14-bit (from 2005's D200 onwards), and depending on the camera may be uncompressed, losslessly compressed, or lossily compressed.",
-    "mimeType":"image/x-nikon-nef"
+    "description": "Nikon Electronic Format is Nikon's RAW digital image format for DSLR cameras. It is a close relative to TIFF, and has a standard TIFF header. NEF files are usually big-endian, with the exception of files from the Coolpix 5700, which were little-endian. Data can be either 12- or 14-bit (from 2005's D200 onwards), and depending on the camera may be uncompressed, losslessly compressed, or lossily compressed.",
+    "mimeType": "image/x-nikon-nef"
   },
   {
-    "extensions":[
+    "extensions": [
       ".orf"
     ],
-    "description":"ORF, or Olympus RAW, is a raw image format produced by Olympus digital cameras. The format is TIFF-like, but with a different file signature. The full-size image is in the first IFD. There is also Exif data, with a MakerNote.",
-    "mimeType":"image/x-olympus-orf"
+    "description": "ORF, or Olympus RAW, is a raw image format produced by Olympus digital cameras. The format is TIFF-like, but with a different file signature. The full-size image is in the first IFD. There is also Exif data, with a MakerNote.",
+    "mimeType": "image/x-olympus-orf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".raw",
       ".rw2",
       ".rwl"
     ],
-    "description":"Panasonic RAW/RW2, also known as Leica RAW or RWL, is a raw image format used by some Panasonic and Leica digital cameras. It can also be known by a camera-specific name such as Lumix RAW or Panasonic LX3 RAW. Different cameras produce different versions of it, and at some point the .raw file extension was changed to .rw2. The term Panasonic RAW might refer to just the .raw files, but more likely includes both .raw and .rw2.",
-    "mimeType":"image/x-panasonic-raw"
+    "description": "Panasonic RAW/RW2, also known as Leica RAW or RWL, is a raw image format used by some Panasonic and Leica digital cameras. It can also be known by a camera-specific name such as Lumix RAW or Panasonic LX3 RAW. Different cameras produce different versions of it, and at some point the .raw file extension was changed to .rw2. The term Panasonic RAW might refer to just the .raw files, but more likely includes both .raw and .rw2.",
+    "mimeType": "image/x-panasonic-raw"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pcx"
     ],
-    "description":"",
-    "mimeType":"image/x-pcx"
+    "description": "",
+    "mimeType": "image/x-pcx"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pef",
       ".ptx"
     ],
-    "description":"Pentax PEF (or Pentax RAW) is a raw image format associated with Pentax digital cameras. It is based on TIFF.",
-    "mimeType":"image/x-pentax-pef"
+    "description": "Pentax PEF (or Pentax RAW) is a raw image format associated with Pentax digital cameras. It is based on TIFF.",
+    "mimeType": "image/x-pentax-pef"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pct",
       ".pic"
     ],
-    "description":"",
-    "mimeType":"image/x-pict"
+    "description": "",
+    "mimeType": "image/x-pict"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pnm"
     ],
-    "description":"",
-    "mimeType":"image/x-portable-anymap"
+    "description": "",
+    "mimeType": "image/x-portable-anymap"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pbm"
     ],
-    "description":"",
-    "mimeType":"image/x-portable-bitmap"
+    "description": "",
+    "mimeType": "image/x-portable-bitmap"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pgm"
     ],
-    "description":"",
-    "mimeType":"image/x-portable-graymap"
+    "description": "",
+    "mimeType": "image/x-portable-graymap"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ppm"
     ],
-    "description":"",
-    "mimeType":"image/x-portable-pixmap"
+    "description": "",
+    "mimeType": "image/x-portable-pixmap"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rgb"
     ],
-    "description":"",
-    "mimeType":"image/x-rgb"
+    "description": "",
+    "mimeType": "image/x-rgb"
   },
   {
-    "extensions":[
+    "extensions": [
       ".x3f"
     ],
-    "description":"X3F (or Sigma X3F, or Foveon X3F) is a raw image format used by some Sigma digital cameras that use a \"Foveon sensor\".",
-    "mimeType":"image/x-sigma-x3f"
+    "description": "X3F (or Sigma X3F, or Foveon X3F) is a raw image format used by some Sigma digital cameras that use a \"Foveon sensor\".",
+    "mimeType": "image/x-sigma-x3f"
   },
   {
-    "extensions":[
+    "extensions": [
       ".arw"
     ],
-    "description":"Sony ARW is a raw image format used by some Sony digital cameras. It is based on TIFF.",
-    "mimeType":"image/x-sony-arw"
+    "description": "Sony ARW is a raw image format used by some Sony digital cameras. It is based on TIFF.",
+    "mimeType": "image/x-sony-arw"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sr2"
     ],
-    "description":"SR2 is a raw image format produced by some makes of Sony cameras. The format is based upon TIFF.",
-    "mimeType":"image/x-sony-sr2"
+    "description": "SR2 is a raw image format produced by some makes of Sony cameras. The format is based upon TIFF.",
+    "mimeType": "image/x-sony-sr2"
   },
   {
-    "extensions":[
+    "extensions": [
       ".srf"
     ],
-    "description":"",
-    "mimeType":"image/x-sony-srf"
+    "description": "",
+    "mimeType": "image/x-sony-srf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xbm"
     ],
-    "description":"",
-    "mimeType":"image/x-xbitmap"
+    "description": "",
+    "mimeType": "image/x-xbitmap"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xpm"
     ],
-    "description":"",
-    "mimeType":"image/x-xpixmap"
+    "description": "",
+    "mimeType": "image/x-xpixmap"
   },
   {
-    "extensions":[
+    "extensions": [
       ".xwd"
     ],
-    "description":"",
-    "mimeType":"image/x-xwindowdump"
+    "description": "",
+    "mimeType": "image/x-xwindowdump"
   },
   {
-    "extensions":[
+    "extensions": [
       ".eml",
       ".mht",
       ".mhtml",
       ".mime",
       ".nws"
     ],
-    "description":"",
-    "mimeType":"message/rfc822"
+    "description": "",
+    "mimeType": "message/rfc822"
   },
   {
-    "extensions":[
+    "extensions": [
       ".iges",
       ".igs"
     ],
-    "description":"",
-    "mimeType":"model/iges"
+    "description": "",
+    "mimeType": "model/iges"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mesh",
       ".msh",
       ".silo"
     ],
-    "description":"",
-    "mimeType":"model/mesh"
+    "description": "",
+    "mimeType": "model/mesh"
   },
   {
-    "extensions":[
+    "extensions": [
       ".dwf"
     ],
-    "description":"",
-    "mimeType":"model/vnd.dwf"
+    "description": "",
+    "mimeType": "model/vnd.dwf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".gdl"
     ],
-    "description":"",
-    "mimeType":"model/vnd.gdl"
+    "description": "",
+    "mimeType": "model/vnd.gdl"
   },
   {
-    "extensions":[
+    "extensions": [
       ".gtw"
     ],
-    "description":"",
-    "mimeType":"model/vnd.gtw"
+    "description": "",
+    "mimeType": "model/vnd.gtw"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mts"
     ],
-    "description":"",
-    "mimeType":"model/vnd.mts"
+    "description": "",
+    "mimeType": "model/vnd.mts"
   },
   {
-    "extensions":[
+    "extensions": [
       ".vtu"
     ],
-    "description":"",
-    "mimeType":"model/vnd.vtu"
+    "description": "",
+    "mimeType": "model/vnd.vtu"
   },
   {
-    "extensions":[
+    "extensions": [
       ".vrml",
       ".wrl"
     ],
-    "description":"",
-    "mimeType":"model/vrml"
+    "description": "",
+    "mimeType": "model/vrml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ics",
       ".ifb"
     ],
-    "description":"",
-    "mimeType":"text/calendar"
+    "description": "",
+    "mimeType": "text/calendar"
   },
   {
-    "extensions":[
+    "extensions": [
       ".css"
     ],
-    "description":"",
-    "mimeType":"text/css"
+    "description": "",
+    "mimeType": "text/css"
   },
   {
-    "extensions":[
+    "extensions": [
       ".csv"
     ],
-    "description":"",
-    "mimeType":"text/csv"
+    "description": "",
+    "mimeType": "text/csv"
   },
   {
-    "extensions":[
+    "extensions": [
       ".htm",
       ".html"
     ],
-    "description":"",
-    "mimeType":"text/html"
+    "description": "",
+    "mimeType": "text/html"
   },
   {
-    "extensions":[
+    "extensions": [
       ".js"
     ],
-    "description":"JavaScript (sometimes abbreviated JS) is a scripting language commonly implemented as part of a web browser in order to create enhanced user interfaces and dynamic websites, but also used in other contexts (such as server-side JavaScript). This is not the same as Java. People constantly get confused about that. JavaScript was originally developed at Netscape by Brendan Eich (who later became Mozilla CEO... very briefly), where it was originally called LiveScript while under development, but became JavaScript (with the name licensed from Sun) in order to capitalize on the popularity of Java, though the languages aren't really related (although there are some similarities in syntax). Later, a Microsoft implementation designed to be (more or less) compatible was called JScript, and an attempt at a formally standardized version of the language was published by ECMA as ECMAScript. The node.js runtime environment is (mostly) implemented in JavaScript, as are applications running within it. Due to its status as the only scripting language for browsers, JavaScript skyrocketed in popularity in the 2000's and 2010's and as of 2017 serves as a lingua franca of Web development. Arguably, it is currently the world's most popular programming language (it tops GitHub and StackOverflow currently).",
-    "mimeType":"text/javascript"
+    "description": "JavaScript (sometimes abbreviated JS) is a scripting language commonly implemented as part of a web browser in order to create enhanced user interfaces and dynamic websites, but also used in other contexts (such as server-side JavaScript). This is not the same as Java. People constantly get confused about that. JavaScript was originally developed at Netscape by Brendan Eich (who later became Mozilla CEO... very briefly), where it was originally called LiveScript while under development, but became JavaScript (with the name licensed from Sun) in order to capitalize on the popularity of Java, though the languages aren't really related (although there are some similarities in syntax). Later, a Microsoft implementation designed to be (more or less) compatible was called JScript, and an attempt at a formally standardized version of the language was published by ECMA as ECMAScript. The node.js runtime environment is (mostly) implemented in JavaScript, as are applications running within it. Due to its status as the only scripting language for browsers, JavaScript skyrocketed in popularity in the 2000's and 2010's and as of 2017 serves as a lingua franca of Web development. Arguably, it is currently the world's most popular programming language (it tops GitHub and StackOverflow currently).",
+    "mimeType": "text/javascript"
   },
   {
-    "extensions":[
+    "extensions": [
       ".md",
       ".markdown",
       ".mdown",
       ".markdn"
     ],
-    "description":"Markdown is a lightweight and human readable markup format for text formatting created by John Gruber and Aaron Swartz. It is similar to various forms of wiki markup. There is no formal specification for the original Markdown, and it has ambiguities that are handled inconsistently by different implementations. An attempt to improve on this situation was done (released 2014-09) by a group unrelated to the originators of Markdown, and was originally dubbed Standard Markdown until John Gruber objected to this name, and it was first renamed \"Common Markdown\" and later CommonMark. Markdeep is an extended Markdown implemented in JavaScript for web use.",
-    "mimeType":"text/markdown"
+    "description": "Markdown is a lightweight and human readable markup format for text formatting created by John Gruber and Aaron Swartz. It is similar to various forms of wiki markup. There is no formal specification for the original Markdown, and it has ambiguities that are handled inconsistently by different implementations. An attempt to improve on this situation was done (released 2014-09) by a group unrelated to the originators of Markdown, and was originally dubbed Standard Markdown until John Gruber objected to this name, and it was first renamed \"Common Markdown\" and later CommonMark. Markdeep is an extended Markdown implemented in JavaScript for web use.",
+    "mimeType": "text/markdown"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mathml",
       ".mml"
     ],
-    "description":"",
-    "mimeType":"text/mathml"
+    "description": "",
+    "mimeType": "text/mathml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".conf",
       ".def",
       ".diff",
@@ -4408,40 +4408,40 @@
       ".text",
       ".txt"
     ],
-    "description":"",
-    "mimeType":"text/plain"
+    "description": "",
+    "mimeType": "text/plain"
   },
   {
-    "extensions":[
+    "extensions": [
       ".dsc"
     ],
-    "description":"",
-    "mimeType":"text/prs.lines.tag"
+    "description": "",
+    "mimeType": "text/prs.lines.tag"
   },
   {
-    "extensions":[
+    "extensions": [
       ".rtx"
     ],
-    "description":"",
-    "mimeType":"text/richtext"
+    "description": "",
+    "mimeType": "text/richtext"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sgm",
       ".sgml"
     ],
-    "description":"",
-    "mimeType":"text/sgml"
+    "description": "",
+    "mimeType": "text/sgml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".tsv"
     ],
-    "description":"",
-    "mimeType":"text/tab-separated-values"
+    "description": "",
+    "mimeType": "text/tab-separated-values"
   },
   {
-    "extensions":[
+    "extensions": [
       ".man",
       ".me",
       ".ms",
@@ -4449,126 +4449,126 @@
       ".t",
       ".tr"
     ],
-    "description":"",
-    "mimeType":"text/troff"
+    "description": "",
+    "mimeType": "text/troff"
   },
   {
-    "extensions":[
+    "extensions": [
       ".uri",
       ".uris",
       ".urls"
     ],
-    "description":"",
-    "mimeType":"text/uri-list"
+    "description": "",
+    "mimeType": "text/uri-list"
   },
   {
-    "extensions":[
+    "extensions": [
       ".curl"
     ],
-    "description":"",
-    "mimeType":"text/vnd.curl"
+    "description": "",
+    "mimeType": "text/vnd.curl"
   },
   {
-    "extensions":[
+    "extensions": [
       ".dcurl"
     ],
-    "description":"",
-    "mimeType":"text/vnd.curl.dcurl"
+    "description": "",
+    "mimeType": "text/vnd.curl.dcurl"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mcurl"
     ],
-    "description":"",
-    "mimeType":"text/vnd.curl.mcurl"
+    "description": "",
+    "mimeType": "text/vnd.curl.mcurl"
   },
   {
-    "extensions":[
+    "extensions": [
       ".scurl"
     ],
-    "description":"",
-    "mimeType":"text/vnd.curl.scurl"
+    "description": "",
+    "mimeType": "text/vnd.curl.scurl"
   },
   {
-    "extensions":[
+    "extensions": [
       ".fly"
     ],
-    "description":"",
-    "mimeType":"text/vnd.fly"
+    "description": "",
+    "mimeType": "text/vnd.fly"
   },
   {
-    "extensions":[
+    "extensions": [
       ".flx"
     ],
-    "description":"",
-    "mimeType":"text/vnd.fmi.flexstor"
+    "description": "",
+    "mimeType": "text/vnd.fmi.flexstor"
   },
   {
-    "extensions":[
+    "extensions": [
       ".gv"
     ],
-    "description":"",
-    "mimeType":"text/vnd.graphviz"
+    "description": "",
+    "mimeType": "text/vnd.graphviz"
   },
   {
-    "extensions":[
+    "extensions": [
       ".3dml"
     ],
-    "description":"",
-    "mimeType":"text/vnd.in3d.3dml"
+    "description": "",
+    "mimeType": "text/vnd.in3d.3dml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".spot"
     ],
-    "description":"",
-    "mimeType":"text/vnd.in3d.spot"
+    "description": "",
+    "mimeType": "text/vnd.in3d.spot"
   },
   {
-    "extensions":[
+    "extensions": [
       ".jad"
     ],
-    "description":"",
-    "mimeType":"text/vnd.sun.j2me.app-descriptor"
+    "description": "",
+    "mimeType": "text/vnd.sun.j2me.app-descriptor"
   },
   {
-    "extensions":[
+    "extensions": [
       ".si"
     ],
-    "description":"",
-    "mimeType":"text/vnd.wap.si"
+    "description": "",
+    "mimeType": "text/vnd.wap.si"
   },
   {
-    "extensions":[
+    "extensions": [
       ".sl"
     ],
-    "description":"",
-    "mimeType":"text/vnd.wap.sl"
+    "description": "",
+    "mimeType": "text/vnd.wap.sl"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wml"
     ],
-    "description":"",
-    "mimeType":"text/vnd.wap.wml"
+    "description": "",
+    "mimeType": "text/vnd.wap.wml"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wmls"
     ],
-    "description":"",
-    "mimeType":"text/vnd.wap.wmlscript"
+    "description": "",
+    "mimeType": "text/vnd.wap.wmlscript"
   },
   {
-    "extensions":[
+    "extensions": [
       ".asm",
       ".s"
     ],
-    "description":"",
-    "mimeType":"text/x-asm"
+    "description": "",
+    "mimeType": "text/x-asm"
   },
   {
-    "extensions":[
+    "extensions": [
       ".c",
       ".cc",
       ".cpp",
@@ -4577,140 +4577,140 @@
       ".h",
       ".hh"
     ],
-    "description":"",
-    "mimeType":"text/x-c"
+    "description": "",
+    "mimeType": "text/x-c"
   },
   {
-    "extensions":[
+    "extensions": [
       ".f",
       ".f77",
       ".f90",
       ".for"
     ],
-    "description":"",
-    "mimeType":"text/x-fortran"
+    "description": "",
+    "mimeType": "text/x-fortran"
   },
   {
-    "extensions":[
+    "extensions": [
       ".java"
     ],
-    "description":"",
-    "mimeType":"text/x-java-source"
+    "description": "",
+    "mimeType": "text/x-java-source"
   },
   {
-    "extensions":[
+    "extensions": [
       ".p",
       ".pas",
       ".pp",
       ".inc"
     ],
-    "description":"Pascal is an influential imperative and procedural programming language, designed in 1968–1969 and published in 1970. Borland's Turbo Pascal, and the later Borland Pascal, were popular in the 1980s and early 1990s on the PC/MS-DOS platform (CP/M versions were also released).",
-    "mimeType":"text/x-pascal"
+    "description": "Pascal is an influential imperative and procedural programming language, designed in 1968–1969 and published in 1970. Borland's Turbo Pascal, and the later Borland Pascal, were popular in the 1980s and early 1990s on the PC/MS-DOS platform (CP/M versions were also released).",
+    "mimeType": "text/x-pascal"
   },
   {
-    "extensions":[
+    "extensions": [
       ".py"
     ],
-    "description":"",
-    "mimeType":"text/x-python"
+    "description": "",
+    "mimeType": "text/x-python"
   },
   {
-    "extensions":[
+    "extensions": [
       ".etx"
     ],
-    "description":"",
-    "mimeType":"text/x-setext"
+    "description": "",
+    "mimeType": "text/x-setext"
   },
   {
-    "extensions":[
+    "extensions": [
       ".uu"
     ],
-    "description":"",
-    "mimeType":"text/x-uuencode"
+    "description": "",
+    "mimeType": "text/x-uuencode"
   },
   {
-    "extensions":[
+    "extensions": [
       ".vcs"
     ],
-    "description":"",
-    "mimeType":"text/x-vcalendar"
+    "description": "",
+    "mimeType": "text/x-vcalendar"
   },
   {
-    "extensions":[
+    "extensions": [
       ".vcf"
     ],
-    "description":"",
-    "mimeType":"text/x-vcard"
+    "description": "",
+    "mimeType": "text/x-vcard"
   },
   {
-    "extensions":[
+    "extensions": [
       ".3gp"
     ],
-    "description":"",
-    "mimeType":"video/3gpp"
+    "description": "",
+    "mimeType": "video/3gpp"
   },
   {
-    "extensions":[
+    "extensions": [
       ".3g2"
     ],
-    "description":"",
-    "mimeType":"video/3gpp2"
+    "description": "",
+    "mimeType": "video/3gpp2"
   },
   {
-    "extensions":[
+    "extensions": [
       ".h261"
     ],
-    "description":"",
-    "mimeType":"video/h261"
+    "description": "",
+    "mimeType": "video/h261"
   },
   {
-    "extensions":[
+    "extensions": [
       ".h263"
     ],
-    "description":"",
-    "mimeType":"video/h263"
+    "description": "",
+    "mimeType": "video/h263"
   },
   {
-    "extensions":[
+    "extensions": [
       ".h264"
     ],
-    "description":"Advanced Video Coding (AVC), also referred to as H.264 or MPEG-4 Part 10, Advanced Video Coding (MPEG-4 AVC), is a video compression standard based on block-oriented, motion-compensated integer-DCT coding.[1] It is by far the most commonly used format for the recording, compression, and distribution of video content, used by 91% of video industry developers as of September 2019. It supports resolutions up to and including 8K UHD. H.264 is controversial for being patent-encumbered, and hence subject to royalty requirements. In 2013, Cisco is attempting to partially remedy this by producing a freely distributed executable H.264 codec for many platforms for which they have paid the royalty, allowing anybody to download and use it in unmodified form royalty-free. The source code is also openly available, but any altered versions that anybody might create from it would require separate licensing, as would any distribution of the executables other than direct download from Cisco. Thus, the only way to use it as part of a product without additional license fees is to have the product's installer download the executable from Cisco during the install process, rather than including it directly in your own product (whether on disk or downloadable from your site). HEVC (H.265) has been developed as a more efficient successor to this format, but it is also patent-encumbered. Attempts to create a royalty-free alternative include AV1, Daala, VP9, and Thor. The H.264 specification does not, in an extremely strict sense, define a codec which fits into a series of bytes; instead, it describes the stream as fitting into a sequence of frames called \"network abstraction layer units\", which can then be delineated into a raw byte format by the user. The format for putting these into a raw bytestream described by Annex B of the specification apparently is apparently very widely-used.",
-    "mimeType":"video/h264"
+    "description": "Advanced Video Coding (AVC), also referred to as H.264 or MPEG-4 Part 10, Advanced Video Coding (MPEG-4 AVC), is a video compression standard based on block-oriented, motion-compensated integer-DCT coding.[1] It is by far the most commonly used format for the recording, compression, and distribution of video content, used by 91% of video industry developers as of September 2019. It supports resolutions up to and including 8K UHD. H.264 is controversial for being patent-encumbered, and hence subject to royalty requirements. In 2013, Cisco is attempting to partially remedy this by producing a freely distributed executable H.264 codec for many platforms for which they have paid the royalty, allowing anybody to download and use it in unmodified form royalty-free. The source code is also openly available, but any altered versions that anybody might create from it would require separate licensing, as would any distribution of the executables other than direct download from Cisco. Thus, the only way to use it as part of a product without additional license fees is to have the product's installer download the executable from Cisco during the install process, rather than including it directly in your own product (whether on disk or downloadable from your site). HEVC (H.265) has been developed as a more efficient successor to this format, but it is also patent-encumbered. Attempts to create a royalty-free alternative include AV1, Daala, VP9, and Thor. The H.264 specification does not, in an extremely strict sense, define a codec which fits into a series of bytes; instead, it describes the stream as fitting into a sequence of frames called \"network abstraction layer units\", which can then be delineated into a raw byte format by the user. The format for putting these into a raw bytestream described by Annex B of the specification apparently is apparently very widely-used.",
+    "mimeType": "video/h264"
   },
   {
-    "extensions":[
+    "extensions": [
       ".jpgv"
     ],
-    "description":"",
-    "mimeType":"video/jpeg"
+    "description": "",
+    "mimeType": "video/jpeg"
   },
   {
-    "extensions":[
+    "extensions": [
       ".jpgm",
       ".jpm"
     ],
-    "description":"",
-    "mimeType":"video/jpm"
+    "description": "",
+    "mimeType": "video/jpm"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mj2",
       ".mjp2"
     ],
-    "description":"",
-    "mimeType":"video/mj2"
+    "description": "",
+    "mimeType": "video/mj2"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mp4",
       ".mp4v",
       ".mpg4"
     ],
-    "description":"MP4 usually refers to the multimedia file format defined in Part 14 (and to a lesser extent Part 1) of the MPEG-4 standard. \"MP4\" could also mean the entire MPEG-4 standard, or some other subset of MPEG-4. MPEG-4 Part 14 is an application of Part 12. The recommended extension for it is \".mp4\", though \".m4a\" is often used for audio-only files. It is standardized by ISO/IEC 14496-14.",
-    "mimeType":"video/mp4"
+    "description": "MP4 usually refers to the multimedia file format defined in Part 14 (and to a lesser extent Part 1) of the MPEG-4 standard. \"MP4\" could also mean the entire MPEG-4 standard, or some other subset of MPEG-4. MPEG-4 Part 14 is an application of Part 12. The recommended extension for it is \".mp4\", though \".m4a\" is often used for audio-only files. It is standardized by ISO/IEC 14496-14.",
+    "mimeType": "video/mp4"
   },
   {
-    "extensions":[
+    "extensions": [
       ".m1v",
       ".m2v",
       ".mpa",
@@ -4718,150 +4718,150 @@
       ".mpeg",
       ".mpg"
     ],
-    "description":"",
-    "mimeType":"video/mpeg"
+    "description": "",
+    "mimeType": "video/mpeg"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ogv"
     ],
-    "description":"",
-    "mimeType":"video/ogg"
+    "description": "",
+    "mimeType": "video/ogg"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mov",
       ".qt"
     ],
-    "description":"",
-    "mimeType":"video/quicktime"
+    "description": "",
+    "mimeType": "video/quicktime"
   },
   {
-    "extensions":[
+    "extensions": [
       ".fvt"
     ],
-    "description":"",
-    "mimeType":"video/vnd.fvt"
+    "description": "",
+    "mimeType": "video/vnd.fvt"
   },
   {
-    "extensions":[
+    "extensions": [
       ".m4u",
       ".mxu"
     ],
-    "description":"",
-    "mimeType":"video/vnd.mpegurl"
+    "description": "",
+    "mimeType": "video/vnd.mpegurl"
   },
   {
-    "extensions":[
+    "extensions": [
       ".pyv"
     ],
-    "description":"",
-    "mimeType":"video/vnd.ms-playready.media.pyv"
+    "description": "",
+    "mimeType": "video/vnd.ms-playready.media.pyv"
   },
   {
-    "extensions":[
+    "extensions": [
       ".viv"
     ],
-    "description":"",
-    "mimeType":"video/vnd.vivo"
+    "description": "",
+    "mimeType": "video/vnd.vivo"
   },
   {
-    "extensions":[
+    "extensions": [
       ".webm"
     ],
-    "description":"WebM is a video and audio container format released by Google, used with content encoded under the VP8 or VP9 codecs for video, and Vorbis and Opus for audio. It is a variant of Matroska, based on EBML.",
-    "mimeType":"video/webm"
+    "description": "WebM is a video and audio container format released by Google, used with content encoded under the VP8 or VP9 codecs for video, and Vorbis and Opus for audio. It is a variant of Matroska, based on EBML.",
+    "mimeType": "video/webm"
   },
   {
-    "extensions":[
+    "extensions": [
       ".f4v"
     ],
-    "description":"",
-    "mimeType":"video/x-f4v"
+    "description": "",
+    "mimeType": "video/x-f4v"
   },
   {
-    "extensions":[
+    "extensions": [
       ".fli"
     ],
-    "description":"",
-    "mimeType":"video/x-fli"
+    "description": "",
+    "mimeType": "video/x-fli"
   },
   {
-    "extensions":[
+    "extensions": [
       ".flv"
     ],
-    "description":"",
-    "mimeType":"video/x-flv"
+    "description": "",
+    "mimeType": "video/x-flv"
   },
   {
-    "extensions":[
+    "extensions": [
       ".m4v"
     ],
-    "description":"",
-    "mimeType":"video/x-m4v"
+    "description": "",
+    "mimeType": "video/x-m4v"
   },
   {
-    "extensions":[
+    "extensions": [
       ".mkv"
     ],
-    "description":"Matroska (sometimes spelled Matroška) is an open standard multimedia container format. It is based on the EBML metaformat and can be used with a variety of compressed video formats.",
-    "mimeType":"video/x-matroska"
+    "description": "Matroska (sometimes spelled Matroška) is an open standard multimedia container format. It is based on the EBML metaformat and can be used with a variety of compressed video formats.",
+    "mimeType": "video/x-matroska"
   },
   {
-    "extensions":[
+    "extensions": [
       ".asf",
       ".asx"
     ],
-    "description":"",
-    "mimeType":"video/x-ms-asf"
+    "description": "",
+    "mimeType": "video/x-ms-asf"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wm"
     ],
-    "description":"",
-    "mimeType":"video/x-ms-wm"
+    "description": "",
+    "mimeType": "video/x-ms-wm"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wmv"
     ],
-    "description":"",
-    "mimeType":"video/x-ms-wmv"
+    "description": "",
+    "mimeType": "video/x-ms-wmv"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wmx"
     ],
-    "description":"",
-    "mimeType":"video/x-ms-wmx"
+    "description": "",
+    "mimeType": "video/x-ms-wmx"
   },
   {
-    "extensions":[
+    "extensions": [
       ".wvx"
     ],
-    "description":"",
-    "mimeType":"video/x-ms-wvx"
+    "description": "",
+    "mimeType": "video/x-ms-wvx"
   },
   {
-    "extensions":[
+    "extensions": [
       ".avi"
     ],
-    "description":"",
-    "mimeType":"video/x-msvideo"
+    "description": "",
+    "mimeType": "video/x-msvideo"
   },
   {
-    "extensions":[
+    "extensions": [
       ".movie"
     ],
-    "description":"",
-    "mimeType":"video/x-sgi-movie"
+    "description": "",
+    "mimeType": "video/x-sgi-movie"
   },
   {
-    "extensions":[
+    "extensions": [
       ".ice"
     ],
-    "description":"",
-    "mimeType":"x-conference/x-cooltalk"
+    "description": "",
+    "mimeType": "x-conference/x-cooltalk"
   }
 ]

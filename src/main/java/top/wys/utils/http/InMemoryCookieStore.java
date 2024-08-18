@@ -8,12 +8,11 @@ package top.wys.utils.http;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Lists;
+import okhttp3.Cookie;
 
 import java.net.URI;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-import okhttp3.Cookie;
 
 /**
  * <ol>
@@ -27,25 +26,26 @@ import okhttp3.Cookie;
  */
 public class InMemoryCookieStore implements CookieStore {
 
-    com.google.common.cache.Cache<String,List<Cookie>> cache = CacheBuilder.newBuilder()
+    com.google.common.cache.Cache<String, List<Cookie>> cache = CacheBuilder.newBuilder()
             .expireAfterAccess(120, TimeUnit.MINUTES)
             .maximumSize(10000)
             .build();
+
     @Override
     public void add(URI uri, Cookie cookie) {
         String cookieToken = getCookieToken(cookie);
         List<Cookie> cookies = cache.getIfPresent(cookieToken);
         if (cookies == null) {
             cookies = Lists.newArrayList();
-            cache.put(cookieToken,cookies);
+            cache.put(cookieToken, cookies);
         }
         if (!cookies.contains(cookie)) {
             cookies.add(cookie);
         }
     }
 
-    public String getCookieToken(Cookie cookie){
-        return cookie.name()+"@"+cookie.domain();
+    public String getCookieToken(Cookie cookie) {
+        return cookie.name() + "@" + cookie.domain();
     }
 
     @Override

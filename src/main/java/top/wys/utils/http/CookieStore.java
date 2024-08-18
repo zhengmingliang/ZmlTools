@@ -7,10 +7,10 @@
 package top.wys.utils.http;
 
 
+import okhttp3.Cookie;
+
 import java.net.URI;
 import java.util.List;
-
-import okhttp3.Cookie;
 
 /**
  * <ol>
@@ -24,7 +24,10 @@ import okhttp3.Cookie;
  */
 public interface CookieStore {
     void add(URI uri, Cookie cookie);
+
     List<Cookie> get(URI uri);
+
     List<Cookie> get(String host);
+
     List<Cookie> getCookies();
 }

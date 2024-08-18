@@ -37,7 +37,8 @@ import java.util.Map;
 public class MapTypeAdapter extends TypeAdapter<Object> {
     public static final TypeAdapterFactory FACTORY = new TypeAdapterFactory() {
         @SuppressWarnings("unchecked")
-        @Override public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+        @Override
+        public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
             if (type.getRawType() == Map.class) {
                 return (TypeAdapter<T>) new MapTypeAdapter(gson);
             }
@@ -51,7 +52,8 @@ public class MapTypeAdapter extends TypeAdapter<Object> {
         this.gson = gson;
     }
 
-    @Override public Object read(JsonReader in) throws IOException {
+    @Override
+    public Object read(JsonReader in) throws IOException {
         JsonToken token = in.peek();
         switch (token) {
             case BEGIN_ARRAY:
@@ -102,7 +104,8 @@ public class MapTypeAdapter extends TypeAdapter<Object> {
     }
 
     @SuppressWarnings("unchecked")
-    @Override public void write(JsonWriter out, Object value) throws IOException {
+    @Override
+    public void write(JsonWriter out, Object value) throws IOException {
         if (value == null) {
             out.nullValue();
             return;

@@ -30,17 +30,18 @@ public class StringUtilsTest {
             StringUtils.replace(inString, '?', "%s");
         }
 //        stopwatch.stop();
-        System.out.println("重写："+stopwatch.toString());
+        System.out.println("重写：" + stopwatch.toString());
 
         stopwatch.reset();
         stopwatch.start();
         for (int i = 0; i < 1000000; i++) {
-            inString.replaceAll("\\?","%s");
+            inString.replaceAll("\\?", "%s");
         }
 //        stopwatch.stop();
-        System.out.println("replaceAll:"+stopwatch);
+        System.out.println("replaceAll:" + stopwatch);
 
     }
+
     @Test
     public void replace2() {
 
@@ -51,7 +52,7 @@ public class StringUtilsTest {
             StringUtils.replace(inString, "?", "%s");
         }
 //        stopwatch.stop();
-        System.out.println("重写："+stopwatch.toString());
+        System.out.println("重写：" + stopwatch.toString());
 
         stopwatch.reset();
         stopwatch.start();
@@ -59,7 +60,7 @@ public class StringUtilsTest {
             StringUtils.replace(inString, '?', "%s");
         }
 //        stopwatch.stop();
-        System.out.println("replaceAll:"+stopwatch);
+        System.out.println("replaceAll:" + stopwatch);
 
     }
 }

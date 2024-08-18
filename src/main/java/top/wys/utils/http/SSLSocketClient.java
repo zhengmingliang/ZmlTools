@@ -3,9 +3,6 @@ package top.wys.utils.http;
  * Created by 郑明亮 on 2019/9/6 14:28.
  */
 
-import java.security.SecureRandom;
-import java.security.cert.X509Certificate;
-
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
@@ -13,16 +10,20 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
+
 /**
- * @description https 连接支持类
  * @author 郑明亮
  * @version 1.0
+ * @description https 连接支持类
  * @time 2019/9/6 14:28
  */
 public class SSLSocketClient {
 
     /**
      * 获取SSLSocketFactory
+     *
      * @return
      */
     public static SSLSocketFactory getSSLSocketFactory() {
@@ -37,6 +38,7 @@ public class SSLSocketClient {
 
     /**
      * TrustManager
+     *
      * @return
      */
     public static TrustManager[] getTrustManager() {
@@ -59,7 +61,7 @@ public class SSLSocketClient {
         return trustAllCerts;
     }
 
-    public static X509TrustManager getX509TrustManager(){
+    public static X509TrustManager getX509TrustManager() {
         return new X509TrustManager() {
             @Override
             public void checkClientTrusted(X509Certificate[] chain, String authType) {
@@ -78,6 +80,7 @@ public class SSLSocketClient {
 
     /**
      * 获取HostnameVerifier
+     *
      * @return
      */
     public static HostnameVerifier getHostnameVerifier() {

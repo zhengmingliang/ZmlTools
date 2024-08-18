@@ -7,16 +7,14 @@
 package top.wys.utils.http;
 
 import com.google.common.collect.Lists;
-
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.CookieManager;
 import java.net.HttpCookie;
 import java.util.List;
-
-import okhttp3.Cookie;
-import okhttp3.CookieJar;
-import okhttp3.HttpUrl;
 
 /**
  * <ol>
@@ -59,11 +57,12 @@ public class CookieJarImpl implements CookieJar {
         }
         return cookies;
     }
+
     @NotNull
     public List<HttpCookie> convertToHttpCookies(List<Cookie> list) {
         List<HttpCookie> cookies = Lists.newArrayList();
         for (Cookie cookie : list) {
-            HttpCookie httpCookie = convertCookieToHttpCookie(cookie);;
+            HttpCookie httpCookie = convertCookieToHttpCookie(cookie);
             cookies.add(httpCookie);
         }
         return cookies;
@@ -82,7 +81,7 @@ public class CookieJarImpl implements CookieJar {
     @Override
     public void saveFromResponse(@NotNull HttpUrl httpUrl, @NotNull List<Cookie> list) {
         for (Cookie cookie : list) {
-            cookieManager.getCookieStore().add(httpUrl.uri(),convertCookieToHttpCookie(cookie));
+            cookieManager.getCookieStore().add(httpUrl.uri(), convertCookieToHttpCookie(cookie));
         }
     }
 }

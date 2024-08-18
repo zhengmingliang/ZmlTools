@@ -24,18 +24,19 @@ import java.util.Map;
  */
 public class EventBus {
     private Map<String, List<EventHandler>> handlers = Maps.newConcurrentMap();
-    public void register(String topic,EventHandler eventHandler){
+
+    public void register(String topic, EventHandler eventHandler) {
 //        String name = eventHandler.getClass().getName();
         List<EventHandler> eventHandlers = handlers.get(topic);
-        if(eventHandlers == null){
+        if (eventHandlers == null) {
             eventHandlers = Lists.newLinkedList();
         }
         eventHandlers.add(eventHandler);
-        handlers.put(topic,eventHandlers);
+        handlers.put(topic, eventHandlers);
 
     }
 
-    public void notice(String topic,Object message){
+    public void notice(String topic, Object message) {
         List<EventHandler> eventHandlers = handlers.get(topic);
         if (eventHandlers != null) {
             for (EventHandler eventHandler : eventHandlers) {

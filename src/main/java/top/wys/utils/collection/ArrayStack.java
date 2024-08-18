@@ -6,7 +6,9 @@ import java.util.EmptyStackException;
 
 public class ArrayStack extends ArrayList implements Buffer {
 
-    /** Ensure serialization compatibility */
+    /**
+     * Ensure serialization compatibility
+     */
     private static final long serialVersionUID = 2130079159931574599L;
 
     /**
@@ -20,9 +22,9 @@ public class ArrayStack extends ArrayList implements Buffer {
     /**
      * Constructs a new empty <code>ArrayStack</code> with an initial size.
      *
-     * @param initialSize  the initial size to use
-     * @throws IllegalArgumentException  if the specified initial size
-     *  is negative
+     * @param initialSize the initial size to use
+     * @throws IllegalArgumentException if the specified initial size
+     *                                  is negative
      */
     public ArrayStack(int initialSize) {
         super(initialSize);
@@ -44,7 +46,7 @@ public class ArrayStack extends ArrayList implements Buffer {
      * Returns the top item off of this stack without removing it.
      *
      * @return the top item on the stack
-     * @throws EmptyStackException  if the stack is empty
+     * @throws EmptyStackException if the stack is empty
      */
     public Object peek() throws EmptyStackException {
         int n = size();
@@ -59,10 +61,10 @@ public class ArrayStack extends ArrayList implements Buffer {
      * Returns the n'th item down (zero-relative) from the top of this
      * stack without removing it.
      *
-     * @param n  the number of items down to go
+     * @param n the number of items down to go
      * @return the n'th item on the stack, zero relative
-     * @throws EmptyStackException  if there are not enough items on the
-     *  stack to satisfy this request
+     * @throws EmptyStackException if there are not enough items on the
+     *                             stack to satisfy this request
      */
     public Object peek(int n) throws EmptyStackException {
         int m = (size() - n) - 1;
@@ -77,7 +79,7 @@ public class ArrayStack extends ArrayList implements Buffer {
      * Pops the top item off of this stack and return it.
      *
      * @return the top item on the stack
-     * @throws EmptyStackException  if the stack is empty
+     * @throws EmptyStackException if the stack is empty
      */
     public Object pop() throws EmptyStackException {
         int n = size();
@@ -92,7 +94,7 @@ public class ArrayStack extends ArrayList implements Buffer {
      * Pushes a new item onto the top of this stack. The pushed item is also
      * returned. This is equivalent to calling <code>add</code>.
      *
-     * @param item  the item to be added
+     * @param item the item to be added
      * @return the item just pushed
      */
     public Object push(Object item) {
@@ -108,7 +110,7 @@ public class ArrayStack extends ArrayList implements Buffer {
      * <code>equals()</code> method is used to compare to the items
      * in this stack.
      *
-     * @param object  the object to be searched for
+     * @param object the object to be searched for
      * @return the 1-based depth into the stack of the object, or -1 if not found
      */
     public int search(Object object) {
@@ -130,7 +132,7 @@ public class ArrayStack extends ArrayList implements Buffer {
      * Returns the element on the top of the stack.
      *
      * @return the element on the top of the stack
-     * @throws java.nio.BufferUnderflowException  if the stack is empty
+     * @throws java.nio.BufferUnderflowException if the stack is empty
      */
     public Object get() {
         int size = size();
@@ -144,7 +146,7 @@ public class ArrayStack extends ArrayList implements Buffer {
      * Removes the element on the top of the stack.
      *
      * @return the removed element
-     * @throws BufferUnderflowException  if the stack is empty
+     * @throws BufferUnderflowException if the stack is empty
      */
     public Object remove() {
         int size = size();

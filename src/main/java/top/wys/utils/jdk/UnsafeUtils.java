@@ -3,13 +3,13 @@
  */
 package top.wys.utils.jdk;
 
-import java.lang.reflect.Field;
-
 import sun.misc.Unsafe;
 import top.wys.utils.ReflectionUtils;
 import top.wys.utils.TypeUtils;
 import top.wys.utils.convert.ConvertUtils;
 import top.wys.utils.valid.Preconditions;
+
+import java.lang.reflect.Field;
 
 /**
  * <p> 封装jdk的不安全类的使用</p>
@@ -20,6 +20,7 @@ import top.wys.utils.valid.Preconditions;
  */
 public class UnsafeUtils {
     public static final Unsafe UNSAFE;
+
     static {
         Unsafe unsafe = null;
         try {
@@ -106,12 +107,13 @@ public class UnsafeUtils {
 
     /**
      * 直接在堆上分配一个cls类的实例,并返回这个实例的引用。
-     *
+     * <p>
      * 由于没有调用任何构造函数,分配出来的对象中的字段值都是默认值(数值类型是0,boolean是false,引用类型是null)。
-     *
+     * <p>
      * 并且完全忽略了cls类的访问权限,即使cls类没有public构造函数也可以分配实例。
-     *
+     * <p>
      * 这种完全绕过构造函数和访问控制的实例分配方式很危险,可能会破坏对象的状态,应该尽量避免使用或者很小心的使用
+     *
      * @param cls
      * @return
      * @throws InstantiationException
@@ -124,64 +126,67 @@ public class UnsafeUtils {
         return UNSAFE.objectFieldOffset(field);
     }
 
-    public static Object get(Object o,String fieldName){
-        return get(o, ReflectionUtils.getField(o.getClass(),fieldName));
+    public static Object get(Object o, String fieldName) {
+        return get(o, ReflectionUtils.getField(o.getClass(), fieldName));
     }
-    public static Object getNullable(Object o,String fieldName){
-        return get(o, ReflectionUtils.getFieldNullable(o.getClass(),fieldName));
+
+    public static Object getNullable(Object o, String fieldName) {
+        return get(o, ReflectionUtils.getFieldNullable(o.getClass(), fieldName));
     }
 
 
     /**
      * 获取指定对象某个字段的值
-     * @param o 对象
+     *
+     * @param o     对象
      * @param field 字段
      * @return
      */
-    public static Object get(Object o,Field field){
+    public static Object get(Object o, Field field) {
 
-        if(o == null || field == null){
+        if (o == null || field == null) {
             return null;
         }
 
         long offset = objectFieldOffset(field);
 
         if (field.getType() == boolean.class) {
-            return getBoolean(o,offset);
+            return getBoolean(o, offset);
         } else if (field.getType() == byte.class) {
-            return getByte(o,offset);
+            return getByte(o, offset);
         } else if (field.getType() == char.class) {
-            return getChar(o,offset);
+            return getChar(o, offset);
         } else if (field.getType() == short.class) {
-            return getShort(o,offset);
+            return getShort(o, offset);
         } else if (field.getType() == int.class) {
-            return getInt(o,offset);
+            return getInt(o, offset);
         } else if (field.getType() == long.class) {
-            return getLong(o,offset);
+            return getLong(o, offset);
         } else if (field.getType() == float.class) {
-            return getFloat(o,offset);
+            return getFloat(o, offset);
         } else if (field.getType() == double.class) {
-            return getDouble(o,offset);
+            return getDouble(o, offset);
         } else {
-            return getObject(o,offset);
+            return getObject(o, offset);
         }
     }
 
-    public static void set(Object o,String fieldName,Object value){
+    public static void set(Object o, String fieldName, Object value) {
         Field fieldNullable = ReflectionUtils.getFieldNullable(o.getClass(), fieldName);
-        if(fieldNullable == null){
+        if (fieldNullable == null) {
             return;
         }
-        set(o, fieldNullable,value);
+        set(o, fieldNullable, value);
     }
 
     /**
      * 给指定对象的字段设置值（设置字段的值类型和字段类型必需一致）
-     * @param o 设置值的对象
+     *
+     * @param o     设置值的对象
      * @param field 字段
      * @param value 设置的值（值和字段类型必需要一致）
      */
-    public static void set(Object o,Field field,Object value){
+    public static void set(Object o, Field field, Object value) {
 
         long offset = objectFieldOffset(field);
 
@@ -191,32 +196,32 @@ public class UnsafeUtils {
             if (type.isPrimitive() && !targetType.isPrimitive()) {
                 type = TypeUtils.getBoxedType(type);
             }
-            Preconditions.checkArgument(type == targetType, String.format("字段类型和设置的值类型不一致,value需要是%s类型",type.getName() ));
+            Preconditions.checkArgument(type == targetType,
+                    String.format("字段类型和设置的值类型不一致,value需要是%s类型", type.getName()));
         } else {
-            putObject(o,offset,null);
+            putObject(o, offset, null);
             return;
         }
 
 
-
         if (field.getType() == boolean.class) {
-             putBoolean(o,offset, ConvertUtils.toBoolean(value));
+            putBoolean(o, offset, ConvertUtils.toBoolean(value));
         } else if (field.getType() == byte.class) {
-            putByte(o,offset, (byte) value);
+            putByte(o, offset, (byte) value);
         } else if (field.getType() == char.class) {
-            putChar(o,offset,(char)value);
+            putChar(o, offset, (char) value);
         } else if (field.getType() == short.class) {
-             putShort(o,offset,(short)value);
+            putShort(o, offset, (short) value);
         } else if (field.getType() == int.class) {
-            putInt(field,offset, (int) value);
+            putInt(field, offset, (int) value);
         } else if (field.getType() == long.class) {
-            putLong(o,offset, (long) value);
+            putLong(o, offset, (long) value);
         } else if (field.getType() == float.class) {
-            putFloat(o,offset, (float) value);
+            putFloat(o, offset, (float) value);
         } else if (field.getType() == double.class) {
-            putDouble(o,offset, (double) value);
+            putDouble(o, offset, (double) value);
         } else {
-            putObject(o,offset,value);
+            putObject(o, offset, value);
         }
     }
 }

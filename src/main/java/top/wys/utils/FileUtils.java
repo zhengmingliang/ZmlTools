@@ -71,7 +71,7 @@ public class FileUtils {
     /**
      * 默认读写文件编码
      */
-    private static String DEFAULT_ENCODING = "UTF-8";
+    private static final String DEFAULT_ENCODING = "UTF-8";
 
 
     /**
@@ -216,7 +216,7 @@ public class FileUtils {
         ZipOutputStream zos = null;
         String zipName = "";
 
-        if (sourceFile.exists() == false) {
+        if (!sourceFile.exists()) {
             log.debug("待压缩的文件目录：{}不存在.", sourceFilePath);
         } else {
             try {
@@ -373,7 +373,7 @@ public class FileUtils {
         try (BufferedInputStream fis = new BufferedInputStream(new FileInputStream(file));
              // 用5M的缓冲读取文本文件
              BufferedReader reader = new BufferedReader(new InputStreamReader(fis, encoding),
-                     DEFAULT_LARGE_BUFFER_SIEZE);) {
+                     DEFAULT_LARGE_BUFFER_SIEZE)) {
             String line = reader.readLine();
             callback.getFirstLine(line);
             int lineCount = 0;
@@ -488,7 +488,7 @@ public class FileUtils {
         BufferedOutputStream bos = null;
         File targetFolderFile = new File(targetFolder);
         File sourceFile = new File(sourceFileName);
-        try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(sourceFile));) {
+        try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(sourceFile))) {
             String fullName = sourceFile.getName();
             int beginIndex = fullName.indexOf(".");
             if (beginIndex == -1) {
@@ -497,7 +497,7 @@ public class FileUtils {
             //源文件名称（不含后缀名）
             String fileName = fullName.substring(0, beginIndex);
             // 源文件后缀名
-            String suffixName = fullName.substring(beginIndex, fullName.length());
+            String suffixName = fullName.substring(beginIndex);
 
             byte[] bytes = new byte[DEFAULT_BUFFER_SIZE];
             int count = 0;
@@ -566,7 +566,7 @@ public class FileUtils {
             //源文件名称（不含后缀名）
             String fileName = fullName.substring(0, beginIndex);
             // 源文件后缀名
-            String suffixName = fullName.substring(beginIndex, fullName.length());
+            String suffixName = fullName.substring(beginIndex);
 
             fis = new FileInputStream(sourceFile);
             // 用5M的缓冲读取文本文件
@@ -816,6 +816,7 @@ public class FileUtils {
      * <p>结果便于路径比较。对于其他用途，请注意 Windows 分隔符 ("\") 被简单的斜杠替换
      *
      * <p><strong>NOTE</strong> 不应该依赖 {@code cleanPath} 去解决安全问题 . 应使用其他机制来预防路径遍历问题。
+     *
      * @param path 原始路径
      * @return 规范化后的路径
      */
@@ -842,8 +843,7 @@ public class FileUtils {
             prefix = pathToUse.substring(0, prefixIndex + 1);
             if (prefix.contains(FOLDER_SEPARATOR)) {
                 prefix = "";
-            }
-            else {
+            } else {
                 pathToUse = pathToUse.substring(prefixIndex + 1);
             }
         }
@@ -861,17 +861,14 @@ public class FileUtils {
             String element = pathArray[i];
             if (CURRENT_PATH.equals(element)) {
                 // Points to current directory - drop it.
-            }
-            else if (TOP_PATH.equals(element)) {
+            } else if (TOP_PATH.equals(element)) {
                 // Registering top path found.
                 tops++;
-            }
-            else {
+            } else {
                 if (tops > 0) {
                     // Merging path element with element corresponding to top path.
                     tops--;
-                }
-                else {
+                } else {
                     // Normal path element found.
                     pathElements.addFirst(element);
                 }
@@ -1063,6 +1060,7 @@ public class FileUtils {
     /**
      * Extract the filename from the given Java resource path,
      * e.g. {@code "mypath/myfile.txt" &rarr; "myfile.txt"}.
+     *
      * @param path the file path (may be {@code null})
      * @return the extracted filename, or {@code null} if none
      */
@@ -1079,6 +1077,7 @@ public class FileUtils {
     /**
      * Extract the filename extension from the given Java resource path,
      * e.g. "mypath/myfile.txt" &rarr; "txt".
+     *
      * @param path the file path (may be {@code null})
      * @return the extracted filename extension, or {@code null} if none
      */
@@ -1104,6 +1103,7 @@ public class FileUtils {
     /**
      * Strip the filename extension from the given Java resource path,
      * e.g. "mypath/myfile.txt" &rarr; "mypath/myfile".
+     *
      * @param path the file path
      * @return the path with stripped filename extension
      */
@@ -1124,9 +1124,10 @@ public class FileUtils {
     /**
      * Apply the given relative path to the given Java resource path,
      * assuming standard Java folder separation (i.e. "/" separators).
-     * @param path the path to start from (usually a full file path)
+     *
+     * @param path         the path to start from (usually a full file path)
      * @param relativePath the relative path to apply
-     * (relative to the full file path above)
+     *                     (relative to the full file path above)
      * @return the full file path that results from applying the relative path
      */
     public static String applyRelativePath(String path, String relativePath) {
@@ -1137,15 +1138,10 @@ public class FileUtils {
                 newPath += FOLDER_SEPARATOR_CHAR;
             }
             return newPath + relativePath;
-        }
-        else {
+        } else {
             return relativePath;
         }
     }
-
-
-
-
 
 
 }

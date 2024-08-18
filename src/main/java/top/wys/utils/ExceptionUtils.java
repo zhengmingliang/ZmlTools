@@ -23,28 +23,28 @@ public class ExceptionUtils {
 
     /**
      * 获取堆栈异常信息
-     * @author 郑明亮
+     *
      * @param e
      * @return
+     * @author 郑明亮
      */
     public static String getStackTrace(Throwable e) {
         String detail = null;
         StringWriter sw = null;
         PrintWriter pw = null;
-        try{
+        try {
             sw = new StringWriter();
             pw = new PrintWriter(sw);
             e.printStackTrace(pw);
             detail = sw.toString();
         } catch (Exception e1) {
             e1.printStackTrace();
-        }finally {
+        } finally {
             IOUtils.close(pw);
             IOUtils.close(sw);
         }
         return detail;
     }
-
 
 
     public static Throwable getRootCause(final Throwable throwable) {
@@ -67,7 +67,7 @@ public class ExceptionUtils {
      * the end is reached, or until the next item in the chain is already
      * in the result set.</p>
      *
-     * @param throwable  the throwable to inspect, may be null
+     * @param throwable the throwable to inspect, may be null
      * @return the list of throwables, never null
      * @since 2.2
      */

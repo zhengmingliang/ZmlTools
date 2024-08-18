@@ -5,8 +5,6 @@ import top.wys.utils.NumberUtils;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by 郑明亮 on 2022/2/7 21:40.
  */

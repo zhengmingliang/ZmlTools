@@ -23,9 +23,317 @@ import java.util.List;
 public class CourseInfoDTO {
 
     /**
-     * roomInfo : {"iImId":0,"iResourceId":0,"iRoomId":9169,"iStatus":0,"iUserCount":0,"lBeginTime":1561558185,"lEndTime":1561558185,"lWatchSequence":0,"page":{"iColor":0,"iCoursewareId":1561558218,"iHeight":1440,"iOriginalPageId":0,"iPageId":1,"iScrollPosition":0,"iTabulaHeight":9,"iTabulaWidth":16,"iType":1,"iWidth":2560,"isOffline":false,"liveId":0,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_ddbfc95ee4a66e8aaa1786179f7dc76c_2560_1440.jpg?sign=2743afe60049763aa52ad0c336495295&t=1586717940","traces":{},"lSequence":1,"operationType":0},"sName":"【英语】管理类联考<必修课1>","sTeacher":"谷含笑"}
-     * sequenceMap : {"1":[{"bytes":"{\"iPageId\":1,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_ddbfc95ee4a66e8aaa1786179f7dc76c_2560_1440.jpg?sign=2743afe60049763aa52ad0c336495295&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558227392":[{"bytes":"{\"iPageId\":1,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_ddbfc95ee4a66e8aaa1786179f7dc76c_2560_1440.jpg?sign=2743afe60049763aa52ad0c336495295&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558227392,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558231029":[{"bytes":"{\"iPageId\":1,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_ddbfc95ee4a66e8aaa1786179f7dc76c_2560_1440.jpg?sign=2743afe60049763aa52ad0c336495295&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558231029,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558241230":[{"bytes":"{\"iPageId\":2,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_7605df8f065577f6ce23f1ec929c03cf_2560_1440.jpg?sign=0eff7abc1c0730edad8051f869c9485f&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558241230,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558254146":[{"bytes":"{\"iPageId\":3,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_a154985692764dc3a2657758ed0f09ee_2560_1440.jpg?sign=52910ad8e774501050afade36af6e7bb&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558254146,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558267875":[{"bytes":"{\"version\":1,\"iType\":5,\"iCoursewareId\":1561558218,\"iPageId\":3,\"iId\":1,\"lSequence\":1561558267875,\"points\":[{\"x\":7217,\"y\":3032},{\"x\":8175,\"y\":5039}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":200}","eType":10006}],"1561558283787":[{"bytes":"{\"iPageId\":4,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190508/1598_7ded3c72cb8fec44739d7f3f1e59f514_2560_1440.jpg?sign=7f65500cbb119ebfe9de393071438d07&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558283787,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558287141":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":4,\"iId\":2,\"lSequence\":1561558287141,\"points\":[{\"x\":3937,\"y\":6322},{\"x\":3937,\"y\":6392},{\"x\":3950,\"y\":6462}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":404}","eType":10006}],"1561558287343":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":4,\"iId\":2,\"lSequence\":1561558287343,\"points\":[{\"x\":3950,\"y\":6462},{\"x\":3963,\"y\":6485},{\"x\":3976,\"y\":6532},{\"x\":3989,\"y\":6532},{\"x\":3989,\"y\":6579},{\"x\":4015,\"y\":6579}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":203}","eType":10006}],"1561558287749":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":4,\"iId\":2,\"lSequence\":1561558287749,\"points\":[{\"x\":4015,\"y\":6579},{\"x\":4015,\"y\":6602},{\"x\":4041,\"y\":6579},{\"x\":4055,\"y\":6579},{\"x\":4055,\"y\":6555},{\"x\":4068,\"y\":6555},{\"x\":4068,\"y\":6532}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":404}","eType":10006}],"1561558287952":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":4,\"iId\":2,\"lSequence\":1561558287952,\"points\":[{\"x\":4068,\"y\":6532},{\"x\":4081,\"y\":6509},{\"x\":4094,\"y\":6509}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":202}","eType":10006}],"1561558288155":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":4,\"iId\":2,\"lSequence\":1561558288155,\"points\":[{\"x\":4081,\"y\":6509},{\"x\":4120,\"y\":6509},{\"x\":4133,\"y\":6485},{\"x\":4133,\"y\":6462},{\"x\":4146,\"y\":6439},{\"x\":4160,\"y\":6392},{\"x\":4173,\"y\":6369},{\"x\":4186,\"y\":6345},{\"x\":4212,\"y\":6322},{\"x\":4212,\"y\":6299}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":204}","eType":10006}],"1561558288357":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":4,\"iId\":2,\"lSequence\":1561558288357,\"points\":[{\"x\":4212,\"y\":6299},{\"x\":4225,\"y\":6299}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":204}","eType":10006}],"1561558299012":[{"bytes":"{\"iPageId\":7,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_0f62ba444ad3e4e8b4aa7d5b4823f3dd_2560_1440.jpg?sign=2d65aabea86556298a4bd1158e98d171&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558299012,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558304114":[{"bytes":"{\"iPageId\":8,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_2faea2c379bf9233287adfaf80829b38_2560_1440.jpg?sign=288b5452029ed7203a593973bca6f545&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558304114,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558307639":[{"bytes":"{\"iPageId\":9,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_9aacb699046c3bef7c26afd9c31577f8_2560_1440.jpg?sign=9d5fb15723af3613bc0003d8af9b3fd7&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558307639,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558377481":[{"bytes":"{\"iPageId\":10,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_ed567872a3d48a112b8a7bd98a2f58a2_2560_1440.jpg?sign=bf23eac303e1575703afdd560ca697f7&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558377481,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558380694":[{"bytes":"{\"iPageId\":11,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_fc8b2a269cf8ab4b561cf397a25a8257_2560_1440.jpg?sign=0c503d0617e968d8186502e5a7cc17e9&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558380694,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558390835":[{"bytes":"{\"iPageId\":12,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_09da44adccb6f7384e129dc8c49da8c3_2560_1440.jpg?sign=3326769c625bf383b078cf6ad89aea08&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558390835,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558398931":[{"bytes":"{\"iPageId\":13,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_985993fdde3df731d86320a4e4a96862_2560_1440.jpg?sign=f0d48508bc70bfd0d65f257796541c94&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558398931,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558400351":[{"bytes":"{\"iPageId\":14,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_e1107d07c98d7b3e7d015f95464a0dc6_2560_1440.jpg?sign=96d8ae97dc3d431de832b9c647b44b8b&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558400351,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558403424":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":3,\"lSequence\":1561558403424,\"points\":[{\"x\":4120,\"y\":4852},{\"x\":4225,\"y\":4852}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":198}","eType":10006}],"1561558403627":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":3,\"lSequence\":1561558403627,\"points\":[{\"x\":4120,\"y\":4852},{\"x\":4265,\"y\":4852},{\"x\":4304,\"y\":4806},{\"x\":4422,\"y\":4806}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":202}","eType":10006}],"1561558403829":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":3,\"lSequence\":1561558403829,\"points\":[{\"x\":4304,\"y\":4806},{\"x\":4475,\"y\":4806},{\"x\":4488,\"y\":4829}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":204}","eType":10006}],"1561558403876":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":3,\"lSequence\":1561558403876,\"points\":[{\"x\":4488,\"y\":4829},{\"x\":4514,\"y\":4829}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":51}","eType":10006}],"1561558405046":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":4,\"lSequence\":1561558405046,\"points\":[{\"x\":5091,\"y\":4899},{\"x\":5288,\"y\":4899}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":210}","eType":10006}],"1561558405249":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":4,\"lSequence\":1561558405249,\"points\":[{\"x\":5091,\"y\":4899},{\"x\":5524,\"y\":4899},{\"x\":5564,\"y\":4922},{\"x\":5629,\"y\":4922}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":194}","eType":10006}],"1561558405374":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":4,\"lSequence\":1561558405374,\"points\":[{\"x\":5629,\"y\":4922},{\"x\":5643,\"y\":4946},{\"x\":5669,\"y\":4946}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":136}","eType":10006}],"1561558407683":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":5,\"lSequence\":1561558407683,\"points\":[{\"x\":4488,\"y\":8165},{\"x\":4501,\"y\":8188},{\"x\":4724,\"y\":8188},{\"x\":4908,\"y\":8212},{\"x\":5000,\"y\":8305},{\"x\":5026,\"y\":8305}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":200}","eType":10006}],"1561558408572":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":6,\"lSequence\":1561558408572,\"points\":[{\"x\":5354,\"y\":8352},{\"x\":5564,\"y\":8352}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":201}","eType":10006}],"1561558408775":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":6,\"lSequence\":1561558408775,\"points\":[{\"x\":5354,\"y\":8352},{\"x\":5682,\"y\":8352}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":201}","eType":10006}],"1561558408977":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":6,\"lSequence\":1561558408977,\"points\":[{\"x\":5354,\"y\":8352},{\"x\":5761,\"y\":8352}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":200}","eType":10006}],"1561558410397":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":7,\"lSequence\":1561558410397,\"points\":[{\"x\":6049,\"y\":8282},{\"x\":6207,\"y\":8282},{\"x\":6430,\"y\":8328}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":193}","eType":10006}],"1561558410569":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":7,\"lSequence\":1561558410569,\"points\":[{\"x\":6430,\"y\":8328},{\"x\":6601,\"y\":8375},{\"x\":6614,\"y\":8375}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":182}","eType":10006}],"1561558411770":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":8,\"lSequence\":1561558411770,\"points\":[{\"x\":5551,\"y\":7022},{\"x\":5524,\"y\":7022},{\"x\":5498,\"y\":7045},{\"x\":5446,\"y\":7115},{\"x\":5419,\"y\":7185},{\"x\":5393,\"y\":7279},{\"x\":5393,\"y\":7302},{\"x\":5380,\"y\":7372},{\"x\":5380,\"y\":7395},{\"x\":5367,\"y\":7442}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":193}","eType":10006}],"1561558411973":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":8,\"lSequence\":1561558411973,\"points\":[{\"x\":5380,\"y\":7395},{\"x\":5354,\"y\":7489},{\"x\":5472,\"y\":7489}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":209}","eType":10006}],"1561558412175":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":8,\"lSequence\":1561558412175,\"points\":[{\"x\":5354,\"y\":7489},{\"x\":5485,\"y\":7489},{\"x\":5511,\"y\":7465},{\"x\":5524,\"y\":7465},{\"x\":5551,\"y\":7442},{\"x\":5616,\"y\":7442}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":199}","eType":10006}],"1561558412378":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":8,\"lSequence\":1561558412378,\"points\":[{\"x\":5616,\"y\":7442},{\"x\":5616,\"y\":7139}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":200}","eType":10006}],"1561558412581":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":8,\"lSequence\":1561558412581,\"points\":[{\"x\":5616,\"y\":7442},{\"x\":5616,\"y\":6929}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":201}","eType":10006}],"1561558413595":[{"bytes":"{\"iPageId\":15,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_e85e9dbfe858399755b0d4911e610df0_2560_1440.jpg?sign=2b6619b468838b624ccae052d71063c1&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558413595,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558433938":[{"bytes":"{\"iPageId\":16,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_5cc4f45bfcc3ec32e47b4a3eec3e3b28_2560_1440.jpg?sign=92d454ab1dad0c945525c942c1b3eec4&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558433938,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558439179":[{"bytes":"{\"iPageId\":17,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_1b3c3f7dff44113f0dea998b95796cd9_2560_1440.jpg?sign=bb5efac3b381ebaac78e9ad9d2212584&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558439179,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558444390":[{"bytes":"{\"iPageId\":18,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_ec2c586c5e4821a35da5cafc7267d849_2560_1440.jpg?sign=7bf8f0374ebf1bbe4da9fdd8d1c0c011&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558444390,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558449304":[{"bytes":"{\"iPageId\":19,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_7d9c04cad8f6e5d1ac38d88eaf54a348_2560_1440.jpg?sign=04974addf160ff7f6a9c170c60b778dc&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558449304,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558460801":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":19,\"iId\":9,\"lSequence\":1561558460801,\"points\":[{\"x\":5183,\"y\":5272},{\"x\":5209,\"y\":5272},{\"x\":5367,\"y\":5202},{\"x\":5485,\"y\":5202}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":203}","eType":10006}],"1561558461004":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":19,\"iId\":9,\"lSequence\":1561558461004,\"points\":[{\"x\":5485,\"y\":5202},{\"x\":5551,\"y\":5179},{\"x\":5577,\"y\":5156},{\"x\":5590,\"y\":5156}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":213}","eType":10006}],"1561558461066":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":19,\"iId\":9,\"lSequence\":1561558461066,\"points\":[{\"x\":5577,\"y\":5156},{\"x\":5616,\"y\":5156}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":52}","eType":10006}],"1561558462143":[{"bytes":"{\"iPageId\":20,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_281b7eb74f221fadf498b0b205b752df_2560_1440.jpg?sign=feb4e30fdd590281f4eb0839da6d8fc2&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558462143,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558467072":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":20,\"iId\":10,\"lSequence\":1561558467072,\"points\":[{\"x\":4593,\"y\":5762},{\"x\":4593,\"y\":5972},{\"x\":4606,\"y\":6042},{\"x\":4645,\"y\":6089},{\"x\":4645,\"y\":6182},{\"x\":4658,\"y\":6205},{\"x\":4658,\"y\":6299},{\"x\":4671,\"y\":6322},{\"x\":4671,\"y\":6369},{\"x\":4685,\"y\":6439},{\"x\":4698,\"y\":6485}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":189}","eType":10006}],"1561558467275":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":20,\"iId\":10,\"lSequence\":1561558467275,\"points\":[{\"x\":4698,\"y\":6485},{\"x\":4698,\"y\":6509},{\"x\":4711,\"y\":6555},{\"x\":4711,\"y\":6672},{\"x\":4737,\"y\":6695},{\"x\":4737,\"y\":6835},{\"x\":4750,\"y\":6859},{\"x\":4750,\"y\":6929},{\"x\":4763,\"y\":6975},{\"x\":4763,\"y\":7069},{\"x\":4776,\"y\":7092},{\"x\":4776,\"y\":7209}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":209}","eType":10006}],"1561558467478":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":20,\"iId\":10,\"lSequence\":1561558467478,\"points\":[{\"x\":4776,\"y\":7092},{\"x\":4776,\"y\":7535},{\"x\":4803,\"y\":7699},{\"x\":4803,\"y\":8445}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":200}","eType":10006}],"1561558467681":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":20,\"iId\":10,\"lSequence\":1561558467681,\"points\":[{\"x\":4803,\"y\":7699},{\"x\":4803,\"y\":8678},{\"x\":4829,\"y\":8772},{\"x\":4842,\"y\":8888},{\"x\":4842,\"y\":9005},{\"x\":4855,\"y\":9052},{\"x\":4855,\"y\":9075}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":201}","eType":10006}],"1561558476261":[{"bytes":"{\"iPageId\":21,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_5a5eb8ec39034a749be89ae9a2dd9208_2560_1440.jpg?sign=04618922a70c41548203a6a69a6f1144&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558476261,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558483780":[{"bytes":"{\"iPageId\":22,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_6f8e9b611564b2fabbdf987cbb967785_2560_1440.jpg?sign=6add789431a4201906eebc7177e97b49&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558483780,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558485933":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":22,\"iId\":11,\"lSequence\":1561558485933,\"points\":[{\"x\":6181,\"y\":5739},{\"x\":6181,\"y\":5785},{\"x\":6167,\"y\":5809},{\"x\":6154,\"y\":5879},{\"x\":6141,\"y\":5902},{\"x\":6102,\"y\":5972},{\"x\":6089,\"y\":6019},{\"x\":6076,\"y\":6019},{\"x\":6076,\"y\":6112},{\"x\":6062,\"y\":6182},{\"x\":6062,\"y\":6252}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":202}","eType":10006}],"1561558486136":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":22,\"iId\":11,\"lSequence\":1561558486136,\"points\":[{\"x\":6062,\"y\":6252},{\"x\":6036,\"y\":6299},{\"x\":6036,\"y\":6415},{\"x\":6023,\"y\":6439},{\"x\":6010,\"y\":6485},{\"x\":6010,\"y\":6579},{\"x\":5997,\"y\":6602},{\"x\":5997,\"y\":6649},{\"x\":5984,\"y\":6672},{\"x\":5984,\"y\":6719}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":203}","eType":10006}],"1561558487524":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":22,\"iId\":12,\"lSequence\":1561558487524,\"points\":[{\"x\":5656,\"y\":6789},{\"x\":5643,\"y\":6812},{\"x\":5616,\"y\":6905},{\"x\":5590,\"y\":7045},{\"x\":5577,\"y\":7232},{\"x\":5538,\"y\":7372},{\"x\":5538,\"y\":7629}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":199}","eType":10006}],"1561558487727":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":22,\"iId\":12,\"lSequence\":1561558487727,\"points\":[{\"x\":5538,\"y\":7629},{\"x\":5524,\"y\":7675},{\"x\":5524,\"y\":7722}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":195}","eType":10006}],"1561558492032":[{"bytes":"{\"iPageId\":23,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_68a645b7ba9d2206877b3393500554ee_2560_1440.jpg?sign=ecfa2833eab6a1fd5f5837841ff73e0e&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558492032,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558514824":[{"bytes":"{\"iPageId\":24,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_c6a4d431d261039fdf1cde4e657d6329_2560_1440.jpg?sign=e72c28f84e1d821e8f0431d97463f135&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558514824,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558517476":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":24,\"iId\":13,\"lSequence\":1561558517476,\"points\":[{\"x\":5695,\"y\":5902},{\"x\":5656,\"y\":5902},{\"x\":5643,\"y\":5925},{\"x\":5616,\"y\":5925},{\"x\":5603,\"y\":5949},{\"x\":5551,\"y\":6042},{\"x\":5551,\"y\":6112},{\"x\":5524,\"y\":6182},{\"x\":5511,\"y\":6229},{\"x\":5498,\"y\":6275},{\"x\":5498,\"y\":6369},{\"x\":5485,\"y\":6415},{\"x\":5485,\"y\":6439},{\"x\":5472,\"y\":6462},{\"x\":5472,\"y\":6485}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":194}","eType":10006}],"1561558517679":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":24,\"iId\":13,\"lSequence\":1561558517679,\"points\":[{\"x\":5472,\"y\":6462},{\"x\":5472,\"y\":6672}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":202}","eType":10006}],"1561558519426":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":24,\"iId\":14,\"lSequence\":1561558519426,\"points\":[{\"x\":5616,\"y\":6975},{\"x\":5616,\"y\":7045},{\"x\":5564,\"y\":7185},{\"x\":5564,\"y\":7232},{\"x\":5551,\"y\":7325},{\"x\":5551,\"y\":7442},{\"x\":5511,\"y\":7675},{\"x\":5498,\"y\":7722},{\"x\":5498,\"y\":7839},{\"x\":5485,\"y\":7862}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":401}","eType":10006}],"1561558520627":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":24,\"iId\":15,\"lSequence\":1561558520627,\"points\":[{\"x\":5590,\"y\":7722},{\"x\":5603,\"y\":7722},{\"x\":5603,\"y\":7769},{\"x\":5590,\"y\":7909},{\"x\":5577,\"y\":8025},{\"x\":5551,\"y\":8118},{\"x\":5551,\"y\":8188},{\"x\":5538,\"y\":8235},{\"x\":5511,\"y\":8258},{\"x\":5511,\"y\":8282}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":206}","eType":10006}],"1561558520799":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":24,\"iId\":15,\"lSequence\":1561558520799,\"points\":[{\"x\":5511,\"y\":8258},{\"x\":5511,\"y\":8328}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":167}","eType":10006}],"1561558521532":[{"bytes":"{\"iPageId\":25,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_31324aca39906037b4888f1afedd2c4a_2560_1440.jpg?sign=42fb4ab8510261bc80fca9366a5f1a2a&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558521532,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558526399":[{"bytes":"{\"iPageId\":26,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_076b5f737f144c4395fe00ef4634d361_2560_1440.jpg?sign=738e9a64971285ecfc7e6850849bcd01&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558526399,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558530877":[{"bytes":"{\"iPageId\":31,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_5f2660f5c001760ee4c15de3dee859c0_2560_1440.jpg?sign=459047f2597360157eb8b4fed3ada94f&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558530877,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558535182":[{"bytes":"{\"iPageId\":38,\"sUrl\":\"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_6765ffdbc7aff622916d1f1feb20b118_2560_1440.jpg?sign=dd7a60de2e9bf3d5524434181a255014&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,\"iHeight\":1440,\"lSequence\":1561558535182,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558541547":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":38,\"iId\":16,\"lSequence\":1561558541547,\"points\":[{\"x\":7034,\"y\":4969},{\"x\":7099,\"y\":4969},{\"x\":7139,\"y\":4992},{\"x\":7362,\"y\":4992}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":203}","eType":10006}],"1561558541750":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":38,\"iId\":16,\"lSequence\":1561558541750,\"points\":[{\"x\":7139,\"y\":4992},{\"x\":7664,\"y\":4992},{\"x\":7821,\"y\":5062},{\"x\":7887,\"y\":5086},{\"x\":8005,\"y\":5109},{\"x\":8097,\"y\":5132},{\"x\":8123,\"y\":5132}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":200}","eType":10006}],"1561558541890":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":38,\"iId\":16,\"lSequence\":1561558541890,\"points\":[{\"x\":8097,\"y\":5132},{\"x\":8136,\"y\":5132}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":148}","eType":10006}],"1561558542904":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":38,\"iId\":17,\"lSequence\":1561558542904,\"points\":[{\"x\":7060,\"y\":9028},{\"x\":7598,\"y\":9028},{\"x\":7769,\"y\":9052},{\"x\":7900,\"y\":9075},{\"x\":8005,\"y\":9075},{\"x\":8031,\"y\":9098}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":203}","eType":10006}],"1561558543107":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":38,\"iId\":17,\"lSequence\":1561558543107,\"points\":[{\"x\":8031,\"y\":9098},{\"x\":8871,\"y\":9098}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":201}","eType":10006}],"1561558543310":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":38,\"iId\":17,\"lSequence\":1561558543310,\"points\":[{\"x\":8031,\"y\":9098},{\"x\":9146,\"y\":9098}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":204}","eType":10006}]}
-     * videoPlayUrls : [{"bIsConcat":false,"eCdnType":1,"eMediaType":1,"iBitrate":0,"iDuration":344.1,"lFileSize":12495803,"lSequence":1561558230450,"sFileName":"5285890793612291017","sFormat":"mp4","sHttpsUrl":"https://1257236654.vod2.myqcloud.com/cc26eeabvodcq1257236654/130b772a5285890793612291017/f0.mp4?t=5e8a2a74&us=d923fa75&sign=d5e15b0eb7a7f9e61005f90cf5e9158a","sUrl":"http://1257236654.vod2.myqcloud.com/cc26eeabvodcq1257236654/130b772a5285890793612291017/f0.mp4?t=5e8a2a74&us=d923fa75&sign=d5e15b0eb7a7f9e61005f90cf5e9158a","sequenceInfos":[{"iDuration":344.1,"iStart":0,"lSequence":1561558230450}],"sharedPlaybackUrlInfos":[]}]
+     * roomInfo : {"iImId":0,"iResourceId":0,"iRoomId":9169,"iStatus":0,"iUserCount":0,"lBeginTime":1561558185,
+     * "lEndTime":1561558185,"lWatchSequence":0,"page":{"iColor":0,"iCoursewareId":1561558218,"iHeight":1440,
+     * "iOriginalPageId":0,"iPageId":1,"iScrollPosition":0,"iTabulaHeight":9,"iTabulaWidth":16,"iType":1,
+     * "iWidth":2560,"isOffline":false,"liveId":0,"sUrl":"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_ddbfc95ee4a66e8aaa1786179f7dc76c_2560_1440
+     * .jpg?sign=2743afe60049763aa52ad0c336495295&t=1586717940","traces":{},"lSequence":1,"operationType":0},"sName
+     * ":"【英语】管理类联考<必修课1>","sTeacher":"谷含笑"}
+     * sequenceMap : {"1":[{"bytes":"{\"iPageId\":1,\"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_ddbfc95ee4a66e8aaa1786179f7dc76c_2560_1440
+     * .jpg?sign=2743afe60049763aa52ad0c336495295&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,\"iTabulaHeight\":9,
+     * \"iScrollPosition\":50}","eType":10008}],"1561558227392":[{"bytes":"{\"iPageId\":1,\"sUrl\":\"//sfs-private
+     * .shangdejigou.cn/SunliveDocument/20190527/3461_ddbfc95ee4a66e8aaa1786179f7dc76c_2560_1440
+     * .jpg?sign=2743afe60049763aa52ad0c336495295&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558227392,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558231029":[{"bytes":"{\"iPageId\":1,
+     * \"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_ddbfc95ee4a66e8aaa1786179f7dc76c_2560_1440
+     * .jpg?sign=2743afe60049763aa52ad0c336495295&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558231029,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558241230":[{"bytes":"{\"iPageId\":2,
+     * \"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_7605df8f065577f6ce23f1ec929c03cf_2560_1440
+     * .jpg?sign=0eff7abc1c0730edad8051f869c9485f&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558241230,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558254146":[{"bytes":"{\"iPageId\":3,
+     * \"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_a154985692764dc3a2657758ed0f09ee_2560_1440
+     * .jpg?sign=52910ad8e774501050afade36af6e7bb&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558254146,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558267875":[{"bytes":"{\"version\":1,
+     * \"iType\":5,\"iCoursewareId\":1561558218,\"iPageId\":3,\"iId\":1,\"lSequence\":1561558267875,\"points\":[{\"x
+     * \":7217,\"y\":3032},{\"x\":8175,\"y\":5039}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",
+     * \"iDuration\":200}","eType":10006}],"1561558283787":[{"bytes":"{\"iPageId\":4,\"sUrl\":\"//sfs-private
+     * .shangdejigou.cn/SunliveDocument/20190508/1598_7ded3c72cb8fec44739d7f3f1e59f514_2560_1440
+     * .jpg?sign=7f65500cbb119ebfe9de393071438d07&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558283787,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558287141":[{"bytes":"{\"version\":1,
+     * \"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":4,\"iId\":2,\"lSequence\":1561558287141,\"points\":[{\"x
+     * \":3937,\"y\":6322},{\"x\":3937,\"y\":6392},{\"x\":3950,\"y\":6462}],\"penWidth\":6,\"iColor\":4294901760,
+     * \"sText\":\"\",\"iDuration\":404}","eType":10006}],"1561558287343":[{"bytes":"{\"version\":1,\"iType\":1,
+     * \"iCoursewareId\":1561558218,\"iPageId\":4,\"iId\":2,\"lSequence\":1561558287343,\"points\":[{\"x\":3950,
+     * \"y\":6462},{\"x\":3963,\"y\":6485},{\"x\":3976,\"y\":6532},{\"x\":3989,\"y\":6532},{\"x\":3989,\"y\":6579},{
+     * \"x\":4015,\"y\":6579}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":203}","eType":10006}
+     * ],"1561558287749":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":4,\"iId\":2,
+     * \"lSequence\":1561558287749,\"points\":[{\"x\":4015,\"y\":6579},{\"x\":4015,\"y\":6602},{\"x\":4041,\"y\":6579
+     * },{\"x\":4055,\"y\":6579},{\"x\":4055,\"y\":6555},{\"x\":4068,\"y\":6555},{\"x\":4068,\"y\":6532}],\"penWidth
+     * \":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":404}","eType":10006}],"1561558287952":[{"bytes":"{
+     * \"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":4,\"iId\":2,\"lSequence\":1561558287952,
+     * \"points\":[{\"x\":4068,\"y\":6532},{\"x\":4081,\"y\":6509},{\"x\":4094,\"y\":6509}],\"penWidth\":6,
+     * \"iColor\":4294901760,\"sText\":\"\",\"iDuration\":202}","eType":10006}],"1561558288155":[{"bytes":"{\"version
+     * \":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":4,\"iId\":2,\"lSequence\":1561558288155,\"points\":[
+     * {\"x\":4081,\"y\":6509},{\"x\":4120,\"y\":6509},{\"x\":4133,\"y\":6485},{\"x\":4133,\"y\":6462},{\"x\":4146,
+     * \"y\":6439},{\"x\":4160,\"y\":6392},{\"x\":4173,\"y\":6369},{\"x\":4186,\"y\":6345},{\"x\":4212,\"y\":6322},{
+     * \"x\":4212,\"y\":6299}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":204}","eType":10006}
+     * ],"1561558288357":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":4,\"iId\":2,
+     * \"lSequence\":1561558288357,\"points\":[{\"x\":4212,\"y\":6299},{\"x\":4225,\"y\":6299}],\"penWidth\":6,
+     * \"iColor\":4294901760,\"sText\":\"\",\"iDuration\":204}","eType":10006}],"1561558299012":[{"bytes":"{\"iPageId
+     * \":7,\"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_0f62ba444ad3e4e8b4aa7d5b4823f3dd_2560_1440
+     * .jpg?sign=2d65aabea86556298a4bd1158e98d171&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558299012,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558304114":[{"bytes":"{\"iPageId\":8,
+     * \"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_2faea2c379bf9233287adfaf80829b38_2560_1440
+     * .jpg?sign=288b5452029ed7203a593973bca6f545&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558304114,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558307639":[{"bytes":"{\"iPageId\":9,
+     * \"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_9aacb699046c3bef7c26afd9c31577f8_2560_1440
+     * .jpg?sign=9d5fb15723af3613bc0003d8af9b3fd7&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558307639,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558377481":[{"bytes":"{\"iPageId\":10,
+     * \"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_ed567872a3d48a112b8a7bd98a2f58a2_2560_1440
+     * .jpg?sign=bf23eac303e1575703afdd560ca697f7&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558377481,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558380694":[{"bytes":"{\"iPageId\":11,
+     * \"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_fc8b2a269cf8ab4b561cf397a25a8257_2560_1440
+     * .jpg?sign=0c503d0617e968d8186502e5a7cc17e9&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558380694,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558390835":[{"bytes":"{\"iPageId\":12,
+     * \"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_09da44adccb6f7384e129dc8c49da8c3_2560_1440
+     * .jpg?sign=3326769c625bf383b078cf6ad89aea08&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558390835,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558398931":[{"bytes":"{\"iPageId\":13,
+     * \"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_985993fdde3df731d86320a4e4a96862_2560_1440
+     * .jpg?sign=f0d48508bc70bfd0d65f257796541c94&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558398931,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558400351":[{"bytes":"{\"iPageId\":14,
+     * \"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_e1107d07c98d7b3e7d015f95464a0dc6_2560_1440
+     * .jpg?sign=96d8ae97dc3d431de832b9c647b44b8b&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558400351,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558403424":[{"bytes":"{\"version\":1,
+     * \"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":3,\"lSequence\":1561558403424,\"points\":[{\"x
+     * \":4120,\"y\":4852},{\"x\":4225,\"y\":4852}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",
+     * \"iDuration\":198}","eType":10006}],"1561558403627":[{"bytes":"{\"version\":1,\"iType\":1,
+     * \"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":3,\"lSequence\":1561558403627,\"points\":[{\"x\":4120,
+     * \"y\":4852},{\"x\":4265,\"y\":4852},{\"x\":4304,\"y\":4806},{\"x\":4422,\"y\":4806}],\"penWidth\":6,
+     * \"iColor\":4294901760,\"sText\":\"\",\"iDuration\":202}","eType":10006}],"1561558403829":[{"bytes":"{\"version
+     * \":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":3,\"lSequence\":1561558403829,
+     * \"points\":[{\"x\":4304,\"y\":4806},{\"x\":4475,\"y\":4806},{\"x\":4488,\"y\":4829}],\"penWidth\":6,
+     * \"iColor\":4294901760,\"sText\":\"\",\"iDuration\":204}","eType":10006}],"1561558403876":[{"bytes":"{\"version
+     * \":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":3,\"lSequence\":1561558403876,
+     * \"points\":[{\"x\":4488,\"y\":4829},{\"x\":4514,\"y\":4829}],\"penWidth\":6,\"iColor\":4294901760,
+     * \"sText\":\"\",\"iDuration\":51}","eType":10006}],"1561558405046":[{"bytes":"{\"version\":1,\"iType\":1,
+     * \"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":4,\"lSequence\":1561558405046,\"points\":[{\"x\":5091,
+     * \"y\":4899},{\"x\":5288,\"y\":4899}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":210}",
+     * "eType":10006}],"1561558405249":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,
+     * \"iPageId\":14,\"iId\":4,\"lSequence\":1561558405249,\"points\":[{\"x\":5091,\"y\":4899},{\"x\":5524,
+     * \"y\":4899},{\"x\":5564,\"y\":4922},{\"x\":5629,\"y\":4922}],\"penWidth\":6,\"iColor\":4294901760,
+     * \"sText\":\"\",\"iDuration\":194}","eType":10006}],"1561558405374":[{"bytes":"{\"version\":1,\"iType\":1,
+     * \"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":4,\"lSequence\":1561558405374,\"points\":[{\"x\":5629,
+     * \"y\":4922},{\"x\":5643,\"y\":4946},{\"x\":5669,\"y\":4946}],\"penWidth\":6,\"iColor\":4294901760,
+     * \"sText\":\"\",\"iDuration\":136}","eType":10006}],"1561558407683":[{"bytes":"{\"version\":1,\"iType\":1,
+     * \"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":5,\"lSequence\":1561558407683,\"points\":[{\"x\":4488,
+     * \"y\":8165},{\"x\":4501,\"y\":8188},{\"x\":4724,\"y\":8188},{\"x\":4908,\"y\":8212},{\"x\":5000,\"y\":8305},{
+     * \"x\":5026,\"y\":8305}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":200}","eType":10006}
+     * ],"1561558408572":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":6,
+     * \"lSequence\":1561558408572,\"points\":[{\"x\":5354,\"y\":8352},{\"x\":5564,\"y\":8352}],\"penWidth\":6,
+     * \"iColor\":4294901760,\"sText\":\"\",\"iDuration\":201}","eType":10006}],"1561558408775":[{"bytes":"{\"version
+     * \":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":6,\"lSequence\":1561558408775,
+     * \"points\":[{\"x\":5354,\"y\":8352},{\"x\":5682,\"y\":8352}],\"penWidth\":6,\"iColor\":4294901760,
+     * \"sText\":\"\",\"iDuration\":201}","eType":10006}],"1561558408977":[{"bytes":"{\"version\":1,\"iType\":1,
+     * \"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":6,\"lSequence\":1561558408977,\"points\":[{\"x\":5354,
+     * \"y\":8352},{\"x\":5761,\"y\":8352}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":200}",
+     * "eType":10006}],"1561558410397":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,
+     * \"iPageId\":14,\"iId\":7,\"lSequence\":1561558410397,\"points\":[{\"x\":6049,\"y\":8282},{\"x\":6207,
+     * \"y\":8282},{\"x\":6430,\"y\":8328}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":193}",
+     * "eType":10006}],"1561558410569":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,
+     * \"iPageId\":14,\"iId\":7,\"lSequence\":1561558410569,\"points\":[{\"x\":6430,\"y\":8328},{\"x\":6601,
+     * \"y\":8375},{\"x\":6614,\"y\":8375}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":182}",
+     * "eType":10006}],"1561558411770":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,
+     * \"iPageId\":14,\"iId\":8,\"lSequence\":1561558411770,\"points\":[{\"x\":5551,\"y\":7022},{\"x\":5524,
+     * \"y\":7022},{\"x\":5498,\"y\":7045},{\"x\":5446,\"y\":7115},{\"x\":5419,\"y\":7185},{\"x\":5393,\"y\":7279},{
+     * \"x\":5393,\"y\":7302},{\"x\":5380,\"y\":7372},{\"x\":5380,\"y\":7395},{\"x\":5367,\"y\":7442}],\"penWidth
+     * \":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":193}","eType":10006}],"1561558411973":[{"bytes":"{
+     * \"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":8,\"lSequence\":1561558411973,
+     * \"points\":[{\"x\":5380,\"y\":7395},{\"x\":5354,\"y\":7489},{\"x\":5472,\"y\":7489}],\"penWidth\":6,
+     * \"iColor\":4294901760,\"sText\":\"\",\"iDuration\":209}","eType":10006}],"1561558412175":[{"bytes":"{\"version
+     * \":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":8,\"lSequence\":1561558412175,
+     * \"points\":[{\"x\":5354,\"y\":7489},{\"x\":5485,\"y\":7489},{\"x\":5511,\"y\":7465},{\"x\":5524,\"y\":7465},{
+     * \"x\":5551,\"y\":7442},{\"x\":5616,\"y\":7442}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",
+     * \"iDuration\":199}","eType":10006}],"1561558412378":[{"bytes":"{\"version\":1,\"iType\":1,
+     * \"iCoursewareId\":1561558218,\"iPageId\":14,\"iId\":8,\"lSequence\":1561558412378,\"points\":[{\"x\":5616,
+     * \"y\":7442},{\"x\":5616,\"y\":7139}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":200}",
+     * "eType":10006}],"1561558412581":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,
+     * \"iPageId\":14,\"iId\":8,\"lSequence\":1561558412581,\"points\":[{\"x\":5616,\"y\":7442},{\"x\":5616,
+     * \"y\":6929}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":201}","eType":10006}],
+     * "1561558413595":[{"bytes":"{\"iPageId\":15,\"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_e85e9dbfe858399755b0d4911e610df0_2560_1440
+     * .jpg?sign=2b6619b468838b624ccae052d71063c1&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558413595,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558433938":[{"bytes":"{\"iPageId\":16,
+     * \"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_5cc4f45bfcc3ec32e47b4a3eec3e3b28_2560_1440
+     * .jpg?sign=92d454ab1dad0c945525c942c1b3eec4&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558433938,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558439179":[{"bytes":"{\"iPageId\":17,
+     * \"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_1b3c3f7dff44113f0dea998b95796cd9_2560_1440
+     * .jpg?sign=bb5efac3b381ebaac78e9ad9d2212584&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558439179,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558444390":[{"bytes":"{\"iPageId\":18,
+     * \"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_ec2c586c5e4821a35da5cafc7267d849_2560_1440
+     * .jpg?sign=7bf8f0374ebf1bbe4da9fdd8d1c0c011&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558444390,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558449304":[{"bytes":"{\"iPageId\":19,
+     * \"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_7d9c04cad8f6e5d1ac38d88eaf54a348_2560_1440
+     * .jpg?sign=04974addf160ff7f6a9c170c60b778dc&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558449304,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558460801":[{"bytes":"{\"version\":1,
+     * \"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":19,\"iId\":9,\"lSequence\":1561558460801,\"points\":[{\"x
+     * \":5183,\"y\":5272},{\"x\":5209,\"y\":5272},{\"x\":5367,\"y\":5202},{\"x\":5485,\"y\":5202}],\"penWidth\":6,
+     * \"iColor\":4294901760,\"sText\":\"\",\"iDuration\":203}","eType":10006}],"1561558461004":[{"bytes":"{\"version
+     * \":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":19,\"iId\":9,\"lSequence\":1561558461004,
+     * \"points\":[{\"x\":5485,\"y\":5202},{\"x\":5551,\"y\":5179},{\"x\":5577,\"y\":5156},{\"x\":5590,\"y\":5156}],
+     * \"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":213}","eType":10006}],"1561558461066":[{
+     * "bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":19,\"iId\":9,
+     * \"lSequence\":1561558461066,\"points\":[{\"x\":5577,\"y\":5156},{\"x\":5616,\"y\":5156}],\"penWidth\":6,
+     * \"iColor\":4294901760,\"sText\":\"\",\"iDuration\":52}","eType":10006}],"1561558462143":[{"bytes":"{\"iPageId
+     * \":20,\"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_281b7eb74f221fadf498b0b205b752df_2560_1440
+     * .jpg?sign=feb4e30fdd590281f4eb0839da6d8fc2&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558462143,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558467072":[{"bytes":"{\"version\":1,
+     * \"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":20,\"iId\":10,\"lSequence\":1561558467072,\"points\":[{
+     * \"x\":4593,\"y\":5762},{\"x\":4593,\"y\":5972},{\"x\":4606,\"y\":6042},{\"x\":4645,\"y\":6089},{\"x\":4645,
+     * \"y\":6182},{\"x\":4658,\"y\":6205},{\"x\":4658,\"y\":6299},{\"x\":4671,\"y\":6322},{\"x\":4671,\"y\":6369},{
+     * \"x\":4685,\"y\":6439},{\"x\":4698,\"y\":6485}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",
+     * \"iDuration\":189}","eType":10006}],"1561558467275":[{"bytes":"{\"version\":1,\"iType\":1,
+     * \"iCoursewareId\":1561558218,\"iPageId\":20,\"iId\":10,\"lSequence\":1561558467275,\"points\":[{\"x\":4698,
+     * \"y\":6485},{\"x\":4698,\"y\":6509},{\"x\":4711,\"y\":6555},{\"x\":4711,\"y\":6672},{\"x\":4737,\"y\":6695},{
+     * \"x\":4737,\"y\":6835},{\"x\":4750,\"y\":6859},{\"x\":4750,\"y\":6929},{\"x\":4763,\"y\":6975},{\"x\":4763,
+     * \"y\":7069},{\"x\":4776,\"y\":7092},{\"x\":4776,\"y\":7209}],\"penWidth\":6,\"iColor\":4294901760,
+     * \"sText\":\"\",\"iDuration\":209}","eType":10006}],"1561558467478":[{"bytes":"{\"version\":1,\"iType\":1,
+     * \"iCoursewareId\":1561558218,\"iPageId\":20,\"iId\":10,\"lSequence\":1561558467478,\"points\":[{\"x\":4776,
+     * \"y\":7092},{\"x\":4776,\"y\":7535},{\"x\":4803,\"y\":7699},{\"x\":4803,\"y\":8445}],\"penWidth\":6,
+     * \"iColor\":4294901760,\"sText\":\"\",\"iDuration\":200}","eType":10006}],"1561558467681":[{"bytes":"{\"version
+     * \":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":20,\"iId\":10,\"lSequence\":1561558467681,
+     * \"points\":[{\"x\":4803,\"y\":7699},{\"x\":4803,\"y\":8678},{\"x\":4829,\"y\":8772},{\"x\":4842,\"y\":8888},{
+     * \"x\":4842,\"y\":9005},{\"x\":4855,\"y\":9052},{\"x\":4855,\"y\":9075}],\"penWidth\":6,\"iColor\":4294901760,
+     * \"sText\":\"\",\"iDuration\":201}","eType":10006}],"1561558476261":[{"bytes":"{\"iPageId\":21,
+     * \"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_5a5eb8ec39034a749be89ae9a2dd9208_2560_1440
+     * .jpg?sign=04618922a70c41548203a6a69a6f1144&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558476261,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558483780":[{"bytes":"{\"iPageId\":22,
+     * \"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_6f8e9b611564b2fabbdf987cbb967785_2560_1440
+     * .jpg?sign=6add789431a4201906eebc7177e97b49&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558483780,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558485933":[{"bytes":"{\"version\":1,
+     * \"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":22,\"iId\":11,\"lSequence\":1561558485933,\"points\":[{
+     * \"x\":6181,\"y\":5739},{\"x\":6181,\"y\":5785},{\"x\":6167,\"y\":5809},{\"x\":6154,\"y\":5879},{\"x\":6141,
+     * \"y\":5902},{\"x\":6102,\"y\":5972},{\"x\":6089,\"y\":6019},{\"x\":6076,\"y\":6019},{\"x\":6076,\"y\":6112},{
+     * \"x\":6062,\"y\":6182},{\"x\":6062,\"y\":6252}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",
+     * \"iDuration\":202}","eType":10006}],"1561558486136":[{"bytes":"{\"version\":1,\"iType\":1,
+     * \"iCoursewareId\":1561558218,\"iPageId\":22,\"iId\":11,\"lSequence\":1561558486136,\"points\":[{\"x\":6062,
+     * \"y\":6252},{\"x\":6036,\"y\":6299},{\"x\":6036,\"y\":6415},{\"x\":6023,\"y\":6439},{\"x\":6010,\"y\":6485},{
+     * \"x\":6010,\"y\":6579},{\"x\":5997,\"y\":6602},{\"x\":5997,\"y\":6649},{\"x\":5984,\"y\":6672},{\"x\":5984,
+     * \"y\":6719}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":203}","eType":10006}],
+     * "1561558487524":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":22,\"iId\":12,
+     * \"lSequence\":1561558487524,\"points\":[{\"x\":5656,\"y\":6789},{\"x\":5643,\"y\":6812},{\"x\":5616,\"y\":6905
+     * },{\"x\":5590,\"y\":7045},{\"x\":5577,\"y\":7232},{\"x\":5538,\"y\":7372},{\"x\":5538,\"y\":7629}],\"penWidth
+     * \":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":199}","eType":10006}],"1561558487727":[{"bytes":"{
+     * \"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":22,\"iId\":12,\"lSequence\":1561558487727,
+     * \"points\":[{\"x\":5538,\"y\":7629},{\"x\":5524,\"y\":7675},{\"x\":5524,\"y\":7722}],\"penWidth\":6,
+     * \"iColor\":4294901760,\"sText\":\"\",\"iDuration\":195}","eType":10006}],"1561558492032":[{"bytes":"{\"iPageId
+     * \":23,\"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_68a645b7ba9d2206877b3393500554ee_2560_1440
+     * .jpg?sign=ecfa2833eab6a1fd5f5837841ff73e0e&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558492032,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558514824":[{"bytes":"{\"iPageId\":24,
+     * \"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_c6a4d431d261039fdf1cde4e657d6329_2560_1440
+     * .jpg?sign=e72c28f84e1d821e8f0431d97463f135&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558514824,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558517476":[{"bytes":"{\"version\":1,
+     * \"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":24,\"iId\":13,\"lSequence\":1561558517476,\"points\":[{
+     * \"x\":5695,\"y\":5902},{\"x\":5656,\"y\":5902},{\"x\":5643,\"y\":5925},{\"x\":5616,\"y\":5925},{\"x\":5603,
+     * \"y\":5949},{\"x\":5551,\"y\":6042},{\"x\":5551,\"y\":6112},{\"x\":5524,\"y\":6182},{\"x\":5511,\"y\":6229},{
+     * \"x\":5498,\"y\":6275},{\"x\":5498,\"y\":6369},{\"x\":5485,\"y\":6415},{\"x\":5485,\"y\":6439},{\"x\":5472,
+     * \"y\":6462},{\"x\":5472,\"y\":6485}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":194}",
+     * "eType":10006}],"1561558517679":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,
+     * \"iPageId\":24,\"iId\":13,\"lSequence\":1561558517679,\"points\":[{\"x\":5472,\"y\":6462},{\"x\":5472,
+     * \"y\":6672}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":202}","eType":10006}],
+     * "1561558519426":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":24,\"iId\":14,
+     * \"lSequence\":1561558519426,\"points\":[{\"x\":5616,\"y\":6975},{\"x\":5616,\"y\":7045},{\"x\":5564,\"y\":7185
+     * },{\"x\":5564,\"y\":7232},{\"x\":5551,\"y\":7325},{\"x\":5551,\"y\":7442},{\"x\":5511,\"y\":7675},{\"x\":5498,
+     * \"y\":7722},{\"x\":5498,\"y\":7839},{\"x\":5485,\"y\":7862}],\"penWidth\":6,\"iColor\":4294901760,
+     * \"sText\":\"\",\"iDuration\":401}","eType":10006}],"1561558520627":[{"bytes":"{\"version\":1,\"iType\":1,
+     * \"iCoursewareId\":1561558218,\"iPageId\":24,\"iId\":15,\"lSequence\":1561558520627,\"points\":[{\"x\":5590,
+     * \"y\":7722},{\"x\":5603,\"y\":7722},{\"x\":5603,\"y\":7769},{\"x\":5590,\"y\":7909},{\"x\":5577,\"y\":8025},{
+     * \"x\":5551,\"y\":8118},{\"x\":5551,\"y\":8188},{\"x\":5538,\"y\":8235},{\"x\":5511,\"y\":8258},{\"x\":5511,
+     * \"y\":8282}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":206}","eType":10006}],
+     * "1561558520799":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":24,\"iId\":15,
+     * \"lSequence\":1561558520799,\"points\":[{\"x\":5511,\"y\":8258},{\"x\":5511,\"y\":8328}],\"penWidth\":6,
+     * \"iColor\":4294901760,\"sText\":\"\",\"iDuration\":167}","eType":10006}],"1561558521532":[{"bytes":"{\"iPageId
+     * \":25,\"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_31324aca39906037b4888f1afedd2c4a_2560_1440
+     * .jpg?sign=42fb4ab8510261bc80fca9366a5f1a2a&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558521532,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558526399":[{"bytes":"{\"iPageId\":26,
+     * \"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_076b5f737f144c4395fe00ef4634d361_2560_1440
+     * .jpg?sign=738e9a64971285ecfc7e6850849bcd01&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558526399,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558530877":[{"bytes":"{\"iPageId\":31,
+     * \"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_5f2660f5c001760ee4c15de3dee859c0_2560_1440
+     * .jpg?sign=459047f2597360157eb8b4fed3ada94f&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558530877,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558535182":[{"bytes":"{\"iPageId\":38,
+     * \"sUrl\":\"//sfs-private.shangdejigou
+     * .cn/SunliveDocument/20190527/3461_6765ffdbc7aff622916d1f1feb20b118_2560_1440
+     * .jpg?sign=dd7a60de2e9bf3d5524434181a255014&t=1586717940\",\"iType\":1,\"traces\":{},\"iWidth\":2560,
+     * \"iHeight\":1440,\"lSequence\":1561558535182,\"iCoursewareId\":1561558218,\"iTabulaWidth\":16,
+     * \"iTabulaHeight\":9,\"iScrollPosition\":50}","eType":10008}],"1561558541547":[{"bytes":"{\"version\":1,
+     * \"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":38,\"iId\":16,\"lSequence\":1561558541547,\"points\":[{
+     * \"x\":7034,\"y\":4969},{\"x\":7099,\"y\":4969},{\"x\":7139,\"y\":4992},{\"x\":7362,\"y\":4992}],\"penWidth
+     * \":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":203}","eType":10006}],"1561558541750":[{"bytes":"{
+     * \"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":38,\"iId\":16,\"lSequence\":1561558541750,
+     * \"points\":[{\"x\":7139,\"y\":4992},{\"x\":7664,\"y\":4992},{\"x\":7821,\"y\":5062},{\"x\":7887,\"y\":5086},{
+     * \"x\":8005,\"y\":5109},{\"x\":8097,\"y\":5132},{\"x\":8123,\"y\":5132}],\"penWidth\":6,\"iColor\":4294901760,
+     * \"sText\":\"\",\"iDuration\":200}","eType":10006}],"1561558541890":[{"bytes":"{\"version\":1,\"iType\":1,
+     * \"iCoursewareId\":1561558218,\"iPageId\":38,\"iId\":16,\"lSequence\":1561558541890,\"points\":[{\"x\":8097,
+     * \"y\":5132},{\"x\":8136,\"y\":5132}],\"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":148}",
+     * "eType":10006}],"1561558542904":[{"bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,
+     * \"iPageId\":38,\"iId\":17,\"lSequence\":1561558542904,\"points\":[{\"x\":7060,\"y\":9028},{\"x\":7598,
+     * \"y\":9028},{\"x\":7769,\"y\":9052},{\"x\":7900,\"y\":9075},{\"x\":8005,\"y\":9075},{\"x\":8031,\"y\":9098}],
+     * \"penWidth\":6,\"iColor\":4294901760,\"sText\":\"\",\"iDuration\":203}","eType":10006}],"1561558543107":[{
+     * "bytes":"{\"version\":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":38,\"iId\":17,
+     * \"lSequence\":1561558543107,\"points\":[{\"x\":8031,\"y\":9098},{\"x\":8871,\"y\":9098}],\"penWidth\":6,
+     * \"iColor\":4294901760,\"sText\":\"\",\"iDuration\":201}","eType":10006}],"1561558543310":[{"bytes":"{\"version
+     * \":1,\"iType\":1,\"iCoursewareId\":1561558218,\"iPageId\":38,\"iId\":17,\"lSequence\":1561558543310,
+     * \"points\":[{\"x\":8031,\"y\":9098},{\"x\":9146,\"y\":9098}],\"penWidth\":6,\"iColor\":4294901760,
+     * \"sText\":\"\",\"iDuration\":204}","eType":10006}]}
+     * videoPlayUrls : [{"bIsConcat":false,"eCdnType":1,"eMediaType":1,"iBitrate":0,"iDuration":344.1,
+     * "lFileSize":12495803,"lSequence":1561558230450,"sFileName":"5285890793612291017","sFormat":"mp4",
+     * "sHttpsUrl":"https://1257236654.vod2.myqcloud.com/cc26eeabvodcq1257236654/130b772a5285890793612291017/f0
+     * .mp4?t=5e8a2a74&us=d923fa75&sign=d5e15b0eb7a7f9e61005f90cf5e9158a","sUrl":"http://1257236654.vod2.myqcloud
+     * .com/cc26eeabvodcq1257236654/130b772a5285890793612291017/f0
+     * .mp4?t=5e8a2a74&us=d923fa75&sign=d5e15b0eb7a7f9e61005f90cf5e9158a","sequenceInfos":[{"iDuration":344.1,
+     * "iStart":0,"lSequence":1561558230450}],"sharedPlaybackUrlInfos":[]}]
      */
 
     private RoomInfoBean roomInfo;
@@ -66,7 +374,11 @@ public class CourseInfoDTO {
          * lBeginTime : 1561558185
          * lEndTime : 1561558185
          * lWatchSequence : 0
-         * page : {"iColor":0,"iCoursewareId":1561558218,"iHeight":1440,"iOriginalPageId":0,"iPageId":1,"iScrollPosition":0,"iTabulaHeight":9,"iTabulaWidth":16,"iType":1,"iWidth":2560,"isOffline":false,"liveId":0,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_ddbfc95ee4a66e8aaa1786179f7dc76c_2560_1440.jpg?sign=2743afe60049763aa52ad0c336495295&t=1586717940","traces":{},"lSequence":1,"operationType":0}
+         * page : {"iColor":0,"iCoursewareId":1561558218,"iHeight":1440,"iOriginalPageId":0,"iPageId":1,
+         * "iScrollPosition":0,"iTabulaHeight":9,"iTabulaWidth":16,"iType":1,"iWidth":2560,"isOffline":false,
+         * "liveId":0,"sUrl":"//sfs-private.shangdejigou
+         * .cn/SunliveDocument/20190527/3461_ddbfc95ee4a66e8aaa1786179f7dc76c_2560_1440
+         * .jpg?sign=2743afe60049763aa52ad0c336495295&t=1586717940","traces":{},"lSequence":1,"operationType":0}
          * sName : 【英语】管理类联考<必修课1>
          * sTeacher : 谷含笑
          */
@@ -185,7 +497,9 @@ public class CourseInfoDTO {
              * iWidth : 2560
              * isOffline : false
              * liveId : 0
-             * sUrl : //sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_ddbfc95ee4a66e8aaa1786179f7dc76c_2560_1440.jpg?sign=2743afe60049763aa52ad0c336495295&t=1586717940
+             * sUrl : //sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_ddbfc95ee4a66e8aaa1786179f7dc76c_2560_1440
+             * .jpg?sign=2743afe60049763aa52ad0c336495295&t=1586717940
              * traces : {}
              * lSequence : 1
              * operationType : 0
@@ -1095,7 +1409,11 @@ public class CourseInfoDTO {
 
         public static class _$1Bean {
             /**
-             * bytes : {"iPageId":1,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_ddbfc95ee4a66e8aaa1786179f7dc76c_2560_1440.jpg?sign=2743afe60049763aa52ad0c336495295&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":1,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_ddbfc95ee4a66e8aaa1786179f7dc76c_2560_1440
+             * .jpg?sign=2743afe60049763aa52ad0c336495295&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,
+             * "iScrollPosition":50}
              * eType : 10008
              */
 
@@ -1121,7 +1439,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558227392Bean {
             /**
-             * bytes : {"iPageId":1,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_ddbfc95ee4a66e8aaa1786179f7dc76c_2560_1440.jpg?sign=2743afe60049763aa52ad0c336495295&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558227392,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":1,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_ddbfc95ee4a66e8aaa1786179f7dc76c_2560_1440
+             * .jpg?sign=2743afe60049763aa52ad0c336495295&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558227392,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -1147,7 +1469,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558231029Bean {
             /**
-             * bytes : {"iPageId":1,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_ddbfc95ee4a66e8aaa1786179f7dc76c_2560_1440.jpg?sign=2743afe60049763aa52ad0c336495295&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558231029,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":1,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_ddbfc95ee4a66e8aaa1786179f7dc76c_2560_1440
+             * .jpg?sign=2743afe60049763aa52ad0c336495295&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558231029,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -1173,7 +1499,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558241230Bean {
             /**
-             * bytes : {"iPageId":2,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_7605df8f065577f6ce23f1ec929c03cf_2560_1440.jpg?sign=0eff7abc1c0730edad8051f869c9485f&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558241230,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":2,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_7605df8f065577f6ce23f1ec929c03cf_2560_1440
+             * .jpg?sign=0eff7abc1c0730edad8051f869c9485f&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558241230,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -1199,7 +1529,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558254146Bean {
             /**
-             * bytes : {"iPageId":3,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_a154985692764dc3a2657758ed0f09ee_2560_1440.jpg?sign=52910ad8e774501050afade36af6e7bb&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558254146,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":3,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_a154985692764dc3a2657758ed0f09ee_2560_1440
+             * .jpg?sign=52910ad8e774501050afade36af6e7bb&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558254146,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -1225,7 +1559,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558267875Bean {
             /**
-             * bytes : {"version":1,"iType":5,"iCoursewareId":1561558218,"iPageId":3,"iId":1,"lSequence":1561558267875,"points":[{"x":7217,"y":3032},{"x":8175,"y":5039}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":200}
+             * bytes : {"version":1,"iType":5,"iCoursewareId":1561558218,"iPageId":3,"iId":1,
+             * "lSequence":1561558267875,"points":[{"x":7217,"y":3032},{"x":8175,"y":5039}],"penWidth":6,
+             * "iColor":4294901760,"sText":"","iDuration":200}
              * eType : 10006
              */
 
@@ -1251,7 +1587,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558283787Bean {
             /**
-             * bytes : {"iPageId":4,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190508/1598_7ded3c72cb8fec44739d7f3f1e59f514_2560_1440.jpg?sign=7f65500cbb119ebfe9de393071438d07&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558283787,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":4,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190508/1598_7ded3c72cb8fec44739d7f3f1e59f514_2560_1440
+             * .jpg?sign=7f65500cbb119ebfe9de393071438d07&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558283787,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -1277,7 +1617,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558287141Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":4,"iId":2,"lSequence":1561558287141,"points":[{"x":3937,"y":6322},{"x":3937,"y":6392},{"x":3950,"y":6462}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":404}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":4,"iId":2,
+             * "lSequence":1561558287141,"points":[{"x":3937,"y":6322},{"x":3937,"y":6392},{"x":3950,"y":6462}],
+             * "penWidth":6,"iColor":4294901760,"sText":"","iDuration":404}
              * eType : 10006
              */
 
@@ -1303,7 +1645,10 @@ public class CourseInfoDTO {
 
         public static class _$1561558287343Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":4,"iId":2,"lSequence":1561558287343,"points":[{"x":3950,"y":6462},{"x":3963,"y":6485},{"x":3976,"y":6532},{"x":3989,"y":6532},{"x":3989,"y":6579},{"x":4015,"y":6579}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":203}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":4,"iId":2,
+             * "lSequence":1561558287343,"points":[{"x":3950,"y":6462},{"x":3963,"y":6485},{"x":3976,"y":6532},{"x
+             * ":3989,"y":6532},{"x":3989,"y":6579},{"x":4015,"y":6579}],"penWidth":6,"iColor":4294901760,"sText":"",
+             * "iDuration":203}
              * eType : 10006
              */
 
@@ -1329,7 +1674,10 @@ public class CourseInfoDTO {
 
         public static class _$1561558287749Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":4,"iId":2,"lSequence":1561558287749,"points":[{"x":4015,"y":6579},{"x":4015,"y":6602},{"x":4041,"y":6579},{"x":4055,"y":6579},{"x":4055,"y":6555},{"x":4068,"y":6555},{"x":4068,"y":6532}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":404}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":4,"iId":2,
+             * "lSequence":1561558287749,"points":[{"x":4015,"y":6579},{"x":4015,"y":6602},{"x":4041,"y":6579},{"x
+             * ":4055,"y":6579},{"x":4055,"y":6555},{"x":4068,"y":6555},{"x":4068,"y":6532}],"penWidth":6,
+             * "iColor":4294901760,"sText":"","iDuration":404}
              * eType : 10006
              */
 
@@ -1355,7 +1703,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558287952Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":4,"iId":2,"lSequence":1561558287952,"points":[{"x":4068,"y":6532},{"x":4081,"y":6509},{"x":4094,"y":6509}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":202}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":4,"iId":2,
+             * "lSequence":1561558287952,"points":[{"x":4068,"y":6532},{"x":4081,"y":6509},{"x":4094,"y":6509}],
+             * "penWidth":6,"iColor":4294901760,"sText":"","iDuration":202}
              * eType : 10006
              */
 
@@ -1381,7 +1731,10 @@ public class CourseInfoDTO {
 
         public static class _$1561558288155Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":4,"iId":2,"lSequence":1561558288155,"points":[{"x":4081,"y":6509},{"x":4120,"y":6509},{"x":4133,"y":6485},{"x":4133,"y":6462},{"x":4146,"y":6439},{"x":4160,"y":6392},{"x":4173,"y":6369},{"x":4186,"y":6345},{"x":4212,"y":6322},{"x":4212,"y":6299}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":204}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":4,"iId":2,
+             * "lSequence":1561558288155,"points":[{"x":4081,"y":6509},{"x":4120,"y":6509},{"x":4133,"y":6485},{"x
+             * ":4133,"y":6462},{"x":4146,"y":6439},{"x":4160,"y":6392},{"x":4173,"y":6369},{"x":4186,"y":6345},{"x
+             * ":4212,"y":6322},{"x":4212,"y":6299}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":204}
              * eType : 10006
              */
 
@@ -1407,7 +1760,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558288357Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":4,"iId":2,"lSequence":1561558288357,"points":[{"x":4212,"y":6299},{"x":4225,"y":6299}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":204}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":4,"iId":2,
+             * "lSequence":1561558288357,"points":[{"x":4212,"y":6299},{"x":4225,"y":6299}],"penWidth":6,
+             * "iColor":4294901760,"sText":"","iDuration":204}
              * eType : 10006
              */
 
@@ -1433,7 +1788,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558299012Bean {
             /**
-             * bytes : {"iPageId":7,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_0f62ba444ad3e4e8b4aa7d5b4823f3dd_2560_1440.jpg?sign=2d65aabea86556298a4bd1158e98d171&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558299012,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":7,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_0f62ba444ad3e4e8b4aa7d5b4823f3dd_2560_1440
+             * .jpg?sign=2d65aabea86556298a4bd1158e98d171&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558299012,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -1459,7 +1818,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558304114Bean {
             /**
-             * bytes : {"iPageId":8,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_2faea2c379bf9233287adfaf80829b38_2560_1440.jpg?sign=288b5452029ed7203a593973bca6f545&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558304114,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":8,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_2faea2c379bf9233287adfaf80829b38_2560_1440
+             * .jpg?sign=288b5452029ed7203a593973bca6f545&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558304114,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -1485,7 +1848,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558307639Bean {
             /**
-             * bytes : {"iPageId":9,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_9aacb699046c3bef7c26afd9c31577f8_2560_1440.jpg?sign=9d5fb15723af3613bc0003d8af9b3fd7&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558307639,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":9,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_9aacb699046c3bef7c26afd9c31577f8_2560_1440
+             * .jpg?sign=9d5fb15723af3613bc0003d8af9b3fd7&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558307639,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -1511,7 +1878,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558377481Bean {
             /**
-             * bytes : {"iPageId":10,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_ed567872a3d48a112b8a7bd98a2f58a2_2560_1440.jpg?sign=bf23eac303e1575703afdd560ca697f7&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558377481,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":10,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_ed567872a3d48a112b8a7bd98a2f58a2_2560_1440
+             * .jpg?sign=bf23eac303e1575703afdd560ca697f7&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558377481,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -1537,7 +1908,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558380694Bean {
             /**
-             * bytes : {"iPageId":11,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_fc8b2a269cf8ab4b561cf397a25a8257_2560_1440.jpg?sign=0c503d0617e968d8186502e5a7cc17e9&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558380694,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":11,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_fc8b2a269cf8ab4b561cf397a25a8257_2560_1440
+             * .jpg?sign=0c503d0617e968d8186502e5a7cc17e9&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558380694,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -1563,7 +1938,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558390835Bean {
             /**
-             * bytes : {"iPageId":12,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_09da44adccb6f7384e129dc8c49da8c3_2560_1440.jpg?sign=3326769c625bf383b078cf6ad89aea08&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558390835,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":12,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_09da44adccb6f7384e129dc8c49da8c3_2560_1440
+             * .jpg?sign=3326769c625bf383b078cf6ad89aea08&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558390835,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -1589,7 +1968,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558398931Bean {
             /**
-             * bytes : {"iPageId":13,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_985993fdde3df731d86320a4e4a96862_2560_1440.jpg?sign=f0d48508bc70bfd0d65f257796541c94&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558398931,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":13,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_985993fdde3df731d86320a4e4a96862_2560_1440
+             * .jpg?sign=f0d48508bc70bfd0d65f257796541c94&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558398931,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -1615,7 +1998,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558400351Bean {
             /**
-             * bytes : {"iPageId":14,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_e1107d07c98d7b3e7d015f95464a0dc6_2560_1440.jpg?sign=96d8ae97dc3d431de832b9c647b44b8b&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558400351,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":14,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_e1107d07c98d7b3e7d015f95464a0dc6_2560_1440
+             * .jpg?sign=96d8ae97dc3d431de832b9c647b44b8b&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558400351,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -1641,7 +2028,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558403424Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":3,"lSequence":1561558403424,"points":[{"x":4120,"y":4852},{"x":4225,"y":4852}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":198}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":3,
+             * "lSequence":1561558403424,"points":[{"x":4120,"y":4852},{"x":4225,"y":4852}],"penWidth":6,
+             * "iColor":4294901760,"sText":"","iDuration":198}
              * eType : 10006
              */
 
@@ -1667,7 +2056,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558403627Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":3,"lSequence":1561558403627,"points":[{"x":4120,"y":4852},{"x":4265,"y":4852},{"x":4304,"y":4806},{"x":4422,"y":4806}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":202}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":3,
+             * "lSequence":1561558403627,"points":[{"x":4120,"y":4852},{"x":4265,"y":4852},{"x":4304,"y":4806},{"x
+             * ":4422,"y":4806}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":202}
              * eType : 10006
              */
 
@@ -1693,7 +2084,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558403829Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":3,"lSequence":1561558403829,"points":[{"x":4304,"y":4806},{"x":4475,"y":4806},{"x":4488,"y":4829}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":204}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":3,
+             * "lSequence":1561558403829,"points":[{"x":4304,"y":4806},{"x":4475,"y":4806},{"x":4488,"y":4829}],
+             * "penWidth":6,"iColor":4294901760,"sText":"","iDuration":204}
              * eType : 10006
              */
 
@@ -1719,7 +2112,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558403876Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":3,"lSequence":1561558403876,"points":[{"x":4488,"y":4829},{"x":4514,"y":4829}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":51}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":3,
+             * "lSequence":1561558403876,"points":[{"x":4488,"y":4829},{"x":4514,"y":4829}],"penWidth":6,
+             * "iColor":4294901760,"sText":"","iDuration":51}
              * eType : 10006
              */
 
@@ -1745,7 +2140,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558405046Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":4,"lSequence":1561558405046,"points":[{"x":5091,"y":4899},{"x":5288,"y":4899}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":210}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":4,
+             * "lSequence":1561558405046,"points":[{"x":5091,"y":4899},{"x":5288,"y":4899}],"penWidth":6,
+             * "iColor":4294901760,"sText":"","iDuration":210}
              * eType : 10006
              */
 
@@ -1771,7 +2168,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558405249Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":4,"lSequence":1561558405249,"points":[{"x":5091,"y":4899},{"x":5524,"y":4899},{"x":5564,"y":4922},{"x":5629,"y":4922}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":194}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":4,
+             * "lSequence":1561558405249,"points":[{"x":5091,"y":4899},{"x":5524,"y":4899},{"x":5564,"y":4922},{"x
+             * ":5629,"y":4922}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":194}
              * eType : 10006
              */
 
@@ -1797,7 +2196,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558405374Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":4,"lSequence":1561558405374,"points":[{"x":5629,"y":4922},{"x":5643,"y":4946},{"x":5669,"y":4946}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":136}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":4,
+             * "lSequence":1561558405374,"points":[{"x":5629,"y":4922},{"x":5643,"y":4946},{"x":5669,"y":4946}],
+             * "penWidth":6,"iColor":4294901760,"sText":"","iDuration":136}
              * eType : 10006
              */
 
@@ -1823,7 +2224,10 @@ public class CourseInfoDTO {
 
         public static class _$1561558407683Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":5,"lSequence":1561558407683,"points":[{"x":4488,"y":8165},{"x":4501,"y":8188},{"x":4724,"y":8188},{"x":4908,"y":8212},{"x":5000,"y":8305},{"x":5026,"y":8305}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":200}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":5,
+             * "lSequence":1561558407683,"points":[{"x":4488,"y":8165},{"x":4501,"y":8188},{"x":4724,"y":8188},{"x
+             * ":4908,"y":8212},{"x":5000,"y":8305},{"x":5026,"y":8305}],"penWidth":6,"iColor":4294901760,"sText":"",
+             * "iDuration":200}
              * eType : 10006
              */
 
@@ -1849,7 +2253,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558408572Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":6,"lSequence":1561558408572,"points":[{"x":5354,"y":8352},{"x":5564,"y":8352}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":201}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":6,
+             * "lSequence":1561558408572,"points":[{"x":5354,"y":8352},{"x":5564,"y":8352}],"penWidth":6,
+             * "iColor":4294901760,"sText":"","iDuration":201}
              * eType : 10006
              */
 
@@ -1875,7 +2281,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558408775Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":6,"lSequence":1561558408775,"points":[{"x":5354,"y":8352},{"x":5682,"y":8352}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":201}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":6,
+             * "lSequence":1561558408775,"points":[{"x":5354,"y":8352},{"x":5682,"y":8352}],"penWidth":6,
+             * "iColor":4294901760,"sText":"","iDuration":201}
              * eType : 10006
              */
 
@@ -1901,7 +2309,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558408977Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":6,"lSequence":1561558408977,"points":[{"x":5354,"y":8352},{"x":5761,"y":8352}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":200}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":6,
+             * "lSequence":1561558408977,"points":[{"x":5354,"y":8352},{"x":5761,"y":8352}],"penWidth":6,
+             * "iColor":4294901760,"sText":"","iDuration":200}
              * eType : 10006
              */
 
@@ -1927,7 +2337,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558410397Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":7,"lSequence":1561558410397,"points":[{"x":6049,"y":8282},{"x":6207,"y":8282},{"x":6430,"y":8328}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":193}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":7,
+             * "lSequence":1561558410397,"points":[{"x":6049,"y":8282},{"x":6207,"y":8282},{"x":6430,"y":8328}],
+             * "penWidth":6,"iColor":4294901760,"sText":"","iDuration":193}
              * eType : 10006
              */
 
@@ -1953,7 +2365,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558410569Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":7,"lSequence":1561558410569,"points":[{"x":6430,"y":8328},{"x":6601,"y":8375},{"x":6614,"y":8375}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":182}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":7,
+             * "lSequence":1561558410569,"points":[{"x":6430,"y":8328},{"x":6601,"y":8375},{"x":6614,"y":8375}],
+             * "penWidth":6,"iColor":4294901760,"sText":"","iDuration":182}
              * eType : 10006
              */
 
@@ -1979,7 +2393,10 @@ public class CourseInfoDTO {
 
         public static class _$1561558411770Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":8,"lSequence":1561558411770,"points":[{"x":5551,"y":7022},{"x":5524,"y":7022},{"x":5498,"y":7045},{"x":5446,"y":7115},{"x":5419,"y":7185},{"x":5393,"y":7279},{"x":5393,"y":7302},{"x":5380,"y":7372},{"x":5380,"y":7395},{"x":5367,"y":7442}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":193}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":8,
+             * "lSequence":1561558411770,"points":[{"x":5551,"y":7022},{"x":5524,"y":7022},{"x":5498,"y":7045},{"x
+             * ":5446,"y":7115},{"x":5419,"y":7185},{"x":5393,"y":7279},{"x":5393,"y":7302},{"x":5380,"y":7372},{"x
+             * ":5380,"y":7395},{"x":5367,"y":7442}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":193}
              * eType : 10006
              */
 
@@ -2005,7 +2422,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558411973Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":8,"lSequence":1561558411973,"points":[{"x":5380,"y":7395},{"x":5354,"y":7489},{"x":5472,"y":7489}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":209}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":8,
+             * "lSequence":1561558411973,"points":[{"x":5380,"y":7395},{"x":5354,"y":7489},{"x":5472,"y":7489}],
+             * "penWidth":6,"iColor":4294901760,"sText":"","iDuration":209}
              * eType : 10006
              */
 
@@ -2031,7 +2450,10 @@ public class CourseInfoDTO {
 
         public static class _$1561558412175Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":8,"lSequence":1561558412175,"points":[{"x":5354,"y":7489},{"x":5485,"y":7489},{"x":5511,"y":7465},{"x":5524,"y":7465},{"x":5551,"y":7442},{"x":5616,"y":7442}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":199}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":8,
+             * "lSequence":1561558412175,"points":[{"x":5354,"y":7489},{"x":5485,"y":7489},{"x":5511,"y":7465},{"x
+             * ":5524,"y":7465},{"x":5551,"y":7442},{"x":5616,"y":7442}],"penWidth":6,"iColor":4294901760,"sText":"",
+             * "iDuration":199}
              * eType : 10006
              */
 
@@ -2057,7 +2479,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558412378Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":8,"lSequence":1561558412378,"points":[{"x":5616,"y":7442},{"x":5616,"y":7139}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":200}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":8,
+             * "lSequence":1561558412378,"points":[{"x":5616,"y":7442},{"x":5616,"y":7139}],"penWidth":6,
+             * "iColor":4294901760,"sText":"","iDuration":200}
              * eType : 10006
              */
 
@@ -2083,7 +2507,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558412581Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":8,"lSequence":1561558412581,"points":[{"x":5616,"y":7442},{"x":5616,"y":6929}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":201}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":14,"iId":8,
+             * "lSequence":1561558412581,"points":[{"x":5616,"y":7442},{"x":5616,"y":6929}],"penWidth":6,
+             * "iColor":4294901760,"sText":"","iDuration":201}
              * eType : 10006
              */
 
@@ -2109,7 +2535,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558413595Bean {
             /**
-             * bytes : {"iPageId":15,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_e85e9dbfe858399755b0d4911e610df0_2560_1440.jpg?sign=2b6619b468838b624ccae052d71063c1&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558413595,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":15,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_e85e9dbfe858399755b0d4911e610df0_2560_1440
+             * .jpg?sign=2b6619b468838b624ccae052d71063c1&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558413595,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -2135,7 +2565,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558433938Bean {
             /**
-             * bytes : {"iPageId":16,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_5cc4f45bfcc3ec32e47b4a3eec3e3b28_2560_1440.jpg?sign=92d454ab1dad0c945525c942c1b3eec4&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558433938,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":16,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_5cc4f45bfcc3ec32e47b4a3eec3e3b28_2560_1440
+             * .jpg?sign=92d454ab1dad0c945525c942c1b3eec4&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558433938,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -2161,7 +2595,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558439179Bean {
             /**
-             * bytes : {"iPageId":17,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_1b3c3f7dff44113f0dea998b95796cd9_2560_1440.jpg?sign=bb5efac3b381ebaac78e9ad9d2212584&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558439179,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":17,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_1b3c3f7dff44113f0dea998b95796cd9_2560_1440
+             * .jpg?sign=bb5efac3b381ebaac78e9ad9d2212584&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558439179,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -2187,7 +2625,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558444390Bean {
             /**
-             * bytes : {"iPageId":18,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_ec2c586c5e4821a35da5cafc7267d849_2560_1440.jpg?sign=7bf8f0374ebf1bbe4da9fdd8d1c0c011&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558444390,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":18,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_ec2c586c5e4821a35da5cafc7267d849_2560_1440
+             * .jpg?sign=7bf8f0374ebf1bbe4da9fdd8d1c0c011&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558444390,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -2213,7 +2655,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558449304Bean {
             /**
-             * bytes : {"iPageId":19,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_7d9c04cad8f6e5d1ac38d88eaf54a348_2560_1440.jpg?sign=04974addf160ff7f6a9c170c60b778dc&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558449304,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":19,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_7d9c04cad8f6e5d1ac38d88eaf54a348_2560_1440
+             * .jpg?sign=04974addf160ff7f6a9c170c60b778dc&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558449304,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -2239,7 +2685,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558460801Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":19,"iId":9,"lSequence":1561558460801,"points":[{"x":5183,"y":5272},{"x":5209,"y":5272},{"x":5367,"y":5202},{"x":5485,"y":5202}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":203}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":19,"iId":9,
+             * "lSequence":1561558460801,"points":[{"x":5183,"y":5272},{"x":5209,"y":5272},{"x":5367,"y":5202},{"x
+             * ":5485,"y":5202}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":203}
              * eType : 10006
              */
 
@@ -2265,7 +2713,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558461004Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":19,"iId":9,"lSequence":1561558461004,"points":[{"x":5485,"y":5202},{"x":5551,"y":5179},{"x":5577,"y":5156},{"x":5590,"y":5156}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":213}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":19,"iId":9,
+             * "lSequence":1561558461004,"points":[{"x":5485,"y":5202},{"x":5551,"y":5179},{"x":5577,"y":5156},{"x
+             * ":5590,"y":5156}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":213}
              * eType : 10006
              */
 
@@ -2291,7 +2741,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558461066Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":19,"iId":9,"lSequence":1561558461066,"points":[{"x":5577,"y":5156},{"x":5616,"y":5156}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":52}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":19,"iId":9,
+             * "lSequence":1561558461066,"points":[{"x":5577,"y":5156},{"x":5616,"y":5156}],"penWidth":6,
+             * "iColor":4294901760,"sText":"","iDuration":52}
              * eType : 10006
              */
 
@@ -2317,7 +2769,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558462143Bean {
             /**
-             * bytes : {"iPageId":20,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_281b7eb74f221fadf498b0b205b752df_2560_1440.jpg?sign=feb4e30fdd590281f4eb0839da6d8fc2&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558462143,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":20,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_281b7eb74f221fadf498b0b205b752df_2560_1440
+             * .jpg?sign=feb4e30fdd590281f4eb0839da6d8fc2&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558462143,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -2343,7 +2799,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558467072Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":20,"iId":10,"lSequence":1561558467072,"points":[{"x":4593,"y":5762},{"x":4593,"y":5972},{"x":4606,"y":6042},{"x":4645,"y":6089},{"x":4645,"y":6182},{"x":4658,"y":6205},{"x":4658,"y":6299},{"x":4671,"y":6322},{"x":4671,"y":6369},{"x":4685,"y":6439},{"x":4698,"y":6485}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":189}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":20,"iId":10,
+             * "lSequence":1561558467072,"points":[{"x":4593,"y":5762},{"x":4593,"y":5972},{"x":4606,"y":6042},{"x
+             * ":4645,"y":6089},{"x":4645,"y":6182},{"x":4658,"y":6205},{"x":4658,"y":6299},{"x":4671,"y":6322},{"x
+             * ":4671,"y":6369},{"x":4685,"y":6439},{"x":4698,"y":6485}],"penWidth":6,"iColor":4294901760,"sText":"",
+             * "iDuration":189}
              * eType : 10006
              */
 
@@ -2369,7 +2829,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558467275Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":20,"iId":10,"lSequence":1561558467275,"points":[{"x":4698,"y":6485},{"x":4698,"y":6509},{"x":4711,"y":6555},{"x":4711,"y":6672},{"x":4737,"y":6695},{"x":4737,"y":6835},{"x":4750,"y":6859},{"x":4750,"y":6929},{"x":4763,"y":6975},{"x":4763,"y":7069},{"x":4776,"y":7092},{"x":4776,"y":7209}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":209}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":20,"iId":10,
+             * "lSequence":1561558467275,"points":[{"x":4698,"y":6485},{"x":4698,"y":6509},{"x":4711,"y":6555},{"x
+             * ":4711,"y":6672},{"x":4737,"y":6695},{"x":4737,"y":6835},{"x":4750,"y":6859},{"x":4750,"y":6929},{"x
+             * ":4763,"y":6975},{"x":4763,"y":7069},{"x":4776,"y":7092},{"x":4776,"y":7209}],"penWidth":6,
+             * "iColor":4294901760,"sText":"","iDuration":209}
              * eType : 10006
              */
 
@@ -2395,7 +2859,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558467478Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":20,"iId":10,"lSequence":1561558467478,"points":[{"x":4776,"y":7092},{"x":4776,"y":7535},{"x":4803,"y":7699},{"x":4803,"y":8445}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":200}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":20,"iId":10,
+             * "lSequence":1561558467478,"points":[{"x":4776,"y":7092},{"x":4776,"y":7535},{"x":4803,"y":7699},{"x
+             * ":4803,"y":8445}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":200}
              * eType : 10006
              */
 
@@ -2421,7 +2887,10 @@ public class CourseInfoDTO {
 
         public static class _$1561558467681Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":20,"iId":10,"lSequence":1561558467681,"points":[{"x":4803,"y":7699},{"x":4803,"y":8678},{"x":4829,"y":8772},{"x":4842,"y":8888},{"x":4842,"y":9005},{"x":4855,"y":9052},{"x":4855,"y":9075}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":201}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":20,"iId":10,
+             * "lSequence":1561558467681,"points":[{"x":4803,"y":7699},{"x":4803,"y":8678},{"x":4829,"y":8772},{"x
+             * ":4842,"y":8888},{"x":4842,"y":9005},{"x":4855,"y":9052},{"x":4855,"y":9075}],"penWidth":6,
+             * "iColor":4294901760,"sText":"","iDuration":201}
              * eType : 10006
              */
 
@@ -2447,7 +2916,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558476261Bean {
             /**
-             * bytes : {"iPageId":21,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_5a5eb8ec39034a749be89ae9a2dd9208_2560_1440.jpg?sign=04618922a70c41548203a6a69a6f1144&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558476261,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":21,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_5a5eb8ec39034a749be89ae9a2dd9208_2560_1440
+             * .jpg?sign=04618922a70c41548203a6a69a6f1144&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558476261,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -2473,7 +2946,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558483780Bean {
             /**
-             * bytes : {"iPageId":22,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_6f8e9b611564b2fabbdf987cbb967785_2560_1440.jpg?sign=6add789431a4201906eebc7177e97b49&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558483780,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":22,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_6f8e9b611564b2fabbdf987cbb967785_2560_1440
+             * .jpg?sign=6add789431a4201906eebc7177e97b49&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558483780,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -2499,7 +2976,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558485933Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":22,"iId":11,"lSequence":1561558485933,"points":[{"x":6181,"y":5739},{"x":6181,"y":5785},{"x":6167,"y":5809},{"x":6154,"y":5879},{"x":6141,"y":5902},{"x":6102,"y":5972},{"x":6089,"y":6019},{"x":6076,"y":6019},{"x":6076,"y":6112},{"x":6062,"y":6182},{"x":6062,"y":6252}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":202}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":22,"iId":11,
+             * "lSequence":1561558485933,"points":[{"x":6181,"y":5739},{"x":6181,"y":5785},{"x":6167,"y":5809},{"x
+             * ":6154,"y":5879},{"x":6141,"y":5902},{"x":6102,"y":5972},{"x":6089,"y":6019},{"x":6076,"y":6019},{"x
+             * ":6076,"y":6112},{"x":6062,"y":6182},{"x":6062,"y":6252}],"penWidth":6,"iColor":4294901760,"sText":"",
+             * "iDuration":202}
              * eType : 10006
              */
 
@@ -2525,7 +3006,10 @@ public class CourseInfoDTO {
 
         public static class _$1561558486136Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":22,"iId":11,"lSequence":1561558486136,"points":[{"x":6062,"y":6252},{"x":6036,"y":6299},{"x":6036,"y":6415},{"x":6023,"y":6439},{"x":6010,"y":6485},{"x":6010,"y":6579},{"x":5997,"y":6602},{"x":5997,"y":6649},{"x":5984,"y":6672},{"x":5984,"y":6719}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":203}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":22,"iId":11,
+             * "lSequence":1561558486136,"points":[{"x":6062,"y":6252},{"x":6036,"y":6299},{"x":6036,"y":6415},{"x
+             * ":6023,"y":6439},{"x":6010,"y":6485},{"x":6010,"y":6579},{"x":5997,"y":6602},{"x":5997,"y":6649},{"x
+             * ":5984,"y":6672},{"x":5984,"y":6719}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":203}
              * eType : 10006
              */
 
@@ -2551,7 +3035,10 @@ public class CourseInfoDTO {
 
         public static class _$1561558487524Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":22,"iId":12,"lSequence":1561558487524,"points":[{"x":5656,"y":6789},{"x":5643,"y":6812},{"x":5616,"y":6905},{"x":5590,"y":7045},{"x":5577,"y":7232},{"x":5538,"y":7372},{"x":5538,"y":7629}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":199}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":22,"iId":12,
+             * "lSequence":1561558487524,"points":[{"x":5656,"y":6789},{"x":5643,"y":6812},{"x":5616,"y":6905},{"x
+             * ":5590,"y":7045},{"x":5577,"y":7232},{"x":5538,"y":7372},{"x":5538,"y":7629}],"penWidth":6,
+             * "iColor":4294901760,"sText":"","iDuration":199}
              * eType : 10006
              */
 
@@ -2577,7 +3064,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558487727Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":22,"iId":12,"lSequence":1561558487727,"points":[{"x":5538,"y":7629},{"x":5524,"y":7675},{"x":5524,"y":7722}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":195}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":22,"iId":12,
+             * "lSequence":1561558487727,"points":[{"x":5538,"y":7629},{"x":5524,"y":7675},{"x":5524,"y":7722}],
+             * "penWidth":6,"iColor":4294901760,"sText":"","iDuration":195}
              * eType : 10006
              */
 
@@ -2603,7 +3092,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558492032Bean {
             /**
-             * bytes : {"iPageId":23,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_68a645b7ba9d2206877b3393500554ee_2560_1440.jpg?sign=ecfa2833eab6a1fd5f5837841ff73e0e&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558492032,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":23,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_68a645b7ba9d2206877b3393500554ee_2560_1440
+             * .jpg?sign=ecfa2833eab6a1fd5f5837841ff73e0e&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558492032,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -2629,7 +3122,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558514824Bean {
             /**
-             * bytes : {"iPageId":24,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_c6a4d431d261039fdf1cde4e657d6329_2560_1440.jpg?sign=e72c28f84e1d821e8f0431d97463f135&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558514824,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":24,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_c6a4d431d261039fdf1cde4e657d6329_2560_1440
+             * .jpg?sign=e72c28f84e1d821e8f0431d97463f135&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558514824,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -2655,7 +3152,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558517476Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":24,"iId":13,"lSequence":1561558517476,"points":[{"x":5695,"y":5902},{"x":5656,"y":5902},{"x":5643,"y":5925},{"x":5616,"y":5925},{"x":5603,"y":5949},{"x":5551,"y":6042},{"x":5551,"y":6112},{"x":5524,"y":6182},{"x":5511,"y":6229},{"x":5498,"y":6275},{"x":5498,"y":6369},{"x":5485,"y":6415},{"x":5485,"y":6439},{"x":5472,"y":6462},{"x":5472,"y":6485}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":194}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":24,"iId":13,
+             * "lSequence":1561558517476,"points":[{"x":5695,"y":5902},{"x":5656,"y":5902},{"x":5643,"y":5925},{"x
+             * ":5616,"y":5925},{"x":5603,"y":5949},{"x":5551,"y":6042},{"x":5551,"y":6112},{"x":5524,"y":6182},{"x
+             * ":5511,"y":6229},{"x":5498,"y":6275},{"x":5498,"y":6369},{"x":5485,"y":6415},{"x":5485,"y":6439},{"x
+             * ":5472,"y":6462},{"x":5472,"y":6485}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":194}
              * eType : 10006
              */
 
@@ -2681,7 +3182,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558517679Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":24,"iId":13,"lSequence":1561558517679,"points":[{"x":5472,"y":6462},{"x":5472,"y":6672}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":202}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":24,"iId":13,
+             * "lSequence":1561558517679,"points":[{"x":5472,"y":6462},{"x":5472,"y":6672}],"penWidth":6,
+             * "iColor":4294901760,"sText":"","iDuration":202}
              * eType : 10006
              */
 
@@ -2707,7 +3210,10 @@ public class CourseInfoDTO {
 
         public static class _$1561558519426Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":24,"iId":14,"lSequence":1561558519426,"points":[{"x":5616,"y":6975},{"x":5616,"y":7045},{"x":5564,"y":7185},{"x":5564,"y":7232},{"x":5551,"y":7325},{"x":5551,"y":7442},{"x":5511,"y":7675},{"x":5498,"y":7722},{"x":5498,"y":7839},{"x":5485,"y":7862}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":401}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":24,"iId":14,
+             * "lSequence":1561558519426,"points":[{"x":5616,"y":6975},{"x":5616,"y":7045},{"x":5564,"y":7185},{"x
+             * ":5564,"y":7232},{"x":5551,"y":7325},{"x":5551,"y":7442},{"x":5511,"y":7675},{"x":5498,"y":7722},{"x
+             * ":5498,"y":7839},{"x":5485,"y":7862}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":401}
              * eType : 10006
              */
 
@@ -2733,7 +3239,10 @@ public class CourseInfoDTO {
 
         public static class _$1561558520627Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":24,"iId":15,"lSequence":1561558520627,"points":[{"x":5590,"y":7722},{"x":5603,"y":7722},{"x":5603,"y":7769},{"x":5590,"y":7909},{"x":5577,"y":8025},{"x":5551,"y":8118},{"x":5551,"y":8188},{"x":5538,"y":8235},{"x":5511,"y":8258},{"x":5511,"y":8282}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":206}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":24,"iId":15,
+             * "lSequence":1561558520627,"points":[{"x":5590,"y":7722},{"x":5603,"y":7722},{"x":5603,"y":7769},{"x
+             * ":5590,"y":7909},{"x":5577,"y":8025},{"x":5551,"y":8118},{"x":5551,"y":8188},{"x":5538,"y":8235},{"x
+             * ":5511,"y":8258},{"x":5511,"y":8282}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":206}
              * eType : 10006
              */
 
@@ -2759,7 +3268,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558520799Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":24,"iId":15,"lSequence":1561558520799,"points":[{"x":5511,"y":8258},{"x":5511,"y":8328}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":167}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":24,"iId":15,
+             * "lSequence":1561558520799,"points":[{"x":5511,"y":8258},{"x":5511,"y":8328}],"penWidth":6,
+             * "iColor":4294901760,"sText":"","iDuration":167}
              * eType : 10006
              */
 
@@ -2785,7 +3296,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558521532Bean {
             /**
-             * bytes : {"iPageId":25,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_31324aca39906037b4888f1afedd2c4a_2560_1440.jpg?sign=42fb4ab8510261bc80fca9366a5f1a2a&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558521532,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":25,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_31324aca39906037b4888f1afedd2c4a_2560_1440
+             * .jpg?sign=42fb4ab8510261bc80fca9366a5f1a2a&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558521532,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -2811,7 +3326,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558526399Bean {
             /**
-             * bytes : {"iPageId":26,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_076b5f737f144c4395fe00ef4634d361_2560_1440.jpg?sign=738e9a64971285ecfc7e6850849bcd01&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558526399,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":26,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_076b5f737f144c4395fe00ef4634d361_2560_1440
+             * .jpg?sign=738e9a64971285ecfc7e6850849bcd01&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558526399,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -2837,7 +3356,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558530877Bean {
             /**
-             * bytes : {"iPageId":31,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_5f2660f5c001760ee4c15de3dee859c0_2560_1440.jpg?sign=459047f2597360157eb8b4fed3ada94f&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558530877,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":31,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_5f2660f5c001760ee4c15de3dee859c0_2560_1440
+             * .jpg?sign=459047f2597360157eb8b4fed3ada94f&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558530877,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -2863,7 +3386,11 @@ public class CourseInfoDTO {
 
         public static class _$1561558535182Bean {
             /**
-             * bytes : {"iPageId":38,"sUrl":"//sfs-private.shangdejigou.cn/SunliveDocument/20190527/3461_6765ffdbc7aff622916d1f1feb20b118_2560_1440.jpg?sign=dd7a60de2e9bf3d5524434181a255014&t=1586717940","iType":1,"traces":{},"iWidth":2560,"iHeight":1440,"lSequence":1561558535182,"iCoursewareId":1561558218,"iTabulaWidth":16,"iTabulaHeight":9,"iScrollPosition":50}
+             * bytes : {"iPageId":38,"sUrl":"//sfs-private.shangdejigou
+             * .cn/SunliveDocument/20190527/3461_6765ffdbc7aff622916d1f1feb20b118_2560_1440
+             * .jpg?sign=dd7a60de2e9bf3d5524434181a255014&t=1586717940","iType":1,"traces":{},"iWidth":2560,
+             * "iHeight":1440,"lSequence":1561558535182,"iCoursewareId":1561558218,"iTabulaWidth":16,
+             * "iTabulaHeight":9,"iScrollPosition":50}
              * eType : 10008
              */
 
@@ -2889,7 +3416,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558541547Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":38,"iId":16,"lSequence":1561558541547,"points":[{"x":7034,"y":4969},{"x":7099,"y":4969},{"x":7139,"y":4992},{"x":7362,"y":4992}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":203}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":38,"iId":16,
+             * "lSequence":1561558541547,"points":[{"x":7034,"y":4969},{"x":7099,"y":4969},{"x":7139,"y":4992},{"x
+             * ":7362,"y":4992}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":203}
              * eType : 10006
              */
 
@@ -2915,7 +3444,10 @@ public class CourseInfoDTO {
 
         public static class _$1561558541750Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":38,"iId":16,"lSequence":1561558541750,"points":[{"x":7139,"y":4992},{"x":7664,"y":4992},{"x":7821,"y":5062},{"x":7887,"y":5086},{"x":8005,"y":5109},{"x":8097,"y":5132},{"x":8123,"y":5132}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":200}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":38,"iId":16,
+             * "lSequence":1561558541750,"points":[{"x":7139,"y":4992},{"x":7664,"y":4992},{"x":7821,"y":5062},{"x
+             * ":7887,"y":5086},{"x":8005,"y":5109},{"x":8097,"y":5132},{"x":8123,"y":5132}],"penWidth":6,
+             * "iColor":4294901760,"sText":"","iDuration":200}
              * eType : 10006
              */
 
@@ -2941,7 +3473,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558541890Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":38,"iId":16,"lSequence":1561558541890,"points":[{"x":8097,"y":5132},{"x":8136,"y":5132}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":148}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":38,"iId":16,
+             * "lSequence":1561558541890,"points":[{"x":8097,"y":5132},{"x":8136,"y":5132}],"penWidth":6,
+             * "iColor":4294901760,"sText":"","iDuration":148}
              * eType : 10006
              */
 
@@ -2967,7 +3501,10 @@ public class CourseInfoDTO {
 
         public static class _$1561558542904Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":38,"iId":17,"lSequence":1561558542904,"points":[{"x":7060,"y":9028},{"x":7598,"y":9028},{"x":7769,"y":9052},{"x":7900,"y":9075},{"x":8005,"y":9075},{"x":8031,"y":9098}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":203}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":38,"iId":17,
+             * "lSequence":1561558542904,"points":[{"x":7060,"y":9028},{"x":7598,"y":9028},{"x":7769,"y":9052},{"x
+             * ":7900,"y":9075},{"x":8005,"y":9075},{"x":8031,"y":9098}],"penWidth":6,"iColor":4294901760,"sText":"",
+             * "iDuration":203}
              * eType : 10006
              */
 
@@ -2993,7 +3530,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558543107Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":38,"iId":17,"lSequence":1561558543107,"points":[{"x":8031,"y":9098},{"x":8871,"y":9098}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":201}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":38,"iId":17,
+             * "lSequence":1561558543107,"points":[{"x":8031,"y":9098},{"x":8871,"y":9098}],"penWidth":6,
+             * "iColor":4294901760,"sText":"","iDuration":201}
              * eType : 10006
              */
 
@@ -3019,7 +3558,9 @@ public class CourseInfoDTO {
 
         public static class _$1561558543310Bean {
             /**
-             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":38,"iId":17,"lSequence":1561558543310,"points":[{"x":8031,"y":9098},{"x":9146,"y":9098}],"penWidth":6,"iColor":4294901760,"sText":"","iDuration":204}
+             * bytes : {"version":1,"iType":1,"iCoursewareId":1561558218,"iPageId":38,"iId":17,
+             * "lSequence":1561558543310,"points":[{"x":8031,"y":9098},{"x":9146,"y":9098}],"penWidth":6,
+             * "iColor":4294901760,"sText":"","iDuration":204}
              * eType : 10006
              */
 
@@ -3055,8 +3596,10 @@ public class CourseInfoDTO {
          * lSequence : 1561558230450
          * sFileName : 5285890793612291017
          * sFormat : mp4
-         * sHttpsUrl : https://1257236654.vod2.myqcloud.com/cc26eeabvodcq1257236654/130b772a5285890793612291017/f0.mp4?t=5e8a2a74&us=d923fa75&sign=d5e15b0eb7a7f9e61005f90cf5e9158a
-         * sUrl : http://1257236654.vod2.myqcloud.com/cc26eeabvodcq1257236654/130b772a5285890793612291017/f0.mp4?t=5e8a2a74&us=d923fa75&sign=d5e15b0eb7a7f9e61005f90cf5e9158a
+         * sHttpsUrl : https://1257236654.vod2.myqcloud.com/cc26eeabvodcq1257236654/130b772a5285890793612291017/f0
+         * .mp4?t=5e8a2a74&us=d923fa75&sign=d5e15b0eb7a7f9e61005f90cf5e9158a
+         * sUrl : http://1257236654.vod2.myqcloud.com/cc26eeabvodcq1257236654/130b772a5285890793612291017/f0
+         * .mp4?t=5e8a2a74&us=d923fa75&sign=d5e15b0eb7a7f9e61005f90cf5e9158a
          * sequenceInfos : [{"iDuration":344.1,"iStart":0,"lSequence":1561558230450}]
          * sharedPlaybackUrlInfos : []
          */

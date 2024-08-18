@@ -4,7 +4,7 @@ package top.wys.utils;
  */
 
 import com.google.common.collect.Lists;
-
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
@@ -22,11 +22,9 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * <p>
- *  2019/11/13 17:09 <br>
+ * 2019/11/13 17:09 <br>
  *
  * </p>
  *
@@ -37,7 +35,7 @@ import lombok.extern.slf4j.Slf4j;
 public class CSVUtils {
 
     private static final int DEFAULT_BUFFERED_SIZE = 1024 * 8;
-    public final static CSVFormat DEFAULT_CSVFORMAT = CSVFormat.ORACLE
+    public static final CSVFormat DEFAULT_CSVFORMAT = CSVFormat.ORACLE
             .withFirstRecordAsHeader()
             .withIgnoreHeaderCase()
             .withAllowMissingColumnNames()
@@ -74,7 +72,8 @@ public class CSVUtils {
         try {
             FileInputStream fis = new FileInputStream(file);
 
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fis, charsetName), DEFAULT_BUFFERED_SIZE);
+            BufferedReader bufferedReader =
+                    new BufferedReader(new InputStreamReader(fis, charsetName), DEFAULT_BUFFERED_SIZE);
 
             parse = new CSVParser(bufferedReader, csvFormat);
         } catch (IOException e) {
@@ -93,7 +92,8 @@ public class CSVUtils {
         try {
             FileOutputStream fos = new FileOutputStream(outputFile);
 
-            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(fos, Charset.forName(encoding)), DEFAULT_BUFFERED_SIZE);
+            BufferedWriter bufferedWriter =
+                    new BufferedWriter(new OutputStreamWriter(fos, Charset.forName(encoding)), DEFAULT_BUFFERED_SIZE);
 
             csvPrinter = new CSVPrinter(bufferedWriter, csvFormat);
 
@@ -107,8 +107,9 @@ public class CSVUtils {
     public static void write(File outputFile, Iterable<?> datas, String... header) {
 
         try (FileOutputStream fos = new FileOutputStream(outputFile);
-             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(fos, Charset.forName(DEFAULT_ENCODING)), DEFAULT_BUFFERED_SIZE);
-             CSVPrinter csvPrinter = new CSVPrinter(bufferedWriter, CSVFormat.DEFAULT.withHeader(header));) {
+             BufferedWriter bufferedWriter = new BufferedWriter(
+                     new OutputStreamWriter(fos, Charset.forName(DEFAULT_ENCODING)), DEFAULT_BUFFERED_SIZE);
+             CSVPrinter csvPrinter = new CSVPrinter(bufferedWriter, CSVFormat.DEFAULT.withHeader(header))) {
             csvPrinter.printRecords(datas);
             csvPrinter.flush();
         } catch (IOException e) {
@@ -175,8 +176,11 @@ public class CSVUtils {
                         file.createNewFile();
                     }
                     FileOutputStream fos = new FileOutputStream(targetFileName);
-                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(fos, Charset.forName(DEFAULT_ENCODING)), DEFAULT_BUFFERED_SIZE);
-                    write = new CSVPrinter(bufferedWriter, CSVFormat.DEFAULT.withHeader(headerNames.toArray(new String[0])));
+                    BufferedWriter bufferedWriter =
+                            new BufferedWriter(new OutputStreamWriter(fos, Charset.forName(DEFAULT_ENCODING)),
+                                    DEFAULT_BUFFERED_SIZE);
+                    write = new CSVPrinter(bufferedWriter,
+                            CSVFormat.DEFAULT.withHeader(headerNames.toArray(new String[0])));
                 }
 
                 List<String> item = Lists.newArrayList();

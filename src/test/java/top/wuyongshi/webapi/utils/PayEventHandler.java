@@ -16,9 +16,9 @@ package top.wuyongshi.webapi.utils;
  * @date 2021/5/30 7:46
  * @email mpro@vip.qq.com
  */
-public  class PayEventHandler implements EventHandler<Number>{
+public class PayEventHandler implements EventHandler<Number> {
     @Override
     public void notice(Number message) {
-        System.out.printf("消费了%s元",message);
+        System.out.printf("消费了%s元", message);
     }
 }

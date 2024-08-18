@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC
+        "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
+        "http://checkstyle.sourceforge.net/dtds/configuration_1_3.dtd">
+<module name="Checker">
+    <!-- 排除module-info.java文件的检查 -->
+    <module name="BeforeExecutionExclusionFileFilter">
+        <property name="fileNamePattern" value="module\-info\.java$"/>
+    </module>
+
+    <!-- 禁止使用制表符 -->
+    <module name="FileTabCharacter"/>
+
+    <!--一个tab为4个空格 -->
+    <property name="tabWidth" value="4"/>
+
+    <!-- 确保文件以换行符结束 -->
+    <module name="NewlineAtEndOfFile"/>
+
+    <!-- 禁止行尾空白字符 -->
+    <module name="RegexpMultiline">
+        <property name="format" value=" \n" />
+        <property name="message" value="Line has trailing whitespace" />
+    </module>
+
+    <!-- 禁止多个连续空行 -->
+    <module name="RegexpMultiline">
+        <property name="format" value="\n\n\n" />
+        <property name="message" value="Multiple consecutive blank lines" />
+    </module>
+
+    <!-- 禁止文件末尾的空行 -->
+    <module name="RegexpMultiline">
+        <property name="format" value="\n\n\Z" />
+        <property name="message" value="Blank line before end of file" />
+    </module>
+
+    <!-- 禁止开括号后的空行 -->
+    <module name="RegexpMultiline">
+        <property name="format" value="\{\n\n" />
+        <property name="message" value="Blank line after opening brace" />
+    </module>
+
+    <!-- 禁止空lambda表达式体内的空白字符 -->
+    <module name="RegexpMultiline">
+        <property name="format" value="->\s*\{\s+\}" />
+        <property name="message" value="Whitespace inside empty lambda body" />
+    </module>
+
+    <module name="TreeWalker">
+        <module name="SuppressWarningsHolder" />
+
+        <!-- 要求空块中包含注释 -->
+        <module name="EmptyBlock">
+            <property name="option" value="text" />
+            <property name="tokens" value="
+                LITERAL_DO, LITERAL_ELSE, LITERAL_FINALLY, LITERAL_IF,
+                LITERAL_FOR, LITERAL_TRY, LITERAL_WHILE, INSTANCE_INIT, STATIC_INIT" />
+        </module>
+
+        <!-- 禁止空语句 -->
+        <module name="EmptyStatement" />
+
+        <!-- 确保for循环初始化中不使用空白 -->
+        <module name="EmptyForInitializerPad" />
+
+        <!-- 确保方法参数前后的空白符合规范 -->
+        <module name="MethodParamPad">
+            <property name="allowLineBreaks" value="true" />
+            <property name="option" value="nospace" />
+        </module>
+
+        <!-- 确保括号周围的空白符合规范 -->
+        <module name="ParenPad" />
+
+        <!-- 要求使用大括号 -->
+        <module name="NeedBraces" />
+
+        <!-- 确保泛型声明的空白符合规范 -->
+        <module name="GenericWhitespace" />
+
+        <!-- 确保某些标记后有空白 -->
+        <module name="WhitespaceAfter" />
+
+        <!-- 确保某些标记前没有空白 -->
+        <module name="NoWhitespaceBefore" />
+
+        <!-- 确保单个空格分隔符 -->
+        <module name="SingleSpaceSeparator" />
+
+        <!-- 要求使用大写L表示long -->
+        <module name="UpperEll" />
+
+        <!-- 要求default语句在switch的最后 -->
+        <module name="DefaultComesLast" />
+        <!-- Switch语句必须包含一条default case语句,同时必须包含一个break。JAVA-CODE-GF-041-->
+        <module name="MissingSwitchDefault">
+            <message key="missing.switch.default"
+                     value="Switch语句必须包含一条default case语句,同时必须包含一个break.(规范041)."/>
+        </module>
+
+        <!-- 要求数组方括号位于类型之后 -->
+        <module name="ArrayTypeStyle" />
+
+        <!-- 要求修饰符按特定顺序排列 -->
+        <module name="ModifierOrder" />
+
+        <!-- 每行只允许一条语句 -->
+        <module name="OneStatementPerLine" />
+
+        <!-- 禁止使用==比较字符串 -->
+        <module name="StringLiteralEquality" />
+
+        <!-- 禁止可变异常 -->
+<!--        <module name="MutableException" />-->
+
+        <!-- 要求同时覆盖equals和hashCode方法 -->
+        <module name="EqualsHashCode" />
+
+        <!-- 检查成员变量是否显式初始化为默认值 -->
+        <module name="ExplicitInitialization" />
+
+        <!-- 每个文件只允许一个顶级类 -->
+<!--        <module name="OneTopLevelClass" />-->
+
+        <!-- 包名命名规则 -->
+        <module name="PackageName" />
+
+        <!-- 类型参数命名规则 -->
+        <module name="ClassTypeParameterName">
+            <property name="format" value="^[A-Z][0-9]?$" />
+        </module>
+
+        <!-- 方法类型参数命名规则 -->
+        <module name="MethodTypeParameterName">
+            <property name="format" value="^[A-Z][0-9]?$" />
+        </module>
+
+        <!-- 注解使用样式 -->
+        <module name="AnnotationUseStyle">
+            <property name="trailingArrayComma" value="ignore" />
+        </module>
+
+        <!-- 检查冗余的导入语句 -->
+        <module name="RedundantImport" />
+
+        <!-- 检查未使用的导入语句 -->
+        <module name="UnusedImports" />
+
+        <!-- 定义导入语句的顺序规则 -->
+        <module name="ImportOrder">
+            <property name="groups" value="*,javax,java" />
+            <property name="separated" value="true" />
+            <property name="option" value="bottom" />
+            <property name="sortStaticImportsAlphabetically" value="true" />
+        </module>
+
+        <!-- 确保代码块周围有适当的空白 -->
+        <module name="WhitespaceAround">
+            <property name="allowEmptyConstructors" value="true" />
+            <property name="allowEmptyMethods" value="true" />
+            <property name="allowEmptyLambdas" value="true" />
+            <property name="ignoreEnhancedForColon" value="false" />
+            <property name="tokens" value="
+                ASSIGN, BAND, BAND_ASSIGN, BOR, BOR_ASSIGN, BSR, BSR_ASSIGN,
+                BXOR, BXOR_ASSIGN, COLON, DIV, DIV_ASSIGN, DO_WHILE, EQUAL, GE, GT, LAND,
+                LAMBDA, LE, LITERAL_ASSERT, LITERAL_CATCH, LITERAL_DO, LITERAL_ELSE,
+                LITERAL_FINALLY, LITERAL_FOR, LITERAL_IF, LITERAL_RETURN, LITERAL_SWITCH,
+                LITERAL_SYNCHRONIZED, LITERAL_TRY, LITERAL_WHILE,
+                LOR, LT, MINUS, MINUS_ASSIGN, MOD, MOD_ASSIGN, NOT_EQUAL,
+                PLUS, PLUS_ASSIGN, QUESTION, SL, SLIST, SL_ASSIGN, SR, SR_ASSIGN,
+                STAR, STAR_ASSIGN, TYPE_EXTENSION_AND" />
+        </module>
+
+        <!-- 确保某些标记后有空白 -->
+        <module name="WhitespaceAfter" />
+
+        <!-- 确保点号后没有空白 -->
+        <module name="NoWhitespaceAfter">
+            <property name="tokens" value="DOT" />
+            <property name="allowLineBreaks" value="false" />
+        </module>
+
+        <!-- 以下是补充的规则 -->
+
+        <!-- 每行代码只声明一个变量。JAVA-CODE-GF-031 -->
+        <module name="MultipleVariableDeclarations">
+            <property name="severity" value="error"/>
+            <message key="multiple.variable.declarations.comma" value="每行代码只声明一个变量，且在同一行.(规范031)"/>
+        </module>
+
+
+        <!-- 限制方法的最大行数为150行,不计算空行 -->
+       <!-- <module name="MethodLength">
+            <property name="tokens" value="METHOD_DEF"/>
+            <property name="max" value="150"/>
+            <property name="countEmpty" value="false"/>
+        </module>
+
+        &lt;!&ndash; 限制for循环的最大嵌套深度为3 &ndash;&gt;
+        <module name="NestedForDepth">
+            <property name="max" value="3"/>
+        </module>
+
+        &lt;!&ndash; 限制方法的圈复杂度最大为10 &ndash;&gt;
+        <module name="CyclomaticComplexity">
+            <property name="max" value="10"/>
+        </module>
+
+        &lt;!&ndash; 方法名必须以小写字母开头,后跟字母或数字 &ndash;&gt;
+        <module name="MethodName">
+            <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+        </module>
+
+        &lt;!&ndash; 局部变量名必须以小写字母开头,后跟字母或数字 &ndash;&gt;
+        <module name="LocalVariableName">
+            <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+        </module>
+
+        &lt;!&ndash; 成员变量名必须以小写字母开头,后跟字母或数字 &ndash;&gt;
+        <module name="MemberName">
+            <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+        </module>
+
+        &lt;!&ndash; 要求所有public方法都有Javadoc注释,且必须包含所有参数和返回值的说明 &ndash;&gt;
+        <module name="JavadocMethod">
+            <property name="accessModifiers" value="public"/>
+            <property name="allowMissingParamTags" value="false"/>
+            <property name="allowMissingReturnTag" value="false"/>
+        </module>
+
+        &lt;!&ndash; 检查Javadoc注释的样式,但不强制要求第一句话以句点结束 &ndash;&gt;
+        <module name="JavadocStyle">
+            <property name="checkFirstSentence" value="false"/>
+        </module>-->
+    </module>
+
+    <!-- 以下是补充的Checker级别规则 -->
+
+    <!-- 限制每行最大长度为120个字符,但对包声明、导入语句和URL链接不做限制 -->
+    <module name="LineLength">
+        <property name="max" value="120"/>
+        <property name="severity" value="warning"/>
+        <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
+        <message key="maxLineLen" value="行字符数超过 {0,number,integer} 个.(规范024)"/>
+    </module>
+
+    <module name="LineLength">
+        <property name="max" value="160"/>
+        <property name="severity" value="error"/>
+        <message key="maxLineLen" value="行字符数超过 {0,number,integer} 个.(规范024)"/>
+    </module>
+
+    <!-- 限制每个文件的最大行数为1000行 -->
+   <!-- <module name="FileLength">
+        <property name="max" value="5000"/>
+    </module>-->
+</module>

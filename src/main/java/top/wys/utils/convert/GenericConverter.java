@@ -8,11 +8,8 @@ package top.wys.utils.convert;
 
 import com.google.common.collect.Lists;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
-
-import static java.util.stream.Collectors.toList;
 
 /**
  * <ol>

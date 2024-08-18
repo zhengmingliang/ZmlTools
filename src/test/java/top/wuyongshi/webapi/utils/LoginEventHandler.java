@@ -16,9 +16,9 @@ package top.wuyongshi.webapi.utils;
  * @date 2021/5/30 7:46
  * @email mpro@vip.qq.com
  */
-public  class LoginEventHandler implements EventHandler<String>{
+public class LoginEventHandler implements EventHandler<String> {
     @Override
     public void notice(String message) {
-        System.out.println(message+"登陆了");
+        System.out.println(message + "登陆了");
     }
 }

@@ -3,13 +3,14 @@
  */
 package top.wys.utils.reflect;
 
-import java.lang.reflect.Field;
-
 import top.wys.utils.valid.Preconditions;
+
+import java.lang.reflect.Field;
 
 /**
  * <p> 基本类型和对象类型的字段访问器.</p>
  * 注意对于基本类型，将会有box/unbox开销。使用{@link UnsafeFieldAccessor}尽可能避免这种开销。
+ *
  * @author 郑明亮
  * @time 2023/8/13 14:31
  * @since 1.4.3
@@ -59,7 +60,9 @@ public abstract class FieldAccessor {
         }
     }
 
-    /** Primitive boolean accessor. */
+    /**
+     * Primitive boolean accessor.
+     */
     public static class BooleanAccessor extends FieldAccessor {
         public BooleanAccessor(Field field) {
             super(field);
@@ -79,7 +82,9 @@ public abstract class FieldAccessor {
         }
     }
 
-    /** Primitive byte accessor. */
+    /**
+     * Primitive byte accessor.
+     */
     public static class ByteAccessor extends FieldAccessor {
         public ByteAccessor(Field field) {
             super(field);
@@ -99,7 +104,9 @@ public abstract class FieldAccessor {
         }
     }
 
-    /** Primitive char accessor. */
+    /**
+     * Primitive char accessor.
+     */
     public static class CharAccessor extends FieldAccessor {
         public CharAccessor(Field field) {
             super(field);
@@ -119,7 +126,9 @@ public abstract class FieldAccessor {
         }
     }
 
-    /** Primitive short accessor. */
+    /**
+     * Primitive short accessor.
+     */
     public static class ShortAccessor extends FieldAccessor {
         public ShortAccessor(Field field) {
             super(field);
@@ -139,7 +148,9 @@ public abstract class FieldAccessor {
         }
     }
 
-    /** Primitive int accessor. */
+    /**
+     * Primitive int accessor.
+     */
     public static class IntAccessor extends FieldAccessor {
         public IntAccessor(Field field) {
             super(field);
@@ -159,7 +170,9 @@ public abstract class FieldAccessor {
         }
     }
 
-    /** Primitive long accessor. */
+    /**
+     * Primitive long accessor.
+     */
     public static class LongAccessor extends FieldAccessor {
         public LongAccessor(Field field) {
             super(field);
@@ -179,7 +192,9 @@ public abstract class FieldAccessor {
         }
     }
 
-    /** Primitive float accessor. */
+    /**
+     * Primitive float accessor.
+     */
     public static class FloatAccessor extends FieldAccessor {
         public FloatAccessor(Field field) {
             super(field);
@@ -199,7 +214,9 @@ public abstract class FieldAccessor {
         }
     }
 
-    /** Primitive double accessor. */
+    /**
+     * Primitive double accessor.
+     */
     public static class DoubleAccessor extends FieldAccessor {
         public DoubleAccessor(Field field) {
             super(field);
@@ -219,7 +236,9 @@ public abstract class FieldAccessor {
         }
     }
 
-    /** Object accessor. */
+    /**
+     * Object accessor.
+     */
     public static class ObjectAccessor extends FieldAccessor {
         public ObjectAccessor(Field field) {
             super(field);

@@ -4,11 +4,13 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * 确认异常
+ *
  * @since 1.4.1
  */
-public class VerifyException  extends RuntimeException {
+public class VerifyException extends RuntimeException {
 
-    public VerifyException() {}
+    public VerifyException() {
+    }
 
 
     public VerifyException(@Nullable String message) {

@@ -25,11 +25,11 @@ public class EventBusTest {
         LoginEventHandler loginEventHandler = new LoginEventHandler();
         PayEventHandler payEventHandler = new PayEventHandler();
         BalanceEventHandler balanceEventHandler = new BalanceEventHandler(100D);
-        eventBus.register("login",loginEventHandler);
-        eventBus.register("pay",payEventHandler);
-        eventBus.register("pay",balanceEventHandler);
+        eventBus.register("login", loginEventHandler);
+        eventBus.register("pay", payEventHandler);
+        eventBus.register("pay", balanceEventHandler);
 
-        eventBus.notice("login","张三");
-        eventBus.notice("pay",10.256412456);
+        eventBus.notice("login", "张三");
+        eventBus.notice("pay", 10.256412456);
     }
 }

@@ -5,9 +5,15 @@ import top.wys.utils.collection.ArrayUtils;
 import top.wys.utils.collection.Collections;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.text.ParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -77,7 +83,7 @@ public class StringUtils {
      */
     public static String getUnicode(String s) {
         try {
-            StringBuffer out = new StringBuffer("");
+            StringBuffer out = new StringBuffer();
             byte[] bytes = s.getBytes("unicode");
             for (int i = 0; i < bytes.length - 1; i += 2) {
                 out.append("\\u");
@@ -107,7 +113,7 @@ public class StringUtils {
     public static String ISO2UTF(String inStr) throws UnsupportedEncodingException {
         String outStr = "";
         if (inStr != null) {
-            outStr = new String(inStr.getBytes("iso-8859-1"), "UTF-8");
+            outStr = new String(inStr.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
         }
         return outStr;
     }
@@ -513,7 +519,7 @@ public class StringUtils {
         if (isEmpty(s) || !Character.isLowerCase(s.charAt(0))) {
             return s;
         }
-        return String.valueOf((char) (s.charAt(0) - 32)) + s.substring(1);
+        return (char) (s.charAt(0) - 32) + s.substring(1);
     }
 
     /**
@@ -526,7 +532,7 @@ public class StringUtils {
         if (isEmpty(s) || !Character.isUpperCase(s.charAt(0))) {
             return s;
         }
-        return String.valueOf((char) (s.charAt(0) + 32)) + s.substring(1);
+        return (char) (s.charAt(0) + 32) + s.substring(1);
     }
 
     /**
@@ -642,10 +648,10 @@ public class StringUtils {
      * @time 2017年1月13日 下午4:18:14
      */
     public static String formateAmount(Object amount, String pattern) throws ParseException {
-        if (amount == null) {//当传入金额为null时，默认为0
+        if (amount == null) { //当传入金额为null时，默认为0
             return formateAmount(0, pattern);
         }
-        if (pattern == null) {//当pattern为null时，使用默认pattern
+        if (pattern == null) { //当pattern为null时，使用默认pattern
             pattern = "\u00A5,##0.00";
         }
         if (amount instanceof String) {
@@ -679,7 +685,7 @@ public class StringUtils {
         // the index of an occurrence we've found, or -1
         int patLen = oldPattern.length();
         while (index >= 0) {
-            sb.append(inString.substring(pos, index));
+            sb.append(inString, pos, index);
             sb.append(newPattern);
             pos = index + patLen;
             index = inString.indexOf(oldPattern, pos);
@@ -712,7 +718,7 @@ public class StringUtils {
             length += 10;
         }
         StringBuilder builder = new StringBuilder(length);
-        builder.append(text.substring(0, index)).append(replacement);
+        builder.append(text, 0, index).append(replacement);
         for (int i = index + 1; i < chars.length; i++) {
             if (chars[i] == searchChar) {
                 builder.append(replacement);
@@ -1023,12 +1029,12 @@ public class StringUtils {
      *
      * @param template 一个包含0个或多个 {@code "%s"} 占位符的字符串. {@code null} 会被转换为字符串 {@code "null"}.
      * @param args     要替换到消息模板中的参数. 指定的第一个参数将替换模板中第一次出现的 {@code "%s"} ,后面参数依次类推. 如果是 {@code null} 则会转换位字符串 {@code
-     * "null"};
+     *                 "null"};
      *                 非null的值将会通过 {@link Object#toString()} 转换为字符串.
      * @since 1.4.1
      */
     public static String lenientFormat(
-            @Nullable String template, @Nullable Object @Nullable ... args) {
+            @Nullable String template, @Nullable Object @Nullable... args) {
         template = String.valueOf(template); // null -> "null"
 
         if (args == null) {
@@ -1621,7 +1627,8 @@ public class StringUtils {
     /**
      * Split a {@code String} at the first occurrence of the delimiter.
      * Does not include the delimiter in the result.
-     * @param toSplit the string to split (potentially {@code null} or empty)
+     *
+     * @param toSplit   the string to split (potentially {@code null} or empty)
      * @param delimiter to split the string up with (potentially {@code null} or empty)
      * @return a two element array with index 0 being before the delimiter, and
      * index 1 being after the delimiter (neither element includes the delimiter);
@@ -1639,7 +1646,7 @@ public class StringUtils {
 
         String beforeDelimiter = toSplit.substring(0, offset);
         String afterDelimiter = toSplit.substring(offset + delimiter.length());
-        return new String[] {beforeDelimiter, afterDelimiter};
+        return new String[]{beforeDelimiter, afterDelimiter};
     }
 
     /**
@@ -1649,9 +1656,10 @@ public class StringUtils {
      * subsequence} of the {@code CharSequence} (up to the threshold) appended
      * with the suffix {@code " (truncated)..."}. Otherwise, this method returns
      * {@code charSequence.toString()}.
+     *
      * @param charSequence the {@code CharSequence} to truncate
-     * @param threshold the maximum length after which to truncate; must be a
-     * positive number
+     * @param threshold    the maximum length after which to truncate; must be a
+     *                     positive number
      * @return a truncated string, or a string representation of the original
      * {@code CharSequence} if its length does not exceed the threshold
      * @since 5.3.27
@@ -1668,6 +1676,7 @@ public class StringUtils {
 
     /**
      * Trim leading and trailing whitespace from the given {@code String}.
+     *
      * @param str the {@code String} to check
      * @return the trimmed {@code String}
      * @see java.lang.Character#isWhitespace
@@ -1694,11 +1703,12 @@ public class StringUtils {
     /**
      * Trim <em>all</em> whitespace from the given {@code CharSequence}:
      * leading, trailing, and in between characters.
+     *
      * @param str the {@code CharSequence} to check
      * @return the trimmed {@code CharSequence}
-     * @since 5.3.22
      * @see #trimAllWhitespace(String)
      * @see java.lang.Character#isWhitespace
+     * @since 5.3.22
      */
     public static CharSequence trimAllWhitespace(CharSequence str) {
         if (!hasLength(str)) {
@@ -1719,6 +1729,7 @@ public class StringUtils {
     /**
      * Trim <em>all</em> whitespace from the given {@code String}:
      * leading, trailing, and in between characters.
+     *
      * @param str the {@code String} to check
      * @return the trimmed {@code String}
      * @see #trimAllWhitespace(CharSequence)
@@ -1734,7 +1745,8 @@ public class StringUtils {
 
     /**
      * Trim all occurrences of the supplied trailing character from the given {@code String}.
-     * @param str the {@code String} to check
+     *
+     * @param str             the {@code String} to check
      * @param suffixCharacter the trailing character to be trimmed
      * @return the trimmed {@code String}
      */
@@ -1752,7 +1764,8 @@ public class StringUtils {
 
     /**
      * Trim all occurrences of the supplied leading character from the given {@code String}.
-     * @param str the {@code String} to check
+     *
+     * @param str             the {@code String} to check
      * @param prefixCharacter the leading character to be trimmed
      * @return the trimmed {@code String}
      */
@@ -1767,12 +1780,14 @@ public class StringUtils {
         }
         return str.substring(beginIdx);
     }
+
     /**
      * 将给的字符的前后字符都去掉 {@code String}.
-     * @param str the {@code String} to check
+     *
+     * @param str       the {@code String} to check
      * @param character the  character to be trimmed
-     * @see StringUtils#cleanValue(String, String, String)
      * @return the trimmed {@code String}
+     * @see StringUtils#cleanValue(String, String, String)
      */
     public static String trimCharacter(String str, char character) {
         if (!hasLength(str)) {
@@ -1797,7 +1812,8 @@ public class StringUtils {
     /**
      * Test if the given {@code String} starts with the specified prefix,
      * ignoring upper/lower case.
-     * @param str the {@code String} to check
+     *
+     * @param str    the {@code String} to check
      * @param prefix the prefix to look for
      * @see java.lang.String#startsWith
      */
@@ -1809,7 +1825,8 @@ public class StringUtils {
     /**
      * Test if the given {@code String} ends with the specified suffix,
      * ignoring upper/lower case.
-     * @param str the {@code String} to check
+     *
+     * @param str    the {@code String} to check
      * @param suffix the suffix to look for
      * @see java.lang.String#endsWith
      */

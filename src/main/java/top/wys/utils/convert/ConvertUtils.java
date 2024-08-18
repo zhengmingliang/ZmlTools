@@ -598,6 +598,7 @@ public class ConvertUtils {
 
     /**
      * 将 byte 转为 二进制字符串，默认返回 8 位，高位补0
+     *
      * @param value
      * @return
      */
@@ -615,6 +616,7 @@ public class ConvertUtils {
 
     /**
      * 将 int 整数转为二进制字符串，默认返回 32 位，高位补0
+     *
      * @param value
      * @return
      */
@@ -627,6 +629,7 @@ public class ConvertUtils {
 
     /**
      * 将 long 整数转为二进制字符串，默认返回 64 位，高位补0
+     *
      * @param value
      * @return
      */

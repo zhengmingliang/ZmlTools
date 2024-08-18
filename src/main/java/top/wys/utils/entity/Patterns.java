@@ -22,11 +22,14 @@ public class Patterns {
     /**
      * http url
      */
-    public static final Pattern HTTP_URL = Pattern.compile("(https://|http://)?([\\w-]+\\.)+[\\w-]+(:\\d+)*(/[\\w- ./?%&=]*)?");
+    public static final Pattern HTTP_URL =
+            Pattern.compile("(https://|http://)?([\\w-]+\\.)+[\\w-]+(:\\d+)*(/[\\w- ./?%&=]*)?");
     /**
      * email 校验
      */
-    public static final Pattern EMAIL = Pattern.compile("^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$");
+    public static final Pattern EMAIL = Pattern.compile(
+            "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))" +
+                    "([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$");
 
     /**
      * 引用于Android.util.Patterns
@@ -73,6 +76,7 @@ public class Patterns {
     /**
      * 验证时间格式的正则表达式（2021-01-10 12:00:12,2022/10/11 12:32,2012年10月12日 12:10:12）
      */
-    public static final Pattern PATTERN_IS_DATETIME =  Pattern.compile("\\d+(-|/|年)[0-9]{2}(-|/|月)[0-9]{2}(日)?\\s{1}[0-2][0-9](:[0-5][0-9]){1,2}");
+    public static final Pattern PATTERN_IS_DATETIME =
+            Pattern.compile("\\d+(-|/|年)[0-9]{2}(-|/|月)[0-9]{2}(日)?\\s{1}[0-2][0-9](:[0-5][0-9]){1,2}");
 
 }

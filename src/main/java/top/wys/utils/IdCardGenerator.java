@@ -1,6 +1,14 @@
 package top.wys.utils;
 /**
  * Created by 郑明亮 on 2019/10/6 17:06.
+ *
+ * <ol>
+ *  2019/10/6 17:06 <br>
+ *  随机生成身份证号
+ * </ol>
+ *
+ * @author 郑明亮
+ * @version 1.0
  */
 
 /**
@@ -12,6 +20,7 @@ package top.wys.utils;
  * @author 郑明亮
  * @version 1.0
  */
+
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
@@ -3552,14 +3561,15 @@ public class IdCardGenerator {
         generater.append(calcTrailingNumber(generater.toString().toCharArray()));
         return generater.toString();
     }
+
     /**
      * 生成18位随机身份证号
      * @return
      */
-    public static String generate(int minAge,int maxAge) {
+    public static String generate(int minAge, int maxAge) {
         StringBuilder generater = new StringBuilder();
         generater.append(randomAreaCode());
-        generater.append(randomBirthday(minAge,maxAge));
+        generater.append(randomBirthday(minAge, maxAge));
         generater.append(randomCode());
         generater.append(calcTrailingNumber(generater.toString().toCharArray()));
         return generater.toString();
@@ -3581,25 +3591,27 @@ public class IdCardGenerator {
         }
         return code;
     }
+
     /**
      * 随机出生日期
      * @return
      */
     private static String randomBirthday() {
-        return randomBirthday(18,50);
+        return randomBirthday(18, 50);
     }
+
     /**
      * 随机出生日期
      * @return
      */
-    private static String randomBirthday(int minAge,int maxAge) {
+    private static String randomBirthday(int minAge, int maxAge) {
         Calendar birthday = Calendar.getInstance();
         int year = birthday.get(Calendar.YEAR);
         int age = RandomUtils.getNum(minAge, maxAge);
-        year = year - age ;
+        year = year - age;
         birthday.set(Calendar.YEAR, year);
-        birthday.set(Calendar.MONTH, RandomUtils.getNum(1,12));
-        birthday.set(Calendar.DATE, RandomUtils.getNum(1,31));
+        birthday.set(Calendar.MONTH, RandomUtils.getNum(1, 12));
+        birthday.set(Calendar.DATE, RandomUtils.getNum(1, 31));
 
         StringBuilder builder = new StringBuilder();
         builder.append(year);
@@ -3633,8 +3645,8 @@ public class IdCardGenerator {
         if (chars.length < 17) {
             return ' ';
         }
-        int[] c = { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 };
-        char[] r = { '1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2' };
+        int[] c = {7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2};
+        char[] r = {'1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'};
         int[] n = new int[17];
         int result = 0;
         for (int i = 0; i < n.length; i++) {

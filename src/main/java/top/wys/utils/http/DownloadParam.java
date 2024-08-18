@@ -17,7 +17,7 @@ public class DownloadParam {
     private String fileName;
     private long fileSize;
     private long saveSize;
-    private Status status = Status.WAITING;
+    private final Status status = Status.WAITING;
     private Path localPath;
     private URL location;
     private String description;
@@ -26,7 +26,7 @@ public class DownloadParam {
 
     public enum Status {
         WAITING("等待"), RUNNING("运行中"), STOPPED("停止"), FINISHED("完成");
-        private String value;
+        private final String value;
 
         Status(String value) {
             this.value = value;
