@@ -23,19 +23,19 @@ public class EventBusListener {
     Logger log = LoggerFactory.getLogger(EventBusListener.class);
 
     @Subscribe
-    public void handleMessage(String msg){
-        log.info("msg:{}",msg);
+    public void handleMessage(String msg) {
+        log.info("msg:{}", msg);
         System.out.println(msg);
     }
 
     @Subscribe
-    public void handleIntMessage(Integer num){
-        log.info("num:{}",num);
+    public void handleIntMessage(Integer num) {
+        log.info("num:{}", num);
         System.out.println(num);
     }
 
     @Subscribe
-    private void handleDeadEvent(DeadEvent deadEvent){
+    private void handleDeadEvent(DeadEvent deadEvent) {
         Object event = deadEvent.getEvent();
         System.out.println("event = " + event);
         Object source = deadEvent.getSource();

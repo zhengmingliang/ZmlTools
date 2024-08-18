@@ -7,8 +7,8 @@ package top.wys.utils.http;
  * <p> 通知事件</p>
  *
  * @author 郑明亮
- * @since 1.4.1
  * @time 2022/8/27 11:57
+ * @since 1.4.1
  */
 public interface ProcessNotifyEvent {
     /**
@@ -24,5 +24,5 @@ public interface ProcessNotifyEvent {
      * @param process 进度或长度
      * @param total   总长度
      */
-    void notifyProcess(long process,long total);
+    void notifyProcess(long process, long total);
 }

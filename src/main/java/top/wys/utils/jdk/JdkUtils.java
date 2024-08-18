@@ -13,9 +13,12 @@ package top.wys.utils.jdk;
 public class JdkUtils {
     public static final int JAVA_VERSION;
     public static final String JVM_NAME;
+
     static {
         int jvmVersion = -1;
-        boolean openj9 = false, android = false, graal = false;
+        boolean openj9 = false;
+        boolean android = false;
+        boolean graal = false;
         JVM_NAME = System.getProperty("java.vm.name");
         try {
             String javaSpecVer = System.getProperty("java.specification.version");

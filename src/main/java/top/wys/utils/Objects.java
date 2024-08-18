@@ -12,7 +12,11 @@ import javax.annotation.Nullable;
 import java.lang.reflect.Array;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.*;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 /**
@@ -167,7 +171,7 @@ public class Objects {
      * @see Object#equals(Object)
      */
     public static boolean equals(Object a, Object b) {
-        return (a == b) || (a != null && a.equals(b));
+        return java.util.Objects.equals(a, b);
     }
 
     /**
@@ -480,7 +484,7 @@ public class Objects {
                 return (Boolean) object;
 
             } else if (object instanceof String) {
-                return new Boolean((String) object);
+                return Boolean.valueOf((String) object);
 
             } else if (object instanceof Number) {
                 Number n = (Number) object;

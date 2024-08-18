@@ -6,10 +6,10 @@
 
 package top.wys.utils.http;
 
-import java.io.IOException;
-
 import okhttp3.Call;
 import okhttp3.Response;
+
+import java.io.IOException;
 
 /**
  * <ol>
@@ -23,7 +23,8 @@ import okhttp3.Response;
  */
 public interface HttpCallBack<T> {
     void onFailure(Call call, IOException e);
-    void onProcess(long process,long total);
 
-    void onResponse(Call call, Response response,T result) throws IOException;
+    void onProcess(long process, long total);
+
+    void onResponse(Call call, Response response, T result) throws IOException;
 }

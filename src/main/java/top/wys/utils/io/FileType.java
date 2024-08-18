@@ -24,16 +24,19 @@ public class FileType {
     //默认判断文件头前三个字节内容
     public static int CHECK_BYTES_NUMBER = 3;
 
-    public final static Map<String, String> FILE_TYPE_MAP = new HashMap<String, String>();
+    public static final Map<String, String> FILE_TYPE_MAP = new HashMap<String, String>();
 
-    private final static Properties mimeTypeMap;
-    private FileType(){}
-    static{
+    private static final Properties mimeTypeMap;
+
+    private FileType() {
+    }
+
+    static {
         getAllFileType(); //初始化文件类型信息
         mimeTypeMap = new Properties();
         try {
-        InputStream is = FileType.class.getResourceAsStream("/filetype.properties");
-        mimeTypeMap.load(is);
+            InputStream is = FileType.class.getResourceAsStream("/filetype.properties");
+            mimeTypeMap.load(is);
             Properties properties = new Properties();
             properties.load(FileType.class.getResourceAsStream("/mimetype.properties"));
             mimeTypeMap.putAll(properties);
@@ -45,8 +48,7 @@ public class FileType {
     /**
      * Discription:[getAllFileType,常见文件头信息]
      */
-    private static void getAllFileType()
-    {
+    private static void getAllFileType() {
         FILE_TYPE_MAP.put("ffd8ffe000104a464946", "jpg"); //JPEG (jpg)
         FILE_TYPE_MAP.put("89504e470d0a1a0a0000", "png"); //PNG (png)
         FILE_TYPE_MAP.put("47494638396126026f01", "gif"); //GIF (gif)
@@ -80,20 +82,20 @@ public class FileType {
         FILE_TYPE_MAP.put("526172211a0700cf9073", "rar");
         FILE_TYPE_MAP.put("235468697320636f6e66", "ini");
         FILE_TYPE_MAP.put("504b03040a0000000000", "jar");
-        FILE_TYPE_MAP.put("4d5a9000030000000400", "exe");//可执行文件
-        FILE_TYPE_MAP.put("3c25402070616765206c", "jsp");//jsp文件
-        FILE_TYPE_MAP.put("4d616e69666573742d56", "mf");//MF文件
-        FILE_TYPE_MAP.put("3c3f786d6c2076657273", "xml");//xml文件
-        FILE_TYPE_MAP.put("494e5345525420494e54", "sql");//xml文件
-        FILE_TYPE_MAP.put("7061636b616765207765", "java");//java文件
-        FILE_TYPE_MAP.put("406563686f206f66660d", "bat");//bat文件
-        FILE_TYPE_MAP.put("1f8b0800000000000000", "gz");//gz文件
-        FILE_TYPE_MAP.put("6c6f67346a2e726f6f74", "properties");//bat文件
-        FILE_TYPE_MAP.put("cafebabe0000002e0041", "class");//bat文件
-        FILE_TYPE_MAP.put("49545346030000006000", "chm");//bat文件
-        FILE_TYPE_MAP.put("04000000010000001300", "mxp");//bat文件
-        FILE_TYPE_MAP.put("504b0304140006000800", "docx");//docx文件
-        FILE_TYPE_MAP.put("d0cf11e0a1b11ae10000", "wps");//WPS文字wps、表格et、演示dps都是一样的
+        FILE_TYPE_MAP.put("4d5a9000030000000400", "exe"); //可执行文件
+        FILE_TYPE_MAP.put("3c25402070616765206c", "jsp"); //jsp文件
+        FILE_TYPE_MAP.put("4d616e69666573742d56", "mf"); //MF文件
+        FILE_TYPE_MAP.put("3c3f786d6c2076657273", "xml"); //xml文件
+        FILE_TYPE_MAP.put("494e5345525420494e54", "sql"); //xml文件
+        FILE_TYPE_MAP.put("7061636b616765207765", "java"); //java文件
+        FILE_TYPE_MAP.put("406563686f206f66660d", "bat"); //bat文件
+        FILE_TYPE_MAP.put("1f8b0800000000000000", "gz"); //gz文件
+        FILE_TYPE_MAP.put("6c6f67346a2e726f6f74", "properties"); //bat文件
+        FILE_TYPE_MAP.put("cafebabe0000002e0041", "class"); //bat文件
+        FILE_TYPE_MAP.put("49545346030000006000", "chm"); //bat文件
+        FILE_TYPE_MAP.put("04000000010000001300", "mxp"); //bat文件
+        FILE_TYPE_MAP.put("504b0304140006000800", "docx"); //docx文件
+        FILE_TYPE_MAP.put("d0cf11e0a1b11ae10000", "wps"); //WPS文字wps、表格et、演示dps都是一样的
         FILE_TYPE_MAP.put("6431303a637265617465", "torrent");
 
 
@@ -109,10 +111,11 @@ public class FileType {
 
     /**
      * 根据制定文件的文件头判断其文件类型
+     *
      * @param filePaht
      * @return
      */
-    public static String getFileType(String filePaht){
+    public static String getFileType(String filePaht) {
         String res = null;
 
         try {
@@ -123,7 +126,8 @@ public class FileType {
         }
         return res;
     }
-    public static String getFileType(InputStream in){
+
+    public static String getFileType(InputStream in) {
         String res = null;
         try {
 
@@ -136,9 +140,10 @@ public class FileType {
 
             //这种方法在字典的头代码不够位数的时候可以用但是速度相对慢一点
             Iterator<String> keyIter = FILE_TYPE_MAP.keySet().iterator();
-            while(keyIter.hasNext()){
+            while (keyIter.hasNext()) {
                 String key = keyIter.next();
-                if(key.toLowerCase().startsWith(fileCode.toLowerCase()) || fileCode.toLowerCase().startsWith(key.toLowerCase())){
+                if (key.toLowerCase().startsWith(fileCode.toLowerCase()) || fileCode.toLowerCase()
+                        .startsWith(key.toLowerCase())) {
                     res = FILE_TYPE_MAP.get(key);
                     break;
                 }
@@ -153,6 +158,7 @@ public class FileType {
 
     /**
      * 得到上传文件的文件头
+     *
      * @param src
      * @return
      */
@@ -182,13 +188,15 @@ public class FileType {
 
     /**
      * 通过mimeType获取对应文件后缀
+     *
      * @param mimeType
      * @return
      */
-    public static String getSuffixByMimeType(String mimeType){
+    public static String getSuffixByMimeType(String mimeType) {
         return mimeTypeMap.getProperty(mimeType, "");
     }
-    public static String getMimeTypeBySuffix(String mimeType){
+
+    public static String getMimeTypeBySuffix(String mimeType) {
         return mimeTypeMap.getProperty(mimeType, "");
     }
 

@@ -1,5 +1,10 @@
-package top.wys.utils;/**
+package top.wys.utils;
+/**
  * Created by 郑明亮 on 2017/11/26 20:57.
+ *
+ * @author 郑明亮   @email 1072307340@qq.com
+ * @version 1.0
+ * @time 2017/11/26 20:57
  */
 
 /**
@@ -7,6 +12,7 @@ package top.wys.utils;/**
  * @version 1.0
  * @time 2017/11/26 20:57
  */
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,19 +38,19 @@ import java.util.Set;
  */
 public final class PropertiesUtil {
 
-    private static Logger log = LoggerFactory.getLogger(PropertiesUtil.class);
+    private static final Logger log = LoggerFactory.getLogger(PropertiesUtil.class);
 
     private PropertiesUtil() {
         throw new UnsupportedOperationException("you cannot instant me");
     }
 
-    private static HashMap<String, Properties> propertiesMap = new HashMap<>();
+    private static final HashMap<String, Properties> propertiesMap = new HashMap<>();
 
 
     /**
      * 对加载的配置文件计数
      */
-    private static int propertySize = 0;
+    private static int propertySize;
 
 
     /**
@@ -70,7 +76,7 @@ public final class PropertiesUtil {
 
         if (!loadOnce || properties == null) {
             properties = new Properties();
-            try (InputStream resourceAsStream = PropertiesUtil.class.getResourceAsStream("/" + fileName)){
+            try (InputStream resourceAsStream = PropertiesUtil.class.getResourceAsStream("/" + fileName)) {
                 if (resourceAsStream == null) {
                     log.warn("未在classpath中找到{}文件", fileName);
                     return false;
@@ -83,7 +89,7 @@ public final class PropertiesUtil {
                 log.warn("从classpath下未找到执行配置文件，开始通过绝对路径寻找配置文件", e);
                 flag = loadFromPath(fileName);
             }
-        } else {//仅加载一次，并且properties不为空
+        } else { //仅加载一次，并且properties不为空
             flag = true;
         }
 
@@ -122,7 +128,7 @@ public final class PropertiesUtil {
             } catch (IOException e) {
                 log.warn("通过绝对路径未找到配置文件", e);
             }
-        } else {//首次加载
+        } else { //首次加载
             flag = true;
         }
         return flag;
@@ -271,14 +277,15 @@ public final class PropertiesUtil {
         return remove != null;
     }
 
-    public static boolean update(String key, String value, String comment, boolean updateToFile,String... path) throws FileNotFoundException {
+    public static boolean update(String key, String value, String comment, boolean updateToFile, String... path)
+            throws FileNotFoundException {
         boolean flag = false;
         for (Map.Entry<String, Properties> propertiesEntry : propertiesMap.entrySet()) {
             Properties properties = propertiesEntry.getValue();
             if (properties.containsKey(key)) {
                 flag = properties.setProperty(key, value) != null;
                 if (updateToFile) {
-                    updateToFile(key, value, comment, propertiesEntry,path);
+                    updateToFile(key, value, comment, propertiesEntry, path);
                 }
                 break;
             }
@@ -296,12 +303,16 @@ public final class PropertiesUtil {
      * @param propertiesEntry
      * @throws FileNotFoundException
      */
-    private static void updateToFile(String key, String value, String comment, Map.Entry<String, Properties> propertiesEntry,String... filePath) throws FileNotFoundException {
+    private static void updateToFile(String key,
+                                     String value,
+                                     String comment,
+                                     Map.Entry<String, Properties> propertiesEntry,
+                                     String... filePath) throws FileNotFoundException {
         Properties properties;
-        properties = new SafeProperties();//采用自定义Properties，读取配置文件时，记录注释等信息
+        properties = new SafeProperties(); //采用自定义Properties，读取配置文件时，记录注释等信息
         String fileName = propertiesEntry.getKey();
         String path = PropertiesUtil.class.getResource(File.separator + fileName).getPath();
-        if(filePath != null && filePath.length >0){
+        if (filePath != null && filePath.length > 0) {
             path = filePath[0];
         }
 
@@ -315,7 +326,7 @@ public final class PropertiesUtil {
         }
 
         try (FileInputStream fis = new FileInputStream(file);
-             FileOutputStream fos = new FileOutputStream(file);) {
+             FileOutputStream fos = new FileOutputStream(file)) {
             properties.load(fis);
             properties.setProperty(key, value);
             properties.store(fos, comment);

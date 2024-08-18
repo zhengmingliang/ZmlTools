@@ -10,15 +10,15 @@
 
 package top.wys.utils.entity;
 
+import lombok.Data;
+
+import javax.validation.Valid;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
-
-import javax.validation.Valid;
-
-import lombok.Data;
 
 /**
  * <ol>

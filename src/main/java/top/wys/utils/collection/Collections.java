@@ -241,13 +241,13 @@ public class Collections {
      * If the input collection or predicate is null, or no element of the collection
      * matches the predicate, null is returned.
      *
-     * @param collection  the collection to search, may be null
+     * @param collection the collection to search, may be null
      * @param predicate  the predicate to use, may be null
      * @return the first element of the collection which matches the predicate or null if none could be found
      */
     public static <T> T findFirst(Collection<T> collection, Predicate predicate) {
         if (collection != null && predicate != null) {
-            for (Iterator<T> iter = collection.iterator(); iter.hasNext();) {
+            for (Iterator<T> iter = collection.iterator(); iter.hasNext(); ) {
                 T item = iter.next();
                 if (predicate.test(item)) {
                     return item;
@@ -263,14 +263,14 @@ public class Collections {
      * If the input collection or predicate is null, or no element of the collection
      * matches the predicate, null is returned.
      *
-     * @param collection  the collection to search, may be null
+     * @param collection the collection to search, may be null
      * @param predicate  the predicate to use, may be null
      * @return the first element of the collection which matches the predicate or null if none could be found
      */
     public static <T> List<T> findAll(Collection<T> collection, Predicate predicate) {
         if (collection != null && predicate != null) {
             List<T> list = Lists.newArrayListWithExpectedSize(collection.size());
-            for (Iterator<T> iter = collection.iterator(); iter.hasNext();) {
+            for (Iterator<T> iter = collection.iterator(); iter.hasNext(); ) {
                 T item = iter.next();
                 if (predicate.test(item)) {
                     list.add(item);
@@ -288,8 +288,8 @@ public class Collections {
      * <p>
      * If the input iterator or transformer is null, the result is an empty list.
      *
-     * @param inputIterator  the iterator to get the input from, may be null
-     * @param transformer  the transformer to use, may be null
+     * @param inputIterator the iterator to get the input from, may be null
+     * @param transformer   the transformer to use, may be null
      * @return the transformed result (new list)
      */
     public static <I, O> Collection<O> convert(Iterator<I> inputIterator, Function<I, O> transformer) {
@@ -306,8 +306,8 @@ public class Collections {
      * output collection.
      *
      * @param inputCollection  the collection to get the input from, may be null
-     * @param transformer  the transformer to use, may be null
-     * @param outputCollection  the collection to output into, may not be null
+     * @param transformer      the transformer to use, may be null
+     * @param outputCollection the collection to output into, may not be null
      * @return the outputCollection with the transformed input added
      * @throws NullPointerException if the output collection is null
      */
@@ -327,9 +327,9 @@ public class Collections {
      * If the input iterator or transformer is null, there is no change to the
      * output collection.
      *
-     * @param inputIterator  the iterator to get the input from, may be null
-     * @param transformer  the transformer to use, may be null
-     * @param outputCollection  the collection to output into, may not be null
+     * @param inputIterator    the iterator to get the input from, may be null
+     * @param transformer      the transformer to use, may be null
+     * @param outputCollection the collection to output into, may not be null
      * @return the outputCollection with the transformed input added
      * @throws NullPointerException if the output collection is null
      */
@@ -346,20 +346,19 @@ public class Collections {
     }
 
 
-
     /**
      * Counts the number of elements in the input collection that match the predicate.
      * <p>
      * A <code>null</code> collection or predicate matches no elements.
      *
-     * @param inputCollection  the collection to get the input from, may be null
-     * @param predicate  the predicate to use, may be null
+     * @param inputCollection the collection to get the input from, may be null
+     * @param predicate       the predicate to use, may be null
      * @return the number of matches for the predicate in the collection
      */
     public static int countMatches(Collection inputCollection, Predicate predicate) {
         int count = 0;
         if (inputCollection != null && predicate != null) {
-            for (Iterator it = inputCollection.iterator(); it.hasNext();) {
+            for (Iterator it = inputCollection.iterator(); it.hasNext(); ) {
                 if (predicate.test(it.next())) {
                     count++;
                 }
@@ -375,12 +374,12 @@ public class Collections {
      * A <code>null</code> collection or predicate returns false.
      *
      * @param collection the collection to get the input from, may be null
-     * @param predicate the predicate to use, may be null
+     * @param predicate  the predicate to use, may be null
      * @return true if at least one element of the collection matches the predicate
      */
     public static boolean exists(Collection collection, Predicate predicate) {
         if (collection != null && predicate != null) {
-            for (Iterator it = collection.iterator(); it.hasNext();) {
+            for (Iterator it = collection.iterator(); it.hasNext(); ) {
                 if (predicate.test(it.next())) {
                     return true;
                 }
@@ -388,11 +387,13 @@ public class Collections {
         }
         return false;
     }
+
     /**
      * 获取集合大小
+     *
      * @param collection
-     * @since 1.4.5
      * @return
+     * @since 1.4.5
      */
     public static int size(Collection collection) {
         if (collection == null) {
@@ -413,7 +414,7 @@ public class Collections {
      * <li>Enumeration - the number of elements remaining in the enumeration
      * </ul>
      *
-     * @param object  the object to get the size of
+     * @param object the object to get the size of
      * @return the size of the specified collection
      * @throws IllegalArgumentException thrown if object is not recognised or null
      * @since Commons Collections 3.1
@@ -452,11 +453,11 @@ public class Collections {
     }
 
 
-
     /**
      * Check whether the given Iterator contains the given element.
+     *
      * @param iterator the Iterator to check
-     * @param element the element to look for
+     * @param element  the element to look for
      * @return {@code true} if found, {@code false} otherwise
      */
     public static boolean contains(@Nullable Iterator<?> iterator, Object element) {
@@ -474,8 +475,9 @@ public class Collections {
 
     /**
      * Find a single value of the given type in the given Collection.
+     *
      * @param collection the Collection to search
-     * @param type the type to look for
+     * @param type       the type to look for
      * @return a value of the given type found if there is a clear match,
      * or {@code null} if none or more than one such value found
      */
@@ -499,13 +501,13 @@ public class Collections {
     }
 
 
-
     /**
      * Find a single value of one of the given types in the given Collection:
      * searching the Collection for a value of the first type, then
      * searching for a value of the second type, etc.
+     *
      * @param collection the collection to search
-     * @param types the types to look for, in prioritized order
+     * @param types      the types to look for, in prioritized order
      * @return a value of one of the given types found if there is a clear match,
      * or {@code null} if none or more than one such value found
      */

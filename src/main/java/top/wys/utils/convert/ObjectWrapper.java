@@ -2,7 +2,7 @@ package top.wys.utils.convert;
 
 
 public class ObjectWrapper {
-    private Object object;
+    private final Object object;
 
     public ObjectWrapper(Object object) {
         this.object = object;
@@ -11,6 +11,7 @@ public class ObjectWrapper {
     public Object getObject() {
         return object;
     }
+
     public Object getObjectOrDefault(Object defaultObject) {
         return object == null ? defaultObject : object;
     }
@@ -36,6 +37,7 @@ public class ObjectWrapper {
         }
         return Integer.parseInt(object.toString());
     }
+
     public Integer getIntegerOrDefault(Integer defaultInteger) {
         if (object == null) {
             return defaultInteger;
@@ -63,6 +65,7 @@ public class ObjectWrapper {
         }
         return Double.parseDouble(object.toString());
     }
+
     public Double getDoubleOrDefault(Double defaultDouble) {
         if (object == null) {
             return defaultDouble;
@@ -76,6 +79,7 @@ public class ObjectWrapper {
         }
         return Boolean.parseBoolean(object.toString());
     }
+
     public boolean getBooleanOrDefault(Boolean defaultBoolean) {
         if (object == null) {
             return defaultBoolean;

@@ -1,6 +1,14 @@
 package top.wys.utils.crypto;
 /**
  * Created by 郑明亮 on 2021/11/28 14:48.
+ *
+ * <ol>
+ *  2021/11/28 14:48 <br>
+ *
+ * </ol>
+ *
+ * @author 郑明亮
+ * @version 1.0
  */
 
 /**
@@ -13,13 +21,14 @@ package top.wys.utils.crypto;
  * @version 1.0
  */
 
+import javax.crypto.Cipher;
+import javax.crypto.CipherOutputStream;
+import javax.crypto.spec.IvParameterSpec;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.Key;
-import javax.crypto.Cipher;
-import javax.crypto.CipherOutputStream;
-import javax.crypto.spec.IvParameterSpec;
 
 /**
  * 透过Cipher来实现加解密。
@@ -43,6 +52,7 @@ public abstract class CipherCrpyt extends Crypt {
     protected Cipher cipher;
 
     // -----组件方法-----
+
     /**
      * 加/解密资料。
      *
@@ -51,7 +61,8 @@ public abstract class CipherCrpyt extends Crypt {
      * @param listener 传入监听者组件
      * @throws IOException 当输入输出处理时发生问题，会抛出这个异常
      */
-    protected void crypt(final InputStream inputData, final OutputStream outputData, final CryptListener listener) throws IOException {
+    protected void crypt(final InputStream inputData, final OutputStream outputData, final CryptListener listener)
+            throws IOException {
         final int totalBytes = inputData.available();
 
         if (listener != null) {
@@ -90,7 +101,8 @@ public abstract class CipherCrpyt extends Crypt {
      * @throws IOException 当输入输出处理时发生问题，会抛出这个异常
      */
     @Override
-    public void encrypt(final InputStream inputData, final OutputStream outputData, final CryptListener listener) throws IOException {
+    public void encrypt(final InputStream inputData, final OutputStream outputData, final CryptListener listener)
+            throws IOException {
         try {
             cipher.init(Cipher.ENCRYPT_MODE, key, iv);
             crypt(inputData, outputData, listener);
@@ -110,7 +122,8 @@ public abstract class CipherCrpyt extends Crypt {
      * @throws IOException 当输入输出处理时发生问题，会抛出这个异常
      */
     @Override
-    public void decrypt(final InputStream inputData, final OutputStream outputData, final CryptListener listener) throws IOException {
+    public void decrypt(final InputStream inputData, final OutputStream outputData, final CryptListener listener)
+            throws IOException {
         try {
             cipher.init(Cipher.DECRYPT_MODE, key, iv);
             crypt(inputData, outputData, listener);

@@ -29,75 +29,75 @@
 //public class FieldDataVo implements Serializable{
 //
 //
-//	private static final long serialVersionUID = 3048556605156440239L;
+//    private static final long serialVersionUID = 3048556605156440239L;
 //
-//	/**
-//	 * @param field
-//	 */
-//	public FieldDataVo(String field) {
-//		this.field = field;
-//	}
-//
-//
-//	/**
-//	 * 类型 维度1还是指标0, 过滤字段2
-//	 */
-//	Integer type;
+//    /**
+//     * @param field
+//     */
+//    public FieldDataVo(String field) {
+//        this.field = field;
+//    }
 //
 //
-//	/**
-//	 * code字段
-//	 */
-//	String code;
-//
-//	/**
-//	 * 汉语字段
-//	 */
-//	String textCode;
-//	/**
-//	 * 维度字段 是关联维表还是没有关联
-//	 */
-//	Integer dimType;
-//
-//	/**
-//	 * 显示字段
-//	 */
-//	String fieldText;
-//	/**
-//	 * @since 2021年6月30日 12:06:35
-//	 *  用于记录前端字段所处位置，如维度面板（dimension_panel）、指标面板（index_panel）、属性面板(property_panel)等
-//	 */
-//	String position;
-//
-//	/**
-//	 * 字段类型
-//	 */
-//	@SerializedName(value = "fieldtype")
-//	@JSONField(name = "fieldtype")
-//	@JsonProperty(aliases = {"fieldtype"})
-//	@ONodeAttr(name = "fieldtype")
-//	String fieldType;
+//    /**
+//     * 类型 维度1还是指标0, 过滤字段2
+//     */
+//    Integer type;
 //
 //
-//	/**
-//	 * 字段
-//	 */
-//	String field;
+//    /**
+//     * code字段
+//     */
+//    String code;
+//
+//    /**
+//     * 汉语字段
+//     */
+//    String textCode;
+//    /**
+//     * 维度字段 是关联维表还是没有关联
+//     */
+//    Integer dimType;
+//
+//    /**
+//     * 显示字段
+//     */
+//    String fieldText;
+//    /**
+//     * @since 2021年6月30日 12:06:35
+//     *  用于记录前端字段所处位置，如维度面板（dimension_panel）、指标面板（index_panel）、属性面板(property_panel)等
+//     */
+//    String position;
+//
+//    /**
+//     * 字段类型
+//     */
+//    @SerializedName(value = "fieldtype")
+//    @JSONField(name = "fieldtype")
+//    @JsonProperty(aliases = {"fieldtype"})
+//    @ONodeAttr(name = "fieldtype")
+//    String fieldType;
 //
 //
-//	/**
-//	 * 对应的表id
-//	 */
-//	String tableid;
-//	/**
-//	 * add by 郑明亮 2020年12月11日 14:34:08
-//	 * 字段格式化格式，主要用于日期格式化
-//	 */
-//	String timePattern;
+//    /**
+//     * 字段
+//     */
+//    String field;
 //
 //
-//	/**
-//	 * 排序类型  升序还是降序
+//    /**
+//     * 对应的表id
+//     */
+//    String tableid;
+//    /**
+//     * add by 郑明亮 2020年12月11日 14:34:08
+//     * 字段格式化格式，主要用于日期格式化
+//     */
+//    String timePattern;
+//
+//
+//    /**
+//     * 排序类型  升序还是降序
 //	 */
 //	String sortType;
 //

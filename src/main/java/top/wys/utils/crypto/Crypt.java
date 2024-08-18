@@ -1,6 +1,14 @@
 package top.wys.utils.crypto;
 /**
  * Created by 郑明亮 on 2021/12/2 14:36.
+ *
+ * <ol>
+ *  2021/12/2 14:36 <br>
+ *
+ * </ol>
+ *
+ * @author 郑明亮
+ * @version 1.0
  */
 
 /**
@@ -12,6 +20,7 @@ package top.wys.utils.crypto;
  * @author 郑明亮
  * @version 1.0
  */
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -26,14 +35,14 @@ import java.io.OutputStream;
 public abstract class Crypt {
 
     // -----类别介面-----
-    public static interface CryptListener {
+    public interface CryptListener {
 
         /**
          * 开始进行加/解密。
          *
          * @param totalBytes 要处理的内容大小
          */
-        public void onStarted(final long totalBytes);
+        void onStarted(final long totalBytes);
 
         /**
          * 正在进行加/解密。
@@ -42,7 +51,7 @@ public abstract class Crypt {
          * @param totalBytes 全部的内容大小
          * @return 传回是否要继续处理内容
          */
-        public boolean onRunning(final long currentBytes, final long totalBytes);
+        boolean onRunning(final long currentBytes, final long totalBytes);
 
         /**
          * 加/解密結束。
@@ -50,7 +59,7 @@ public abstract class Crypt {
          * @param finishedBytes 已处理的内容大小
          * @param totalBytes 全部的内容大小
          */
-        public void onFinished(final long finishedBytes, final long totalBytes);
+        void onFinished(final long finishedBytes, final long totalBytes);
     }
 
     // -----类别常数-----
@@ -61,6 +70,7 @@ public abstract class Crypt {
 
     // -----物件变数-----
     // -----物件方法-----
+
     /**
      * 加密内容。
      *
@@ -79,7 +89,8 @@ public abstract class Crypt {
      * @return 传回加密后的内容
      */
     public byte[] encrypt(final byte[] data, final CryptListener listener) {
-        try (final ByteArrayInputStream bais = new ByteArrayInputStream(data); final ByteArrayOutputStream baos = new ByteArrayOutputStream();) {
+        try (final ByteArrayInputStream bais = new ByteArrayInputStream(data);
+             final ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
             encrypt(bais, baos, listener);
             return baos.toByteArray();
         } catch (final Exception ex) {
@@ -105,7 +116,8 @@ public abstract class Crypt {
      * @return 传回加密后的内容
      */
     public byte[] decrypt(final byte[] data, final CryptListener listener) {
-        try (final ByteArrayInputStream bais = new ByteArrayInputStream(data); final ByteArrayOutputStream baos = new ByteArrayOutputStream();) {
+        try (final ByteArrayInputStream bais = new ByteArrayInputStream(data);
+             final ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
             decrypt(bais, baos, listener);
             return baos.toByteArray();
         } catch (final Exception ex) {
@@ -136,6 +148,7 @@ public abstract class Crypt {
     }
 
     // -----抽象方法-----
+
     /**
      * 加密内容。
      *
@@ -144,7 +157,9 @@ public abstract class Crypt {
      * @param listener 传入监听者物件
      * @throws IOException 当输入输出处理时发生问题，会抛出这个异常
      */
-    public abstract void encrypt(final InputStream inputData, final OutputStream outputData, final CryptListener listener) throws IOException;
+    public abstract void encrypt(final InputStream inputData,
+                                 final OutputStream outputData,
+                                 final CryptListener listener) throws IOException;
 
     /**
      * 解密内容。
@@ -154,5 +169,7 @@ public abstract class Crypt {
      * @param listener 传入监听者
      * @throws IOException 当输入输出处理时发生问题，会抛出这个异常
      */
-    public abstract void decrypt(final InputStream inputData, final OutputStream outputData, final CryptListener listener) throws IOException;
+    public abstract void decrypt(final InputStream inputData,
+                                 final OutputStream outputData,
+                                 final CryptListener listener) throws IOException;
 }

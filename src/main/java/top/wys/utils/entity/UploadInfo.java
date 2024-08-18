@@ -6,9 +6,6 @@
 
 package top.wys.utils.entity;
 
-import lombok.Data;
-import lombok.experimental.Accessors;
-
 /**
  * <ol>
  *  <li>上传文件的相关信息

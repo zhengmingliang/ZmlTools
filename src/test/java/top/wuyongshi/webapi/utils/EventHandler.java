@@ -24,5 +24,5 @@ import java.util.Map;
  */
 public interface EventHandler<T> {
 
-     void notice(T message);
+    void notice(T message);
 }

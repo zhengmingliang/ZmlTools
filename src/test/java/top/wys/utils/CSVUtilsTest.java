@@ -2,7 +2,6 @@ package top.wys.utils;
 
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
-
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.junit.Test;
@@ -58,17 +57,17 @@ public class CSVUtilsTest {
         Random random = new Random();
         List<Object> list = Lists.newArrayList();
         List<Object> itemList = Lists.newArrayList();
-        String[] header = {"name","sex","company","road","telephone"};
+        String[] header = {"name", "sex", "company", "road", "telephone"};
         Map person = null;
         for (int i = 0; i < 10; i++) {
-             person = RandomUtils.getRandomPerson();
+            person = RandomUtils.getRandomPerson();
 //            itemList.add(person.get("name"));
 //            itemList.add(person.get("sex"));
 //            itemList.add(person.get("company"));
 //            itemList.add(person.get("road"));
 //            itemList.add(person.get("telephone"));
-           list.add(person.values());
+            list.add(person.values());
         }
-        CSVUtils.write(new File("G:\\test\\random.csv"),list,header);
+        CSVUtils.write(new File("G:\\test\\random.csv"), list, header);
     }
 }

@@ -39,8 +39,8 @@
 //        long start3 = System.currentTimeMillis();
 //        for (int i = 0; i < size; i++) {
 //            if (PropertiesUtil.loadFromClassPath("sysconfig.properties")) {
-////                Set<String> keys = PropertiesUtil.getAllKeys();//在配置文件少量时，使用该方法更省时
-//                Set<String> keys = PropertiesUtil.getKeys("sysconfig.properties");//在配置文件少量时，使用该方法更省时
+////                Set<String> keys = PropertiesUtil.getAllKeys(); //在配置文件少量时，使用该方法更省时
+//                Set<String> keys = PropertiesUtil.getKeys("sysconfig.properties"); //在配置文件少量时，使用该方法更省时
 //                for (String key : keys) {
 //                    System.out.printf("%s \t",key);
 //                }

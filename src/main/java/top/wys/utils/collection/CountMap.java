@@ -12,12 +12,12 @@ import java.util.HashMap;
  * @version 1.0.0
  * @time 2022/2/19 15:29
  */
-public class CountMap<KEY> extends HashMap<KEY,Integer> {
-    public void increment(KEY key) {
+public class CountMap<K> extends HashMap<K, Integer> {
+    public void increment(K key) {
         put(key, get(key) + 1);
     }
 
-    public void increment(KEY key,int step) {
+    public void increment(K key, int step) {
         put(key, get(key) + step);
     }
 

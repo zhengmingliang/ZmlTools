@@ -3,9 +3,15 @@
  */
 package top.wys.utils.io;
 
-import top.wys.utils.*;
+import top.wys.utils.Assert;
+import top.wys.utils.ClassUtils;
+import top.wys.utils.IOUtils;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Reader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
@@ -17,8 +23,8 @@ import java.util.Properties;
  * <p> 用于加载 java.util.Properties 的便捷实用方法，执行输入流的标准处理</p>
  *
  * @author 郑明亮
- * @since  2.0.0
  * @time 2022/3/20 10:12
+ * @since 2.0.0
  */
 public class PropertiesLoaderUtils {
 
@@ -38,19 +44,21 @@ public class PropertiesLoaderUtils {
      */
     public static Properties loadProperties(File file) throws IOException {
 
-       return loadProperties(file);
-    }  /**
+        return loadProperties(file);
+    }
+
+    /**
      * Load properties from the given EncodedResource,
      * potentially defining a specific encoding for the properties file.
      */
     public static Properties loadProperties(String path) throws IOException {
 
-       return loadProperties(path,DEFAULT_CHARSET);
+        return loadProperties(path, DEFAULT_CHARSET);
     }
 
     public static Properties loadProperties(String path, Charset charset) throws IOException {
         Properties props = new Properties();
-        fillProperties(props, new File(path),charset);
+        fillProperties(props, new File(path), charset);
         return props;
     }
 
@@ -63,7 +71,7 @@ public class PropertiesLoaderUtils {
      */
     public static void fillProperties(Properties props, String path) throws IOException {
 
-        fillProperties(props, new File(path),null);
+        fillProperties(props, new File(path), null);
     }
 
     /**
@@ -74,7 +82,7 @@ public class PropertiesLoaderUtils {
      * @param charset 字符集
      * @throws IOException in case of I/O errors
      */
-    static void fillProperties(Properties props, File file,Charset charset)
+    static void fillProperties(Properties props, File file, Charset charset)
             throws IOException {
 
         InputStream stream = null;
@@ -85,18 +93,15 @@ public class PropertiesLoaderUtils {
             if (fileName != null && fileName.endsWith(XML_FILE_EXTENSION)) {
                 stream = new FileInputStream(file);
                 props.loadFromXML(stream);
-            }
-            else if (charset != null) {
+            } else if (charset != null) {
                 reader = IOUtils.getReader(file);
                 props.load(reader);
 
-            }
-            else {
+            } else {
                 stream = new FileInputStream(file);
                 props.load(stream);
             }
-        }
-        finally {
+        } finally {
             if (stream != null) {
                 stream.close();
             }
@@ -115,9 +120,9 @@ public class PropertiesLoaderUtils {
      * @throws IOException if loading failed
      * @see PropertiesLoaderUtils#fillProperties(java.util.Properties, java.io.InputStream, boolean)
      */
-    public static Properties loadProperties(InputStream is,boolean isXml) throws IOException {
+    public static Properties loadProperties(InputStream is, boolean isXml) throws IOException {
         Properties props = new Properties();
-        fillProperties(props, is,isXml);
+        fillProperties(props, is, isXml);
         return props;
     }
 
@@ -130,17 +135,15 @@ public class PropertiesLoaderUtils {
      * @param isXml 是xml
      * @throws IOException if loading failed
      */
-    public static void fillProperties(Properties props, InputStream is,boolean isXml) throws IOException {
+    public static void fillProperties(Properties props, InputStream is, boolean isXml) throws IOException {
         try {
 
             if (isXml) {
                 props.loadFromXML(is);
+            } else {
+                props.load(is);
             }
-            else {
-               props.load(is);
-            }
-        }
-        finally {
+        } finally {
             is.close();
         }
     }
@@ -150,6 +153,7 @@ public class PropertiesLoaderUtils {
      * (in ISO-8859-1 encoding), using the default class loader.
      * <p>Merges properties if more than one resource of the same name
      * found in the class path.
+     *
      * @param resourceName the name of the class path resource
      * @return the populated Properties instance
      * @throws IOException if loading failed
@@ -163,9 +167,10 @@ public class PropertiesLoaderUtils {
      * (in ISO-8859-1 encoding), using the given class loader.
      * <p>Merges properties if more than one resource of the same name
      * found in the class path.
+     *
      * @param resourceName the name of the class path resource
-     * @param classLoader the ClassLoader to use for loading
-     * (or {@code null} to use the default class loader)
+     * @param classLoader  the ClassLoader to use for loading
+     *                     (or {@code null} to use the default class loader)
      * @return the populated Properties instance
      * @throws IOException if loading failed
      */
@@ -186,12 +191,10 @@ public class PropertiesLoaderUtils {
             try {
                 if (resourceName.endsWith(XML_FILE_EXTENSION)) {
                     props.loadFromXML(is);
-                }
-                else {
+                } else {
                     props.load(is);
                 }
-            }
-            finally {
+            } finally {
                 is.close();
             }
         }

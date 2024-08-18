@@ -27,16 +27,13 @@ public class ArrayUtils {
         if (arr == null) {
             return true;
         }
-        if (arr.length == 0) {
-            return true;
-        }
-        return false;
+        return arr.length == 0;
     }
 
     /**
      * <p>Checks if an array of primitive booleans is empty or {@code null}.
      *
-     * @param array  the array to test
+     * @param array the array to test
      * @return {@code true} if the array is empty or {@code null}
      * @since 1.4.5
      */
@@ -47,7 +44,7 @@ public class ArrayUtils {
     /**
      * <p>Checks if an array of primitive bytes is empty or {@code null}.
      *
-     * @param array  the array to test
+     * @param array the array to test
      * @return {@code true} if the array is empty or {@code null}
      * @since 1.4.5
      */
@@ -61,7 +58,7 @@ public class ArrayUtils {
     /**
      * <p>Checks if an array of primitive chars is empty or {@code null}.
      *
-     * @param array  the array to test
+     * @param array the array to test
      * @return {@code true} if the array is empty or {@code null}
      * @since 1.4.5
      */
@@ -72,7 +69,7 @@ public class ArrayUtils {
     /**
      * <p>Checks if an array of primitive doubles is empty or {@code null}.
      *
-     * @param array  the array to test
+     * @param array the array to test
      * @return {@code true} if the array is empty or {@code null}
      * @since 1.4.5
      */
@@ -83,7 +80,7 @@ public class ArrayUtils {
     /**
      * <p>Checks if an array of primitive floats is empty or {@code null}.
      *
-     * @param array  the array to test
+     * @param array the array to test
      * @return {@code true} if the array is empty or {@code null}
      * @since 1.4.5
      */
@@ -94,7 +91,7 @@ public class ArrayUtils {
     /**
      * <p>Checks if an array of primitive ints is empty or {@code null}.
      *
-     * @param array  the array to test
+     * @param array the array to test
      * @return {@code true} if the array is empty or {@code null}
      * @since 1.4.5
      */
@@ -103,11 +100,10 @@ public class ArrayUtils {
     }
 
 
-
     /**
      * <p>Checks if an array of primitive longs is empty or {@code null}.
      *
-     * @param array  the array to test
+     * @param array the array to test
      * @return {@code true} if the array is empty or {@code null}
      * @since 1.4.5
      */
@@ -212,11 +208,10 @@ public class ArrayUtils {
     }
 
 
-
     /**
      * Gets the nTh element of an array or null if the index is out of bounds or the array is null.
      *
-     * @param <T> The type of array elements.
+     * @param <T>   The type of array elements.
      * @param array The array to index.
      * @param index The index
      * @return the nTh element of an array or null if the index is out of bounds or the array is null.
@@ -229,9 +224,9 @@ public class ArrayUtils {
     /**
      * Gets the nTh element of an array or a default value if the index is out of bounds.
      *
-     * @param <T> The type of array elements.
-     * @param array The array to index.
-     * @param index The index
+     * @param <T>          The type of array elements.
+     * @param array        The array to index.
+     * @param index        The index
      * @param defaultValue The return value of the given index is out of bounds.
      * @return the nTh element of an array or a default value if the index is out of bounds.
      * @since 3.11
@@ -249,7 +244,7 @@ public class ArrayUtils {
      * ArrayUtils.isArrayIndexValid(["a"], 0)      = true
      * </pre>
      *
-     * @param <T> the component type of the array
+     * @param <T>   the component type of the array
      * @param array the array to inspect, may be null
      * @param index the index of the array to be inspected
      * @return Whether the given index is safely-accessible in the given array
@@ -262,7 +257,7 @@ public class ArrayUtils {
     /**
      * Reverses the order of the given array.
      *
-     * @param array  the array to reverse
+     * @param array the array to reverse
      */
     public static void reverseArray(Object[] array) {
         int i = 0;

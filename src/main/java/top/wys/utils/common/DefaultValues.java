@@ -35,9 +35,9 @@ public class DefaultValues {
     public static final String DEFAULT_PATH_DELIMITER = "/";
 
 
-    public interface Datasource{
+    public interface Datasource {
         /**
-         *  初始化连接(最小连接数)
+         * 初始化连接(最小连接数)
          */
         int MIN_ACTION_NUM = 1;
         /**
@@ -59,7 +59,7 @@ public class DefaultValues {
     }
 
 
-    public interface Date{
+    public interface Date {
         /**
          * 默认时间格式化
          */
@@ -70,7 +70,7 @@ public class DefaultValues {
         String DATE_PATTERN = "yyyy-MM-dd";
     }
 
-    public interface Thread{
+    public interface Thread {
         /**
          * 要保留的空闲线程数。
          */

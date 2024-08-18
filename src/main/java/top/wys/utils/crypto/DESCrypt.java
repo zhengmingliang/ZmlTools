@@ -12,7 +12,7 @@ import javax.crypto.spec.SecretKeySpec;
 /**
  * <ol>
  *  2021/12/2 15:01 <br>
- *DES CBC 64位元之加密/解密，使用PKCS5填充方式。
+ * DES CBC 64位元之加密/解密，使用PKCS5填充方式。
  * </ol>
  *
  * @author 郑明亮
@@ -22,11 +22,12 @@ import javax.crypto.spec.SecretKeySpec;
 public class DESCrypt extends CipherCrpyt {
 
     // -----建构子-----
+
     /**
      * 建构子。
      *
      * @param key 传入8位元组(64位元)的密钥
-     * @param iv 传入8位元组(64位元)的初始化向量
+     * @param iv  传入8位元组(64位元)的初始化向量
      */
     public DESCrypt(final byte[] key, final byte[] iv) {
         if (key == null || iv == null) {
@@ -50,6 +51,7 @@ public class DESCrypt extends CipherCrpyt {
     }
 
     // -----组件方法-----
+
     /**
      * 初始化。
      */

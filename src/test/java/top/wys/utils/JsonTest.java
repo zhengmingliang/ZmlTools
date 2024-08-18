@@ -78,12 +78,14 @@
 //    @Test
 //    public void weed() {
 //        Properties prop = new Properties();
-//        prop.setProperty("url","jdbc:mysql://192.168.4.77:6610/sso?characterEncoding=utf-8&serverTimezone=GMT&useSSL=false");
+//        prop.setProperty("url","jdbc:mysql://192.168.4
+//        .77:6610/sso?characterEncoding=utf-8&serverTimezone=GMT&useSSL=false");
 //        prop.setProperty("username","root");
 //        prop.setProperty("password","icell");
 //        DbContext db = new DbContext(prop);
 //        System.out.println(System.getProperty("line.separator"));
-//        String sql = db.table("user").where("name", "zhangsan").andEq("sex", "1").andGt("age", 20).limit(1, 20).selectQ("name,age,sex").toString();
+//        String sql = db.table("user").where("name", "zhangsan").andEq("sex", "1").andGt("age", 20).limit(1, 20)
+//        .selectQ("name,age,sex").toString();
 //        System.out.println(sql);
 //    }
 //}

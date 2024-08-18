@@ -1,6 +1,21 @@
 package top.wys.utils.crypto;
 /**
  * Created by 郑明亮 on 2021/11/28 14:58.
+ *
+ * <ol>
+ *  2021/11/28 14:58 <br>
+ *
+ * </ol>
+ *
+ * @author 郑明亮
+ * @version 1.0
+ *
+ * <ol>
+ *  2021/11/28 14:58 <br>
+ *
+ * </ol>
+ * @author 郑明亮
+ * @version 1.0
  */
 
 /**
@@ -12,6 +27,7 @@ package top.wys.utils.crypto;
  * @author 郑明亮
  * @version 1.0
  */
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -23,6 +39,7 @@ import javax.crypto.spec.SecretKeySpec;
 public class AESCrypt extends CipherCrpyt {
 
     // -----建构子-----
+
     /**
      * 建构子。
      *
@@ -36,7 +53,8 @@ public class AESCrypt extends CipherCrpyt {
 
         final int keyLength = key.length;
         if (keyLength != 16 && keyLength != 24 && keyLength != 32) {
-            throw new RuntimeException("The AES key must be 16 bytes(128 bits), 24 bytes(192 bits) or 32 bytes(256 bits)!");
+            throw new RuntimeException(
+                    "The AES key must be 16 bytes(128 bits), 24 bytes(192 bits) or 32 bytes(256 bits)!");
         }
 
         final int ivLength = iv.length;
@@ -51,6 +69,7 @@ public class AESCrypt extends CipherCrpyt {
     }
 
     // -----组件方法-----
+
     /**
      * 初始化。
      */

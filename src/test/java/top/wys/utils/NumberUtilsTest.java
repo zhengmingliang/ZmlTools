@@ -20,7 +20,7 @@ public class NumberUtilsTest {
         for (int i = 0; i < 10000; i++) {
             NumberUtils.isNumber(str);
         }
-        System.out.println(   NumberUtils.isNumber(str));
+        System.out.println(NumberUtils.isNumber(str));
         stopwatch.stop();
         System.out.println(stopwatch.toString());
         stopwatch = Stopwatch.createStarted();

@@ -4,6 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import lombok.Getter;
+import lombok.Setter;
+import top.wys.utils.gson.MapTypeAdapter;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -12,10 +15,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
-import lombok.Getter;
-import lombok.Setter;
-import top.wys.utils.gson.MapTypeAdapter;
 
 /**
  * @author 郑明亮
@@ -30,9 +29,9 @@ public class GsonTools {
     public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     @Setter
     @Getter
-	private static Gson gson = new GsonBuilder()
+    private static Gson gson = new GsonBuilder()
             .setDateFormat(DEFAULT_DATE_FORMAT)
-            .registerTypeAdapterFactory(MapTypeAdapter.FACTORY).create();;
+            .registerTypeAdapterFactory(MapTypeAdapter.FACTORY).create();
 
 
     /**
@@ -134,15 +133,15 @@ public class GsonTools {
      */
     public static List<Map<String, Object>> getMaps(String jsonString) {
         return gson.fromJson(jsonString,
-				new TypeToken<List<Map<String, Object>>>() {
-				}.getType());
+                new TypeToken<List<Map<String, Object>>>() {
+                }.getType());
 
     }
 
     /**
      * 将json转为Map对象
-     * @param jsonString
      *
+     * @param jsonString
      * @return
      */
     public static Map<String, Object> getMapFromJson(String jsonString) {
@@ -153,7 +152,7 @@ public class GsonTools {
     }
 
     private static class ListParameterizedType implements ParameterizedType {
-        private Type type;
+        private final Type type;
 
         private ListParameterizedType(Type type) {
             this.type = type;

@@ -30,17 +30,15 @@ import java.io.OutputStream;
  *
  * @author wuhongjun
  * @version 1.03 November 2003
- *
  */
-public class GifEncoder
-{
+public class GifEncoder {
     protected int width; // image size
     protected int height;
-    protected Color transparent = null; // transparent color if given
+    protected Color transparent; // transparent color if given
     protected int transIndex; // transparent index in color table
     protected int repeat = -1; // no repeat
-    protected int delay = 0; // frame delay (hundredths)
-    protected boolean started = false; // ready to output frames
+    protected int delay; // frame delay (hundredths)
+    protected boolean started; // ready to output frames
     protected OutputStream out;
     protected BufferedImage image; // current frame
     protected byte[] pixels; // BGR byte array from frame
@@ -50,9 +48,9 @@ public class GifEncoder
     protected boolean[] usedEntry = new boolean[256]; // active palette entries
     protected int palSize = 7; // color table size (bits-1)
     protected int dispose = -1; // disposal code (-1 = use default)
-    protected boolean closeStream = false; // close stream when finished
+    protected boolean closeStream; // close stream when finished
     protected boolean firstFrame = true;
-    protected boolean sizeSet = false; // if false, get size from first frame
+    protected boolean sizeSet; // if false, get size from first frame
     protected int sample = 10; // default sample interval for quantizer
 
     /**
@@ -69,6 +67,7 @@ public class GifEncoder
      * Sets the GIF frame disposal code for the last added frame
      * and any subsequent frames.  Default is 0 if no transparent
      * color has been set, otherwise 2.
+     *
      * @param code int disposal code.
      */
     public void setDispose(int code) {
@@ -174,7 +173,9 @@ public class GifEncoder
      * closed.
      */
     public boolean finish() {
-        if (!started) return false;
+        if (!started) {
+            return false;
+        }
         boolean ok = true;
         started = false;
         try {
@@ -225,7 +226,9 @@ public class GifEncoder
      * @param quality int greater than 0.
      */
     public void setQuality(int quality) {
-        if (quality < 1) quality = 1;
+        if (quality < 1) {
+            quality = 1;
+        }
         sample = quality;
     }
 
@@ -238,11 +241,17 @@ public class GifEncoder
      * @param h int frame width.
      */
     public void setSize(int w, int h) {
-        if (started && !firstFrame) return;
+        if (started && !firstFrame) {
+            return;
+        }
         width = w;
         height = h;
-        if (width < 1) width = 320;
-        if (height < 1) height = 240;
+        if (width < 1) {
+            width = 320;
+        }
+        if (height < 1) {
+            height = 240;
+        }
         sizeSet = true;
     }
 
@@ -254,7 +263,9 @@ public class GifEncoder
      * @return false if initial write failed.
      */
     public boolean start(OutputStream os) {
-        if (os == null) return false;
+        if (os == null) {
+            return false;
+        }
         boolean ok = true;
         closeStream = false;
         out = os;
@@ -322,17 +333,18 @@ public class GifEncoder
 
     /**
      * Returns index of palette color closest to c
-     *
      */
     protected int findClosest(Color c) {
-        if (colorTab == null) return -1;
+        if (colorTab == null) {
+            return -1;
+        }
         int r = c.getRed();
         int g = c.getGreen();
         int b = c.getBlue();
         int minpos = 0;
         int dmin = 256 * 256 * 256;
         int len = colorTab.length;
-        for (int i = 0; i < len;) {
+        for (int i = 0; i < len; ) {
             int dr = r - (colorTab[i++] & 0xff);
             int dg = g - (colorTab[i++] & 0xff);
             int db = b - (colorTab[i] & 0xff);
@@ -374,7 +386,8 @@ public class GifEncoder
         out.write(0x21); // extension introducer
         out.write(0xf9); // GCE label
         out.write(4); // data block size
-        int transp, disp;
+        int transp;
+        int disp;
         if (transparent == null) {
             transp = 0;
             disp = 0; // dispose = no action
@@ -473,7 +486,7 @@ public class GifEncoder
     }
 
     /**
-     *    Write 16-bit value to output stream, LSB first
+     * Write 16-bit value to output stream, LSB first
      */
     protected void writeShort(int value) throws IOException {
         out.write(value & 0xff);

@@ -58,6 +58,7 @@ public class Print {
     public static String wrapWarning(Object object) {
         return wrapYellow(object);
     }
+
     public static String wrapError(Object object) {
         return wrapRed(object);
     }
@@ -65,6 +66,7 @@ public class Print {
 
     /**
      * 黑色
+     *
      * @param object
      * @return
      */
@@ -75,6 +77,7 @@ public class Print {
 
     /**
      * 红色
+     *
      * @param object
      * @return
      */
@@ -85,6 +88,7 @@ public class Print {
 
     /**
      * 绿色
+     *
      * @param object
      * @return
      */
@@ -95,6 +99,7 @@ public class Print {
 
     /**
      * 黄色
+     *
      * @param object
      * @return
      */
@@ -105,6 +110,7 @@ public class Print {
 
     /**
      * 蓝色
+     *
      * @param object
      * @return
      */
@@ -115,6 +121,7 @@ public class Print {
 
     /**
      * 紫色
+     *
      * @param object
      * @return
      */
@@ -126,6 +133,7 @@ public class Print {
 
     /**
      * 浅蓝
+     *
      * @param object
      * @return
      */
@@ -137,6 +145,7 @@ public class Print {
 
     /**
      * 灰色
+     *
      * @param object
      * @return
      */
@@ -171,21 +180,11 @@ public class Print {
         System.out.println(print);
         log.warn(print);
     }
+
     public static void error(Object object) {
         String print = wrapError(object);
         System.out.println(print);
         log.warn(print);
     }
 
-    public static void main(String[] args) {
-        Print.warning("111111111");
-        Print.normal("111111111");
-        Print.error("111111111");
-
-        System.out.println(wrapBlack("111111111"));
-        System.out.println(wrapBlue("111111111"));
-        System.out.println(wrapPurple("111111111"));
-        System.out.println(wrapLightBlue("111111111"));
-        System.out.println(wrapGrey("111111111"));
-    }
 }

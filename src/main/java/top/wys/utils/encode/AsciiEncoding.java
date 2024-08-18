@@ -28,7 +28,7 @@ public class AsciiEncoding {
     /**
      * An absolute value of the {@link Integer#MIN_VALUE} as long.
      */
-    public static final long INTEGER_ABSOLUTE_MIN_VALUE = Math.abs((long)Integer.MIN_VALUE);
+    public static final long INTEGER_ABSOLUTE_MIN_VALUE = Math.abs((long) Integer.MIN_VALUE);
 
     /**
      * US-ASCII-encoded byte representation of the {@link Integer#MIN_VALUE}.
@@ -80,12 +80,12 @@ public class AsciiEncoding {
     /**
      * {@link Long#MAX_VALUE} split into components by 8 digits max.
      */
-    public static final int[] LONG_MAX_VALUE_DIGITS = new int[]{ 92233720, 36854775, 807 };
+    public static final int[] LONG_MAX_VALUE_DIGITS = new int[]{92233720, 36854775, 807};
 
     /**
      * {@link Long#MIN_VALUE} split into components by 8 digits max.
      */
-    public static final int[] LONG_MIN_VALUE_DIGITS = new int[]{ 92233720, 36854775, 808 };
+    public static final int[] LONG_MIN_VALUE_DIGITS = new int[]{92233720, 36854775, 808};
 
     /**
      * Power of ten for int values.
@@ -102,53 +102,42 @@ public class AsciiEncoding {
             {
                     1L, 10L, 100L, 1_000L, 10_000L, 100_000L, 1_000_000L, 10_000_000L, 100_000_000L, 1_000_000_000L,
                     10_000_000_000L, 100_000_000_000L, 1_000_000_000_000L, 10_000_000_000_000L, 100_000_000_000_000L,
-                    1_000_000_000_000_000L, 10_000_000_000_000_000L, 100_000_000_000_000_000L, 1_000_000_000_000_000_000L
+                    1_000_000_000_000_000L, 10_000_000_000_000_000L, 100_000_000_000_000_000L,
+                    1_000_000_000_000_000_000L
             };
 
     private static final long[] INT_DIGITS = new long[32];
 
     private static final long[] LONG_DIGITS = new long[64];
 
-    static
-    {
-        for (int i = 1; i < 33; i++)
-        {
+    static {
+        for (int i = 1; i < 33; i++) {
             final int smallest = 1 << (i - 1);
-            final long smallestLog10 = (long)Math.ceil(Math.log10(smallest) / Math.log10(10));
-            if (1 == i)
-            {
+            final long smallestLog10 = (long) Math.ceil(Math.log10(smallest) / Math.log10(10));
+            if (1 == i) {
                 INT_DIGITS[i - 1] = 1L << 32;
-            }
-            else if (i < 31)
-            {
-                INT_DIGITS[i - 1] = (1L << 32) - LONG_POW_10[(int)smallestLog10] + (smallestLog10 << 32);
-            }
-            else
-            {
+            } else if (i < 31) {
+                INT_DIGITS[i - 1] = (1L << 32) - LONG_POW_10[(int) smallestLog10] + (smallestLog10 << 32);
+            } else {
                 INT_DIGITS[i - 1] = smallestLog10 << 32;
             }
         }
 
         final BigInteger tenToNineteen = BigInteger.TEN.pow(19);
-        for (int i = 0; i < 64; i++)
-        {
-            if (0 == i)
-            {
+        for (int i = 0; i < 64; i++) {
+            if (0 == i) {
                 LONG_DIGITS[i] = 1L << 52;
-            }
-            else
-            {
+            } else {
                 final int upper = ((i * 1262611) >> 22) + 1;
                 final long correction = upper < LONG_MAX_DIGITS ? LONG_POW_10[upper] >> (i >> 2) :
                         tenToNineteen.shiftRight(i >> 2).longValueExact();
-                final long value = ((long)(upper + 1) << 52) - correction;
+                final long value = ((long) (upper + 1) << 52) - correction;
                 LONG_DIGITS[i] = value;
             }
         }
     }
 
-    private AsciiEncoding()
-    {
+    private AsciiEncoding() {
     }
 
     /**
@@ -163,8 +152,7 @@ public class AsciiEncoding {
      * @deprecated Use {@link #digitCount(int)} instead.
      */
     @Deprecated
-    public static int endOffset(final int value)
-    {
+    public static int endOffset(final int value) {
         return digitCount(value) - 1;
     }
 
@@ -180,8 +168,7 @@ public class AsciiEncoding {
      * @deprecated Use {@link #digitCount(long)} instead.
      */
     @Deprecated
-    public static int endOffset(final long value)
-    {
+    public static int endOffset(final long value) {
         return digitCount(value) - 1;
     }
 
@@ -198,9 +185,8 @@ public class AsciiEncoding {
      * @param value to count number of digits int.
      * @return number of digits in a number, e.g. if input value is {@code 123} then the result will be {@code 3}.
      */
-    public static int digitCount(final int value)
-    {
-        return (int)((value + INT_DIGITS[31 - Integer.numberOfLeadingZeros(value | 1)]) >> 32);
+    public static int digitCount(final int value) {
+        return (int) ((value + INT_DIGITS[31 - Integer.numberOfLeadingZeros(value | 1)]) >> 32);
     }
 
     /**
@@ -217,10 +203,9 @@ public class AsciiEncoding {
      * @return number of digits in a number, e.g. if input value is {@code 12345678909876} then the result will be
      * {@code 14}.
      */
-    public static int digitCount(final long value)
-    {
+    public static int digitCount(final long value) {
         final int floorLog2 = 63 ^ Long.numberOfLeadingZeros(value | 1);
-        return (int)((LONG_DIGITS[floorLog2] + (value >> (floorLog2 >> 2))) >> 52);
+        return (int) ((LONG_DIGITS[floorLog2] + (value >> (floorLog2 >> 2))) >> 52);
     }
 
     /**
@@ -229,8 +214,7 @@ public class AsciiEncoding {
      * @param value ti be checked.
      * @return {@code true} if the {@code value} is an ASCII-encoded digit.
      */
-    public static boolean isDigit(final byte value)
-    {
+    public static boolean isDigit(final byte value) {
         return value >= 0x30 && value <= 0x39;
     }
 
@@ -242,11 +226,9 @@ public class AsciiEncoding {
      * @return the digit value of the encoded ASCII.
      * @throws NumberFormatException if the value is not a digit.
      */
-    public static int getDigit(final int index, final byte value)
-    {
-        if (value < 0x30 || value > 0x39)
-        {
-            throw new NumberFormatException("'" + ((char)value) + "' is not a valid digit @ " + index);
+    public static int getDigit(final int index, final byte value) {
+        if (value < 0x30 || value > 0x39) {
+            throw new NumberFormatException("'" + ((char) value) + "' is not a valid digit @ " + index);
         }
 
         return value - 0x30;
@@ -260,10 +242,8 @@ public class AsciiEncoding {
      * @return the digit value of the encoded ASCII.
      * @throws NumberFormatException if the value is not a digit.
      */
-    public static int getDigit(final int index, final char value)
-    {
-        if (value < 0x30 || value > 0x39)
-        {
+    public static int getDigit(final int index, final char value) {
+        if (value < 0x30 || value > 0x39) {
             throw new NumberFormatException("'" + value + "' is not a valid digit @ " + index);
         }
 
@@ -279,38 +259,30 @@ public class AsciiEncoding {
      * @return the parsed value.
      * @throws NumberFormatException if {@code length <= 0} or {@code cs} is not an int value
      */
-    public static int parseIntAscii(final CharSequence cs, final int index, final int length)
-    {
-        if (length <= 0)
-        {
+    public static int parseIntAscii(final CharSequence cs, final int index, final int length) {
+        if (length <= 0) {
             throw new NumberFormatException("empty string: index=" + index + " length=" + length);
         }
 
         final boolean negative = MINUS_SIGN == cs.charAt(index);
         int i = index;
-        if (negative)
-        {
+        if (negative) {
             i++;
-            if (1 == length)
-            {
+            if (1 == length) {
                 throwParseIntError(cs, index, length);
             }
         }
 
         final int end = index + length;
-        if (end - i < INT_MAX_DIGITS)
-        {
+        if (end - i < INT_MAX_DIGITS) {
             final int tally = parsePositiveIntAscii(cs, index, length, i, end);
             return negative ? -tally : tally;
-        }
-        else
-        {
+        } else {
             final long tally = parsePositiveIntAsciiOverflowCheck(cs, index, length, i, end);
-            if (tally > INTEGER_ABSOLUTE_MIN_VALUE || INTEGER_ABSOLUTE_MIN_VALUE == tally && !negative)
-            {
+            if (tally > INTEGER_ABSOLUTE_MIN_VALUE || INTEGER_ABSOLUTE_MIN_VALUE == tally && !negative) {
                 throwParseIntOverflowError(cs, index, length);
             }
-            return (int)(negative ? -tally : tally);
+            return (int) (negative ? -tally : tally);
         }
     }
 
@@ -323,36 +295,27 @@ public class AsciiEncoding {
      * @return the parsed value.
      * @throws NumberFormatException if {@code length <= 0} or {@code cs} is not a long value
      */
-    public static long parseLongAscii(final CharSequence cs, final int index, final int length)
-    {
-        if (length <= 0)
-        {
+    public static long parseLongAscii(final CharSequence cs, final int index, final int length) {
+        if (length <= 0) {
             throw new NumberFormatException("empty string: index=" + index + " length=" + length);
         }
 
         final boolean negative = MINUS_SIGN == cs.charAt(index);
         int i = index;
-        if (negative)
-        {
+        if (negative) {
             i++;
-            if (1 == length)
-            {
+            if (1 == length) {
                 throwParseLongError(cs, index, length);
             }
         }
 
         final int end = index + length;
-        if (end - i < LONG_MAX_DIGITS)
-        {
+        if (end - i < LONG_MAX_DIGITS) {
             final long tally = parsePositiveLongAscii(cs, index, length, i, end);
             return negative ? -tally : tally;
-        }
-        else if (negative)
-        {
+        } else if (negative) {
             return -parseLongAsciiOverflowCheck(cs, index, length, LONG_MIN_VALUE_DIGITS, i, end);
-        }
-        else
-        {
+        } else {
             return parseLongAsciiOverflowCheck(cs, index, length, LONG_MAX_VALUE_DIGITS, i, end);
         }
     }
@@ -363,8 +326,7 @@ public class AsciiEncoding {
      * @param value four ASCII-encoded bytes to check.
      * @return {@code true} if the {@code value} is an ASCII-encoded number with four digits in it.
      */
-    public static boolean isFourDigitsAsciiEncodedNumber(final int value)
-    {
+    public static boolean isFourDigitsAsciiEncodedNumber(final int value) {
         return 0 == ((((value + 0x46464646) | (value - 0x30303030)) & 0x80808080));
     }
 
@@ -374,8 +336,7 @@ public class AsciiEncoding {
      * @param bytes ASCII-encoded value in little-endian byte order.
      * @return {@code int} value with four digits.
      */
-    public static int parseFourDigitsLittleEndian(final int bytes)
-    {
+    public static int parseFourDigitsLittleEndian(final int bytes) {
         int val = bytes & 0x0F0F0F0F;
         val = (val * 10) + (val >> 8);
         return ((val & 0x00FF00FF) * 6553601) >> 16;
@@ -387,8 +348,7 @@ public class AsciiEncoding {
      * @param value eoght ASCII-encoded bytes to check.
      * @return {@code true} if the {@code value} is an ASCII-encoded number with eight digits in it.
      */
-    public static boolean isEightDigitAsciiEncodedNumber(final long value)
-    {
+    public static boolean isEightDigitAsciiEncodedNumber(final long value) {
         return 0L == ((((value + 0x4646464646464646L) | (value - 0x3030303030303030L)) & 0x8080808080808080L));
     }
 
@@ -398,35 +358,31 @@ public class AsciiEncoding {
      * @param bytes ASCII-encoded value in little-endian byte order.
      * @return {@code int} value with eight digits.
      */
-    public static int parseEightDigitsLittleEndian(final long bytes)
-    {
+    public static int parseEightDigitsLittleEndian(final long bytes) {
         long val = bytes - 0x3030303030303030L;
         val = (val * 10) + (val >> 8);
         val = (((val & 0x000000FF000000FFL) * 0x000F424000000064L) +
                 (((val >> 16) & 0x000000FF000000FFL) * 0x0000271000000001L)) >> 32;
-        return (int)val;
+        return (int) val;
     }
 
     private static int parsePositiveIntAscii(
-            final CharSequence cs, final int index, final int length, final int startIndex, final int end)
-    {
+            final CharSequence cs, final int index, final int length, final int startIndex, final int end) {
         int i = startIndex;
-        int tally = 0, quartet;
-        while ((end - i) >= 4 && isFourDigitsAsciiEncodedNumber(quartet = readFourBytesLittleEndian(cs, i)))
-        {
+        int tally = 0;
+        int quartet;
+        while ((end - i) >= 4 && isFourDigitsAsciiEncodedNumber(quartet = readFourBytesLittleEndian(cs, i))) {
             tally = (tally * 10_000) + parseFourDigitsLittleEndian(quartet);
             i += 4;
         }
 
         byte digit;
-        while (i < end && isDigit(digit = (byte)cs.charAt(i)))
-        {
+        while (i < end && isDigit(digit = (byte) cs.charAt(i))) {
             tally = (tally * 10) + (digit - 0x30);
             i++;
         }
 
-        if (i != end)
-        {
+        if (i != end) {
             throwParseIntError(cs, index, length);
         }
 
@@ -434,74 +390,63 @@ public class AsciiEncoding {
     }
 
     private static long parsePositiveIntAsciiOverflowCheck(
-            final CharSequence cs, final int index, final int length, final int startIndex, final int end)
-    {
-        if ((end - startIndex) > INT_MAX_DIGITS)
-        {
+            final CharSequence cs, final int index, final int length, final int startIndex, final int end) {
+        if ((end - startIndex) > INT_MAX_DIGITS) {
             throwParseIntOverflowError(cs, index, length);
         }
 
         int i = startIndex;
         long tally = 0;
         final long octet = readEightBytesLittleEndian(cs, i);
-        if (isEightDigitAsciiEncodedNumber(octet))
-        {
+        if (isEightDigitAsciiEncodedNumber(octet)) {
             tally = parseEightDigitsLittleEndian(octet);
             i += 8;
 
             byte digit;
-            while (i < end && isDigit(digit = (byte)cs.charAt(i)))
-            {
+            while (i < end && isDigit(digit = (byte) cs.charAt(i))) {
                 tally = (tally * 10L) + (digit - 0x30);
                 i++;
             }
         }
 
-        if (i != end)
-        {
+        if (i != end) {
             throwParseIntError(cs, index, length);
         }
 
         return tally;
     }
 
-    private static void throwParseIntError(final CharSequence cs, final int index, final int length)
-    {
+    private static void throwParseIntError(final CharSequence cs, final int index, final int length) {
         throw new NumberFormatException("error parsing int: " + cs.subSequence(index, index + length));
     }
 
-    private static void throwParseIntOverflowError(final CharSequence cs, final int index, final int length)
-    {
+    private static void throwParseIntOverflowError(final CharSequence cs, final int index, final int length) {
         throw new NumberFormatException("int overflow parsing: " + cs.subSequence(index, index + length));
     }
 
     private static long parsePositiveLongAscii(
-            final CharSequence cs, final int index, final int length, final int startIndex, final int end)
-    {
+            final CharSequence cs, final int index, final int length, final int startIndex, final int end) {
         int i = startIndex;
-        long tally = 0, octet;
-        while ((end - i) >= 8 && isEightDigitAsciiEncodedNumber(octet = readEightBytesLittleEndian(cs, i)))
-        {
+        long tally = 0;
+        long octet;
+        while ((end - i) >= 8 && isEightDigitAsciiEncodedNumber(octet = readEightBytesLittleEndian(cs, i))) {
             tally = (tally * 100_000_000L) + parseEightDigitsLittleEndian(octet);
             i += 8;
         }
 
         int quartet;
-        while ((end - i) >= 4 && isFourDigitsAsciiEncodedNumber(quartet = readFourBytesLittleEndian(cs, i)))
-        {
+        while ((end - i) >= 4 && isFourDigitsAsciiEncodedNumber(quartet = readFourBytesLittleEndian(cs, i))) {
             tally = (tally * 10_000L) + parseFourDigitsLittleEndian(quartet);
             i += 4;
         }
 
         byte digit;
-        while (i < end && isDigit(digit = (byte)cs.charAt(i)))
-        {
+        while (i < end && isDigit(digit = (byte) cs.charAt(i))) {
             tally = (tally * 10) + (digit - 0x30);
             i++;
         }
 
-        if (i != end)
-        {
+        if (i != end) {
             throwParseLongError(cs, index, length);
         }
 
@@ -514,27 +459,22 @@ public class AsciiEncoding {
             final int length,
             final int[] maxValue,
             final int startIndex,
-            final int end)
-    {
-        if ((end - startIndex) > LONG_MAX_DIGITS)
-        {
+            final int end) {
+        if ((end - startIndex) > LONG_MAX_DIGITS) {
             throwParseLongOverflowError(cs, index, length);
         }
 
-        int i = startIndex, k = 0;
+        int i = startIndex;
+        int k = 0;
         boolean checkOverflow = true;
-        long tally = 0, octet;
-        while ((end - i) >= 8 && isEightDigitAsciiEncodedNumber(octet = readEightBytesLittleEndian(cs, i)))
-        {
+        long tally = 0;
+        long octet;
+        while ((end - i) >= 8 && isEightDigitAsciiEncodedNumber(octet = readEightBytesLittleEndian(cs, i))) {
             final int eightDigits = parseEightDigitsLittleEndian(octet);
-            if (checkOverflow)
-            {
-                if (eightDigits > maxValue[k])
-                {
+            if (checkOverflow) {
+                if (eightDigits > maxValue[k]) {
                     throwParseLongOverflowError(cs, index, length);
-                }
-                else if (eightDigits < maxValue[k])
-                {
+                } else if (eightDigits < maxValue[k]) {
                     checkOverflow = false;
                 }
                 k++;
@@ -545,50 +485,42 @@ public class AsciiEncoding {
 
         byte digit;
         int lastDigits = 0;
-        while (i < end && isDigit(digit = (byte)cs.charAt(i)))
-        {
+        while (i < end && isDigit(digit = (byte) cs.charAt(i))) {
             lastDigits = (lastDigits * 10) + (digit - 0x30);
             i++;
         }
 
-        if (i != end)
-        {
+        if (i != end) {
             throwParseLongError(cs, index, length);
-        }
-        else if (checkOverflow && lastDigits > maxValue[k])
-        {
+        } else if (checkOverflow && lastDigits > maxValue[k]) {
             throwParseLongOverflowError(cs, index, length);
         }
 
         return (tally * 1000L) + lastDigits;
     }
 
-    private static void throwParseLongError(final CharSequence cs, final int index, final int length)
-    {
+    private static void throwParseLongError(final CharSequence cs, final int index, final int length) {
         throw new NumberFormatException("error parsing long: " + cs.subSequence(index, index + length));
     }
 
-    private static void throwParseLongOverflowError(final CharSequence cs, final int index, final int length)
-    {
+    private static void throwParseLongOverflowError(final CharSequence cs, final int index, final int length) {
         throw new NumberFormatException("long overflow parsing: " + cs.subSequence(index, index + length));
     }
 
-    private static int readFourBytesLittleEndian(final CharSequence cs, final int index)
-    {
+    private static int readFourBytesLittleEndian(final CharSequence cs, final int index) {
         return cs.charAt(index + 3) << 24 |
                 cs.charAt(index + 2) << 16 |
                 cs.charAt(index + 1) << 8 |
                 cs.charAt(index);
     }
 
-    private static long readEightBytesLittleEndian(final CharSequence cs, final int index)
-    {
-        return (long)cs.charAt(index + 7) << 56 |
-                (long)cs.charAt(index + 6) << 48 |
-                (long)cs.charAt(index + 5) << 40 |
-                (long)cs.charAt(index + 4) << 32 |
-                (long)cs.charAt(index + 3) << 24 |
-                (long)cs.charAt(index + 2) << 16 |
+    private static long readEightBytesLittleEndian(final CharSequence cs, final int index) {
+        return (long) cs.charAt(index + 7) << 56 |
+                (long) cs.charAt(index + 6) << 48 |
+                (long) cs.charAt(index + 5) << 40 |
+                (long) cs.charAt(index + 4) << 32 |
+                (long) cs.charAt(index + 3) << 24 |
+                (long) cs.charAt(index + 2) << 16 |
                 cs.charAt(index + 1) << 8 |
                 cs.charAt(index);
     }

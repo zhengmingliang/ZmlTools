@@ -1,4 +1,5 @@
-package top.wys.utils.image;/**
+package top.wys.utils.image;
+/**
  * Created by 郑明亮 on 2018/9/10 23:28.
  */
 
@@ -17,7 +18,7 @@ public abstract class Captcha extends Randoms {
     protected int len = 5; // 验证码随机字符长度
     protected int width = 150; // 验证码显示跨度
     protected int height = 40; // 验证码显示高度
-    private String chars = null; // 随机字符串
+    private String chars; // 随机字符串
 
     /**
      * 生成随机字符数组
@@ -71,10 +72,12 @@ public abstract class Captcha extends Randoms {
      * @return Color 随机颜色
      */
     protected Color color(int fc, int bc) {
-        if (fc > 255)
+        if (fc > 255) {
             fc = 255;
-        if (bc > 255)
+        }
+        if (bc > 255) {
             bc = 255;
+        }
         int r = fc + num(bc - fc);
         int g = fc + num(bc - fc);
         int b = fc + num(bc - fc);
@@ -84,8 +87,7 @@ public abstract class Captcha extends Randoms {
     /**
      * 验证码输出,抽象方法，由子类实现
      *
-     * @param os
-     *            输出流
+     * @param os 输出流
      */
     public abstract void out(OutputStream os);
 

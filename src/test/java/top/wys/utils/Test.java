@@ -6,10 +6,16 @@ package top.wys.utils;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Maps;
 import com.google.common.eventbus.AsyncEventBus;
-
+import okhttp3.MediaType;
+import okhttp3.Response;
 import org.jsoup.Jsoup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.script.Invocable;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -17,14 +23,6 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-
-import javax.script.Invocable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
-
-import okhttp3.MediaType;
-import okhttp3.Response;
 
 /**
  * @author 郑明亮   @email 1072307340@qq.com
@@ -39,23 +37,39 @@ public class Test {
     @org.junit.Test
     public void test() {
         String str = "76ED9C7B9F42365C5EE4B9EDA2BD2B57";
-        str = "eyJjb21wdXRlck5hbWUiOiJXQU5HWUMiLCJtYWNBZGRyIjoiNDAtOEQtNUMtN0YtNTktMzEiLCJvc05hbWUiOiJXaW5kb3dzIDciLCJ1c2VyTmFtZSI6IkFkbWluaXN0cmF0b3IifQ==";
-        str = "eyJjb21wdXRlck5hbWUiOiJERVNLVE9QLUpCVUE5R08iLCJtYWNBZGRyIjoiOTAtMkItMzQtNTctOTUtQzYiLCJvc05hbWUiOiJXaW5kb3dzIDEwIiwidXNlck5hbWUiOiK0sM3iIn0=";
-        str = "eyJjb21wdXRlck5hbWUiOiJXQU5HWUMiLCJtYWNBZGRyIjoiNDAtOEQtNUMtN0YtNTktMzEiLCJvc05hbWUiOiJXaW5kb3dzIDciLCJ1c2VyTmFtZSI6IkFkbWluaXN0cmF0b3IifQ==";
-        str = "eyJjb21wdXRlck5hbWUiOiJERVNLVE9QLTlDMUk3UFIiLCJtYWNBZGRyIjoiMTgtREItRjItMkItOTgtNDIiLCJvc05hbWUiOiJXaW5kb3dzIDEwIiwidXNlck5hbWUiOiLC7cfHIn0=";
-        str = "eyJjb21wdXRlck5hbWUiOiJMQVBUT1AtMDlOOTZLVU8iLCJtYWNBZGRyIjoiMDAtNTAtNTYtQzAtMDAtMDgiLCJvc05hbWUiOiJXaW5kb3dzIDEwIiwidXNlck5hbWUiOiJ3bGoifQ==";
-        str = "eyJjb21wdXRlck5hbWUiOiJERVNLVE9QLTRJNEg1T0UiLCJtYWNBZGRyIjoiMDAtNTAtNTYtQzAtMDAtMDgiLCJvc05hbWUiOiJXaW5kb3dzIDEwIiwidXNlck5hbWUiOiJBZG1pbmlzdHJhdG9yIn0=";
-        str = "eyJjb21wdXRlck5hbWUiOiJpWnZoY2lqN2RybW1yeloiLCJtYWNBZGRyIjoiMDAtMTYtM0UtMDAtRUUtOEYiLCJvc05hbWUiOiJXaW5kb3dzIFNlcnZlciAyMDE2IiwidXNlck5hbWUiOiJBZG1pbmlzdHJhdG9yIn0=";
-        str = "eyJjb21wdXRlck5hbWUiOiJERVNLVE9QLU5FRzQ3NTAiLCJtYWNBZGRyIjoiQTQtMDItQjktN0YtQzctRjQiLCJvc05hbWUiOiJXaW5kb3dzIDEwIiwidXNlck5hbWUiOiJCQ1RDLVIifQ==";
-        str = "eyJjb21wdXRlck5hbWUiOiJaTUwtUEMiLCJtYWNBZGRyIjoiRUMtNTUtRjktQzktNEItNjQiLCJvc05hbWUiOiJXaW5kb3dzIE5UICh1bmtub3duKSIsInVzZXJOYW1lIjoiem1sIn0=";
-        str = "eyJjb21wdXRlck5hbWUiOiJDQkhYVVRUIiwibWFjQWRkciI6IkI4LTg4LUUzLUYxLUZBLUZFIiwib3NOYW1lIjoiV2luZG93cyA3IiwidXNlck5hbWUiOiJDQkgifQ==";
-        str = "eyJjb21wdXRlck5hbWUiOiJERVNLVE9QLUxGUkJQTDAiLCJtYWNBZGRyIjoiMDAtNTAtNTYtQzAtMDAtMDgiLCJvc05hbWUiOiJXaW5kb3dzIDEwIiwidXNlck5hbWUiOiJhZG1pbiJ9";
-        str = "eyJjb21wdXRlck5hbWUiOiJQN1g4MlNMU0xGOTBISUsiLCJtYWNBZGRyIjoiMDAtNTAtNTYtQzAtMDAtMDgiLCJvc05hbWUiOiJXaW5kb3dzIDciLCJ1c2VyTmFtZSI6IkFkbWluaXN0cmF0b3IifQ==";
-        str = "eyJjb21wdXRlck5hbWUiOiJQN1g4MlNMU0xGOTBISUsiLCJtYWNBZGRyIjoiMDAtNTAtNTYtQzAtMDAtMDgiLCJvc05hbWUiOiJXaW5kb3dzIDciLCJ1c2VyTmFtZSI6IkFkbWluaXN0cmF0b3IifQ==";
-        str = "eyJjb21wdXRlck5hbWUiOiJQQy0yMDE4MDYwNktORUoiLCJtYWNBZGRyIjoiMDAtRTAtNEMtQTgtNzItMzAiLCJvc05hbWUiOiJXaW5kb3dzIDciLCJ1c2VyTmFtZSI6IkFkbWluaXN0cmF0b3IifQ==";
-        str = "eyJjb21wdXRlck5hbWUiOiJaTUwtUEMiLCJtYWNBZGRyIjoiNkMtODgtMTQtMjctN0QtRDQiLCJvc05hbWUiOiJXaW5kb3dzIE5UICh1bmtub3duKSIsInVzZXJOYW1lIjoiem1sIn0=";
+        str =
+                "eyJjb21wdXRlck5hbWUiOiJXQU5HWUMiLCJtYWNBZGRyIjoiNDAtOEQtNUMtN0YtNTktMzEiLCJvc05hbWUiOiJXaW5kb3dzIDciLCJ1c2VyTmFtZSI6IkFkbWluaXN0cmF0b3IifQ==";
+        str =
+                "eyJjb21wdXRlck5hbWUiOiJERVNLVE9QLUpCVUE5R08iLCJtYWNBZGRyIjoiOTAtMkItMzQtNTctOTUtQzYiLCJvc05hbWUiOiJXaW5kb3dzIDEwIiwidXNlck5hbWUiOiK0sM3iIn0=";
+        str =
+                "eyJjb21wdXRlck5hbWUiOiJXQU5HWUMiLCJtYWNBZGRyIjoiNDAtOEQtNUMtN0YtNTktMzEiLCJvc05hbWUiOiJXaW5kb3dzIDciLCJ1c2VyTmFtZSI6IkFkbWluaXN0cmF0b3IifQ==";
+        str =
+                "eyJjb21wdXRlck5hbWUiOiJERVNLVE9QLTlDMUk3UFIiLCJtYWNBZGRyIjoiMTgtREItRjItMkItOTgtNDIiLCJvc05hbWUiOiJXaW5kb3dzIDEwIiwidXNlck5hbWUiOiLC7cfHIn0=";
+        str =
+                "eyJjb21wdXRlck5hbWUiOiJMQVBUT1AtMDlOOTZLVU8iLCJtYWNBZGRyIjoiMDAtNTAtNTYtQzAtMDAtMDgiLCJvc05hbWUiOiJXaW5kb3dzIDEwIiwidXNlck5hbWUiOiJ3bGoifQ==";
+        str =
+                "eyJjb21wdXRlck5hbWUiOiJERVNLVE9QLTRJNEg1T0UiLCJtYWNBZGRyIjoiMDAtNTAtNTYtQzAtMDAtMDgiLCJvc05hbWUiOiJXaW5kb3dzIDEwIiwidXNlck5hbWUiOiJBZG1pbmlzdHJhdG9yIn0=";
+        str =
+                "eyJjb21wdXRlck5hbWUiOiJpWnZoY2lqN2RybW1yeloiLCJtYWNBZGRyIjoiMDAtMTYtM0UtMDAtRUUtOEYiLCJvc05hbWUiOiJXaW5kb3dzIFNlcnZlciAyMDE2IiwidXNlck5hbWUiOiJBZG1pbmlzdHJhdG9yIn0=";
+        str =
+                "eyJjb21wdXRlck5hbWUiOiJERVNLVE9QLU5FRzQ3NTAiLCJtYWNBZGRyIjoiQTQtMDItQjktN0YtQzctRjQiLCJvc05hbWUiOiJXaW5kb3dzIDEwIiwidXNlck5hbWUiOiJCQ1RDLVIifQ==";
+        str =
+                "eyJjb21wdXRlck5hbWUiOiJaTUwtUEMiLCJtYWNBZGRyIjoiRUMtNTUtRjktQzktNEItNjQiLCJvc05hbWUiOiJXaW5kb3dzIE5UICh1bmtub3duKSIsInVzZXJOYW1lIjoiem1sIn0=";
+        str =
+                "eyJjb21wdXRlck5hbWUiOiJDQkhYVVRUIiwibWFjQWRkciI6IkI4LTg4LUUzLUYxLUZBLUZFIiwib3NOYW1lIjoiV2luZG93cyA3IiwidXNlck5hbWUiOiJDQkgifQ==";
+        str =
+                "eyJjb21wdXRlck5hbWUiOiJERVNLVE9QLUxGUkJQTDAiLCJtYWNBZGRyIjoiMDAtNTAtNTYtQzAtMDAtMDgiLCJvc05hbWUiOiJXaW5kb3dzIDEwIiwidXNlck5hbWUiOiJhZG1pbiJ9";
+        str =
+                "eyJjb21wdXRlck5hbWUiOiJQN1g4MlNMU0xGOTBISUsiLCJtYWNBZGRyIjoiMDAtNTAtNTYtQzAtMDAtMDgiLCJvc05hbWUiOiJXaW5kb3dzIDciLCJ1c2VyTmFtZSI6IkFkbWluaXN0cmF0b3IifQ==";
+        str =
+                "eyJjb21wdXRlck5hbWUiOiJQN1g4MlNMU0xGOTBISUsiLCJtYWNBZGRyIjoiMDAtNTAtNTYtQzAtMDAtMDgiLCJvc05hbWUiOiJXaW5kb3dzIDciLCJ1c2VyTmFtZSI6IkFkbWluaXN0cmF0b3IifQ==";
+        str =
+                "eyJjb21wdXRlck5hbWUiOiJQQy0yMDE4MDYwNktORUoiLCJtYWNBZGRyIjoiMDAtRTAtNEMtQTgtNzItMzAiLCJvc05hbWUiOiJXaW5kb3dzIDciLCJ1c2VyTmFtZSI6IkFkbWluaXN0cmF0b3IifQ==";
+        str =
+                "eyJjb21wdXRlck5hbWUiOiJaTUwtUEMiLCJtYWNBZGRyIjoiNkMtODgtMTQtMjctN0QtRDQiLCJvc05hbWUiOiJXaW5kb3dzIE5UICh1bmtub3duKSIsInVzZXJOYW1lIjoiem1sIn0=";
         String decode = Base64Coder.decodeString(str);
-//        String decode = "{\"computerName\":\"DESKTOP-JBUA9GO\",\"macAddr\":\"90-2B-34-57-95-C6\",\"osName\":\"Windows 10\",\"userName\":\"38290\"}";
+//        String decode = "{\"computerName\":\"DESKTOP-JBUA9GO\",\"macAddr\":\"90-2B-34-57-95-C6\",
+//        \"osName\":\"Windows 10\",\"userName\":\"38290\"}";
         System.out.println(decode);
         String key = EncryptUtils.getEncryptionPasswd(decode, "zml_2015");
         key = EncryptUtils.md5(decode + EncryptUtils.md5("zml_2015").toUpperCase()).toUpperCase();
@@ -107,24 +121,24 @@ public class Test {
 
         String url = "http://ucenter.xmeise.com/index/sms/";
         String mobile = "15733100573";
-        Map<String,Object> params = Maps.newHashMap();
-        params.put("page_type","signin");
-        params.put("form_hash",fromHash);
-        params.put("_",System.currentTimeMillis());
-        params.put("mobile",mobile);
+        Map<String, Object> params = Maps.newHashMap();
+        params.put("page_type", "signin");
+        params.put("form_hash", fromHash);
+        params.put("_", System.currentTimeMillis());
+        params.put("mobile", mobile);
 
 
-
-        Map<String,String> headerMap = Maps.newHashMap();
-        headerMap.put("User-Agent",RandomUtils.getRandomUserAgent());
-        headerMap.put("X-Requested-With","XMLHttpRequest");
-        headerMap.put("Referer",visitUrl);
+        Map<String, String> headerMap = Maps.newHashMap();
+        headerMap.put("User-Agent", RandomUtils.getRandomUserAgent());
+        headerMap.put("X-Requested-With", "XMLHttpRequest");
+        headerMap.put("Referer", visitUrl);
         headerMap.put("cookie", cookieValue);
         String result = HttpUtils.get(url, params, headerMap);
         System.out.println(result);
 
 
     }
+
     public static final String MOBILE = "15733100573";
 
     @org.junit.Test
@@ -142,33 +156,35 @@ public class Test {
         String url = "https://admin.youkaoshi.cn/sign-up.raw?task=sms.teacherRegisterCode";
 
         //header param
-        Map<String,String> header = Maps.newHashMap();
-        header.put("cookie",cookie);
+        Map<String, String> header = Maps.newHashMap();
+        header.put("cookie", cookie);
 
         //body param
-        Map<String,Object> params = Maps.newHashMap();
-        params.put("phone",MOBILE);
-        params.put(dataToken,1);
+        Map<String, Object> params = Maps.newHashMap();
+        params.put("phone", MOBILE);
+        params.put(dataToken, 1);
 
 
-        String result = HttpUtils.getStringFromPost(url, params,header);
+        String result = HttpUtils.getStringFromPost(url, params, header);
         System.out.println("result = " + result);
 
 
     }
+
     String seed = "abcdefghijklmnopqrstuvwxyz";
     char[] seedArray = seed.toCharArray();
+
     @org.junit.Test
     public void forTest() {
         StringBuilder sb = new StringBuilder();
         int size = 2;
         int length = seedArray.length;
-        for (int i = 0; i < Math.pow(seed.length(),size); i++) {
-            int count =0;
+        for (int i = 0; i < Math.pow(seed.length(), size); i++) {
+            int count = 0;
             for (int j = 0; j < size; i++) {
-                sb.append(getChar(seedArray,count));
+                sb.append(getChar(seedArray, count));
                 count++;
-                if(count == length){
+                if (count == length) {
                     count = 0;
                 }
             }
@@ -186,9 +202,9 @@ public class Test {
         String real = "5312";
         long start = System.currentTimeMillis();
         for (int i = 0; i < 9; i++) {
-            if (createPassWord(new char[i+1],0,i+1)) {
+            if (createPassWord(new char[i + 1], 0, i + 1)) {
                 long end = System.currentTimeMillis();
-                System.out.println((end - start)/1000.0+"s");
+                System.out.println((end - start) / 1000.0 + "s");
             }
         }
     }
@@ -198,20 +214,22 @@ public class Test {
         testPwd = "018911";
         long start = System.currentTimeMillis();
         for (int i = 0; i < 5; i++) {
-            if (createPassWord(new char[i+1],0,i+1)) {
+            if (createPassWord(new char[i + 1], 0, i + 1)) {
                 long end = System.currentTimeMillis();
-                System.out.println((end - start)/1000.0+"s");
+                System.out.println((end - start) / 1000.0 + "s");
             }
         }
     }
+
     String testPwd = "9999";
+
     /**
      * @param str 存放拼装的密码的字符数组
-     * @param n 下标
+     * @param n   下标
      * @param len 字符数组长度，也就是密码长度
      * @return
      */
-    private boolean createPassWord( char[] str, int n, int len) {
+    private boolean createPassWord(char[] str, int n, int len) {
         if (n == len) {
             String ps = new String(str);
             System.out.println(ps);
@@ -223,13 +241,14 @@ public class Test {
         }
         for (int i = 0; i <= 9; i++) {
             str[n] = (char) (i + '0');
-            if (createPassWord(str, n + 1, len))
+            if (createPassWord(str, n + 1, len)) {
                 return true;
+            }
         }
         return false;
     }
 
-    private boolean createNumPass( char[] str, int n, int len) {
+    private boolean createNumPass(char[] str, int n, int len) {
         if (n == len) {
             String ps = new String(str);
             if (testPwd.equalsIgnoreCase(ps)) {
@@ -240,21 +259,22 @@ public class Test {
         }
         for (int i = 0; i <= 9; i++) {
             str[n] = (char) (i + '0');
-            if (createNumPass(str, n + 1, len))
+            if (createNumPass(str, n + 1, len)) {
                 return true;
+            }
         }
         return false;
     }
 
 
-    public char getChar(char[] array,int index){
+    public char getChar(char[] array, int index) {
         return array[index];
     }
 
     @org.junit.Test
     public void passwdTest() {
-   
-        
+
+
         int min = 2;
         int max = 2;
         int length = seedArray.length;
@@ -294,7 +314,7 @@ public class Test {
         Map<String, Object> map = new HashMap(FastJsonTools.createJsonToMap(json));
         for (int i = 0; i < 1; i++) {
             try {
-                String result = HttpUtils.sendRequestBody(url,map);
+                String result = HttpUtils.sendRequestBody(url, map);
                 System.out.println(result);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -313,11 +333,11 @@ public class Test {
 
         ScriptEngine engine = manager.getEngineByExtension("js");
         engine.eval(js);
-        if(engine instanceof Invocable) {
-            Invocable invoke = (Invocable)engine;    // 调用merge方法，并传入两个参数
+        if (engine instanceof Invocable) {
+            Invocable invoke = (Invocable) engine;    // 调用merge方法，并传入两个参数
 
 
-            String result = (String)invoke.invokeFunction("hex_md5", "18519094522");
+            String result = (String) invoke.invokeFunction("hex_md5", "18519094522");
 
             System.out.println("result = " + result);
         }
@@ -328,8 +348,8 @@ public class Test {
         Response response = HttpUtils.getResponse("http://m.yifatong.com/Customers/register");
         String cookieValue = HttpUtils.getCookieValue(response);
         System.out.println("cookieValue = " + cookieValue);
-        Map<String,String> header = Maps.newHashMap();
-        header.put("cookie",cookieValue);
+        Map<String, String> header = Maps.newHashMap();
+        header.put("cookie", cookieValue);
         String result = HttpUtils.get("http://m.yifatong.com/Customers/gettsms?rnd=1571478800.922&mobile=18519094522");
         System.out.println(result);
     }
@@ -339,11 +359,11 @@ public class Test {
         Response response = HttpUtils.getResponse("https://tb.ele.me/wow/zele/act/sjcz?wh_biz=tm");
         String cookieValue = HttpUtils.getCookieValue(response);
         System.out.println("cookieValue = " + cookieValue);
-        Map<String,String> header = Maps.newHashMap();
-        header.put("cookie",cookieValue);
+        Map<String, String> header = Maps.newHashMap();
+        header.put("cookie", cookieValue);
         String url = "https://tb.ele.me/restapi/traffic/code/send";
 
-        String result = HttpUtils.sendRequestBody(url,"{\"phone\":\"15733100573\"}",header);
+        String result = HttpUtils.sendRequestBody(url, "{\"phone\":\"15733100573\"}", header);
         System.out.println(result);
     }
 
@@ -356,9 +376,9 @@ public class Test {
         String url = "http://localhost:8888/xlm";
         MediaType mediaType = MediaType.parse("application/xml");
         HttpUtils.defaultMediaType = (mediaType);
-        String result = HttpUtils.sendRequestBody(url, xml,"application/xml");
+        String result = HttpUtils.sendRequestBody(url, xml, "application/xml");
         System.out.println("result = " + result);
-         result = HttpUtils.sendRequestBody(url, xml,"application/xml");
+        result = HttpUtils.sendRequestBody(url, xml, "application/xml");
         System.out.println("result = " + result);
         getStringFromPost();
     }
@@ -366,8 +386,9 @@ public class Test {
     public static void main(String[] args) {
         EventBusTest();
     }
-//    @org.junit.Test
-    public static void EventBusTest()  {
+
+    //    @org.junit.Test
+    public static void EventBusTest() {
 //        EventBus bus = new EventBus();
 //        bus.register(new EventBusListener());
 //        bus.post("hello world");

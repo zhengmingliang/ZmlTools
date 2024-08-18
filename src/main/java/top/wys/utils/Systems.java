@@ -95,8 +95,7 @@ public class Systems {
 
     private static final long PID;
 
-    static
-    {
+    static {
         OS_NAME = System.getProperty("os.name").toLowerCase();
         USER_DIR = System.getProperty("user.dir");
         USER_HOME = System.getProperty("user.home");
@@ -108,39 +107,29 @@ public class Systems {
         FILE_SEPARATOR = System.getProperty("file.separator");
 
         long pid = PID_NOT_FOUND;
-        try
-        {
+        try {
             final Class<?> processHandleClass = Class.forName("java.lang.ProcessHandle");
             final Method currentMethod = processHandleClass.getMethod("current");
             final Object processHandle = currentMethod.invoke(null);
             final Method pidMethod = processHandleClass.getMethod("pid");
-            pid = (Long)pidMethod.invoke(processHandle);
-        }
-        catch (final Throwable ignore)
-        {
-            try
-            {
+            pid = (Long) pidMethod.invoke(processHandle);
+        } catch (final Throwable ignore) {
+            try {
                 final String pidPropertyValue = System.getProperty(SUN_PID_PROP_NAME);
-                if (null != pidPropertyValue)
-                {
+                if (null != pidPropertyValue) {
                     pid = Long.parseLong(pidPropertyValue);
-                }
-                else
-                {
+                } else {
                     final String jvmName = ManagementFactory.getRuntimeMXBean().getName();
                     pid = Long.parseLong(jvmName.split("@")[0]);
                 }
-            }
-            catch (final Throwable ignore2)
-            {
+            } catch (final Throwable ignore2) {
             }
         }
 
         PID = pid;
     }
 
-    private Systems()
-    {
+    private Systems() {
     }
 
     /**
@@ -150,20 +139,18 @@ public class Systems {
      *
      * @return the name of the operating system as a lower case String.
      */
-    public static String osName()
-    {
+    public static String osName() {
         return OS_NAME;
     }
 
     /**
      * 新的一行(换行符)
+     *
      * @return
      */
-    public static String line()
-    {
+    public static String line() {
         return NEW_LINE;
     }
-
 
 
     /**
@@ -172,8 +159,7 @@ public class Systems {
      * @return current process id or {@link #PID_NOT_FOUND} if PID was not able to be found.
      * @see #PID_NOT_FOUND
      */
-    public static long getPid()
-    {
+    public static long getPid() {
         return PID;
     }
 
@@ -182,8 +168,7 @@ public class Systems {
      *
      * @return true if the operating system is likely to be Windows based on {@link #osName()}.
      */
-    public static boolean isWindows()
-    {
+    public static boolean isWindows() {
         return OS_NAME.startsWith("win");
     }
 
@@ -192,8 +177,7 @@ public class Systems {
      *
      * @return true if the operating system is likely to be Linux based on {@link #osName()}.
      */
-    public static boolean isLinux()
-    {
+    public static boolean isLinux() {
         return OS_NAME.contains("linux");
     }
 
@@ -202,14 +186,11 @@ public class Systems {
      *
      * @return true if attached otherwise false.
      */
-    public static boolean isDebuggerAttached()
-    {
+    public static boolean isDebuggerAttached() {
         final RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();
 
-        for (final String arg : runtimeMXBean.getInputArguments())
-        {
-            if (arg.contains("-agentlib:jdwp"))
-            {
+        for (final String arg : runtimeMXBean.getInputArguments()) {
+            if (arg.contains("-agentlib:jdwp")) {
                 return true;
             }
         }
@@ -222,11 +203,9 @@ public class Systems {
      *
      * @return tmp directory for the runtime.
      */
-    public static String tmpDirName()
-    {
+    public static String tmpDirName() {
         String tmpDirName = System.getProperty("java.io.tmpdir");
-        if (!tmpDirName.endsWith(File.separator))
-        {
+        if (!tmpDirName.endsWith(File.separator)) {
             tmpDirName += File.separator;
         }
 
@@ -238,8 +217,7 @@ public class Systems {
      *
      * @return a formatted dump of all threads with associated state and stack traces.
      */
-    public static String threadDump()
-    {
+    public static String threadDump() {
         final StringBuilder sb = new StringBuilder();
         threadDump(sb);
 
@@ -251,18 +229,14 @@ public class Systems {
      *
      * @param sb to write the thread dump to.
      */
-    public static void threadDump(final StringBuilder sb)
-    {
+    public static void threadDump(final StringBuilder sb) {
         final ThreadMXBean mxBean = ManagementFactory.getThreadMXBean();
 
-        for (final ThreadInfo threadInfo : mxBean.getThreadInfo(mxBean.getAllThreadIds(), Integer.MAX_VALUE))
-        {
-            if (null != threadInfo)
-            {
+        for (final ThreadInfo threadInfo : mxBean.getThreadInfo(mxBean.getAllThreadIds(), Integer.MAX_VALUE)) {
+            if (null != threadInfo) {
                 sb.append('"').append(threadInfo.getThreadName()).append("\": ").append(threadInfo.getThreadState());
 
-                for (final StackTraceElement stackTraceElement : threadInfo.getStackTrace())
-                {
+                for (final StackTraceElement stackTraceElement : threadInfo.getStackTrace()) {
                     sb.append("\n    at ").append(stackTraceElement.toString());
                 }
 
@@ -279,8 +253,7 @@ public class Systems {
      *
      * @param filenameOrUrl that holds properties.
      */
-    public static void loadPropertiesFile(final String filenameOrUrl)
-    {
+    public static void loadPropertiesFile(final String filenameOrUrl) {
         loadPropertiesFile(REPLACE, filenameOrUrl);
     }
 
@@ -290,41 +263,29 @@ public class Systems {
      * File is first searched for in resources using the system {@link ClassLoader},
      * then file system, then URL. All are loaded if multiples found.
      *
-     * @param propertyAction  to take with each loaded property.
-     * @param filenameOrUrl that holds properties.
+     * @param propertyAction to take with each loaded property.
+     * @param filenameOrUrl  that holds properties.
      */
-    public static void loadPropertiesFile(String propertyAction, final String filenameOrUrl)
-    {
+    public static void loadPropertiesFile(String propertyAction, final String filenameOrUrl) {
         final URL resource = ClassLoader.getSystemClassLoader().getResource(filenameOrUrl);
-        if (null != resource)
-        {
-            try (InputStream in = resource.openStream())
-            {
+        if (null != resource) {
+            try (InputStream in = resource.openStream()) {
                 loadProperties(propertyAction, in);
-            }
-            catch (final Exception ignore)
-            {
+            } catch (final Exception ignore) {
             }
         }
 
         final File file = new File(filenameOrUrl);
-        if (file.exists())
-        {
-            try (InputStream in = new FileInputStream(file))
-            {
+        if (file.exists()) {
+            try (InputStream in = new FileInputStream(file)) {
                 loadProperties(propertyAction, in);
-            }
-            catch (final Exception ignore)
-            {
+            } catch (final Exception ignore) {
             }
         }
 
-        try (InputStream in = new URL(filenameOrUrl).openStream())
-        {
+        try (InputStream in = new URL(filenameOrUrl).openStream()) {
             loadProperties(propertyAction, in);
-        }
-        catch (final Exception ignore)
-        {
+        } catch (final Exception ignore) {
         }
     }
 
@@ -334,8 +295,7 @@ public class Systems {
      * @param filenamesOrUrls that holds properties.
      * @see #loadPropertiesFile(String)
      */
-    public static void loadPropertiesFiles(final String... filenamesOrUrls)
-    {
+    public static void loadPropertiesFiles(final String... filenamesOrUrls) {
         loadPropertiesFiles(REPLACE, filenamesOrUrls);
     }
 
@@ -346,10 +306,8 @@ public class Systems {
      * @param filenamesOrUrls that holds properties.
      * @see #loadPropertiesFile(String)
      */
-    public static void loadPropertiesFiles(String propertyAction, final String... filenamesOrUrls)
-    {
-        for (final String filenameOrUrl : filenamesOrUrls)
-        {
+    public static void loadPropertiesFiles(String propertyAction, final String... filenamesOrUrls) {
+        for (final String filenameOrUrl : filenamesOrUrls) {
             loadPropertiesFile(propertyAction, filenameOrUrl);
         }
     }
@@ -362,8 +320,7 @@ public class Systems {
      * @return the value of a {@link System#getProperty(String)} with the exception that if the value is
      * {@link #NULL_PROPERTY_VALUE} then return {@code null}.
      */
-    public static String getProperty(final String propertyName)
-    {
+    public static String getProperty(final String propertyName) {
         final String propertyValue = System.getProperty(propertyName);
 
         return NULL_PROPERTY_VALUE.equals(propertyValue) ? null : propertyValue;
@@ -380,11 +337,9 @@ public class Systems {
      * {@link #NULL_PROPERTY_VALUE} then return {@code null}, otherwise if the value is not set then return the default
      * value.
      */
-    public static String getProperty(final String propertyName, final String defaultValue)
-    {
+    public static String getProperty(final String propertyName, final String defaultValue) {
         final String propertyValue = System.getProperty(propertyName);
-        if (NULL_PROPERTY_VALUE.equals(propertyValue))
-        {
+        if (NULL_PROPERTY_VALUE.equals(propertyValue)) {
             return null;
         }
 
@@ -400,19 +355,16 @@ public class Systems {
      * @return the int value.
      * @throws NumberFormatException if the value is out of range or mal-formatted.
      */
-    public static int getSizeAsInt(final String propertyName, final int defaultValue)
-    {
+    public static int getSizeAsInt(final String propertyName, final int defaultValue) {
         final String propertyValue = System.getProperty(propertyName);
-        if (propertyValue != null)
-        {
+        if (propertyValue != null) {
             final long value = parseSize(propertyName, propertyValue);
-            if (value < 0 || value > Integer.MAX_VALUE)
-            {
+            if (value < 0 || value > Integer.MAX_VALUE) {
                 throw new NumberFormatException(
                         propertyName + " must positive and less than Integer.MAX_VALUE: " + value);
             }
 
-            return (int)value;
+            return (int) value;
         }
 
         return defaultValue;
@@ -427,14 +379,11 @@ public class Systems {
      * @return the long value.
      * @throws NumberFormatException if the value is out of range or mal-formatted.
      */
-    public static long getSizeAsLong(final String propertyName, final long defaultValue)
-    {
+    public static long getSizeAsLong(final String propertyName, final long defaultValue) {
         final String propertyValue = System.getProperty(propertyName);
-        if (propertyValue != null)
-        {
+        if (propertyValue != null) {
             final long value = parseSize(propertyName, propertyValue);
-            if (value < 0)
-            {
+            if (value < 0) {
                 throw new NumberFormatException(propertyName + " must be positive: " + value);
             }
 
@@ -453,39 +402,33 @@ public class Systems {
      * @return the long value.
      * @throws NumberFormatException if the value is out of range or mal-formatted.
      */
-    public static long parseSize(final String propertyName, final String propertyValue)
-    {
+    public static long parseSize(final String propertyName, final String propertyValue) {
         final int lengthMinusSuffix = propertyValue.length() - 1;
         final char lastCharacter = propertyValue.charAt(lengthMinusSuffix);
-        if (Character.isDigit(lastCharacter))
-        {
+        if (Character.isDigit(lastCharacter)) {
             return Long.parseLong(propertyValue);
         }
 
         final long value = AsciiEncoding.parseLongAscii(propertyValue, 0, lengthMinusSuffix);
 
-        switch (lastCharacter)
-        {
+        switch (lastCharacter) {
             case 'k':
             case 'K':
-                if (value > MAX_K_VALUE)
-                {
+                if (value > MAX_K_VALUE) {
                     throw new NumberFormatException(propertyName + " would overflow a long: " + propertyValue);
                 }
                 return value * 1024;
 
             case 'm':
             case 'M':
-                if (value > MAX_M_VALUE)
-                {
+                if (value > MAX_M_VALUE) {
                     throw new NumberFormatException(propertyName + " would overflow a long: " + propertyValue);
                 }
                 return value * 1024 * 1024;
 
             case 'g':
             case 'G':
-                if (value > MAX_G_VALUE)
-                {
+                if (value > MAX_G_VALUE) {
                     throw new NumberFormatException(propertyName + " would overflow a long: " + propertyValue);
                 }
                 return value * 1024 * 1024 * 1024;
@@ -507,14 +450,11 @@ public class Systems {
      * @return the long value.
      * @throws NumberFormatException if the value is negative or malformed.
      */
-    public static long getDurationInNanos(final String propertyName, final long defaultValue)
-    {
+    public static long getDurationInNanos(final String propertyName, final long defaultValue) {
         final String propertyValue = System.getProperty(propertyName);
-        if (propertyValue != null)
-        {
+        if (propertyValue != null) {
             final long value = parseDuration(propertyName, propertyValue);
-            if (value < 0)
-            {
+            if (value < 0) {
                 throw new NumberFormatException(propertyName + " must be positive: " + value);
             }
 
@@ -535,31 +475,26 @@ public class Systems {
      * @return the long value.
      * @throws NumberFormatException if the value is negative or malformed.
      */
-    public static long parseDuration(final String propertyName, final String propertyValue)
-    {
+    public static long parseDuration(final String propertyName, final String propertyValue) {
         final char lastCharacter = propertyValue.charAt(propertyValue.length() - 1);
-        if (Character.isDigit(lastCharacter))
-        {
+        if (Character.isDigit(lastCharacter)) {
             return Long.parseLong(propertyValue);
         }
 
-        if (lastCharacter != 's' && lastCharacter != 'S')
-        {
+        if (lastCharacter != 's' && lastCharacter != 'S') {
             throw new NumberFormatException(
                     propertyName + ": " + propertyValue + " should end with: s, ms, us, or ns.");
         }
 
         final char secondLastCharacter = propertyValue.charAt(propertyValue.length() - 2);
-        if (Character.isDigit(secondLastCharacter))
-        {
+        if (Character.isDigit(secondLastCharacter)) {
             final long value = AsciiEncoding.parseLongAscii(propertyValue, 0, propertyValue.length() - 1);
             return TimeUnit.SECONDS.toNanos(value);
         }
 
         final long value = AsciiEncoding.parseLongAscii(propertyValue, 0, propertyValue.length() - 2);
 
-        switch (secondLastCharacter)
-        {
+        switch (secondLastCharacter) {
             case 'n':
             case 'N':
                 return value;
@@ -578,8 +513,7 @@ public class Systems {
         }
     }
 
-    private static void loadProperties(String propertyAction, final InputStream in) throws IOException
-    {
+    private static void loadProperties(String propertyAction, final InputStream in) throws IOException {
         final Properties systemProperties = System.getProperties();
         final Properties properties = new Properties();
 
@@ -587,18 +521,16 @@ public class Systems {
         properties.forEach(
                 (k, v) ->
                 {
-                    switch (propertyAction)
-                    {
+                    switch (propertyAction) {
                         case PRESERVE:
-                            if (!systemProperties.containsKey(k))
-                            {
-                                systemProperties.setProperty((String)k, (String)v);
+                            if (!systemProperties.containsKey(k)) {
+                                systemProperties.setProperty((String) k, (String) v);
                             }
                             break;
 
                         default:
                         case REPLACE:
-                            systemProperties.setProperty((String)k, (String)v);
+                            systemProperties.setProperty((String) k, (String) v);
                             break;
                     }
                 });

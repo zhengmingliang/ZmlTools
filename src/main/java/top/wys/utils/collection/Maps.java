@@ -301,7 +301,7 @@ public class Maps {
                     return (Boolean) answer;
 
                 } else if (answer instanceof String) {
-                    return new Boolean((String) answer);
+                    return Boolean.valueOf((String) answer);
 
                 } else if (answer instanceof Number) {
                     Number n = (Number) answer;
@@ -1354,6 +1354,7 @@ public class Maps {
 
     /**
      * 计算实际容量
+     *
      * @param expectedSize
      * @return
      */
