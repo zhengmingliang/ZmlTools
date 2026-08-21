@@ -172,4 +172,39 @@ public class ConvertUtilsTest {
         calendar.set(year, month, day, hour, minute, second);
         return calendar.getTime();
     }
+    @Test
+    public void toDate() {
+        System.out.println("ConvertUtils.toDate(\"20211112\",null) = " + ConvertUtils.toDate("20211112", null));
+        System.out.println("ConvertUtils.toDate(\"2021-11-12\",null) = " + ConvertUtils.toDate("2021-11-12", null));
+        System.out.println("ConvertUtils.toDate(\"2021/11/12\",null) = " + ConvertUtils.toDate("2021/11/12", null));
+        System.out.println(
+                "ConvertUtils.toDate(\"2021年11月12日\",null) = " + ConvertUtils.toDate("2021年11月12日", null));
+        System.out.println("ConvertUtils.toDate(\"2021년11월12일\",null) = " + ConvertUtils.toDate("2021년11월12일")); //
+        System.out.println(
+                "ConvertUtils.toDate(\"20211112214532\",null) = " + ConvertUtils.toDate("20211112214532", null));
+        System.out.println(
+                "ConvertUtils.toDate(\"20211112 22:45:32\",null) = " + ConvertUtils.toDate("20211112 22:45:32", null));
+        System.out.println(
+                "ConvertUtils.toDate(\"2021.11.12 22:45:32\",null) = " + ConvertUtils.toDate("2021.11.12 22:45:32",
+                        null));
+        System.out.println(
+                "ConvertUtils.toDate(\"2021-12-21 23:10:33\") = " + ConvertUtils.toDate("2021-12-21 23:10:33"));
+        System.out.println("ConvertUtils.toDate(\"2021/12/4\") = " + ConvertUtils.toDate("2021/12/4"));
+        System.out.println("ConvertUtils.toDate(\"2021/5/31\") = " + ConvertUtils.toDate("2021/5/31"));
+        System.out.println("ConvertUtils.toDate(\"2021/5/3\") = " + ConvertUtils.toDate("2021/5/3"));
+        System.out.println("ConvertUtils.toDate(\"2021/12/4 1:25\") = " + ConvertUtils.toDate("2021/5/31 1:25"));
+        System.out.println("ConvertUtils.toDate(\"2021/12/4 1:2\") = " + ConvertUtils.toDate("2021/5/31 1:2"));
+        System.out.println("ConvertUtils.toDate(\"2021/12/4 12:25\") = " + ConvertUtils.toDate("2021/5/31 12:25"));
+        System.out.println("ConvertUtils.toDate(\"2021/12/4 12:5\") = " + ConvertUtils.toDate("2021/5/31 12:5"));
+        System.out.println("ConvertUtils.toDate(\"2021-11-28T22:33:31+0800\") = " + ConvertUtils.toDate(
+                "2021-11-28T22:33:31+0800"));
+
+        System.out.println("ConvertUtils.toDate(\"202111122145\") = " + ConvertUtils.toDate("202111122145"));
+        System.out.println("ConvertUtils.toDate(\"1638702321\") = " + ConvertUtils.toDate("1638702321"));
+        System.out.println("ConvertUtils.toDate(\"1638702321200\") = " + ConvertUtils.toDate("1638702321200"));
+        System.out.println("ConvertUtils.toDate(\"2022-03-01T19:26:28+08:00\") = " + ConvertUtils.toDate(
+                "2022-03-01T19:26:28+08:00"));
+        System.out.println(
+                "ConvertUtils.toDate(\"2022-03-01T19:26:28\") = " + ConvertUtils.toDate("2022-03-01T19:26:28"));
+    }
 }
