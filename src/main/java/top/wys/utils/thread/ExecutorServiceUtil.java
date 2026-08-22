@@ -24,6 +24,10 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @since 1.3.3
  */
 public class ExecutorServiceUtil {
+
+    private static ExecutorService defaultPool;
+
+
     private static final ThreadFactory THREAD_FACTORY = new ThreadFactory() {
 
         private final ThreadFactory defaultFactory = Executors.defaultThreadFactory();
@@ -76,8 +80,8 @@ public class ExecutorServiceUtil {
      * @return executor service
      */
     public static ExecutorService newExecutorService() {
-        return new ThreadPoolExecutor(DefaultValues.Thread.CORE_POOL_SIZE, DefaultValues.Thread.MAX_POOL_SIZE, 0L,
-                TimeUnit.MILLISECONDS, new SynchronousQueue<Runnable>(),
+        return new ThreadPoolExecutor(DefaultValues.Thread.CORE_POOL_SIZE, DefaultValues.Thread.MAX_POOL_SIZE, 60L,
+                TimeUnit.SECONDS, new SynchronousQueue<Runnable>(),
                 THREAD_FACTORY);
     }
 
@@ -98,5 +102,30 @@ public class ExecutorServiceUtil {
      */
     public static ThreadFactory getDefaultTreadFactory() {
         return THREAD_FACTORY;
+    }
+
+    public static void execute(Runnable runnable) {
+        if (defaultPool == null) {
+            defaultPool = newExecutorService();
+        }
+        defaultPool.execute(runnable);
+    }
+
+    /**
+     * 挂起当前线程
+     *
+     * @param millis 挂起的毫秒数
+     * @return 被中断返回false，否则true
+     * @since 1.4.5
+     */
+    public static boolean sleep(long millis) {
+        if (millis > 0) {
+            try {
+                Thread.sleep(millis);
+            } catch (InterruptedException e) {
+                return false;
+            }
+        }
+        return true;
     }
 }
