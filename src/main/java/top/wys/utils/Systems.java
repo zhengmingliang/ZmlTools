@@ -3,6 +3,9 @@
  */
 package top.wys.utils;
 
+import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import top.wys.utils.encode.AsciiEncoding;
 
 import java.io.File;
@@ -14,7 +17,9 @@ import java.lang.management.RuntimeMXBean;
 import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
 import java.lang.reflect.Method;
+import java.net.InetAddress;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -26,6 +31,8 @@ import java.util.concurrent.TimeUnit;
  * @time 2022/3/6 14:58
  */
 public class Systems {
+
+    private static final Logger log = LoggerFactory.getLogger(Systems.class);
 
     /**
      * Replace existing property value if one exists.
@@ -92,6 +99,15 @@ public class Systems {
      * 用户默认语言
      */
     public static final String LANGUAGE;
+    /**
+     * 主机名称
+     */
+    public static final String HOST_NAME;
+
+    /**
+     * 操作系统 CPU 架构
+     */
+    public static final String OS_ARCH;
 
     private static final long PID;
 
@@ -105,6 +121,9 @@ public class Systems {
         TMP_DIR = System.getProperty("java.io.tmpdir");
         NEW_LINE = System.getProperty("line.separator");
         FILE_SEPARATOR = System.getProperty("file.separator");
+        OS_ARCH = System.getProperty("os.arch");
+        String hostname = getHostname();
+        HOST_NAME = hostname;
 
         long pid = PID_NOT_FOUND;
         try {
@@ -130,6 +149,42 @@ public class Systems {
     }
 
     private Systems() {
+    }
+
+    /**
+     * 获得主机名
+     *
+     * @return {@link String }
+     */
+    @NotNull
+    public static String getHostname() {
+        if (HOST_NAME != null) {
+            return HOST_NAME;
+        }
+        // linux
+        String hostname = System.getenv("HOSTNAME");
+        if (hostname != null) {
+            return hostname;
+        }
+
+        // windows
+        hostname = System.getenv("COMPUTERNAME");
+        if (hostname != null) {
+            return hostname;
+        }
+
+        try {
+            // 获取本地主机的 InetAddress 对象
+            hostname = InetAddress.getLocalHost().getHostName();
+            return hostname;
+        } catch (UnknownHostException e) {
+            log.warn("获取主机名失败", e);
+        }
+
+        if (hostname == null) {
+            hostname = "unknown";
+        }
+        return hostname;
     }
 
     /**
