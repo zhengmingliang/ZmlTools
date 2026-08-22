@@ -4,6 +4,8 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import top.wys.utils.StringUtils;
 
+import java.util.function.Supplier;
+
 import static top.wys.utils.StringUtils.lenientFormat;
 
 /**
@@ -850,6 +852,44 @@ public final class Preconditions {
     public static <T extends @NonNull Object> T checkNotNull(T reference, @Nullable Object errorMessage) {
         if (reference == null) {
             throw new NullPointerException(String.valueOf(errorMessage));
+        }
+        return reference;
+    }
+
+    /**
+     * Ensures that an object reference passed as a parameter to the calling method is not null.
+     *
+     * @param reference    an object reference
+     * @param exception the exception message to use if the check fails; will be converted to a
+     *                     string using {@link String#valueOf(Object)}
+     * @return the non-null reference that was validated
+     * @throws NullPointerException if {@code reference} is null
+     * @see Verify#verifyNotNull Verify.verifyNotNull()
+     */
+    public static <T extends @NonNull Object> T checkNotNull(T reference, RuntimeException exception) {
+        if (reference == null) {
+            throw exception;
+        }
+        return reference;
+    }
+
+    /**
+     * Ensures that an object reference passed as a parameter to the calling method is not null.
+     *
+     * @param reference    an object reference
+     * @param supplier the exception message to use if the check fails; will be converted to a
+     *                     string using {@link String#valueOf(Object)}
+     * @return the non-null reference that was validated
+     * @throws NullPointerException if {@code reference} is null
+     * @see Verify#verifyNotNull Verify.verifyNotNull()
+     */
+    public static <T extends @NonNull Object> T checkNotNull(T reference, Supplier<RuntimeException> supplier) {
+        if (reference == null) {
+            if (supplier != null) {
+                throw supplier.get();
+            } else {
+                throw new NullPointerException();
+            }
         }
         return reference;
     }
