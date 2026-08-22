@@ -1,11 +1,8 @@
 package top.wys.utils;
 
-
 import com.google.common.collect.Lists;
 import org.apache.logging.log4j.core.util.Throwables;
 import top.wys.utils.collection.ArrayUtils;
-import top.wys.utils.jdk.UnsafeUtils;
-import top.wys.utils.reflect.FieldAccessor;
 import top.wys.utils.valid.Preconditions;
 
 import javax.annotation.Nullable;
@@ -32,15 +29,12 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-
 /**
  * @author 郑明亮
  * @time：2016年12月20日 下午4:34:52
  * @description <p> 反射相关工具类<br>
  */
 public class ReflectionUtils {
-
-
     private static final Method[] EMPTY_METHOD_ARRAY = new Method[0];
 
     /**
@@ -103,7 +97,6 @@ public class ReflectionUtils {
         }
         return list.toArray(new String[list.size()]);
     }
-
 
     /**
      * @param clz
@@ -329,7 +322,7 @@ public class ReflectionUtils {
     public static void makeAccessible(Field field) {
         if ((!Modifier.isPublic(field.getModifiers()) ||
                 !Modifier.isPublic(field.getDeclaringClass().getModifiers()) ||
-                Modifier.isFinal(field.getModifiers())) && !field.isAccessible()) {
+                Modifier.isFinal(field.getModifiers())) && !canAccess(field)) {
             field.setAccessible(true);
         }
     }
@@ -341,7 +334,7 @@ public class ReflectionUtils {
      * @param constructor
      */
     public static void makeAccessible(Constructor constructor) {
-        if (!isAccessible(constructor) && !constructor.isAccessible()) {
+        if (!isAccessible(constructor) && !canAccess(constructor)) {
             constructor.setAccessible(true);
         }
     }
@@ -369,8 +362,30 @@ public class ReflectionUtils {
      */
     public static void makeAccessible(Method method) {
         if ((!Modifier.isPublic(method.getModifiers()) ||
-                !Modifier.isPublic(method.getDeclaringClass().getModifiers())) && !method.isAccessible()) {
+                !Modifier.isPublic(method.getDeclaringClass().getModifiers())) && !canAccess(method)) {
             method.setAccessible(true);
+        }
+    }
+
+    /**
+     * 检查给定的 AccessibleObject 是否可以被访问。
+     * 兼容 JDK 8 和 JDK 9+，优先使用 canAccess() 方法（JDK 9+），
+     * 如果不可用则回退到 isAccessible() 方法（JDK 8）。
+     *
+     * @param obj 要检查的 AccessibleObject
+     * @return 如果可以访问则返回 true
+     */
+    private static boolean canAccess(AccessibleObject obj) {
+        try {
+            // JDK 9+ 使用 canAccess() 方法
+            Method canAccessMethod = AccessibleObject.class.getMethod("canAccess", Object.class);
+            return (boolean) canAccessMethod.invoke(obj, (Object) null);
+        } catch (NoSuchMethodException e) {
+            // JDK 8 回退到 isAccessible() 方法
+            return obj.isAccessible();
+        } catch (Exception e) {
+            // 发生异常时回退到 isAccessible() 方法
+            return obj.isAccessible();
         }
     }
 
@@ -562,16 +577,16 @@ public class ReflectionUtils {
 
     public static Object getObjectFieldValue(Object obj, String fieldName) {
         Class<?> cls = obj.getClass();
-        Preconditions.checkArgument(!cls.isPrimitive());
         while (cls != Object.class) {
             try {
                 Field field = cls.getDeclaredField(fieldName);
-                long fieldOffset = UnsafeUtils.objectFieldOffset(field);
-                return UnsafeUtils.getObject(obj, fieldOffset);
-                // CHECKSTYLE.OFF:EmptyCatchBlock
+                field.setAccessible(true);
+                return field.get(obj);
             } catch (NoSuchFieldException ignored) {
+                // 继续查找父类
+            } catch (IllegalAccessException e) {
+                throw new IllegalStateException("无法访问字段: " + fieldName, e);
             }
-            // CHECKSTYLE.ON:EmptyCatchBlock
             cls = cls.getSuperclass();
         }
         return null;
@@ -580,9 +595,13 @@ public class ReflectionUtils {
     public static List<Object> getFieldValues(Collection<Field> fields, Object o) {
         List<Object> results = new ArrayList<>(fields.size());
         for (Field field : fields) {
-            // UNSAFE.objectFieldOffset(field)无法处理基本数据类型字段.
-            Object fieldValue = FieldAccessor.createAccessor(field).get(o);
-            results.add(fieldValue);
+            try {
+                field.setAccessible(true);
+                Object fieldValue = field.get(o);
+                results.add(fieldValue);
+            } catch (IllegalAccessException e) {
+                throw new IllegalStateException("无法访问字段: " + field.getName(), e);
+            }
         }
         return results;
     }
