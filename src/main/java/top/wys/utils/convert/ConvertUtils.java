@@ -11,6 +11,10 @@ import top.wys.utils.collection.Booleans;
 import top.wys.utils.math.Numbers;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -460,35 +464,46 @@ public class ConvertUtils {
             return defaultValue;
         }
 
-        String strValue = obj.toString();
-        int strLength = strValue.length();
-        Date date = new Date();
-        if (obj instanceof Number) {
-            int length = strValue.length();
-            if (length == 10) {
-                date.setTime(toLong(strValue + "000"));
-            } else {
-                date.setTime(((Number) obj).longValue());
-            }
-            return date;
-        }
         if (obj instanceof Date) {
             return (Date) obj;
         }
 
         if (obj instanceof java.sql.Date) {
+            Date date = new Date();
             date.setTime(((java.sql.Date) obj).getTime());
             return date;
+        }
+
+        if (obj instanceof Calendar) {
+            return ((Calendar) obj).getTime();
+        }
+
+        if (obj instanceof LocalDate) {
+
+            return Date.from(((LocalDate) obj).atStartOfDay(ZoneId.systemDefault()).toInstant());
+        }
+
+        if (obj instanceof LocalDateTime) {
+            return Date.from(((LocalDateTime) obj).atZone(ZoneId.systemDefault()).toInstant());
+        }
+
+        String strValue = obj.toString();
+        int strLength = strValue.length();
+        if (obj instanceof Number) {
+            int length = strValue.length();
+            if (length == 10) {
+                return new Date(toLong(strValue + "000"));
+            } else {
+                return new Date(((Number) obj).longValue());
+            }
         }
 
         char[] chars = strValue.toCharArray();
         // 判断是否是时间戳
         if (strLength == 10 && NumberUtils.isNumber(chars)) {
-            date.setTime(toLong(strValue + "000"));
-            return date;
+            return new Date(toLong(strValue + "000"));
         } else if (strLength == 13 && NumberUtils.isNumber(chars)) {
-            date.setTime(toLong(strValue));
-            return date;
+            return new Date(toLong(strValue));
         }
         // 计算pattern和日期对应配置的偏移量
         // 如：yyyy-MM-dd 对于2021-5-2 偏移量为-2， 对于2021-5-12 偏移量为-1 ，对于2021-05-12 偏移量为0
