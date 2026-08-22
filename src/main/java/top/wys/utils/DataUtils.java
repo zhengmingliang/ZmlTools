@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import top.wys.utils.entity.Patterns;
 import top.wys.utils.math.Numbers;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,6 +22,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
@@ -1263,15 +1265,66 @@ public class DataUtils {
      * @param object
      */
     public static void writeToClient(ServletResponse response, Object object) {
+        ServletOutputStream outputStream = null;
         try {
             response.setCharacterEncoding("UTF-8");
             String contentType = response.getContentType();
             if (contentType == null) {
                 response.setContentType("application/json;charset=UTF-8");
             }
-            response.getWriter().write(JSON.toJSONString(object));
+            outputStream = response.getOutputStream();
+            write(response, object, outputStream);
+
         } catch (IOException e) {
             log.error("Write the request data back to the client exception", e);
+        } finally {
+            IOUtils.flush(outputStream);
+            IOUtils.close(outputStream);
+        }
+    }
+
+    private static void write(ServletResponse response, Object object, ServletOutputStream outputStream) throws IOException {
+        if (object instanceof String) {
+            response.getWriter().write((String) object);
+        } else if (object instanceof byte[]) {
+            if (outputStream == null) {
+                outputStream = response.getOutputStream();
+            }
+            outputStream.write((byte[]) object);
+
+        } else {
+            response.getWriter().write(JSON.toJSONString(object));
+        }
+    }
+
+    /**
+     * 将数据写回到客户端
+     *
+     * @param response
+     * @param objects
+     */
+    public static void writeToClient(ServletResponse response, Object... objects) {
+
+        ServletOutputStream outputStream = null;
+        try {
+            response.setCharacterEncoding("UTF-8");
+            String contentType = response.getContentType();
+            if (contentType == null) {
+                response.setContentType("application/json;charset=UTF-8");
+            }
+            if (objects == null || objects.length == 0) {
+                return;
+            }
+            outputStream = response.getOutputStream();
+            for (Object object : objects) {
+                write(response, object, outputStream);
+            }
+
+        } catch (IOException e) {
+            log.error("Write the request data back to the client exception", e);
+        } finally {
+            IOUtils.flush(outputStream);
+            IOUtils.close(outputStream);
         }
     }
 
