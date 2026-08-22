@@ -10,6 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import top.wys.utils.convert.ConvertUtils;
 
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+
 /**
  * <ol>
  *     Twitter的Snowflake 算法<br>
@@ -52,8 +55,55 @@ public class SnowFlakeIdWorker {
 
     public static final SnowFlakeIdWorker INSTANCE;
 
+
+
+    private static final long twepoch = 1288834974657L;
+
+    /**
+     * 机器id所占的位数
+     */
+    private static final long workerIdBits = 5L;
+    /**
+     * 数据标识id所占的位数
+     */
+    private static final long datacenterIdBits = 5L;
+    /**
+     * 支持的最大机器id，结果是31 (这个移位算法可以很快的计算出几位二进制数所能表示的最大十进制数)
+     */
+    private static final long maxWorkerId = -1L ^ (-1L << workerIdBits);
+    /**
+     * 支持的最大数据标识id，结果是31
+     */
+    private static final long maxDatacenterId = -1L ^ (-1L << datacenterIdBits);
+    /**
+     * 序列在id中占的位数
+     */
+    private static final long sequenceBits = 12L;
+
+    /**
+     * 机器ID向左移12位
+     */
+    private static final long workerIdShift = sequenceBits;
+    /**
+     * 数据标识id向左移17位(12+5)
+     */
+    private static final long datacenterIdShift = sequenceBits + workerIdBits;
+    /**
+     * 时间截向左移22位(5+5+12)
+     */
+    private static final long timestampLeftShift = sequenceBits + workerIdBits + datacenterIdBits;
+    /**
+     * 生成序列的掩码，这里为4095 (0b111111111111=0xfff=4095)
+     */
+    private static final long sequenceMask = -1L ^ (-1L << sequenceBits);
+
+    /**
+     * 上次生成ID的时间截
+     */
+    private long lastTimestamp = -1L;
+
     static {
-        Integer workId = 1;
+        long workId = 1;
         try {
             String localHostIP = DataUtils.getLocalHostIP();
             int lastIndex = localHostIP.lastIndexOf(".");
@@ -61,9 +111,33 @@ public class SnowFlakeIdWorker {
         } catch (Exception e) {
             log.warn("自动计算工作机器id出现错误，将使用默认值1", e);
         }
-        INSTANCE = new SnowFlakeIdWorker(workId, 10, 100);
+        long datacenterId = getDatacenterId(maxDatacenterId);
+
+        INSTANCE = new SnowFlakeIdWorker(workId, datacenterId, 0);
     }
 
+    /**
+     * 数据标识id部分
+     */
+    protected static long getDatacenterId(long maxDatacenterId) {
+        long id = 0L;
+        try {
+            InetAddress inetAddress = InetAddress.getLocalHost();
+            NetworkInterface network = NetworkInterface.getByInetAddress(inetAddress);
+            if (null == network) {
+                id = 1L;
+            } else {
+                byte[] mac = network.getHardwareAddress();
+                if (null != mac) {
+                    id = ((0x000000FF & (long) mac[mac.length - 2]) | (0x0000FF00 & (((long) mac[mac.length - 1]) << 8))) >> 6;
+                    id = id % (maxDatacenterId + 1);
+                }
+            }
+        } catch (Exception e) {
+            log.warn(" getDatacenterId: " + e.getMessage());
+        }
+        return id;
+    }
     /**
      * @param workerId     工作机器ID(0~31)
      * @param datacenterId 数据中心ID(0~31)
@@ -88,51 +162,6 @@ public class SnowFlakeIdWorker {
         this.datacenterId = datacenterId;
         this.sequence = sequence;
     }
-
-    private final long twepoch = 1288834974657L;
-
-    /**
-     * 机器id所占的位数
-     */
-    private final long workerIdBits = 5L;
-    /**
-     * 数据标识id所占的位数
-     */
-    private final long datacenterIdBits = 5L;
-    /**
-     * 支持的最大机器id，结果是31 (这个移位算法可以很快的计算出几位二进制数所能表示的最大十进制数)
-     */
-    private final long maxWorkerId = -1L ^ (-1L << workerIdBits);
-    /**
-     * 支持的最大数据标识id，结果是31
-     */
-    private final long maxDatacenterId = -1L ^ (-1L << datacenterIdBits);
-    /**
-     * 序列在id中占的位数
-     */
-    private final long sequenceBits = 12L;
-
-    /**
-     * 机器ID向左移12位
-     */
-    private final long workerIdShift = sequenceBits;
-    /**
-     * 数据标识id向左移17位(12+5)
-     */
-    private final long datacenterIdShift = sequenceBits + workerIdBits;
-    /**
-     * 时间截向左移22位(5+5+12)
-     */
-    private final long timestampLeftShift = sequenceBits + workerIdBits + datacenterIdBits;
-    /**
-     * 生成序列的掩码，这里为4095 (0b111111111111=0xfff=4095)
-     */
-    private final long sequenceMask = -1L ^ (-1L << sequenceBits);
-
-    /**
-     * 上次生成ID的时间截
-     */
-    private long lastTimestamp = -1L;
 
     /**
      * @return 获取 工作机器ID
