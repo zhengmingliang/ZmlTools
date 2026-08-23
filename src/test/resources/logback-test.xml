@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level [%t] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="top.wys.utils.io.monitor.FileMonitorTest" level="INFO" additivity="false">
+        <appender-ref ref="Console"/>
+    </logger>
+    <root level="WARN">
+        <appender-ref ref="Console"/>
+    </root>
+</configuration>
