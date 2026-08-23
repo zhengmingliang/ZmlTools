@@ -1,6 +1,5 @@
 package top.wys.utils;
 
-import com.sun.istack.internal.Nullable;
 import okhttp3.Headers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -8,6 +7,8 @@ import okhttp3.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import top.wys.utils.convert.ConvertUtils;
+
+import javax.annotation.Nullable;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

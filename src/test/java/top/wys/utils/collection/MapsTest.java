@@ -1,5 +1,6 @@
 package top.wys.utils.collection;
 
+import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
@@ -95,7 +96,7 @@ public class MapsTest {
                         "\"updateTime\":\"2022-06-13 18:25:41\",\"url\":\"jdbc:oracle:thin:@172.16.18" +
                         ".226:1521/orcl11g.us.oracle.com\",\"username\":\"ys\"}],\"pageNo\":1,\"pageSize\":10," +
                         "\"startRow\":0,\"totalCount\":29,\"totalPage\":3}";
-        jsonObject = JSONObject.parseObject(json);
+        jsonObject = JSON.parseObject(json);
     }
 
     public void testToProperties() {

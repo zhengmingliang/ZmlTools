@@ -101,9 +101,6 @@ public class FileMonitorTest {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        new FileMonitorTest().recursiveMonitor_shouldWatchDirectoriesCreatedAfterStartup();
-    }
     /**
      * 验证递归监听能够注册启动后创建的子目录，并继续监听子目录中的文件。
      */

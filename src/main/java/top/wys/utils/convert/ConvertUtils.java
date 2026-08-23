@@ -120,26 +120,6 @@ public class ConvertUtils {
     }
 
     /**
-     * 转换为非空字符串
-     *
-     * @param obj
-     * @param defaultValue 当被转换的字符串为空字符串时，返回的默认值
-     * @return
-     */
-    public static String toNoneEmptyString(String obj, String defaultValue) {
-        if (obj == null) {
-            return defaultValue;
-        }
-
-        String strValue = obj;
-        if (strValue.length() == 0 || NULL_STRING.equalsIgnoreCase(strValue)) {
-            return defaultValue;
-        }
-
-        return strValue;
-    }
-
-    /**
      * 转换为非null对象实例
      *
      * @param obj
@@ -158,7 +138,6 @@ public class ConvertUtils {
 
         return defaultValue;
     }
-
 
     /**
      * 转换为非null字符串
@@ -203,13 +182,9 @@ public class ConvertUtils {
             return Boolean.TRUE.equals(obj);
         }
         if (obj instanceof CharSequence) {
-            boolean bool;
-            try {
-                bool = Boolean.parseBoolean(obj.toString());
-            } catch (Exception e) {
-                bool = DataUtils.orEqualsIgnoreCase(obj.toString(), trueValues);
-            }
-            return bool;
+            String value = obj.toString();
+            return Boolean.parseBoolean(value)
+                    || DataUtils.orEqualsIgnoreCase(value, trueValues);
         }
 
         if (trueValues != null && trueValues.length > 0) {
@@ -235,7 +210,7 @@ public class ConvertUtils {
     public static int toInt(byte[] bytes) {
         int result = 0;
         for (int i = 0; i < 4; i++) {
-            result = (result << 8) - Byte.MIN_VALUE + (int) bytes[i];
+            result = (result << 8) | (bytes[i] & UNSIGNED_MASK);
         }
         return result;
     }

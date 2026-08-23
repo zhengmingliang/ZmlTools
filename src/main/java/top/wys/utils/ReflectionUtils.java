@@ -1,10 +1,6 @@
 package top.wys.utils;
 
 import com.google.common.collect.Lists;
-import org.apache.logging.log4j.core.util.Throwables;
-import top.wys.utils.collection.ArrayUtils;
-import top.wys.utils.valid.Preconditions;
-import org.apache.logging.log4j.core.util.Throwables;
 import top.wys.utils.collection.ArrayUtils;
 import top.wys.utils.jdk.UnsafeUtils;
 import top.wys.utils.reflect.FieldAccessor;
@@ -528,8 +524,7 @@ public class ReflectionUtils {
         } catch (final IllegalAccessException e) {
             throw new IllegalStateException(e);
         } catch (final InvocationTargetException e) {
-            Throwables.rethrow(e.getCause());
-            throw new InternalError("Unreachable");
+            throw new InternalError("Unreachable", e);
         }
     }
 

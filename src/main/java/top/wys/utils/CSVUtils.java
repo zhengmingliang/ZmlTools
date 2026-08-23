@@ -4,11 +4,12 @@ package top.wys.utils;
  */
 
 import com.google.common.collect.Lists;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -31,8 +32,9 @@ import java.util.stream.Collectors;
  * @author 郑明亮
  * @version 1.0
  */
-@Slf4j
 public class CSVUtils {
+
+    private static final Logger log = LoggerFactory.getLogger(CSVUtils.class);
 
     private static final int DEFAULT_BUFFERED_SIZE = 1024 * 8;
     public static final CSVFormat DEFAULT_CSVFORMAT = CSVFormat.ORACLE
