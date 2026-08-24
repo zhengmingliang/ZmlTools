@@ -38,7 +38,6 @@ public class ConvertUtilsTest {
         assertEquals("default", ConvertUtils.toNoneNullString(null, "default"));
         assertEquals("default", ConvertUtils.toNoneNullString("NULL", "default"));
     }
-
     @Test
     public void toNoneEmptyString_shouldReplaceEmptyValuesWithDefaultValue() {
         assertEquals("value", ConvertUtils.toNoneEmptyString("value", "default"));
